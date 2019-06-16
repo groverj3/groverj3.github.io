@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff's Little Slice of the Web Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="In an effort to aid in my future job searching I decided I needed a personal/professional website. It needed to look good, contain links to my relevant social and job-search profiles, host some examples of work from my Ph.D. , showcase my skillset, and host my CV. GitHub pages …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Jeff's Little Slice of the Web"/>
+<meta property="og:title" content="Setting up a Static Site With Pelican and GitHub Pages"/>
+<meta property="og:description" content="In an effort to aid in my future job searching I decided I needed a personal/professional website. It needed to look good, contain links to my relevant social and job-search profiles, host some examples of work from my Ph.D. , showcase my skillset, and host my CV. GitHub pages …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/setting-up-a-static-site-with-pelican-and-github-pages.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-06-15 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="articles"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff's Little Slice of the Web &ndash; Setting up a Static Site With Pelican and GitHub Pages</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/pages/blog.html">Blog</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="setting-up-a-static-site-with-pelican-and-github-pages">Setting up a Static Site With Pelican and GitHub Pages</h1>
+    <p>
+          Posted on Sat 15 June 2019 in <a href="https://groverj3.github.io/category/articles.html">articles</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>In an effort to aid in my future job searching I decided I needed a
+personal/professional website. It needed to look good, contain links to my
+relevant social and job-search profiles, host some examples of work from my Ph.D.
+, showcase my skillset, and host my CV. GitHub pages seemed like a natural fit,
+since I already share most of my work there. GitHub recommends static site
+generation with Jekyll, which I've seen to be a fine way to do that, and they
+have integrated tools for working with it. However, I mostly write python
+day-to-day (and R) and the idea of using a ruby-based framework for this just
+seemed silly to me. So, stubborn as I am, I decided to embark on a quest to use a
+python-based alternative. Pelican seemed to be the most actively developed, so I
+went ahead with that.</p>
+<p>The issue I ran into is that many of the guides were unnecessarily complicated, 
+or didn't contain information for my particular use-case. So, I've compiled here
+the steps I used to generate this site, in the hope that it will help others.</p>
+<h3>Note Before Starting</h3>
+<p>Before starting here, I would like to mention that I will not be recommending
+using a virtual environment. Why? This is overkill for a simple static site/blog
+and adds unnecessary complication to a process that doesn't need to be hard at
+all. These sorts of instructions are useful for more advanced deployments, and if
+you need them then you probably don't need a guide as simplified as this anyway.</p>
+<p>Personally, I <strong>do</strong> use <a href="https://github.com/pyenv/pyenv">pyenv</a> to manage python
+installations on my home and work computers, and well as our lab server. It makes
+my life much easier. But it is not <strong>required</strong> so I won't be going over it here.</p>
+<p>I still recommend installing python packages at the user level though. Mostly a
+*nix/macOS thing, I'm pretty sure Windows peeps can ignore this. This will be
+explained where relevant.</p>
+<p>This guide will be GNU/Linux centric and I'm not apologizing for it :)</p>
+<p>Don't use Python 2.x, it's 2019. I'm writing these with Ubuntu and derivatives in
+mind, so I will specify python3 throughout, since I believe <code>python</code> still points
+to 2.7.</p>
+<h3>Step-by-step Instructions Start Here:</h3>
+<p>Like I said above, there are existing guides for this. However, most of them
+recommend installing what amounts to extreme overkill for simple GitHub pages.</p>
+<ol>
+<li>
+<p>Have Python and PIP Installed</p>
+<p>If you're on Linux then congrats, you've already got it. If not, consult the
+docs at <a href="https://www.python.org/">python.org</a></p>
+<p>However, you may not have pip, the python package manager. For that check by
+running:</p>
+<p><code>which pip3</code></p>
+<p>If it doesn't point to an executable then you'll need to run (Ubuntu-based):</p>
+<p><code>sudo apt install python3-pip</code></p>
+<p>For other distros/package managers or macOS with homebrew consult the docs to
+get the specific commands. These will likely require superuser/administrator
+privileges.</p>
+</li>
+<li>
+<p>Install Pelican</p>
+<p>On any *nix or macOS machine the following should do the trick in  or
+other terminal:</p>
+<p><code>pip3 install --user pelican ghp-import Markdown typogrify</code></p>
+<p>The <code>--user</code> flag installs Pelican to your home directory and doesn't require
+super-user/administrator privileges and <code>ghp-import</code> will allow you to push
+directly to github.</p>
+</li>
+<li>
+<p>Create a New GitHub Repo and Clone</p>
+<p>It's perfectly fine to use the web interface to create a new repo, so go to
+your github homepage and create a new repository with the name:</p>
+<p><code>{username}.github.io</code></p>
+<p>This is important, and will allow you to access your site at
+{username}.github.io rather than needing extra bits on the end of your github
+url. Initializing with a README and LICENSE is up to you! May I recommend the
+MIT license for simplifcity and FOSSness?</p>
+<p>Go to your desired dev folder on your machine, I keep all github projects in
+"~/Github/{project_name}", and clone:</p>
+<p><code>cd {project_folder} &amp;&amp; git clone {repo.git}</code></p>
+</li>
+<li>
+<p>Run Pelican Quickstart in Your Repo Directory</p>
+<p>Pelican comes with a handy quickstart script. Though, it's not terribly-well
+documented. My settings were as follows. Only non-defaults listed (for 
+defaults just push enter):</p>
+<p><code>pelican quick-start</code></p>
+<blockquote>
+<p>Do you want to specify a URL prefix? Y (Followed by: 
+{https://{username}.github.io})<br> 
+What is your time zone? {insert local timezone here}<br>
+Do you want to upload your website using GitHub Pages? Y</p>
+</blockquote>
+<p>This will create the skeleton of your page, and allow you start adding
+content! Other things can be changed later in your config files.</p>
+</li>
+<li>
+<p>Create a First Post</p>
+<p>By default, things created in your root level directory are turned into blog
+posts. Don't ask me why this is the default, I don't like it. However, this
+can be changed/hacked around later. For now create a file called <code>test.md</code>.
+Add the following to it:</p>
+<blockquote>
+<p>Title: This is a Blog Post!<br>
+Date: 2019-06-15<br>
+Category: Article</p>
+<p>Hello World!</p>
+</blockquote>
+</li>
+<li>
+<p>Generate Your Site</p>
+<p>There are several ways to do this, this is the simplest:</p>
+<p><code>make devserver</code></p>
+<p>This command starts a dev server, which automatically updates the generated
+content in real-time. So you can edit and preview simultaneously. Point your
+web browser of choice to <code>localhost:8000</code> and take a look!</p>
+</li>
+<li>
+<p>Add a Static Page</p>
+<p>By default, things in the root directory are blog posts (configurable), but
+you'll probably want some static pages that are always linked to and don't
+contain blog content. For that, without stopping the devserver, create a
+new folder inside the "content" subdirectory called "pages":</p>
+<p><code>mkdir ./content/pages</code></p>
+<p>Create a new markdown document in there called "about.md":</p>
+<p><code>touch ./content/pages/about.md</code></p>
+<p>Fill this with the following:</p>
+<blockquote>
+<p>Title: About<br>
+Date: 2019-06-14</p>
+<p>Hello world! This is a test, using Pelican to create a github pages site.</p>
+</blockquote>
+</li>
+<li>
+<p>Preview Your New Pages</p>
+<p>Go back to your browser, which should have been running the whole time, and
+refresh on <code>localhost:8000</code>. You should now see options to go to a new page
+called "about." That's it! Easy peasy!</p>
+</li>
+<li>
+<p>Generate Your Content and Push</p>
+<p>Kill the devserver with ctrl + c. Run the following in your root directory:</p>
+<p><code>make html</code></p>
+<p>This is probably unnecessary, but in case the devserver wasn't working
+correctly, then this ensures you will have no issues.</p>
+<p>Next, run the following to push to github:</p>
+<p><code>make github</code></p>
+<p>This will ask for your github username and password, then pushes to your
+repo.</p>
+<p>Now direct your browser to:</p>
+<p><code>https://{username}.github.io</code></p>
+<p>You site should be visible now!</p>
+</li>
+<li>
+<p>Push Your Source Code to a New Branch</p>
+<p>This method of pushing creates a problem from a dev standpoint. It will write
+over all content in your repo every time. Plus, it only writes the rendered
+site there. If you want to work on things off this same machine, you're going
+to want to push the source code. Fortunately, there's an easy workaround for
+this.</p>
+<p>Go to the GitHub web interface and create a new branch called "source". This
+will copy all current content to it, which is just the rendered page. Now,
+back in your development folder, copy all content from your repo's folder
+elsewhere (non-hidden stuff only). Then, open a terminal and type:</p>
+<p><code>git checkout source</code></p>
+<p>This switches you to the source branch. It also replaces the contents with
+the rendered content-only.</p>
+<p>Delete the contents again and replace with your copy of the source code.
+Now enter:</p>
+<p><code>git add . &amp;&amp; git commit -m "Pushed source" &amp;&amp; git push -f origin source</code></p>
+<p>This will force a push to the source branch. Technically you don't need the
+"origin source" since you've checked it out, but for extra safety since we're
+already doing something that is frowned on. This will totally overwrite your
+site's content with the source code used to generate it. But only on that
+branch. Now you can push using the <code>make github</code> command, which defaults to
+the master branch, when you want to publish, and push with <code>git push origin
+source</code> when you want to update the source code.</p>
+</li>
+</ol>
+<h3>Final Thoughts</h3>
+<p>You're now done! And you can switch between branches to see the source and output
+from Pelican's rendering. I'll make another post later to detail some more
+configuration details. Until then, the <a href="https://docs.getpelican.com">docs</a> are a
+wonderful resource.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff's Little Slice of the Web ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
