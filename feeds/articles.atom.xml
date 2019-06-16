@@ -40,7 +40,7 @@ recommend installing what amounts to extreme overkill for simple GitHub pages.&l
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Have Python and PIP Installed&lt;/p&gt;
-&lt;p&gt;If you're on Linux then congrats, you've already got it. If not consult the
+&lt;p&gt;If you're on Linux then congrats, you've already got it. If not, consult the
 docs at &lt;a href="https://www.python.org/"&gt;python.org&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;However, you may not have pip, the python package manager. For that check by
 running:&lt;/p&gt;
@@ -53,7 +53,7 @@ privileges.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install Pelican&lt;/p&gt;
-&lt;p&gt;On any *nix machine, or macOS the following should do the trick in  or
+&lt;p&gt;On any *nix or macOS machine the following should do the trick in  or
 other terminal:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;pip3 install --user pelican ghp-import Markdown typogrify&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;--user&lt;/code&gt; flag installs Pelican to your home directory and doesn't require
