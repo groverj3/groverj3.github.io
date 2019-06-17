@@ -43,7 +43,7 @@ Following undergrad I got a job working for MPI Research, Inc. in Mattawan, MI.
 Just outside of Kalamazoo (a real place, believe it or not). This was my first
 exposure to science outside of academia. There I mostly extracted DNA, performed
 qPCR assays, and ordered supplies for our lab. Due to the nature of their work
-and the FDA's regulated (the GLPs) we also did a lot of paperwork. After two
+and the FDA's regulations (the GLPs) we also did a lot of paperwork. After two
 years there I had decided to move on to graduate school.
 
 I came to The University of Arizona to complete a professional science masters.
