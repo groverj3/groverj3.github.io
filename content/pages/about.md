@@ -67,10 +67,10 @@ Since beginning my Ph.D. in 2015 I've learned a lot. My background in shell
 scripting and Python programming has proven useful. I've also picked up R
 programming. In my opinion, these are the most vital skills that a
 bioinformatician needs to have to be productive on a day-to-day basis. I also
-manage the lab's server, installing software, settings up new users, and solving
+manage the lab's server, installing software, setting up new users, and solving
 any hardware and software issues. In addition to my work, I've also mentored
 undergraduate and high school students in the lab and I feel I have a knack for
-how to motivate people to give their best effort.
+motivating people to give their best effort.
 
 As I near the end of my Ph.D. my interests currently lie in improving my
 knowledge of applied statistics, and leveraging concepts from data science and
