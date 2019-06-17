@@ -1,8 +1,6 @@
-Title: About Me
+Title: Hi!
 Date: 2019-06-14
 save_as: pages/about.html
-
-### I'm Jeffrey Grover, a Bioinformatician.
 
 I work with "big data" (and small, and medium data!) from "next-generation 
 sequencing" (will it ever be "current-gen?"). I've analyzed data from small
@@ -80,7 +78,8 @@ machine learning in my work. I'm a fast learner, whether it's learning a static
 website generating framework (Pelican), updating the UI of a web portal for NGS
 analysis ([CoGe](https://genomevolution.org/coge/)) in Javascript, or creating a
 reproducible analysis pipeline with SnakeMake. The greatest skills I've acquired
-in my Ph.D. is the ability to learn quickly and work collaboratively with a team.
+in my Ph.D. are the ability to learn quickly and work collaboratively with a
+team.
 
 ### When I'm Not Working
 

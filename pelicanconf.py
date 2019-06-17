@@ -22,7 +22,7 @@ INDEX_SAVE_AS = '/pages/blog.html'
 
 # Theming
 THEME = 'Flex'
-MAIN_MENU = False
+MAIN_MENU = True
 
 # Feed generation - unused currently
 FEED_ALL_ATOM = None
@@ -41,8 +41,16 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
+    ('envelope', 'mailto:groverj3@gmail.com'),
     ('linkedin', 'https://www.linkedin.com/in/jeffreygrover/'),
-    ('github', 'https://github.com/groverj3')
+    ('github', 'https://github.com/groverj3'),
+)
+
+# Main menu - actually the menu at the top and bottom of pages
+MENUITEMS = (
+    ('About', '/pages/about.html'),
+    ('Blog', '/pages/blog.html'),
+    ('Categories', '/categories.html'),
 )
 
 # Pagination setting
@@ -53,4 +61,3 @@ RELATIVE_URLS = True
 
 # Don't keep old files
 DELETE_OUTPUT_DIRECTORY = True
-
