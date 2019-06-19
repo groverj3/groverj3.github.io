@@ -18,7 +18,9 @@ PATH = 'content'
 ARTICLE_PATHS = ['articles']
 PAGE_PATHS = ['pages']
 STATIC_PATHS = ['images']
-INDEX_SAVE_AS = '/pages/blog.html'
+INDEX_SAVE_AS = '/blog.html'
+ARTICLE_URL = 'articles/{date:%Y}-{date:%m}-{date:%d}/{slug}.html'
+ARTICLE_SAVE_AS = 'articles/{date:%Y}-{date:%m}-{date:%d}/{slug}.html'
 
 # Theming
 THEME = 'Flex'
@@ -36,12 +38,12 @@ AUTHOR_FEED_RSS = None
 DISPLAY_PAGES_ON_MENU = False
 LINKS = (
     ('About', '/pages/about.html'),
-    ('Blog', '/pages/blog.html'),
+    ('Blog', '/blog.html'),
 )
 
 # Social widget
 SOCIAL = (
-    ('envelope', 'mailto:groverj3@gmail.com'),
+    ('envelope', 'mailto:jeffrey.w.grover@gmail.com'),
     ('linkedin', 'https://www.linkedin.com/in/jeffreygrover/'),
     ('github', 'https://github.com/groverj3'),
 )

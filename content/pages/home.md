@@ -10,7 +10,8 @@ I'm also a Ph.D. candidate in the
 [Molecular and Cellular Biology Graduate Program](http://http://bmcb.biology.arizona.edu/)
 at [The University of Arizona](https://www.arizona.edu/).
 
-I work here in the [Mosher Lab](https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html)
+I work here in the
+[Mosher Lab](https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html)
 studying RNA-directed DNA methylation through next-generation sequencing
 techniques. 
 
@@ -19,5 +20,6 @@ out my [blog](/pages/blog.html) where I post how-tos, thoughts on bioinformatics
 and general nonsense.
 
 <center>
-<img src="/images/saguaro-2714995_1920.jpg" alt="The Sonoran Desert is Otherworldly! Image by icondigital from Pixabay">
+<img src="/images/saguaro-2714995_1920.jpg" alt="Image by icondigital from Pixabay">
+The Sonoran Desert is otherworldly! 
 </center>
