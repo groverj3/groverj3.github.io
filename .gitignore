@@ -1,2 +1,5 @@
 # Ignore the cached bytecode from python
 __pycache__/
+
+# Ignore the output folder, it's not necessary on the source branch
+output/
