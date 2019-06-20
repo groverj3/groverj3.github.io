@@ -81,10 +81,6 @@ team.
 
 ### When I'm Not Working
 
-<center>
-<img src="/images/geetars.png", alt="I don't have a problem...">
-</center>
-
 Aside from biology, data science, and general computer nerdery I have a few
 hobbies. I'm an avid guitarist (mostly Jacksons, though my gear acquisition
 syndrome is equal opportunity), and I try to see one of my favorite 
@@ -93,3 +89,7 @@ recording and music production. You can usually find me playing some classic RPG
 as well (Chrono Trigger is a personal favorite). When I'm unwinding with friends
 you can find me wherever fine craft beers are sold (no thank you on the IPAs
 though)!
+
+<center>
+<img src="/images/geetars.png", alt="I don't have a problem...">
+</center>

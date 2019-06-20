@@ -39,6 +39,8 @@ DISPLAY_PAGES_ON_MENU = False
 LINKS = (
     ('About', '/pages/about.html'),
     ('Blog', '/blog.html'),
+    ('CV', '/pages/cv.html'),
+    ('Projects', '/pages/projects.html')
 )
 
 # Social widget
