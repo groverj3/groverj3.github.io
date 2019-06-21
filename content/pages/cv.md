@@ -150,7 +150,7 @@ RNA-directed DNA Methylation in *Arabidopsis thaliana*
 #### **Publications**
 **Grover JW\***, Kendall T\*, Baten A, Burgess D, Freeling M, King GJ, and Mosher RA. *Maternal
 components of RNA‐directed DNA methylation are required for seed development in Brassica
-rapa.* The Plant Journal. 2018. https://doi.org/10.1111/tpj.13910
+rapa.* The Plant Journal. 2018. [https://doi.org/10.1111/tpj.13910](https://doi.org/10.1111/tpj.13910)
 
 - \* These authors contributed equally to this work.<br>
 - Chosen as the cover article by The Plant Journal.<br>
@@ -159,7 +159,7 @@ rapa.* The Plant Journal. 2018. https://doi.org/10.1111/tpj.13910
 
 **Grover JW**, Bomhoff M, Davey S, Gregory BD, Mosher RA, Lyons E. *CoGe LoadExp+:
 A web‐based suite that integrates next‐generation sequencing data analysis workflows and
-visualization*. Plant Direct. 2017. https://doi.org/10.1002/pld3.8
+visualization*. Plant Direct. 2017. [https://doi.org/10.1002/pld3.8](https://doi.org/10.1002/pld3.8)
 
 #### **References**
 Available upon request

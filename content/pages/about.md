@@ -11,39 +11,40 @@ the completion of my doctoral studies in the Spring-Summer of 2020.
 If you're looking for someone with my skillset I'm very interested in hearing
 from you!
 
-### How I Got Here
-
-I grew up in a small town in southwest Michigan, called Niles. Though, it'd be
-more appropriate to say that I grew up in
-[Edwardsburg](https://en.wikipedia.org/wiki/Edwardsburg,_Michigan), an even more
-obscure one, technically a "village" of 1,226 (2017) people. It's located only 10
-minutes' drive from The University of Notre Dame's campus in South Bend, Indiana,
-and roughly 2 hours drive from Chicago.
-
-Growing up, I was always interested in technology. I made extra cash building and
-repairing computers in high school. I also learned a bit of web development at
-this time, which was my first exposure to programming. I dabbled in open source
-software, installing Linux on my parents' computer and learned the basics of
-working on a command line and shell scripting.
+### From "The Mitten"...
 
 <center>
-<img src="/images/michiana.png" alt="Michiana">
+<img src="/images/michiana.png" alt="Michiana"><br>
+The "Michiana" Area
 </center>
 
-I was also interested in biology and chemistry, and decided to double major in 
-biochemistry & molecular biology and chemistry at Michigan State University (Go
-Green!), where I received my B.S. in 2011. I had the opportunity to work in
-[Dr. Robert Last's](https://bmb.natsci.msu.edu/faculty/robert-l-last/) lab,
-identifying genes which affect lipid production using the model plant
-*Arabidopsis thaliana*. With application to engineering crops for biofuel
-production.
+I hail from [Edwardsburg](https://en.wikipedia.org/wiki/Edwardsburg,_Michigan), a
+small town, technically a "village" of 1,226 (2017) people. It's located only 10
+minutes' drive from The University of Notre Dame's campus in South Bend, Indiana,
+and roughly 2 hours from Chicago.
 
-Following undergrad I got a job working for MPI Research, Inc. in Mattawan, MI.
-Just outside of Kalamazoo (a real place, believe it or not). This was my first
-exposure to science outside of academia. There I mostly extracted DNA/RNA, 
-performed qPCR assays, and ordered supplies for our lab. Due to the nature of 
-their work and the FDA's regulations (the GLPs) we also did a lot of paperwork.
-After two years there I had decided to move on to graduate school.
+In high school I made extra cash building and repairing computers. I also learned
+a bit of web development at this time, which was my first exposure to
+programming. I dabbled in open source software, installing Linux on my parents'
+computer and learned the basics of working on a command line and shell scripting.
+
+I attended Michigan State University (Go Green!), where I majored in biochemistry
+and molecular biology. There, I worked in
+[Dr. Robert Last's](https://bmb.natsci.msu.edu/faculty/robert-l-last/)
+lab, where I received training in molecular biology and genetics.
+
+After graduating in 2011 with my B.S. I worked for MPI Research, Inc. in
+Mattawan, MI. Just outside of Kalamazoo (a real place). I extracted DNA/RNA,
+performed qPCR assays, and ordered supplies for our lab. Due to the nature of
+their work and FDA's regulations (the GLPs) I also did a lot of paperwork. After
+two years there I decided to move on to graduate school.
+
+### ... to the Southwest
+
+<center>
+<img src="/images/saguaro-2714995_1920.jpg" alt="Image by icondigital from Pixabay"><br>
+Tucson and The Sonoran Desert
+</center>
 
 I came to The University of Arizona to complete a professional science masters.
 I took classes related to patent law, finance, and economics in addition to
@@ -52,23 +53,14 @@ in
 [Dr. Rebecca Mosher's lab](https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html)
 and designed a qPCR-based assay for measuring DNA methylation. I also was
 introduced to the field of bioinformatics. I completed my masters in 2015 and
-decided to remain at Arizona and pursue a Ph.D. in order to combine my interests
+decided to remain at Arizona and pursue a Ph.D. and combine my life-long interest
 in computing with my previous experience in molecular biology.
 
-### Turning a Hobby Into a Profession
-
-<center>
-<img src="/images/doin_work.png", alt="Check Out SpacEmacs!">
-</center>
-
-Since beginning my Ph.D. in 2015 I've learned a lot. My background in shell
-scripting and Python programming has proven useful. I've also picked up R
-programming. In my opinion, these are the most vital skills that a
-bioinformatician needs to have to be productive on a day-to-day basis. I also
-manage the lab's server, installing software, setting up new users, and solving
-any hardware and software issues. In addition to my work, I've also mentored
-undergraduate and high school students in the lab and I feel I have a knack for
-motivating people to give their best effort.
+During my Ph.D. I've learned a lot and I love sharing what I know. My background
+in shell scripting and Python programming has proven useful. I also do a bang-up
+job in R and manage the lab's server as the de-facto sysadmin. In addition to my
+work, I've mentored undergraduate and high school students in the lab and I feel
+I have a knack for motivating people to give their best effort.
 
 As I near the end of my Ph.D. my interests currently lie in improving my
 knowledge of applied statistics, and leveraging concepts from data science and
