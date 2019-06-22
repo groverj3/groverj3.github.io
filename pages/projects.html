@@ -12,13 +12,13 @@
 
     <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff's Little Slice of the Web Atom">
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
 
 
 
@@ -26,15 +26,15 @@
 
     <meta name="author" content="Jeffrey Grover" />
     <meta name="description" content="" />
-<meta property="og:site_name" content="Jeff's Little Slice of the Web"/>
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
 <meta property="og:type" content="blog"/>
-<meta property="og:title" content="Jeff's Little Slice of the Web"/>
+<meta property="og:title" content="Jeff Grover. Bioinformatician."/>
 <meta property="og:description" content=""/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://groverj3.github.io"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff's Little Slice of the Web &ndash; Projects</title>
+  <title>Jeff Grover. Bioinformatician. &ndash; Projects</title>
 
 </head>
 <body>
@@ -100,12 +100,70 @@
     <h1 id="projects">Projects</h1>
   </header>
   <div>
-<p>Project descriptions to come... and not just "work" ones.</p>  </div>
+<h3>Enabling Reproducible Bioinformatics Workflows</h3>
+<h4><a href="https://genomevolution.org/coge/LoadExperiment.pl"><strong>LoadExp+</strong></a></h4>
+<p>As the prices for sequencing techologies have decreasaed many researchers are now
+able to conduct large experiments on the genomic and even metagenomic scales.
+This progression is exciting, and the need for computational expertise in the
+biological sciences has never been greater! However, the need for this experience
+has greatly surpassed the number of trained individuals, and not every lab wants
+to invest the time into learning these new technologies. They want to answer
+scientific questions!</p>
+<p>I worked with Dr. Eric Lyons' lab at The University of Arizona to add analysis
+workflows to their web-based comparative genomics resource,
+<a href="https://genomevolution.org">CoGe</a>. These workflows, collectively called
+<a href="https://genomevolution.org/wiki/index.php/LoadExp%2B">"LoadExp+"</a> allow
+researchers upload raw data from their local machine or from cloud storage by
+integration with the <a href="http://www.cyverse.org">CyVerse</a> Datastore. Output files
+are automatically organized into digital "notebooks" to be shared with
+colaborators or kept private if desired. Each experiment's files are also
+viewable as tracks in CoGe's integrated genome browser
+(<a href="https://genomevolution.org/wiki/index.php/EPIC-CoGe">Epic-Coge</a>). This enables
+researchers to run LoadExp+ workflows using any available genome in CoGe,
+including those uploaded by users themselves.</p>
+<p><a href="https://doi.org/10.1002/pld3.8"><strong>Read The Publication!</strong></a></p>
+<h4><strong>Automated Analysis Pipelines With <a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a> and <a href="https://sylabs.io/">Singularity</a></strong></h4>
+<p>If you or your lab are already comfortable working with bioinformatics tools on
+a command-line you still face challenges. While the simple solution of writing a
+BASH script for each step of a workflow does work, as you run more types of
+analyses this gets old very quickly. Your directory structure becomes a mess,
+your sysadmin (if you have one) doesn't like you very much, and you fail to make
+efficient use of available resources for a workflow (i.e. step 1 needs 8 cores,
+step 2 only needs 1, how do I leverage my 28 core system for this?). Even more
+concerning, when there are different versions of piecemeal shell scripts floating
+around and nobody knows which was used to for sample X.</p>
+<p>Enter workflow managers. Snakemake is based on Python and therefore integrates
+well with a team accustomed to that language. It intelligently replaces processes
+in a workflow to paralellize jobs up to your maximum resources at run-time.</p>
+<p>Once a pipeline has been tested and works well, it can be packaged into a
+container with Singularity. Similar to Docker, Singularity is optimized for HPC
+environments, where normal users can't acquire the permissions to use Docker
+containers. This also keeps HPC sysadmins happy because they don't need to
+manage your software, plus you can port the analysis to any system you want!</p>
+<p>Work is ongoing to implement our lab's pipelines for
+<a href="https://github.com/boseHere/sRNA_snakemake_workflow">small RNA</a> and
+<a href="https://github.com/groverj3/wgbs_snakemake">whole-genome bisulfite</a> sequencing
+in such a framework.</p>
+<h3>The Role of RNA-directed DNA Methylation in Seed Production</h3>
+<h3>Genomic Imprinting as a Function of Epigenome State</h3>  </div>
 </article>
 
     <footer>
-<p>&copy;  </p>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
 </p>    </footer>
   </main>
 
@@ -116,7 +174,7 @@
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Jeff's Little Slice of the Web ",
+  "name": " Jeff Grover. Bioinformatician. ",
   "url" : "https://groverj3.github.io",
   "image": "/images/jeff.jpg",
   "description": ""
