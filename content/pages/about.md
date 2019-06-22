@@ -5,11 +5,8 @@ save_as: pages/about.html
 I work with "big data" (and small, and medium data!) from "next-generation 
 sequencing" (will it ever be "current-gen?"). I've analyzed data from small
 RNA-sequencing, mRNA-sequencing, and whole-genome bisulfite-sequencing over the
-course of my PhD work. I'm excited to soon be transitioning to a career following
-the completion of my doctoral studies in the Spring-Summer of 2020.
-
-If you're looking for someone with my skillset I'm very interested in hearing
-from you!
+course of my PhD work. If you're looking for someone with my skillset I'm very
+interested in hearing from you!
 
 ### From "The Mitten"...
 

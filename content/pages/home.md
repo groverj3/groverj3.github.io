@@ -5,16 +5,22 @@ save_as: index.html
 I live at the intersection between big data and biology (and buzzwords), and am
 very interested in applying data science concepts outside of bioinformatics.
 
-I code in **Python**, **R**, **BASH**, and anything else that piques my interest.
+<i class="fas fa-code" style="width:22px;height:22px;"></i>
+I code in <img src="/images/Python-Logo.png" alt="Python" style="width:100px;height:24px;">,
+<img src="/images/Rlogo.png" alt="R Logo" style="width:24px;height:24px;">,
+<img src="/images/BASH_logo-transparent-bg-color.png" alt="R Logo" style="width:57px;height:24px;">,
+and anything else that piques my interest.
 
-I can manage a multi-user **Linux** server environment and I'm comfortable on the
-command line.
+<i class="fas fa-server" style="width:22px;height:22px;"></i> I can manage a
+multi-user **Linux** <img src="/images/OS-Linux-icon.png" style="width:22px;height:22px;">
+server environment and I'm comfortable on the command line.
 
-I believe in **open** science, **open** source software, **reproducible** data
-analysis
+<i class="fas fa-flask" style="width:22px;height:22px;"></i> I believe in **open** science, **open** source
+software, **reproducible** data analysis
 
-I've analyzed small RNA, mRNA, and whole-genome bisulfite sequencing. I've
-updated transcriptomes, annotated small RNA loci, and compared methylomes.
+<i class="fas fa-dna" style="width:22px;height:22px;"></i> I've analyzed small 
+RNA, mRNA, and whole-genome bisulfite sequencing. I've assembled transcriptomes,
+called genetic variants, annotated small RNA loci, and compared methylomes.
 
 I can create an analysis pipeline and interface it with high performance
 computing resources, or create visualizations and explore data in a jupyter
