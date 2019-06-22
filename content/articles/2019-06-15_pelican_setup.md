@@ -56,7 +56,7 @@ recommend installing what amounts to extreme overkill for simple GitHub pages.
     ```
     which pip3
     ```
-    
+
     If it doesn't point to an executable then you'll need to run (Ubuntu-based):
     
     ```

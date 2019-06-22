@@ -1,12 +1,10 @@
-Title: Hi!
+Title: About Me
 Date: 2019-06-14
 save_as: pages/about.html
 
 I work with "big data" (and small, and medium data!) from "next-generation 
-sequencing" (will it ever be "current-gen?"). I've analyzed data from small
-RNA-sequencing, mRNA-sequencing, and whole-genome bisulfite-sequencing over the
-course of my PhD work. If you're looking for someone with my skillset I'm very
-interested in hearing from you!
+sequencing" (will it ever be "current-gen?").  If you're looking for someone with
+my skillset then let's talk!
 
 ### From "The Mitten"...
 
@@ -80,5 +78,5 @@ you can find me wherever fine craft beers are sold (no thank you on the IPAs
 though)!
 
 <center>
-<img src="/images/geetars.png", alt="I don't have a problem...">
+<img src="/images/geetars.jpg", alt="I don't have a problem...">
 </center>

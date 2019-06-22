@@ -17,11 +17,11 @@ server environment and I'm comfortable on the **command line**
 <img src="/images/terminal_icon.png" style="width:24px;height:24px;">.
 
 <i class="fas fa-flask" style="width:24px;height:24px;"></i> I believe in
-**open** science, **open** source software, **reproducible** data analysis.
+**open** science, **open** source software, and **reproducible** data analysis.
 
 <i class="fas fa-dna" style="width:24px;height:24px;"></i>  I've assembled
 **transcriptomes**, called **genetic variants**, annotated **small RNA** loci
-and compared **methylomes** using sequencing data.
+, and compared **methylomes** using sequencing data.
 
 <i class="fas fa-project-diagram" style="width:24px;height:24px;"></i> I can
 create an analysis pipeline and deploy it on high performance computing
@@ -41,5 +41,6 @@ out my [blog](/pages/blog.html) where I post how-tos, thoughts on bioinformatics
 and general nonsense.
 
 <center>
-<img src="/images/doin_work.png" alt="Check Out SpacEmacs!">
+<img src="/images/doin_work.png" alt="Check Out Spacemacs!">
+Check out [Spacemacs](http://spacemacs.org/)!
 </center>
