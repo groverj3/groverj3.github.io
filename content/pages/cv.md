@@ -69,20 +69,17 @@ RNA-directed DNA Methylation in *Arabidopsis thaliana*
 - Protein analysis – SDS-PAGE and western blotting
 
 #### **Mentorship**
-**2019-Present – Mosher Lab, University of Arizona**
+**2019-Present – Mosher Lab, University of Arizona**<br>
+Mentored an undergraduate student working on a project with next-generation
+sequencing data analysis and reproducible analysis pipelines.
 
-- Mentored an undergraduate student working on a project with next-generation
-  sequencing data analysis and reproducible analysis pipelines.
+**2017-2018 – Mosher Lab, University of Arizona**<br>
+Mentored a high school student who completed a senior project on plant
+epigenetics.
 
-**2017-2018 – Mosher Lab, University of Arizona**
-
-- Mentored a high school student who completed a senior project on plant
-  epigenetics.
-
-**2014-2015 – Mosher Lab, University of Arizona**
-
-- Mentored a high school student who completed a research project in epigenetics
-  and won multiple awards at regional and national science fairs.
+**2014-2015 – Mosher Lab, University of Arizona**<br>
+Mentored a high school student who completed a research project in epigenetics
+and won multiple awards at regional and national science fairs.
 
 #### **Teaching Experience**
 **2019 – Teaching Assistant, University of Arizona**<br>
@@ -95,26 +92,22 @@ MCB304: Molecular Genetics (3rd/4th Year: Genetics)
 
 **Tool Development**
 
-**LoadExp+**
-
-- Web-based analysis pipelines next-generation sequencing experiments
-  [CoGe](https://genomevolution.org). Integrated with the
-  [CyVerse](www.cyverse.org) datastore.
+**LoadExp+**<br>
+Web-based analysis pipelines next-generation sequencing experiments
+[CoGe](https://genomevolution.org). Integrated with the
+[CyVerse](www.cyverse.org) datastore.
 
 **Publicly Available Data**
 
 Small RNA Sequencing from *B. rapa* ovules and leaves - R-o-18, *nrpd1*, *nrpe1*,
-and *rdr2* mutants 
+and *rdr2* mutants<br> 
+NCBI SRA Accession: [SRP114437](https://www.ncbi.nlm.nih.gov/sra/SRP114437)
 
-- NCBI SRA Accession: [SRP114437](https://www.ncbi.nlm.nih.gov/sra/SRP114437)
+Small RNA Sequencing from *B. rapa* R-o-18xR500 reciprocal cross seeds<br>
+NCBI SRA Accession: [SRP114469](https://www.ncbi.nlm.nih.gov/sra/SRP114469)
 
-Small RNA Sequencing from *B. rapa* R-o-18xR500 reciprocal cross seeds
-
-- NCBI SRA Accession: [SRP114469](https://www.ncbi.nlm.nih.gov/sra/SRP114469)
-
-RNA Sequencing from *B. rapa* R-o-18 and *nrpd1* mutant ovules and seeds
-
-- NCBI SRA Accession: [SRP132223](https://www.ncbi.nlm.nih.gov/sra/SRP132223)
+RNA Sequencing from *B. rapa* R-o-18 and *nrpd1* mutant ovules and seeds<br>
+NCBI SRA Accession: [SRP132223](https://www.ncbi.nlm.nih.gov/sra/SRP132223)
 
 #### **Conference Presentations**
 
