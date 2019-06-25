@@ -63,7 +63,7 @@ SOCIAL = (
 # Main menu - actually the menu at the top and bottom of pages
 MENUITEMS = (
     ('About', '/pages/about.html'),
-    ('Blog', '/pages/blog.html'),
+    ('Blog', '/blog.html'),
     ('Categories', '/categories.html'),
 )
 
