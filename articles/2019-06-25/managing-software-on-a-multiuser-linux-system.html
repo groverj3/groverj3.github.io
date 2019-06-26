@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="When I started my Ph.D. I had a good amount of experience working in a Linux environment on my own computers. Mostly as a hobby. My advisor had bought a small server several years previous for a post-doc&#39;s project and I was offered this system to use for my …" />
+<meta name="keywords" content="sysadmin">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:title" content="Managing Software on a Multiuser Linux System"/>
+<meta property="og:description" content="When I started my Ph.D. I had a good amount of experience working in a Linux environment on my own computers. Mostly as a hobby. My advisor had bought a small server several years previous for a post-doc&#39;s project and I was offered this system to use for my …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-06-25 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="how-to"/>
+<meta property="article:tag" content="sysadmin"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatician. &ndash; Managing Software on a Multiuser Linux System</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="managing-software-on-a-multiuser-linux-system">Managing Software on a Multiuser Linux System</h1>
+    <p>
+          Posted on Tue 25 June 2019 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>When I started my Ph.D. I had a good amount of experience working in a Linux
+environment on my own computers. Mostly as a hobby. My advisor had bought a small
+server several years previous for a post-doc's project and I was offered this
+system to use for my day-to-day work. It doesn't set any speed records, but it
+<em>is</em> a 24 thread system with 75gb of RAM and 12TB of storage. This makes it
+perfect for running analyses that I wouldn't want to do on my laptop, but need to
+be tweaked repeatedly and therefore are awkward to run on the university HPC. I
+also use this server for jupyter notebooks and it still handles a few users at
+a time well.</p>
+<p>Since this system was starting from a blank slate I decided to implement some
+simple rules for system management. When I started out I was the only user, but
+since then we've added several others and this plan has held up. This is going to
+be heavily biased toward running a small server for computational work that's
+shared between &lt; 10 users, because that's what I do.</p>
+<p>These are ordered, but feel free to ignore that. They're really more like general
+tips.</p>
+<h3>0. Run a Well-Supported (Popular) Linux Server Distro</h3>
+<p>I know, I know, I know. You may have a favorite Linux distribution. It might be
+<a href="https://getfedora.org/">Fedora</a>, or <a href="https://linuxmint.com/">Mint</a>, or
+<a href="https://manjaro.org/">Manjaro</a> (that's what I've been using). You might use
+<a href="https://www.archlinux.org/">Arch</a>, you might be a <a href="https://www.gentoo.org/">masochist</a>,
+or you may enjoy running something with an innovative package management system
+like <a href="https://www.gnu.org/software/guix/">Guix</a> or <a href="https://nixos.org/">NixOS</a>.</p>
+<p>Maybe you just don't know why everyone uses this *nix stuff and don't know why
+you can't just bioinformatics in Excel.</p>
+<p><center>
+<img src="/images/clippy_bioinfo.png">
+</center></p>
+<p>You're welcome to use something flashier, but I'd recommend sticking to Ubuntu
+Server or CentOS. Fedora Server might also be a good choice. Especially with
+Ubuntu potentially not shipping 32bit support in the future. For those with more
+time or inclination to fiddle around, Debian would also make a good research
+computing environment. The reason for this is that most software that's already
+packaged will be either in .deb (Debian and derivate, including Ubuntu) or .rpm
+(Redhat, Fedora, SUSE) format. Can you extract these packages and install them on
+other systems? Sure. Are you going to want to do that every time you update
+stuff. No.</p>
+<p>You also want to make sure that required libraries for software you may need to
+compile are available without much fussing around straight from the repositories.
+You'll have to do enough annoying things. Don't make this annoying.</p>
+<h3>1. Revoke Other Users' <strong>sudo</strong> Privileges</h3>
+<p>This may seem obvious but you'd be surprised how many academic labs don't think
+about this on their private server (if they have one). It's hard to overstate the
+terrible time you'll have as a sysadmin if another one of your users types the
+dreaded:</p>
+<div class="highlight"><pre><span></span>sudo rm -r /
+</pre></div>
+
+
+<p>or</p>
+<div class="highlight"><pre><span></span>sudo rm -r /*
+</pre></div>
+
+
+<p>It's easy to forget that "." before the "/". </p>
+<p>Or, less catasrophically, that user may try installing software in a brittle way.
+Meaning, you, the humble pseudo-sysadmin who's not actually getting paid for
+sysadmin tasks, will have to spend time fixing it.</p>
+<p>All it takes is for you, the SUPER USER, the GOD OF THE SERVER, to run:</p>
+<div class="highlight"><pre><span></span>sudo deluser <span class="o">{</span>USERNAME<span class="o">}</span> sudo
+</pre></div>
+
+
+<p>Replace {USERNAME} with the user to remove.</p>
+<h3>2. Don't Blindly Install Software From Your Distro's Repos</h3>
+<p>I did just say to pick a distro with lots of stuff in the repos, right? Yes, but
+particularly in scientific/research computing you really really really can't
+assume these repos are anything close to up-to-date. Don't be afraid to download
+the source code and compile, or even easier, there is likely a prebuilt
+binary release available on the project's github.</p>
+<p>As an example, if you're running the most recent LTS version of Ubuntu (18.04)
+then the version of samtools available to you is v1.7 which is a year and a half
+old at the time of writing. If you have control of the system, then at least try
+to install the most recent stable versions of critical software.</p>
+<h3>3. Use an Easily Followed Convention for Manual Software Installation</h3>
+<p>When you need to download software and install it manually put it somewhere easy
+to remember, and easy to find for others. I put manually installed software in
+/opt/software_version and symlink the binaries to /usr/local/bin/. This way,
+you quickly know what you have manually installed, and what version they are just
+from the directory structure. You also make everything available in the $PATH and
+runnable with just the program name.</p>
+<p>The worst thing that can happen in a broken symlink if you change software
+versions, and that's an easy fix with a:</p>
+<div class="highlight"><pre><span></span>sudo ln -s /path/to/binary /usr/local/bin
+</pre></div>
+
+
+<h3>4. Encourage Users To Test Software in ~/bin</h3>
+<p>Create a private bin directory inside each user's home folder. This is often
+pre-configured in each user's path. If not you'll need to add it to each user's
+.bashrc or .profile or .bash_profile, depending on which is the preferred method
+for your distro:</p>
+<div class="highlight"><pre><span></span><span class="c1"># set PATH so it includes user&#39;s private bin if it exists</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+    <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+
+
+<p>Let your users test and if multiple people need it, or they're running something
+all the time then you can install it system-wide in /opt.</p>
+<h3>5. Encourage Python Users to Set Up <a href="https://github.com/pyenv/pyenv">pyenv</a></h3>
+<p>Linux systems use Python under the hood a lot. Much of the system depends on
+python, and your distro's package manager has already likely installed many
+python packages. However, these versions are likely old and frozen at the version
+number that shipped with the OS. I dislike running software that is <em>years</em> out
+of date. Python's package management with pip is kind of a mess and it doesn't
+know which packages are needed by the system, and which are installed with it.
+This is improving over time, but it's still not good.</p>
+<p>To avoid this, users should install the most recent stable version of Python.
+Pyenv gives you a relatively easy and very lightweight way to do this. It also
+allows the system packages to coexist peacefully in the root directory so it's
+harder to break things. Plus, the users get the latest Python features.</p>
+<p>The <a href="https://github.com/pyenv/pyenv">pyenv github</a> has relatively easy to follow
+instructions.</p>
+<h3>6. Use User-specific Lnaguage Libraries/Packages</h3>
+<p>This pops up for us with both python and R. It boils down to never, ever, using:</p>
+<div class="highlight"><pre><span></span>sudo pip install <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">R</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;PACKAGE_NAME&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>If users can't use sudo there's no danger here anyway, but using user-specific
+libraries and packages keeps things consistent. It also means that, once again,
+you don't have to manage something. The following will solve this for Python:</p>
+<div class="highlight"><pre><span></span>pip install --user <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
+</pre></div>
+
+
+<p>This installs packages to ~/.local/lib/python{VERSION}/site-packages </p>
+<p>R requires a bit more doing. To create a user-library I recommend creating a
+.Renviron in each user's home directory and adding the following to it.</p>
+<div class="highlight"><pre><span></span><span class="c1"># .Renviron is run every time a new R session is started</span>
+<span class="c1"># Use .Renviron to set environment variables for R</span>
+
+<span class="c1"># Use the local R library</span>
+<span class="n">R_LIBS_USER</span><span class="o">=</span><span class="s">&quot;~/.local/lib/R/site-library&quot;</span>
+</pre></div>
+
+
+<h3>Wrapping up</h3>
+<p>In summary, administering a small multi-user system doesn't have to be
+complicated. You do want to minimize the ability for your users to break things
+though. By no means is this an exhaustive guide, but it might help you out if
+you're wondering where to start.</p>
+<p>Despite the proliferation of HPC systems at Universities, and cloud computing in
+enterprise environments, a smaller server for your research group is still a
+good investment in 2019. Submitting jobs to a queue is fine when you're not doing
+iterative work, but if you want to quickly test things it gets old really quick.
+Likewise, you can easily get hardware on-par with a remote VM and it's more
+readily accessed.</p>
+<p>Tune in next time for something more bioinformatics-focused!</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/sysadmin.html">sysadmin</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatician. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

@@ -1,7 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician. - how-to</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/how-to.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-06-15T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician. - how-to</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/how-to.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-06-25T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
 &lt;a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank"&gt;The Mosher Lab&lt;/a&gt;
-@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Setting up a Static Site With Pelican and GitHub Pages</title><link href="https://groverj3.github.io/articles/2019-06-15/setting-up-a-static-site-with-pelican-and-github-pages.html" rel="alternate"></link><published>2019-06-15T00:00:00-07:00</published><updated>2019-06-15T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-15:/articles/2019-06-15/setting-up-a-static-site-with-pelican-and-github-pages.html</id><summary type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
+@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Managing Software on a Multiuser Linux System</title><link href="https://groverj3.github.io/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html" rel="alternate"></link><published>2019-06-25T00:00:00-07:00</published><updated>2019-06-25T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-25:/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html</id><summary type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
+environment on my own computers. Mostly as a hobby. My advisor had bought a small
+server several years previous for a post-doc's project and I was offered this
+system to use for my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
+environment on my own computers. Mostly as a hobby. My advisor had bought a small
+server several years previous for a post-doc's project and I was offered this
+system to use for my day-to-day work. It doesn't set any speed records, but it
+&lt;em&gt;is&lt;/em&gt; a 24 thread system with 75gb of RAM and 12TB of storage. This makes it
+perfect for running analyses that I wouldn't want to do on my laptop, but need to
+be tweaked repeatedly and therefore are awkward to run on the university HPC. I
+also use this server for jupyter notebooks and it still handles a few users at
+a time well.&lt;/p&gt;
+&lt;p&gt;Since this system was starting from a blank slate I decided to implement some
+simple rules for system management. When I started out I was the only user, but
+since then we've added several others and this plan has held up. This is going to
+be heavily biased toward running a small server for computational work that's
+shared between &amp;lt; 10 users, because that's what I do.&lt;/p&gt;
+&lt;p&gt;These are ordered, but feel free to ignore that. They're really more like general
+tips.&lt;/p&gt;
+&lt;h3&gt;0. Run a Well-Supported (Popular) Linux Server Distro&lt;/h3&gt;
+&lt;p&gt;I know, I know, I know. You may have a favorite Linux distribution. It might be
+&lt;a href="https://getfedora.org/"&gt;Fedora&lt;/a&gt;, or &lt;a href="https://linuxmint.com/"&gt;Mint&lt;/a&gt;, or
+&lt;a href="https://manjaro.org/"&gt;Manjaro&lt;/a&gt; (that's what I've been using). You might use
+&lt;a href="https://www.archlinux.org/"&gt;Arch&lt;/a&gt;, you might be a &lt;a href="https://www.gentoo.org/"&gt;masochist&lt;/a&gt;,
+or you may enjoy running something with an innovative package management system
+like &lt;a href="https://www.gnu.org/software/guix/"&gt;Guix&lt;/a&gt; or &lt;a href="https://nixos.org/"&gt;NixOS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Maybe you just don't know why everyone uses this *nix stuff and don't know why
+you can't just bioinformatics in Excel.&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;img src="/images/clippy_bioinfo.png"&gt;
+&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;You're welcome to use something flashier, but I'd recommend sticking to Ubuntu
+Server or CentOS. Fedora Server might also be a good choice. Especially with
+Ubuntu potentially not shipping 32bit support in the future. For those with more
+time or inclination to fiddle around, Debian would also make a good research
+computing environment. The reason for this is that most software that's already
+packaged will be either in .deb (Debian and derivate, including Ubuntu) or .rpm
+(Redhat, Fedora, SUSE) format. Can you extract these packages and install them on
+other systems? Sure. Are you going to want to do that every time you update
+stuff. No.&lt;/p&gt;
+&lt;p&gt;You also want to make sure that required libraries for software you may need to
+compile are available without much fussing around straight from the repositories.
+You'll have to do enough annoying things. Don't make this annoying.&lt;/p&gt;
+&lt;h3&gt;1. Revoke Other Users' &lt;strong&gt;sudo&lt;/strong&gt; Privileges&lt;/h3&gt;
+&lt;p&gt;This may seem obvious but you'd be surprised how many academic labs don't think
+about this on their private server (if they have one). It's hard to overstate the
+terrible time you'll have as a sysadmin if another one of your users types the
+dreaded:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo rm -r /
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo rm -r /*
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It's easy to forget that "." before the "/". &lt;/p&gt;
+&lt;p&gt;Or, less catasrophically, that user may try installing software in a brittle way.
+Meaning, you, the humble pseudo-sysadmin who's not actually getting paid for
+sysadmin tasks, will have to spend time fixing it.&lt;/p&gt;
+&lt;p&gt;All it takes is for you, the SUPER USER, the GOD OF THE SERVER, to run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo deluser &lt;span class="o"&gt;{&lt;/span&gt;USERNAME&lt;span class="o"&gt;}&lt;/span&gt; sudo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Replace {USERNAME} with the user to remove.&lt;/p&gt;
+&lt;h3&gt;2. Don't Blindly Install Software From Your Distro's Repos&lt;/h3&gt;
+&lt;p&gt;I did just say to pick a distro with lots of stuff in the repos, right? Yes, but
+particularly in scientific/research computing you really really really can't
+assume these repos are anything close to up-to-date. Don't be afraid to download
+the source code and compile, or even easier, there is likely a prebuilt
+binary release available on the project's github.&lt;/p&gt;
+&lt;p&gt;As an example, if you're running the most recent LTS version of Ubuntu (18.04)
+then the version of samtools available to you is v1.7 which is a year and a half
+old at the time of writing. If you have control of the system, then at least try
+to install the most recent stable versions of critical software.&lt;/p&gt;
+&lt;h3&gt;3. Use an Easily Followed Convention for Manual Software Installation&lt;/h3&gt;
+&lt;p&gt;When you need to download software and install it manually put it somewhere easy
+to remember, and easy to find for others. I put manually installed software in
+/opt/software_version and symlink the binaries to /usr/local/bin/. This way,
+you quickly know what you have manually installed, and what version they are just
+from the directory structure. You also make everything available in the $PATH and
+runnable with just the program name.&lt;/p&gt;
+&lt;p&gt;The worst thing that can happen in a broken symlink if you change software
+versions, and that's an easy fix with a:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s /path/to/binary /usr/local/bin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;4. Encourage Users To Test Software in ~/bin&lt;/h3&gt;
+&lt;p&gt;Create a private bin directory inside each user's home folder. This is often
+pre-configured in each user's path. If not you'll need to add it to each user's
+.bashrc or .profile or .bash_profile, depending on which is the preferred method
+for your distro:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# set PATH so it includes user&amp;#39;s private bin if it exists&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/bin&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/bin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let your users test and if multiple people need it, or they're running something
+all the time then you can install it system-wide in /opt.&lt;/p&gt;
+&lt;h3&gt;5. Encourage Python Users to Set Up &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Linux systems use Python under the hood a lot. Much of the system depends on
+python, and your distro's package manager has already likely installed many
+python packages. However, these versions are likely old and frozen at the version
+number that shipped with the OS. I dislike running software that is &lt;em&gt;years&lt;/em&gt; out
+of date. Python's package management with pip is kind of a mess and it doesn't
+know which packages are needed by the system, and which are installed with it.
+This is improving over time, but it's still not good.&lt;/p&gt;
+&lt;p&gt;To avoid this, users should install the most recent stable version of Python.
+Pyenv gives you a relatively easy and very lightweight way to do this. It also
+allows the system packages to coexist peacefully in the root directory so it's
+harder to break things. Plus, the users get the latest Python features.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv github&lt;/a&gt; has relatively easy to follow
+instructions.&lt;/p&gt;
+&lt;h3&gt;6. Use User-specific Lnaguage Libraries/Packages&lt;/h3&gt;
+&lt;p&gt;This pops up for us with both python and R. It boils down to never, ever, using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pip install &lt;span class="o"&gt;{&lt;/span&gt;PACKAGE_NAME&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;R&lt;/span&gt;
+&lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;PACKAGE_NAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If users can't use sudo there's no danger here anyway, but using user-specific
+libraries and packages keeps things consistent. It also means that, once again,
+you don't have to manage something. The following will solve this for Python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --user &lt;span class="o"&gt;{&lt;/span&gt;PACKAGE_NAME&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This installs packages to ~/.local/lib/python{VERSION}/site-packages &lt;/p&gt;
+&lt;p&gt;R requires a bit more doing. To create a user-library I recommend creating a
+.Renviron in each user's home directory and adding the following to it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# .Renviron is run every time a new R session is started&lt;/span&gt;
+&lt;span class="c1"&gt;# Use .Renviron to set environment variables for R&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Use the local R library&lt;/span&gt;
+&lt;span class="n"&gt;R_LIBS_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;~/.local/lib/R/site-library&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;In summary, administering a small multi-user system doesn't have to be
+complicated. You do want to minimize the ability for your users to break things
+though. By no means is this an exhaustive guide, but it might help you out if
+you're wondering where to start.&lt;/p&gt;
+&lt;p&gt;Despite the proliferation of HPC systems at Universities, and cloud computing in
+enterprise environments, a smaller server for your research group is still a
+good investment in 2019. Submitting jobs to a queue is fine when you're not doing
+iterative work, but if you want to quickly test things it gets old really quick.
+Likewise, you can easily get hardware on-par with a remote VM and it's more
+readily accessed.&lt;/p&gt;
+&lt;p&gt;Tune in next time for something more bioinformatics-focused!&lt;/p&gt;</content><category term="sysadmin"></category></entry><entry><title>Setting up a Static Site With Pelican and GitHub Pages</title><link href="https://groverj3.github.io/articles/2019-06-15/setting-up-a-static-site-with-pelican-and-github-pages.html" rel="alternate"></link><published>2019-06-15T00:00:00-07:00</published><updated>2019-06-15T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-15:/articles/2019-06-15/setting-up-a-static-site-with-pelican-and-github-pages.html</id><summary type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
 personal/professional website. It needed to look good, contain links to my
 relevant social and job-search profiles, host some examples of work from my Ph.D.
 , showcase my skillset, and host my CV. GitHub pages …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
@@ -175,4 +334,4 @@ source&lt;/code&gt; when you want to update the source code.&lt;/p&gt;
 &lt;p&gt;You're now done! And you can switch between branches to see the source and output
 from Pelican's rendering. I'll make another post later to detail some more
 configuration details. Until then, the &lt;a href="https://docs.getpelican.com"&gt;docs&lt;/a&gt; are a
-wonderful resource.&lt;/p&gt;</content></entry></feed>
+wonderful resource.&lt;/p&gt;</content><category term="tutorial"></category><category term="pelican"></category></entry></feed>
