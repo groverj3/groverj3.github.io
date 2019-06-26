@@ -127,7 +127,7 @@ fi
 ```
 
 Let your users test and if multiple people need it, or they're running something
-all the time then you can install it system-wide in /opt.
+all the time, then you can install it system-wide in /opt.
 
 ### 5. Encourage Python Users to Set Up [pyenv](https://github.com/pyenv/pyenv)
 
@@ -147,7 +147,7 @@ harder to break things. Plus, the users get the latest Python features.
 The [pyenv github](https://github.com/pyenv/pyenv) has relatively easy to follow
 instructions.
 
-### 6. Use User-specific Lnaguage Libraries/Packages
+### 6. Use User-specific Language Libraries/Packages
 
 This pops up for us with both python and R. It boils down to never, ever, using:
 
