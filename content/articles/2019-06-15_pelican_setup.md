@@ -1,6 +1,7 @@
 Title: Setting up a Static Site With Pelican and GitHub Pages
 Date: 2019-06-15
 Category: how-to
+tags: tutorial, pelican
 
 In an effort to aid in my future job searching I decided I needed a
 personal/professional website. It needed to look good, contain links to my
