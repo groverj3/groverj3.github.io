@@ -1,7 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician. - how-to</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/how-to.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-06-25T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician. - how-to</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/how-to.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-06-28T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
 &lt;a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank"&gt;The Mosher Lab&lt;/a&gt;
-@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Managing Software on a Multiuser Linux System</title><link href="https://groverj3.github.io/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html" rel="alternate"></link><published>2019-06-25T00:00:00-07:00</published><updated>2019-06-25T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-25:/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html</id><summary type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
+@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Making Better Metaplots With ggplot, Part 2</title><link href="https://groverj3.github.io/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html" rel="alternate"></link><published>2019-06-28T00:00:00-07:00</published><updated>2019-06-28T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-28:/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html</id><summary type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
+prepared our data using Deeptools.&lt;/p&gt;
+&lt;p&gt;Now we're going to do something kind of scandalous. R and python, living together
+in peace. What is this madness? I like R's ecosystem for manipulating data and
+plotting with the &lt;a href="https://www.tidyverse.org/"&gt;tidyverse&lt;/a&gt;. It still requires some
+tweaking, but with a bit of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
+prepared our data using Deeptools.&lt;/p&gt;
+&lt;p&gt;Now we're going to do something kind of scandalous. R and python, living together
+in peace. What is this madness? I like R's ecosystem for manipulating data and
+plotting with the &lt;a href="https://www.tidyverse.org/"&gt;tidyverse&lt;/a&gt;. It still requires some
+tweaking, but with a bit of a time investment you can have publication-ready
+vector images in only a few lines of code. It's great for genomics data as well.
+Some out there may prefer &lt;a href="https://matplotlib.org/"&gt;matplotlib&lt;/a&gt; in python, and
+it is powerful, but I find it kind of tedious to use without adding another
+package on-top like &lt;a href="https://seaborn.pydata.org/"&gt;Seaborn&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Genomics and data science belong together just like python and R!&lt;/p&gt;
+&lt;h3&gt;1. Investigate Deeptools' Metaplot Output&lt;/h3&gt;
+&lt;p&gt;Your first task with any new data is just to see what it looks like. In a
+terminal my initial instinct is always to call:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;head &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;filename&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But you can also just open deeptools metaplot table in your text editor of
+choice. What you'll find is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;bin&lt;/span&gt; &lt;span class="nv"&gt;labels&lt;/span&gt;    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;Kb&lt;/span&gt;    ...    &lt;span class="nv"&gt;start&lt;/span&gt;    ...    &lt;span class="k"&gt;end&lt;/span&gt;    ...    &lt;span class="mi"&gt;1&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;Kb&lt;/span&gt;
+&lt;span class="nv"&gt;bins&lt;/span&gt;        &lt;span class="mi"&gt;1&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt; ...
+&lt;span class="nv"&gt;sample_name&lt;/span&gt; &lt;span class="nv"&gt;genes&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; ...
+&lt;span class="nv"&gt;sample_name&lt;/span&gt; &lt;span class="nv"&gt;genes&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A tab delimited table of bin labels, bin numbers, and scores (data to plot) for
+each of those bins. This is a rather odd format because it's horizontal, rather
+than the long format that would be more convenient. We also have a label "genes"
+in position 2 of the same row as the score data. The bin labels only have 4
+values in the whole row. The &lt;code&gt;--upstream&lt;/code&gt;, &lt;code&gt;--startLabel&lt;/code&gt;, &lt;code&gt;--endLabel&lt;/code&gt;, and
+&lt;code&gt;--downstream&lt;/code&gt; values from the &lt;code&gt;computeMatrix&lt;/code&gt; step. We can work with this but
+it's a bit unwieldly.&lt;/p&gt;
+&lt;h3&gt;2. Load Data Into R&lt;/h3&gt;
+&lt;p&gt;Before getting started here make sure you have the tidyverse packages installed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;tidyverse&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There are no built-in functions to read a "transposed tsv" file like this, but
+with a little &lt;a href="https://stackoverflow.com/questions/17288197/reading-a-csv-file-organized-horizontally"&gt;googling&lt;/a&gt;
+this turned out to not be so bad. My original thought was to read it as a
+standard .tsv file with &lt;code&gt;read_tsv()&lt;/code&gt; or base &lt;code&gt;read.csv()&lt;/code&gt; and transpose with
+&lt;code&gt;t()&lt;/code&gt; but these didn't like the data. This is because of the need to keep that
+first row exactly as it appears, despite most of it technically being empty,
+we'll need the blank labels later. So, from that stackoverflow post I was able
+to edit a few things:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;read_deeptools_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;count.fields&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;na.rm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;readLines&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+  &lt;span class="n"&gt;.splitvar&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;unlist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;strsplit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;split&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="nf"&gt;length&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+    &lt;span class="nf"&gt;return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nf"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;.splitvar&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;paste&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;collapse&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;plot_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;na.omit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read.csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;[&lt;/span&gt;&lt;span class="m"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;]&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Remove first row with &amp;quot;gene&amp;quot; label&lt;/span&gt;
+
+  &lt;span class="nf"&gt;return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plot_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Essentially, this function is finding the length of the lines, reading the lines
+as character vectors, splitting the vectors by the tab character, and creating a
+new table from the vectors. Reading the data with this gives us a nice dataframe.
+From here on I will be using the tidyverse packages so feel free to load them
+with &lt;code&gt;library('tidyverse')&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;table_test&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;read_deeptools_table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;metaplot.tab&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;as_tibble&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;table_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# A tibble: 600 x 4&lt;/span&gt;
+   &lt;span class="n"&gt;bin.labels&lt;/span&gt;  &lt;span class="n"&gt;bins&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt;            &lt;span class="n"&gt;sample_2&lt;/span&gt;
+   &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fct&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;dbl&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fct&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;               &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;fct&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+ &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;-1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;         &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.7382198952879583&lt;/span&gt;  &lt;span class="m"&gt;0.008900523560209424&lt;/span&gt;
+ &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.9565445026178011&lt;/span&gt;  &lt;span class="m"&gt;0.007329842931937172&lt;/span&gt;
+ &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="m"&gt;0.9879581151832458&lt;/span&gt;  &lt;span class="m"&gt;0.008376963350785341&lt;/span&gt;
+ &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="m"&gt;0.8026178010471204&lt;/span&gt;  &lt;span class="m"&gt;0.005235602094240838&lt;/span&gt;
+ &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;0.7968586387434556&lt;/span&gt;  &lt;span class="m"&gt;0.0031413612565445023&lt;/span&gt;
+ &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="m"&gt;0.593717277486911&lt;/span&gt;   &lt;span class="m"&gt;0.005235602094240838&lt;/span&gt;
+ &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="m"&gt;0.36230366492146604&lt;/span&gt; &lt;span class="m"&gt;0.004712041884816754&lt;/span&gt;
+ &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;0.5392670157068064&lt;/span&gt;  &lt;span class="m"&gt;0.0&lt;/span&gt;
+ &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0.9617801047120418&lt;/span&gt;  &lt;span class="m"&gt;0.0020942408376963353&lt;/span&gt;
+&lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;            &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="m"&gt;1.403664921465969&lt;/span&gt;   &lt;span class="m"&gt;0.01099476439790576&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;3. Convert the Data to Long Format&lt;/h3&gt;
+&lt;p&gt;A quirk of ggplot is that it really likes long format data. Where, instead of
+separate columns for the different samples you end up with a column of "scores"
+and another of "sample_id." This means that your sample ID is actually a variable
+and can be plotted. This results in a new data frame which concatenates the
+current sample columns into one, replicates bin.labels and bins as needed, and
+creates a new column with the sample ID for each row. The easiest way to do this
+is with the &lt;code&gt;gather()&lt;/code&gt; function in tidyr:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;gather&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plot_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sample&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;score&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bin.labels&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can check out what this looks like as follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;   &lt;span class="n"&gt;sample&lt;/span&gt;              &lt;span class="n"&gt;score&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt;     &lt;span class="m"&gt;-1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;    &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.7382198952879583&lt;/span&gt;
+&lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.9565445026178011&lt;/span&gt;
+&lt;span class="m"&gt;3&lt;/span&gt;               &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.9879581151832458&lt;/span&gt;
+&lt;span class="m"&gt;4&lt;/span&gt;               &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.8026178010471204&lt;/span&gt;
+&lt;span class="m"&gt;5&lt;/span&gt;               &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.7968586387434556&lt;/span&gt;
+&lt;span class="m"&gt;6&lt;/span&gt;               &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt;  &lt;span class="m"&gt;0.593717277486911&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;tail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;     &lt;span class="n"&gt;sample&lt;/span&gt;                &lt;span class="n"&gt;score&lt;/span&gt;
+&lt;span class="m"&gt;1195&lt;/span&gt;             &lt;span class="m"&gt;595&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.005759162303664922&lt;/span&gt;
+&lt;span class="m"&gt;1196&lt;/span&gt;             &lt;span class="m"&gt;596&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt;                  &lt;span class="m"&gt;0.0&lt;/span&gt;
+&lt;span class="m"&gt;1197&lt;/span&gt;             &lt;span class="m"&gt;597&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.006282722513089005&lt;/span&gt;
+&lt;span class="m"&gt;1198&lt;/span&gt;             &lt;span class="m"&gt;598&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.017277486910994764&lt;/span&gt;
+&lt;span class="m"&gt;1199&lt;/span&gt;             &lt;span class="m"&gt;599&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.020942408376963352&lt;/span&gt;
+&lt;span class="m"&gt;1200&lt;/span&gt;      &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;  &lt;span class="m"&gt;600&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.012565445026178013&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This would be annoying to work with by hand, but ggplot2 understands it just
+fine.&lt;/p&gt;
+&lt;h3&gt;4. Build the ggplot Command&lt;/h3&gt;
+&lt;p&gt;Now that our data is in the right format it's time to get plotting! We'll start
+simple, and make it more complex from there:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;ggplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nf"&gt;aes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+  &lt;span class="nf"&gt;geom_line&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+  &lt;span class="nf"&gt;scale_x_continuous&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;breaks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="n"&gt;labels&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bin.labels&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will get us started with a simple line plot. The key here is that the x axis
+breaks are the bin numbers, but are labeled as the bounds, start, and end of the
+features. However, this also creates a major gridline at each break. Not ideal. I
+have some sensible plot defaults that I use often, which I have saved to a code
+snippet on my &lt;a href="https://github.com/groverj3/genomics_visualizations/blob/master/ggplot2_pub_settings.r"&gt;github&lt;/a&gt;.
+I'll use these as a starting point for the theming. Another feature we may want
+to add is the ability to smooth the line. This can be accomplished by using:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;geom_smooth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;method&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;loess&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;se&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will smooth the data with
+&lt;a href="https://en.wikipedia.org/wiki/Local_regression"&gt;loess&lt;/a&gt; regression. The amount of
+smoothing can be configured with the &lt;code&gt;span = ...&lt;/code&gt; parameter in &lt;code&gt;geom_smooth()&lt;/code&gt;.
+You'll also want to control the size of the plot when it's saved, and perhaps
+stretch or shrink its aspect ratio. This can also be controlled by ggplot2 using
+&lt;code&gt;ggsave()&lt;/code&gt; at the end of our plotting command. We also will want to add the
+ability to specify the colors rather than just using the defaults. It's best to
+use a colorblind-friendly palette when possible. Putting this all together, our
+plot command becomes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;metaplot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_axis_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="n"&gt;out_prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;smooth&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;aspect&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="n"&gt;colors&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="n"&gt;start_bin&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;subset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;start_label&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;
+  &lt;span class="n"&gt;end_bin&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;subset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;end_label&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;
+
+  &lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;ggplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nf"&gt;aes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="nf"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;smooth&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nf"&gt;geom_smooth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;method&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;loess&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                                 &lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                                 &lt;span class="n"&gt;se&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nf"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nf"&gt;geom_line&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nf"&gt;scale_color_manual&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;unlist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;strsplit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;colors&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    &lt;span class="nf"&gt;scale_x_continuous&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;breaks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                       &lt;span class="n"&gt;labels&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bin.labels&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    &lt;span class="nf"&gt;geom_vline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xintercept&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start_bin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end_bin&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;linetype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dotted&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    &lt;span class="nf"&gt;ylab&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_axis_label&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    &lt;span class="nf"&gt;xlab&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Position&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    &lt;span class="nf"&gt;theme_bw&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base_size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;22&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    &lt;span class="nf"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;legend.title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;element_blank&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+          &lt;span class="n"&gt;legend.position&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;bottom&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="n"&gt;legend.direction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;horizontal&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="n"&gt;legend.margin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;margin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+          &lt;span class="n"&gt;legend.box.margin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;margin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;-10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;-10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;-10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;-10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+          &lt;span class="n"&gt;axis.text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;element_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;black&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+          &lt;span class="n"&gt;axis.ticks.x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;element_blank&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+          &lt;span class="n"&gt;panel.grid.major.x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;element_blank&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+          &lt;span class="n"&gt;panel.grid.minor.x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;element_blank&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+          &lt;span class="n"&gt;aspect.ratio&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;aspect&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+    &lt;span class="nf"&gt;ggsave&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;paste0&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out_prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+           &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+           &lt;span class="n"&gt;height&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With a few if statements we actually can plot both the smoothed and line plots on
+the same coordinate system if we want. Let's test it with some data small RNA
+expression data over a set of genomic features:&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;img src="https://github.com/groverj3/genomics_visualizations/raw/master/metaplotteR.png", style="width:600px;height:429px;"&gt;
+&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;I think we can agree that this is an improvement. This could still be improved by
+showing error when replicates are plotted, but it's pretty good for now.&lt;/p&gt;
+&lt;h3&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;While this required a little patience, I think the results are worth it. Creating
+clean visualizations is necessary to get your point across. I've tidied this up
+a bit and pushed the full code to github. Bonus: it runs as a standalone script
+and works with any number of input samples!
+&lt;a href="https://github.com/groverj3/genomics_visualizations/blob/master/metaplotteR.r"&gt;Check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 1</title><link href="https://groverj3.github.io/articles/2019-06-27/making-better-metaplots-with-ggplot-part-1.html" rel="alternate"></link><published>2019-06-27T00:00:00-07:00</published><updated>2019-06-27T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-27:/articles/2019-06-27/making-better-metaplots-with-ggplot-part-1.html</id><summary type="html">&lt;p&gt;Commonly, in bioinformatics we're in the business of determining whether
+something, be it gene expression, or DNA methylation, or splicing, etc. is
+different between multiple conditions. Typically this would be done by comparing
+those data and using some kind of statistical test. However, with the continued
+advances in sequencing technologies …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Commonly, in bioinformatics we're in the business of determining whether
+something, be it gene expression, or DNA methylation, or splicing, etc. is
+different between multiple conditions. Typically this would be done by comparing
+those data and using some kind of statistical test. However, with the continued
+advances in sequencing technologies generating greater read depth, and these
+technologies becoming more available to researchers we can also look at
+genome-scale data in other ways. Testing purely on count or score data does not
+inform one of the positional information associated with that data.&lt;/p&gt;
+&lt;p&gt;To look at the positional context associated with genomics data we have several
+options. One common way is a visualization that's often referred to as a
+"metaplot" or "metagene plot." These plots are similar to the TSS or "peak" plots
+commonly used to visualize chip-seq or similar data. In a metaplot the entire
+length of a feature is scaled such that each feature now is composed of the same
+number of "bins" of data. This allows one to visualize the data associated with
+these features across their entire length. There are existing software packages
+that can make these plots without too much trouble such as 
+&lt;a href="https://deeptools.readthedocs.io/en/stable/"&gt;Deeptools&lt;/a&gt; or the
+&lt;a href="https://bioconductor.org/packages/release/bioc/html/genomation.html"&gt;Genomation&lt;/a&gt;
+R library. In particular, I find Deeptools to be a great software package, and it
+makes some wonderful visualizations that would be a pain to make yourself.
+Genomation requires one to be very familiar with R since it isn't a standalone
+program. Deeptools is easier to use but its metaplots leave something to be
+desired:&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;img src="/images/deeptools_example_meta.png", style="width:460px;height:275px;"&gt;
+&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;I like the control I have over all plot elements and the professional look that
+&lt;a href="https://ggplot2.tidyverse.org/"&gt;ggplot&lt;/a&gt; affords. I use it for most of my data
+visualization needs. So, I figured, why not make something prettier with it?&lt;/p&gt;
+&lt;h3&gt;1. Install Required Packages&lt;/h3&gt;
+&lt;p&gt;This guide will use Deeptools, a Python package with a ton of functionality that
+you can play around with later, and ggplot2 from the
+&lt;a href="https://www.tidyverse.org/"&gt;tidyverse&lt;/a&gt;. The tidyverse is a collection of R
+libraries designed by Hadley Wickham that make data science a snap. You can
+install them as follows in a terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --user deeptools
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Launch the R interpreter by typing &lt;code&gt;R&lt;/code&gt; and then:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;tidyverse&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I recommend installing them into a user-specific library by either the &lt;code&gt;--user&lt;/code&gt;
+flag for pip or setting up a .Renviron file with a path to a local library. You
+can learn how to do that in my
+&lt;a href="/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html"&gt;previous post&lt;/a&gt;.
+You're also going to need &lt;a href="https://samtools.github.io/"&gt;samtools&lt;/a&gt;. Feel free to
+use the package manager of your choice if conda is more your jam.&lt;/p&gt;
+&lt;h3&gt;2. Generate the Data Table With Deeptools&lt;/h3&gt;
+&lt;p&gt;Now that you've got the software installed you'll need to generate per-position
+"score" information. If this is expression data or similar you can use Deeptools
+again. But you should be able to use other inputs to the later steps as well. If
+using expression data you can use your bam file you can use Deeptools'
+bamCoverage tool. First, you need to index the alignment .bam file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;samtools index &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="p"&gt;%.bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;${}&lt;/code&gt; is the syntax for using a previously declared variable in BASH and I'll use
+that kind of representation throughout for places where values should be
+specified.&lt;/p&gt;
+&lt;p&gt;Now that you have that out of the way. Your first step is to generate a coverage
+file in bigWig format. This is a binary format but contains similar data to a
+&lt;a href="https://genome.ucsc.edu/goldenPath/help/bedgraph.html"&gt;bedGraph&lt;/a&gt;. You can use
+the bamCoverage tool:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;bamCoverage &lt;span class="se"&gt;\&lt;/span&gt;
+    -p &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;threads_to_use&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --binSize &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --normalizeUsing &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;RPKM&lt;/span&gt;&lt;span class="p"&gt;|CPM|BPM|RPGC&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --outFileFormat bigwig &lt;span class="se"&gt;\&lt;/span&gt;
+    --bam &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --outFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="p"&gt;%.bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.bigWig
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A &lt;code&gt;--binsize&lt;/code&gt; of 1 will just generate per-base converage. This may be slow, and
+you could increase the value if you wish. There are also other ways of generating
+coverage/depth such as &lt;a href="https://github.com/brentp/mosdepth"&gt;mosdepth&lt;/a&gt; (a great
+tool by Brent Pedersen). This comes with Deeptools though, and is easy to get
+running. The &lt;code&gt;--normalizeUsing&lt;/code&gt; option will let you normalize the coverage by
+several methods, which is particularly useful for plotting multiple experiments
+together at the end.&lt;/p&gt;
+&lt;p&gt;Next, you'll need to generate a score matrix. In other words, a matrix of
+coverages or other values of interest. This step can be done on any score data in
+a bedGraph/bigWig file, even if you did not generate it with Deeptools. So, if
+you're using data from a tool other than bamCoverage this is your starting point.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;computeMatrix scale-regions &lt;span class="se"&gt;\&lt;/span&gt;
+    -p &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --startLabel start &lt;span class="se"&gt;\&lt;/span&gt;
+    --endLabel end &lt;span class="se"&gt;\&lt;/span&gt;
+    --upstream &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;base_pairs&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --downstream &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;base_pairs&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --regionBodyLength &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;scale_length&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --regionsFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;regions_bed&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --scoreFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input1_bigWig&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input2_bigWig&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --outFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;output_matrix&lt;/span&gt;&lt;span class="p"&gt;.gz&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;--startLabel&lt;/code&gt; and &lt;code&gt;--endLabel&lt;/code&gt; values can be changed as desired, but don't
+forget them! The &lt;code&gt;--upstream&lt;/code&gt; and &lt;code&gt;--downstream&lt;/code&gt; values can be as desired. The
+&lt;code&gt;--regionBodyLength&lt;/code&gt; is the value to which all features will be scaled. I suggest
+using either the mean or median length of the features of interest. The regions
+will be input as a .bed file, and the bigWig files that were generated in the
+previous step will be used where indicated. Multiple files can be input,
+space separated. You can specify that the matrix be gzipped by simply adding .gz
+to the name of your output file. Now, the final step is to generate the plot and
+also output the raw data:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plotProfile &lt;span class="se"&gt;\&lt;/span&gt;
+    --startLabel start &lt;span class="se"&gt;\&lt;/span&gt;
+    --endLabel end &lt;span class="se"&gt;\&lt;/span&gt;
+    --averageType &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;|median&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --matrixFile &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_matrix&lt;/span&gt;&lt;span class="p"&gt;.gz&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --outFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;metaplot&lt;/span&gt;&lt;span class="p"&gt;.svg&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --outFileNameData &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;metaplot&lt;/span&gt;&lt;span class="p"&gt;.tab&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will generate a plot, but also output the table of per-bin values that were
+plotted. I made this with it:&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;img src="/images/deeptools_example_meta2.png", style="width:460px;height:275px;"&gt;
+&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;I could play with Deeptools further, but the options for changing its aesthetics
+are more limited than I'd like. In particular, smoothing the lines requires
+smoothing the underlying data in the scoreMatrix step. Which I am not a huge fan
+of. Now, let's load that table into R and make something prettier in
+&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html"&gt;Part 2&lt;/a&gt;.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Managing Software on a Multiuser Linux System</title><link href="https://groverj3.github.io/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html" rel="alternate"></link><published>2019-06-25T00:00:00-07:00</published><updated>2019-06-25T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-25:/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html</id><summary type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
 environment on my own computers. Mostly as a hobby. My advisor had bought a small
 server several years previous for a post-doc's project and I was offered this
 system to use for my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux

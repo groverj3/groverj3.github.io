@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="Last time we prepared our data using Deeptools. Now we&#39;re going to do something kind of scandalous. R and python, living together in peace. What is this madness? I like R&#39;s ecosystem for manipulating data and plotting with the tidyverse. It still requires some tweaking, but with a bit of …" />
+<meta name="keywords" content="bioinformatics, data-visualization">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:title" content="Making Better Metaplots With ggplot, Part 2"/>
+<meta property="og:description" content="Last time we prepared our data using Deeptools. Now we&#39;re going to do something kind of scandalous. R and python, living together in peace. What is this madness? I like R&#39;s ecosystem for manipulating data and plotting with the tidyverse. It still requires some tweaking, but with a bit of …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-06-28 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="how-to"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="data-visualization"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatician. &ndash; Making Better Metaplots With ggplot, Part 2</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="making-better-metaplots-with-ggplot-part-2">Making Better Metaplots With ggplot, Part 2</h1>
+    <p>
+          Posted on Fri 28 June 2019 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html">Last time</a> we
+prepared our data using Deeptools.</p>
+<p>Now we're going to do something kind of scandalous. R and python, living together
+in peace. What is this madness? I like R's ecosystem for manipulating data and
+plotting with the <a href="https://www.tidyverse.org/">tidyverse</a>. It still requires some
+tweaking, but with a bit of a time investment you can have publication-ready
+vector images in only a few lines of code. It's great for genomics data as well.
+Some out there may prefer <a href="https://matplotlib.org/">matplotlib</a> in python, and
+it is powerful, but I find it kind of tedious to use without adding another
+package on-top like <a href="https://seaborn.pydata.org/">Seaborn</a>.</p>
+<p>Genomics and data science belong together just like python and R!</p>
+<h3>1. Investigate Deeptools' Metaplot Output</h3>
+<p>Your first task with any new data is just to see what it looks like. In a
+terminal my initial instinct is always to call:</p>
+<div class="highlight"><pre><span></span>head <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
+</pre></div>
+
+
+<p>But you can also just open deeptools metaplot table in your text editor of
+choice. What you'll find is:</p>
+<div class="highlight"><pre><span></span><span class="nv">bin</span> <span class="nv">labels</span>    <span class="o">-</span><span class="mi">1</span>.<span class="mi">0</span><span class="nv">Kb</span>    ...    <span class="nv">start</span>    ...    <span class="k">end</span>    ...    <span class="mi">1</span>.<span class="mi">0</span><span class="nv">Kb</span>
+<span class="nv">bins</span>        <span class="mi">1</span>.<span class="mi">0</span> <span class="mi">2</span>.<span class="mi">0</span> <span class="mi">3</span>.<span class="mi">0</span> ...
+<span class="nv">sample_name</span> <span class="nv">genes</span> <span class="nv">score</span> <span class="nv">score</span> <span class="nv">score</span> ...
+<span class="nv">sample_name</span> <span class="nv">genes</span> <span class="nv">score</span> <span class="nv">score</span> <span class="nv">score</span> ...
+</pre></div>
+
+
+<p>A tab delimited table of bin labels, bin numbers, and scores (data to plot) for
+each of those bins. This is a rather odd format because it's horizontal, rather
+than the long format that would be more convenient. We also have a label "genes"
+in position 2 of the same row as the score data. The bin labels only have 4
+values in the whole row. The <code>--upstream</code>, <code>--startLabel</code>, <code>--endLabel</code>, and
+<code>--downstream</code> values from the <code>computeMatrix</code> step. We can work with this but
+it's a bit unwieldly.</p>
+<h3>2. Load Data Into R</h3>
+<p>Before getting started here make sure you have the tidyverse packages installed:</p>
+<div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyverse&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>There are no built-in functions to read a "transposed tsv" file like this, but
+with a little <a href="https://stackoverflow.com/questions/17288197/reading-a-csv-file-organized-horizontally">googling</a>
+this turned out to not be so bad. My original thought was to read it as a
+standard .tsv file with <code>read_tsv()</code> or base <code>read.csv()</code> and transpose with
+<code>t()</code> but these didn't like the data. This is because of the need to keep that
+first row exactly as it appears, despite most of it technically being empty,
+we'll need the blank labels later. So, from that stackoverflow post I was able
+to edit a few things:</p>
+<div class="highlight"><pre><span></span><span class="n">read_deeptools_table</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="nf">count.fields</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">),</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+  <span class="n">.splitvar</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">split</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">))</span>
+    <span class="nf">length</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">n</span>
+    <span class="nf">return</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">do.call</span><span class="p">(</span><span class="n">cbind</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">.splitvar</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">))</span>
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">paste</span><span class="p">,</span> <span class="n">collapse</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">)</span>
+  <span class="n">plot_table</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">)</span><span class="n">[</span><span class="m">-1</span><span class="p">,</span><span class="n">]</span><span class="p">)</span>  <span class="c1"># Remove first row with &quot;gene&quot; label</span>
+
+  <span class="nf">return</span><span class="p">(</span><span class="n">plot_table</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Essentially, this function is finding the length of the lines, reading the lines
+as character vectors, splitting the vectors by the tab character, and creating a
+new table from the vectors. Reading the data with this gives us a nice dataframe.
+From here on I will be using the tidyverse packages so feel free to load them
+with <code>library('tidyverse')</code>.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">table_test</span> <span class="o">&lt;-</span> <span class="nf">read_deeptools_table</span><span class="p">(</span><span class="s">&#39;metaplot.tab&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nf">as_tibble</span><span class="p">(</span><span class="n">table_test</span><span class="p">)</span>
+<span class="c1"># A tibble: 600 x 4</span>
+   <span class="n">bin.labels</span>  <span class="n">bins</span> <span class="n">sample_1</span>            <span class="n">sample_2</span>
+   <span class="o">&lt;</span><span class="n">fct</span><span class="o">&gt;</span>      <span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">fct</span><span class="o">&gt;</span>               <span class="o">&lt;</span><span class="n">fct</span><span class="o">&gt;</span>
+ <span class="m">1</span> <span class="m">-1.0</span><span class="n">Kb</span>         <span class="m">1</span> <span class="m">0.7382198952879583</span>  <span class="m">0.008900523560209424</span>
+ <span class="m">2</span> <span class="s">&quot;&quot;</span>             <span class="m">2</span> <span class="m">0.9565445026178011</span>  <span class="m">0.007329842931937172</span>
+ <span class="m">3</span> <span class="s">&quot;&quot;</span>             <span class="m">3</span> <span class="m">0.9879581151832458</span>  <span class="m">0.008376963350785341</span>
+ <span class="m">4</span> <span class="s">&quot;&quot;</span>             <span class="m">4</span> <span class="m">0.8026178010471204</span>  <span class="m">0.005235602094240838</span>
+ <span class="m">5</span> <span class="s">&quot;&quot;</span>             <span class="m">5</span> <span class="m">0.7968586387434556</span>  <span class="m">0.0031413612565445023</span>
+ <span class="m">6</span> <span class="s">&quot;&quot;</span>             <span class="m">6</span> <span class="m">0.593717277486911</span>   <span class="m">0.005235602094240838</span>
+ <span class="m">7</span> <span class="s">&quot;&quot;</span>             <span class="m">7</span> <span class="m">0.36230366492146604</span> <span class="m">0.004712041884816754</span>
+ <span class="m">8</span> <span class="s">&quot;&quot;</span>             <span class="m">8</span> <span class="m">0.5392670157068064</span>  <span class="m">0.0</span>
+ <span class="m">9</span> <span class="s">&quot;&quot;</span>             <span class="m">9</span> <span class="m">0.9617801047120418</span>  <span class="m">0.0020942408376963353</span>
+<span class="m">10</span> <span class="s">&quot;&quot;</span>            <span class="m">10</span> <span class="m">1.403664921465969</span>   <span class="m">0.01099476439790576</span>
+</pre></div>
+
+
+<h3>3. Convert the Data to Long Format</h3>
+<p>A quirk of ggplot is that it really likes long format data. Where, instead of
+separate columns for the different samples you end up with a column of "scores"
+and another of "sample_id." This means that your sample ID is actually a variable
+and can be plotted. This results in a new data frame which concatenates the
+current sample columns into one, replicates bin.labels and bins as needed, and
+creates a new column with the sample ID for each row. The easiest way to do this
+is with the <code>gather()</code> function in tidyr:</p>
+<div class="highlight"><pre><span></span><span class="n">long_table</span> <span class="o">&lt;-</span> <span class="nf">gather</span><span class="p">(</span><span class="n">plot_table</span><span class="p">,</span> <span class="s">&#39;sample&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">bin.labels</span><span class="p">,</span> <span class="o">-</span><span class="n">bins</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You can check out what this looks like as follows:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">long_table</span><span class="p">)</span>
+  <span class="n">bin.labels</span> <span class="n">bins</span>   <span class="n">sample</span>              <span class="n">score</span>
+<span class="m">1</span>     <span class="m">-1.0</span><span class="n">Kb</span>    <span class="m">1</span> <span class="n">wt_ovule</span> <span class="m">0.7382198952879583</span>
+<span class="m">2</span>               <span class="m">2</span> <span class="n">wt_ovule</span> <span class="m">0.9565445026178011</span>
+<span class="m">3</span>               <span class="m">3</span> <span class="n">wt_ovule</span> <span class="m">0.9879581151832458</span>
+<span class="m">4</span>               <span class="m">4</span> <span class="n">wt_ovule</span> <span class="m">0.8026178010471204</span>
+<span class="m">5</span>               <span class="m">5</span> <span class="n">wt_ovule</span> <span class="m">0.7968586387434556</span>
+<span class="m">6</span>               <span class="m">6</span> <span class="n">wt_ovule</span>  <span class="m">0.593717277486911</span>
+<span class="o">&gt;</span> <span class="nf">tail</span><span class="p">(</span><span class="n">long_table</span><span class="p">)</span>
+     <span class="n">bin.labels</span> <span class="n">bins</span>     <span class="n">sample</span>                <span class="n">score</span>
+<span class="m">1195</span>             <span class="m">595</span> <span class="n">rdr2_ovule</span> <span class="m">0.005759162303664922</span>
+<span class="m">1196</span>             <span class="m">596</span> <span class="n">rdr2_ovule</span>                  <span class="m">0.0</span>
+<span class="m">1197</span>             <span class="m">597</span> <span class="n">rdr2_ovule</span> <span class="m">0.006282722513089005</span>
+<span class="m">1198</span>             <span class="m">598</span> <span class="n">rdr2_ovule</span> <span class="m">0.017277486910994764</span>
+<span class="m">1199</span>             <span class="m">599</span> <span class="n">rdr2_ovule</span> <span class="m">0.020942408376963352</span>
+<span class="m">1200</span>      <span class="m">1.0</span><span class="n">Kb</span>  <span class="m">600</span> <span class="n">rdr2_ovule</span> <span class="m">0.012565445026178013</span>
+</pre></div>
+
+
+<p>This would be annoying to work with by hand, but ggplot2 understands it just
+fine.</p>
+<h3>4. Build the ggplot Command</h3>
+<p>Now that our data is in the right format it's time to get plotting! We'll start
+simple, and make it more complex from there:</p>
+<div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="n">sample</span><span class="p">))</span> <span class="o">+</span>
+  <span class="nf">geom_line</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span> <span class="o">=</span> <span class="n">long_table</span><span class="o">$</span><span class="n">bins</span><span class="p">,</span>
+                     <span class="n">labels</span> <span class="o">=</span> <span class="n">long_table</span><span class="o">$</span><span class="n">bin.labels</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This will get us started with a simple line plot. The key here is that the x axis
+breaks are the bin numbers, but are labeled as the bounds, start, and end of the
+features. However, this also creates a major gridline at each break. Not ideal. I
+have some sensible plot defaults that I use often, which I have saved to a code
+snippet on my <a href="https://github.com/groverj3/genomics_visualizations/blob/master/ggplot2_pub_settings.r">github</a>.
+I'll use these as a starting point for the theming. Another feature we may want
+to add is the ability to smooth the line. This can be accomplished by using:</p>
+<div class="highlight"><pre><span></span><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;loess&#39;</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This will smooth the data with
+<a href="https://en.wikipedia.org/wiki/Local_regression">loess</a> regression. The amount of
+smoothing can be configured with the <code>span = ...</code> parameter in <code>geom_smooth()</code>.
+You'll also want to control the size of the plot when it's saved, and perhaps
+stretch or shrink its aspect ratio. This can also be controlled by ggplot2 using
+<code>ggsave()</code> at the end of our plotting command. We also will want to add the
+ability to specify the colors rather than just using the defaults. It's best to
+use a colorblind-friendly palette when possible. Putting this all together, our
+plot command becomes:</p>
+<div class="highlight"><pre><span></span><span class="n">metaplot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="n">start_label</span><span class="p">,</span> <span class="n">end_label</span><span class="p">,</span> <span class="n">y_axis_label</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span>
+                     <span class="n">out_prefix</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="n">smooth</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">aspect</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
+                     <span class="n">colors</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">start_bin</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="n">bin.labels</span> <span class="o">==</span> <span class="n">start_label</span><span class="p">)</span><span class="o">$</span><span class="n">bins</span>
+  <span class="n">end_bin</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="n">bin.labels</span> <span class="o">==</span> <span class="n">end_label</span><span class="p">)</span><span class="o">$</span><span class="n">bins</span>
+
+  <span class="n">plot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="n">sample</span><span class="p">))</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">smooth</span> <span class="o">==</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="n">plot</span> <span class="o">&lt;-</span> <span class="n">plot</span> <span class="o">+</span> <span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;loess&#39;</span><span class="p">,</span>
+                                                 <span class="n">span</span> <span class="o">=</span> <span class="n">span</span><span class="p">,</span>
+                                                 <span class="n">se</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">line</span> <span class="o">==</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="n">plot</span> <span class="o">&lt;-</span> <span class="n">plot</span> <span class="o">+</span> <span class="nf">geom_line</span><span class="p">()</span>
+  <span class="n">plot</span> <span class="o">&lt;-</span> <span class="n">plot</span> <span class="o">+</span> <span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="s">&#39;,&#39;</span><span class="p">)))</span> <span class="o">+</span>
+    <span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span> <span class="o">=</span> <span class="n">long_table</span><span class="o">$</span><span class="n">bins</span><span class="p">,</span>
+                       <span class="n">labels</span> <span class="o">=</span> <span class="n">long_table</span><span class="o">$</span><span class="n">bin.labels</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">start_bin</span><span class="p">,</span> <span class="n">end_bin</span><span class="p">),</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s">&#39;dotted&#39;</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">ylab</span><span class="p">(</span><span class="n">y_axis_label</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">xlab</span><span class="p">(</span><span class="s">&#39;Position&#39;</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">theme_bw</span><span class="p">(</span><span class="n">base_size</span> <span class="o">=</span> <span class="m">22</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">theme</span><span class="p">(</span><span class="n">legend.title</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span>
+          <span class="n">legend.position</span> <span class="o">=</span> <span class="s">&#39;bottom&#39;</span><span class="p">,</span>
+          <span class="n">legend.direction</span> <span class="o">=</span> <span class="s">&#39;horizontal&#39;</span><span class="p">,</span>
+          <span class="n">legend.margin</span> <span class="o">=</span> <span class="nf">margin</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span>
+          <span class="n">legend.box.margin</span> <span class="o">=</span> <span class="nf">margin</span><span class="p">(</span><span class="m">-10</span><span class="p">,</span><span class="m">-10</span><span class="p">,</span><span class="m">-10</span><span class="p">,</span><span class="m">-10</span><span class="p">),</span>
+          <span class="n">axis.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s">&#39;black&#39;</span><span class="p">),</span>
+          <span class="n">axis.ticks.x</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span>
+          <span class="n">panel.grid.major.x</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span>
+          <span class="n">panel.grid.minor.x</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span>
+          <span class="n">aspect.ratio</span> <span class="o">=</span> <span class="n">aspect</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">ggsave</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">out_prefix</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">format</span><span class="p">),</span>
+           <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">,</span>
+           <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>With a few if statements we actually can plot both the smoothed and line plots on
+the same coordinate system if we want. Let's test it with some data small RNA
+expression data over a set of genomic features:</p>
+<p><center>
+<img src="https://github.com/groverj3/genomics_visualizations/raw/master/metaplotteR.png", style="width:600px;height:429px;">
+</center></p>
+<p>I think we can agree that this is an improvement. This could still be improved by
+showing error when replicates are plotted, but it's pretty good for now.</p>
+<h3>Wrapping up</h3>
+<p>While this required a little patience, I think the results are worth it. Creating
+clean visualizations is necessary to get your point across. I've tidied this up
+a bit and pushed the full code to github. Bonus: it runs as a standalone script
+and works with any number of input samples!
+<a href="https://github.com/groverj3/genomics_visualizations/blob/master/metaplotteR.r">Check it out!</a></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/data-visualization.html">data-visualization</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatician. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
