@@ -124,20 +124,20 @@ You can check out what this looks like as follows:
 ```R
 > head(long_table)
   bin.labels bins   sample              score
-1     -1.0Kb    1 wt_ovule 0.7382198952879583
-2               2 wt_ovule 0.9565445026178011
-3               3 wt_ovule 0.9879581151832458
-4               4 wt_ovule 0.8026178010471204
-5               5 wt_ovule 0.7968586387434556
-6               6 wt_ovule  0.593717277486911
+1     -1.0Kb    1 Group 1 0.7382198952879583
+2               2 Group 1 0.9565445026178011
+3               3 Group 1 0.9879581151832458
+4               4 Group 1 0.8026178010471204
+5               5 Group 1 0.7968586387434556
+6               6 Group 1  0.593717277486911
 > tail(long_table)
      bin.labels bins     sample                score
-1195             595 rdr2_ovule 0.005759162303664922
-1196             596 rdr2_ovule                  0.0
-1197             597 rdr2_ovule 0.006282722513089005
-1198             598 rdr2_ovule 0.017277486910994764
-1199             599 rdr2_ovule 0.020942408376963352
-1200      1.0Kb  600 rdr2_ovule 0.012565445026178013
+1195             595 Group 2 0.005759162303664922
+1196             596 Group 2                  0.0
+1197             597 Group 2 0.006282722513089005
+1198             598 Group 2 0.017277486910994764
+1199             599 Group 2 0.020942408376963352
+1200      1.0Kb  600 Group 2 0.012565445026178013
 ```
 
 This would be annoying to work with by hand, but ggplot2 understands it just
@@ -215,7 +215,9 @@ metaplot <- function(long_table, start_label, end_label, y_axis_label, span,
 
 With a few if statements we actually can plot both the smoothed and line plots on
 the same coordinate system if we want. Let's test it with some data small RNA
-expression data over a set of genomic features:
+expression data from my
+[2018 paper](https://onlinelibrary.wiley.com/doi/full/10.1111/tpj.13910) over a
+set of genomic features:
 
 <center>
 <img src="https://github.com/groverj3/genomics_visualizations/raw/master/metaplotteR.png", style="width:600px;height:429px;">
