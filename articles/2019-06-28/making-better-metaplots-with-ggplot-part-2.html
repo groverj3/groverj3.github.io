@@ -169,7 +169,7 @@ to edit a few things:</p>
   <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
   <span class="n">.splitvar</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">var</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">split</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">))</span>
+    <span class="n">var</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">split</span> <span class="o">=</span> <span class="n">sep</span><span class="p">))</span>
     <span class="nf">length</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">n</span>
     <span class="nf">return</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
   <span class="p">}</span>
