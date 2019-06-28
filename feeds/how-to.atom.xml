@@ -112,20 +112,20 @@ is with the &lt;code&gt;gather()&lt;/code&gt; function in tidyr:&lt;/p&gt;
 &lt;p&gt;You can check out what this looks like as follows:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;   &lt;span class="n"&gt;sample&lt;/span&gt;              &lt;span class="n"&gt;score&lt;/span&gt;
-&lt;span class="m"&gt;1&lt;/span&gt;     &lt;span class="m"&gt;-1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;    &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.7382198952879583&lt;/span&gt;
-&lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.9565445026178011&lt;/span&gt;
-&lt;span class="m"&gt;3&lt;/span&gt;               &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.9879581151832458&lt;/span&gt;
-&lt;span class="m"&gt;4&lt;/span&gt;               &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.8026178010471204&lt;/span&gt;
-&lt;span class="m"&gt;5&lt;/span&gt;               &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt; &lt;span class="m"&gt;0.7968586387434556&lt;/span&gt;
-&lt;span class="m"&gt;6&lt;/span&gt;               &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="n"&gt;wt_ovule&lt;/span&gt;  &lt;span class="m"&gt;0.593717277486911&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt;     &lt;span class="m"&gt;-1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;    &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.7382198952879583&lt;/span&gt;
+&lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.9565445026178011&lt;/span&gt;
+&lt;span class="m"&gt;3&lt;/span&gt;               &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.9879581151832458&lt;/span&gt;
+&lt;span class="m"&gt;4&lt;/span&gt;               &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.8026178010471204&lt;/span&gt;
+&lt;span class="m"&gt;5&lt;/span&gt;               &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.7968586387434556&lt;/span&gt;
+&lt;span class="m"&gt;6&lt;/span&gt;               &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0.593717277486911&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;tail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;     &lt;span class="n"&gt;sample&lt;/span&gt;                &lt;span class="n"&gt;score&lt;/span&gt;
-&lt;span class="m"&gt;1195&lt;/span&gt;             &lt;span class="m"&gt;595&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.005759162303664922&lt;/span&gt;
-&lt;span class="m"&gt;1196&lt;/span&gt;             &lt;span class="m"&gt;596&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt;                  &lt;span class="m"&gt;0.0&lt;/span&gt;
-&lt;span class="m"&gt;1197&lt;/span&gt;             &lt;span class="m"&gt;597&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.006282722513089005&lt;/span&gt;
-&lt;span class="m"&gt;1198&lt;/span&gt;             &lt;span class="m"&gt;598&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.017277486910994764&lt;/span&gt;
-&lt;span class="m"&gt;1199&lt;/span&gt;             &lt;span class="m"&gt;599&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.020942408376963352&lt;/span&gt;
-&lt;span class="m"&gt;1200&lt;/span&gt;      &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;  &lt;span class="m"&gt;600&lt;/span&gt; &lt;span class="n"&gt;rdr2_ovule&lt;/span&gt; &lt;span class="m"&gt;0.012565445026178013&lt;/span&gt;
+&lt;span class="m"&gt;1195&lt;/span&gt;             &lt;span class="m"&gt;595&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.005759162303664922&lt;/span&gt;
+&lt;span class="m"&gt;1196&lt;/span&gt;             &lt;span class="m"&gt;596&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;                  &lt;span class="m"&gt;0.0&lt;/span&gt;
+&lt;span class="m"&gt;1197&lt;/span&gt;             &lt;span class="m"&gt;597&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.006282722513089005&lt;/span&gt;
+&lt;span class="m"&gt;1198&lt;/span&gt;             &lt;span class="m"&gt;598&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.017277486910994764&lt;/span&gt;
+&lt;span class="m"&gt;1199&lt;/span&gt;             &lt;span class="m"&gt;599&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.020942408376963352&lt;/span&gt;
+&lt;span class="m"&gt;1200&lt;/span&gt;      &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;  &lt;span class="m"&gt;600&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.012565445026178013&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -199,7 +199,9 @@ plot command becomes:&lt;/p&gt;
 
 &lt;p&gt;With a few if statements we actually can plot both the smoothed and line plots on
 the same coordinate system if we want. Let's test it with some data small RNA
-expression data over a set of genomic features:&lt;/p&gt;
+expression data from my
+&lt;a href="https://onlinelibrary.wiley.com/doi/full/10.1111/tpj.13910"&gt;2018 paper&lt;/a&gt; over a
+set of genomic features:&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;
 &lt;img src="https://github.com/groverj3/genomics_visualizations/raw/master/metaplotteR.png", style="width:600px;height:429px;"&gt;
 &lt;/center&gt;&lt;/p&gt;

@@ -221,20 +221,20 @@ is with the <code>gather()</code> function in tidyr:</p>
 <p>You can check out what this looks like as follows:</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">long_table</span><span class="p">)</span>
   <span class="n">bin.labels</span> <span class="n">bins</span>   <span class="n">sample</span>              <span class="n">score</span>
-<span class="m">1</span>     <span class="m">-1.0</span><span class="n">Kb</span>    <span class="m">1</span> <span class="n">wt_ovule</span> <span class="m">0.7382198952879583</span>
-<span class="m">2</span>               <span class="m">2</span> <span class="n">wt_ovule</span> <span class="m">0.9565445026178011</span>
-<span class="m">3</span>               <span class="m">3</span> <span class="n">wt_ovule</span> <span class="m">0.9879581151832458</span>
-<span class="m">4</span>               <span class="m">4</span> <span class="n">wt_ovule</span> <span class="m">0.8026178010471204</span>
-<span class="m">5</span>               <span class="m">5</span> <span class="n">wt_ovule</span> <span class="m">0.7968586387434556</span>
-<span class="m">6</span>               <span class="m">6</span> <span class="n">wt_ovule</span>  <span class="m">0.593717277486911</span>
+<span class="m">1</span>     <span class="m">-1.0</span><span class="n">Kb</span>    <span class="m">1</span> <span class="n">Group</span> <span class="m">1</span> <span class="m">0.7382198952879583</span>
+<span class="m">2</span>               <span class="m">2</span> <span class="n">Group</span> <span class="m">1</span> <span class="m">0.9565445026178011</span>
+<span class="m">3</span>               <span class="m">3</span> <span class="n">Group</span> <span class="m">1</span> <span class="m">0.9879581151832458</span>
+<span class="m">4</span>               <span class="m">4</span> <span class="n">Group</span> <span class="m">1</span> <span class="m">0.8026178010471204</span>
+<span class="m">5</span>               <span class="m">5</span> <span class="n">Group</span> <span class="m">1</span> <span class="m">0.7968586387434556</span>
+<span class="m">6</span>               <span class="m">6</span> <span class="n">Group</span> <span class="m">1</span>  <span class="m">0.593717277486911</span>
 <span class="o">&gt;</span> <span class="nf">tail</span><span class="p">(</span><span class="n">long_table</span><span class="p">)</span>
      <span class="n">bin.labels</span> <span class="n">bins</span>     <span class="n">sample</span>                <span class="n">score</span>
-<span class="m">1195</span>             <span class="m">595</span> <span class="n">rdr2_ovule</span> <span class="m">0.005759162303664922</span>
-<span class="m">1196</span>             <span class="m">596</span> <span class="n">rdr2_ovule</span>                  <span class="m">0.0</span>
-<span class="m">1197</span>             <span class="m">597</span> <span class="n">rdr2_ovule</span> <span class="m">0.006282722513089005</span>
-<span class="m">1198</span>             <span class="m">598</span> <span class="n">rdr2_ovule</span> <span class="m">0.017277486910994764</span>
-<span class="m">1199</span>             <span class="m">599</span> <span class="n">rdr2_ovule</span> <span class="m">0.020942408376963352</span>
-<span class="m">1200</span>      <span class="m">1.0</span><span class="n">Kb</span>  <span class="m">600</span> <span class="n">rdr2_ovule</span> <span class="m">0.012565445026178013</span>
+<span class="m">1195</span>             <span class="m">595</span> <span class="n">Group</span> <span class="m">2</span> <span class="m">0.005759162303664922</span>
+<span class="m">1196</span>             <span class="m">596</span> <span class="n">Group</span> <span class="m">2</span>                  <span class="m">0.0</span>
+<span class="m">1197</span>             <span class="m">597</span> <span class="n">Group</span> <span class="m">2</span> <span class="m">0.006282722513089005</span>
+<span class="m">1198</span>             <span class="m">598</span> <span class="n">Group</span> <span class="m">2</span> <span class="m">0.017277486910994764</span>
+<span class="m">1199</span>             <span class="m">599</span> <span class="n">Group</span> <span class="m">2</span> <span class="m">0.020942408376963352</span>
+<span class="m">1200</span>      <span class="m">1.0</span><span class="n">Kb</span>  <span class="m">600</span> <span class="n">Group</span> <span class="m">2</span> <span class="m">0.012565445026178013</span>
 </pre></div>
 
 
@@ -308,7 +308,9 @@ plot command becomes:</p>
 
 <p>With a few if statements we actually can plot both the smoothed and line plots on
 the same coordinate system if we want. Let's test it with some data small RNA
-expression data over a set of genomic features:</p>
+expression data from my
+<a href="https://onlinelibrary.wiley.com/doi/full/10.1111/tpj.13910">2018 paper</a> over a
+set of genomic features:</p>
 <p><center>
 <img src="https://github.com/groverj3/genomics_visualizations/raw/master/metaplotteR.png", style="width:600px;height:429px;">
 </center></p>
