@@ -124,20 +124,20 @@ You can check out what this looks like as follows:
 ```R
 > head(long_table)
   bin.labels bins   sample              score
-1     -1.0Kb    1 Group 1 0.7382198952879583
-2               2 Group 1 0.9565445026178011
-3               3 Group 1 0.9879581151832458
-4               4 Group 1 0.8026178010471204
-5               5 Group 1 0.7968586387434556
-6               6 Group 1  0.593717277486911
+1     -1.0Kb    1 sample_1 0.7382198952879583
+2               2 sample_1 0.9565445026178011
+3               3 sample_1 0.9879581151832458
+4               4 sample_1 0.8026178010471204
+5               5 sample_1 0.7968586387434556
+6               6 sample_1  0.593717277486911
 > tail(long_table)
      bin.labels bins     sample                score
-1195             595 Group 2 0.005759162303664922
-1196             596 Group 2                  0.0
-1197             597 Group 2 0.006282722513089005
-1198             598 Group 2 0.017277486910994764
-1199             599 Group 2 0.020942408376963352
-1200      1.0Kb  600 Group 2 0.012565445026178013
+1195             595 sample_2 0.005759162303664922
+1196             596 sample_2                  0.0
+1197             597 sample_2 0.006282722513089005
+1198             598 sample_2 0.017277486910994764
+1199             599 sample_2 0.020942408376963352
+1200      1.0Kb  600 sample_2 0.012565445026178013
 ```
 
 This would be annoying to work with by hand, but ggplot2 understands it just

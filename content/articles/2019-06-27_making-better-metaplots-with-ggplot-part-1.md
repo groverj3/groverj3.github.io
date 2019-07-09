@@ -29,7 +29,7 @@ program. Deeptools is easier to use but its metaplots leave something to be
 desired:
 
 <center>
-<img src="/images/deeptools_example_meta.png", style="width:460px;height:275px;">
+<img src="/figures/2019-06-27_making-better-metaplots-with-ggplot-part-1/deeptools_example_meta.png", style="width:460px;height:275px;">
 </center>
 
 I like the control I have over all plot elements and the professional look that
@@ -142,11 +142,11 @@ This will generate a plot, but also output the table of per-bin values that were
 plotted. I made this with it:
 
 <center>
-<img src="/images/deeptools_example_meta2.png", style="width:460px;height:275px;">
+<img src="/figures/2019-06-27_making-better-metaplots-with-ggplot-part-1/deeptools_example_meta2.png", style="width:460px;height:275px;">
 </center>
 
 I could play with Deeptools further, but the options for changing its aesthetics
 are more limited than I'd like. In particular, smoothing the lines requires
 smoothing the underlying data in the scoreMatrix step. Which I am not a huge fan
 of. Now, let's load that table into R and make something prettier in
-[Part 2](/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html).
+[Part 2](/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html).

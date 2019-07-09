@@ -17,10 +17,10 @@ DEFAULT_LANG = 'en'
 PATH = 'content'
 ARTICLE_PATHS = ['articles']
 PAGE_PATHS = ['pages']
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'figures']
 INDEX_SAVE_AS = '/blog.html'
-ARTICLE_URL = 'articles/{date:%Y}-{date:%m}-{date:%d}/{slug}.html'
-ARTICLE_SAVE_AS = 'articles/{date:%Y}-{date:%m}-{date:%d}/{slug}.html'
+ARTICLE_URL = 'articles/{date:%Y}-{date:%m}-{date:%d}_{slug}.html'
+ARTICLE_SAVE_AS = 'articles/{date:%Y}-{date:%m}-{date:%d}_{slug}.html'
 
 COPYRIGHT_YEAR = 2019
 CC_LICENSE = {
@@ -65,6 +65,7 @@ MENUITEMS = (
     ('About', '/pages/about.html'),
     ('Blog', '/blog.html'),
     ('Categories', '/categories.html'),
+    ('Tags', '/tags.html'),
 )
 
 # Pagination setting
