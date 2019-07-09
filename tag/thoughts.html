@@ -34,7 +34,8 @@
 <meta property="og:url" content="https://groverj3.github.io"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatician. &ndash; Projects</title>
+  <title>Jeff Grover. Bioinformatician. &ndash;     Tag thoughts
+</title>
 
 </head>
 <body>
@@ -95,59 +96,37 @@
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    
-    <h1 id="projects">Projects</h1>
+    <h2><a href="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html#variations-on-rnaseq-workflows-for-deg-analysis">Variations on RNAseq Workflows for DEG Analysis</a></h2>
+    <p>
+          Posted on Tue 09 July 2019 in <a href="https://groverj3.github.io/category/commentary.html">commentary</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>,              <a href="https://groverj3.github.io/tag/thoughts.html">thoughts</a>
+    </p>
   </header>
   <div>
-<h3>Enabling Reproducible Bioinformatics Workflows</h3>
-<h4><a href="https://genomevolution.org/coge/LoadExperiment.pl"><strong>LoadExp+</strong></a></h4>
-<p>As the prices for sequencing techologies have decreasaed many researchers are now
-able to conduct large experiments on the genomic and even metagenomic scales.
-This progression is exciting, and the need for computational expertise in the
-biological sciences has never been greater! However, the need for this experience
-has greatly surpassed the number of trained individuals, and not every lab wants
-to invest the time into learning these new technologies. They want to answer
-scientific questions!</p>
-<p>I worked with Dr. Eric Lyons' lab at The University of Arizona to add analysis
-workflows to their web-based comparative genomics resource,
-<a href="https://genomevolution.org">CoGe</a>. These workflows, collectively called
-<a href="https://genomevolution.org/wiki/index.php/LoadExp%2B">"LoadExp+"</a> allow
-researchers upload raw data from their local machine or from cloud storage by
-integration with the <a href="http://www.cyverse.org">CyVerse</a> Datastore. Output files
-are automatically organized into digital "notebooks" to be shared with
-colaborators or kept private if desired. Each experiment's files are also
-viewable as tracks in CoGe's integrated genome browser
-(<a href="https://genomevolution.org/wiki/index.php/EPIC-CoGe">Epic-Coge</a>). This enables
-researchers to run LoadExp+ workflows using any available genome in CoGe,
-including those uploaded by users themselves.</p>
-<p><a href="https://doi.org/10.1002/pld3.8"><strong>Read The Publication!</strong></a></p>
-<h4><strong>Automated Analysis Pipelines With <a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a> and <a href="https://sylabs.io/">Singularity</a></strong></h4>
-<p>If you or your lab are already comfortable working with bioinformatics tools on
-a command-line you still face challenges. While the simple solution of writing a
-BASH script for each step of a workflow does work, as you run more types of
-analyses this gets old very quickly. Your directory structure becomes a mess,
-your sysadmin (if you have one) doesn't like you very much, and you fail to make
-efficient use of available resources for a workflow (i.e. step 1 needs 8 cores,
-step 2 only needs 1, how do I leverage my 28 core system for this?). Even more
-concerning, when there are different versions of piecemeal shell scripts floating
-around and nobody knows which was used to for sample X.</p>
-<p>Enter workflow managers. Snakemake is based on Python and therefore integrates
-well with a team accustomed to that language. It intelligently replaces processes
-in a workflow to paralellize jobs up to your maximum resources at run-time.</p>
-<p>Once a pipeline has been tested and works well, it can be packaged into a
-container with Singularity. Similar to Docker, Singularity is optimized for HPC
-environments, where normal users can't acquire the permissions to use Docker
-containers. This also keeps HPC sysadmins happy because they don't need to
-manage your software, plus you can port the analysis to any system you want!</p>
-<p>Work is ongoing to implement our lab's pipelines for
-<a href="https://github.com/boseHere/sRNA_snakemake_workflow">small RNA</a> and
-<a href="https://github.com/groverj3/wgbs_snakemake">whole-genome bisulfite</a> sequencing
-in such a framework.</p>
-<h3>The Role of RNA-directed DNA Methylation in Seed Production</h3>
-<h3>Genomic Imprinting as a Function of Epigenome State</h3>  </div>
+      <p>When analyzing RNAseq you're faced with many possible analysis pipelines. The
+biggest decision you need to make is what the purpose of your experiment is. I
+will make the assumption that <em>most</em> of the time people want to determine which
+genes are differentially expressed between two samples, genotypes, conditions,
+etc …</p>
+        <br>
+        <a class="btn" href="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html#variations-on-rnaseq-workflows-for-deg-analysis">    Continue reading
+</a>
+  </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>

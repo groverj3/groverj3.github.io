@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician. - how-to</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/how-to.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-06-28T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
 &lt;a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank"&gt;The Mosher Lab&lt;/a&gt;
-@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Making Better Metaplots With ggplot, Part 2</title><link href="https://groverj3.github.io/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html" rel="alternate"></link><published>2019-06-28T00:00:00-07:00</published><updated>2019-06-28T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-28:/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html</id><summary type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
+@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Making Better Metaplots With ggplot, Part 2</title><link href="https://groverj3.github.io/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html" rel="alternate"></link><published>2019-06-28T00:00:00-07:00</published><updated>2019-06-28T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-28:/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html</id><summary type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
 prepared our data using Deeptools.&lt;/p&gt;
 &lt;p&gt;Now we're going to do something kind of scandalous. R and python, living together
 in peace. What is this madness? I like R's ecosystem for manipulating data and
@@ -112,20 +112,20 @@ is with the &lt;code&gt;gather()&lt;/code&gt; function in tidyr:&lt;/p&gt;
 &lt;p&gt;You can check out what this looks like as follows:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;   &lt;span class="n"&gt;sample&lt;/span&gt;              &lt;span class="n"&gt;score&lt;/span&gt;
-&lt;span class="m"&gt;1&lt;/span&gt;     &lt;span class="m"&gt;-1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;    &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.7382198952879583&lt;/span&gt;
-&lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.9565445026178011&lt;/span&gt;
-&lt;span class="m"&gt;3&lt;/span&gt;               &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.9879581151832458&lt;/span&gt;
-&lt;span class="m"&gt;4&lt;/span&gt;               &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.8026178010471204&lt;/span&gt;
-&lt;span class="m"&gt;5&lt;/span&gt;               &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0.7968586387434556&lt;/span&gt;
-&lt;span class="m"&gt;6&lt;/span&gt;               &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;  &lt;span class="m"&gt;0.593717277486911&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt;     &lt;span class="m"&gt;-1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;    &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt; &lt;span class="m"&gt;0.7382198952879583&lt;/span&gt;
+&lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt; &lt;span class="m"&gt;0.9565445026178011&lt;/span&gt;
+&lt;span class="m"&gt;3&lt;/span&gt;               &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt; &lt;span class="m"&gt;0.9879581151832458&lt;/span&gt;
+&lt;span class="m"&gt;4&lt;/span&gt;               &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt; &lt;span class="m"&gt;0.8026178010471204&lt;/span&gt;
+&lt;span class="m"&gt;5&lt;/span&gt;               &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt; &lt;span class="m"&gt;0.7968586387434556&lt;/span&gt;
+&lt;span class="m"&gt;6&lt;/span&gt;               &lt;span class="m"&gt;6&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt;  &lt;span class="m"&gt;0.593717277486911&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;tail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;     &lt;span class="n"&gt;sample&lt;/span&gt;                &lt;span class="n"&gt;score&lt;/span&gt;
-&lt;span class="m"&gt;1195&lt;/span&gt;             &lt;span class="m"&gt;595&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.005759162303664922&lt;/span&gt;
-&lt;span class="m"&gt;1196&lt;/span&gt;             &lt;span class="m"&gt;596&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;                  &lt;span class="m"&gt;0.0&lt;/span&gt;
-&lt;span class="m"&gt;1197&lt;/span&gt;             &lt;span class="m"&gt;597&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.006282722513089005&lt;/span&gt;
-&lt;span class="m"&gt;1198&lt;/span&gt;             &lt;span class="m"&gt;598&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.017277486910994764&lt;/span&gt;
-&lt;span class="m"&gt;1199&lt;/span&gt;             &lt;span class="m"&gt;599&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.020942408376963352&lt;/span&gt;
-&lt;span class="m"&gt;1200&lt;/span&gt;      &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;  &lt;span class="m"&gt;600&lt;/span&gt; &lt;span class="n"&gt;Group&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;0.012565445026178013&lt;/span&gt;
+&lt;span class="m"&gt;1195&lt;/span&gt;             &lt;span class="m"&gt;595&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.005759162303664922&lt;/span&gt;
+&lt;span class="m"&gt;1196&lt;/span&gt;             &lt;span class="m"&gt;596&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt;                  &lt;span class="m"&gt;0.0&lt;/span&gt;
+&lt;span class="m"&gt;1197&lt;/span&gt;             &lt;span class="m"&gt;597&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.006282722513089005&lt;/span&gt;
+&lt;span class="m"&gt;1198&lt;/span&gt;             &lt;span class="m"&gt;598&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.017277486910994764&lt;/span&gt;
+&lt;span class="m"&gt;1199&lt;/span&gt;             &lt;span class="m"&gt;599&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.020942408376963352&lt;/span&gt;
+&lt;span class="m"&gt;1200&lt;/span&gt;      &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;  &lt;span class="m"&gt;600&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.012565445026178013&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -212,7 +212,7 @@ showing error when replicates are plotted, but it's pretty good for now.&lt;/p&g
 clean visualizations is necessary to get your point across. I've tidied this up
 a bit and pushed the full code to github. Bonus: it runs as a standalone script
 and works with any number of input samples!
-&lt;a href="https://github.com/groverj3/genomics_visualizations/blob/master/metaplotteR.r"&gt;Check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 1</title><link href="https://groverj3.github.io/articles/2019-06-27/making-better-metaplots-with-ggplot-part-1.html" rel="alternate"></link><published>2019-06-27T00:00:00-07:00</published><updated>2019-06-27T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-27:/articles/2019-06-27/making-better-metaplots-with-ggplot-part-1.html</id><summary type="html">&lt;p&gt;Commonly, in bioinformatics we're in the business of determining whether
+&lt;a href="https://github.com/groverj3/genomics_visualizations/blob/master/metaplotteR.r"&gt;Check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 1</title><link href="https://groverj3.github.io/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html" rel="alternate"></link><published>2019-06-27T00:00:00-07:00</published><updated>2019-06-27T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-27:/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html</id><summary type="html">&lt;p&gt;Commonly, in bioinformatics we're in the business of determining whether
 something, be it gene expression, or DNA methylation, or splicing, etc. is
 different between multiple conditions. Typically this would be done by comparing
 those data and using some kind of statistical test. However, with the continued
@@ -240,7 +240,7 @@ Genomation requires one to be very familiar with R since it isn't a standalone
 program. Deeptools is easier to use but its metaplots leave something to be
 desired:&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;
-&lt;img src="/images/deeptools_example_meta.png", style="width:460px;height:275px;"&gt;
+&lt;img src="/figures/2019-06-27_making-better-metaplots-with-ggplot-part-1/deeptools_example_meta.png", style="width:460px;height:275px;"&gt;
 &lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;I like the control I have over all plot elements and the professional look that
 &lt;a href="https://ggplot2.tidyverse.org/"&gt;ggplot&lt;/a&gt; affords. I use it for most of my data
@@ -339,13 +339,13 @@ also output the raw data:&lt;/p&gt;
 &lt;p&gt;This will generate a plot, but also output the table of per-bin values that were
 plotted. I made this with it:&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;
-&lt;img src="/images/deeptools_example_meta2.png", style="width:460px;height:275px;"&gt;
+&lt;img src="/figures/2019-06-27_making-better-metaplots-with-ggplot-part-1/deeptools_example_meta2.png", style="width:460px;height:275px;"&gt;
 &lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;I could play with Deeptools further, but the options for changing its aesthetics
 are more limited than I'd like. In particular, smoothing the lines requires
 smoothing the underlying data in the scoreMatrix step. Which I am not a huge fan
 of. Now, let's load that table into R and make something prettier in
-&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot-part-2.html"&gt;Part 2&lt;/a&gt;.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Managing Software on a Multiuser Linux System</title><link href="https://groverj3.github.io/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html" rel="alternate"></link><published>2019-06-25T00:00:00-07:00</published><updated>2019-06-25T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-25:/articles/2019-06-25/managing-software-on-a-multiuser-linux-system.html</id><summary type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
+&lt;a href="/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html"&gt;Part 2&lt;/a&gt;.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Managing Software on a Multiuser Linux System</title><link href="https://groverj3.github.io/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html" rel="alternate"></link><published>2019-06-25T00:00:00-07:00</published><updated>2019-06-25T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-25:/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html</id><summary type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
 environment on my own computers. Mostly as a hobby. My advisor had bought a small
 server several years previous for a post-doc's project and I was offered this
 system to use for my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
@@ -504,7 +504,7 @@ good investment in 2019. Submitting jobs to a queue is fine when you're not doin
 iterative work, but if you want to quickly test things it gets old really quick.
 Likewise, you can easily get hardware on-par with a remote VM and it's more
 readily accessed.&lt;/p&gt;
-&lt;p&gt;Tune in next time for something more bioinformatics-focused!&lt;/p&gt;</content><category term="sysadmin"></category></entry><entry><title>Setting up a Static Site With Pelican and GitHub Pages</title><link href="https://groverj3.github.io/articles/2019-06-15/setting-up-a-static-site-with-pelican-and-github-pages.html" rel="alternate"></link><published>2019-06-15T00:00:00-07:00</published><updated>2019-06-15T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-15:/articles/2019-06-15/setting-up-a-static-site-with-pelican-and-github-pages.html</id><summary type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
+&lt;p&gt;Tune in next time for something more bioinformatics-focused!&lt;/p&gt;</content><category term="sysadmin"></category></entry><entry><title>Setting up a Static Site With Pelican and GitHub Pages</title><link href="https://groverj3.github.io/articles/2019-06-15_setting-up-a-static-site-with-pelican-and-github-pages.html" rel="alternate"></link><published>2019-06-15T00:00:00-07:00</published><updated>2019-06-15T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-15:/articles/2019-06-15_setting-up-a-static-site-with-pelican-and-github-pages.html</id><summary type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
 personal/professional website. It needed to look good, contain links to my
 relevant social and job-search profiles, host some examples of work from my Ph.D.
 , showcase my skillset, and host my CV. GitHub pages …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a

@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="When analyzing RNAseq you&#39;re faced with many possible analysis pipelines. The biggest decision you need to make is what the purpose of your experiment is. I will make the assumption that most of the time people want to determine which genes are differentially expressed between two samples, genotypes, conditions, etc …" />
+<meta name="keywords" content="bioinformatics, thoughts">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:title" content="Variations on RNAseq Workflows for DEG Analysis"/>
+<meta property="og:description" content="When analyzing RNAseq you&#39;re faced with many possible analysis pipelines. The biggest decision you need to make is what the purpose of your experiment is. I will make the assumption that most of the time people want to determine which genes are differentially expressed between two samples, genotypes, conditions, etc …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-07-09 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="commentary"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="thoughts"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatician. &ndash; Variations on RNAseq Workflows for DEG Analysis</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="variations-on-rnaseq-workflows-for-deg-analysis">Variations on RNAseq Workflows for DEG Analysis</h1>
+    <p>
+          Posted on Tue 09 July 2019 in <a href="https://groverj3.github.io/category/commentary.html">commentary</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>When analyzing RNAseq you're faced with many possible analysis pipelines. The
+biggest decision you need to make is what the purpose of your experiment is. I
+will make the assumption that <em>most</em> of the time people want to determine which
+genes are differentially expressed between two samples, genotypes, conditions,
+etc. In DEG analyss you are interested in gene-level expression. This means you
+are <strong>not</strong> interested in differential isoforms/transcripts or alternative
+splicing.The absolute most simple version of this is simply having control and
+experimental samples (preferably with &gt;= 3 biological replicates each). However,
+this isn't as straightforward as firing up your favorite aligner and going to
+town on the data. There are other considerations.</p>
+<h3>I Have a High Quality Annotated Reference Genome or Transcriptome</h3>
+<p><strong>My Reference Genome is High Quality</strong></p>
+<ol>
+<li>Align reads to reference genome (STAR, HISAT2)</li>
+<li>Count reads per gene (HTSeq-count, summarizeOverlaps, featurecounts)</li>
+<li>DEG Analysis (DESeq2, edgeR)</li>
+</ol>
+<p>This is the standard workflow that you're probably accustomed to. Note: it is
+very important to use a <em>modern</em> splicing-aware aligner. Do not use bowtie. Both
+STAR and HISAT2 are very fast compared to older aligners and are designed for
+RNAseq. Their default options are generally appropriate for most simple
+experimental designs. As a bonus, STAR can actually do step 2 itself, although
+the output format is kind of clunky.</p>
+<p>This workflow is a good general purpose one in model organisms, and nobody will
+fault you for using it there. However, there are potentially better options.</p>
+<p><strong>My Annotation/transcriptome is High Quality</strong></p>
+<ol>
+<li>Pseudoalignment-based abundance estimation (Salmon, Kallisto)</li>
+<li>Aggregate abundances per gene from transcripts (tximport)</li>
+<li>DEG Analysis (DESeq2, edgeR)</li>
+</ol>
+<p>This workflow may actually be better
+(<a href="https://f1000research.com/articles/4-1521/v2">ref</a>) even if you have a
+reference genome. I've always assumed that reference-genome alignment is superior
+when you have a good reference, but apparently this is not necessarily the case
+for the reasons detailed here.</p>
+<p><strong>Pros:</strong> very fast, potentially more accurate.</p>
+<p><strong>Cons:</strong> no .bam file is generated so you can't look at positional information
+from your reads, no ability to discover new transcripts later from your
+alignments.</p>
+<p>Either of these workflows will work fine in this situation, and the better your
+genome is the closer the first will likely approximate the second. Though, I now
+believe that the second workflow should be the standard if your goal is purely
+DEG analysis. There are still a lot of good reasons to want a .bam file, though
+nothing is stopping you from aligning your reads anyway for future-use.</p>
+<h3>My Genome/Transcriptome is Incomplete</h3>
+<p>In this case you have some deicsions to make, yet again.</p>
+<p><strong>Genome is Good but Annotations Are Poor</strong></p>
+<ol>
+<li>Align to reference genome (STAR, HISAT2)</li>
+<li>Assemble transcripts, genome-guided (Stringtie)</li>
+<li>Aggregate abundances per gene from transcripts (tximport)</li>
+<li>DEG Analysis (DESeq2, edgeR)</li>
+</ol>
+<p>Another option here is to use a tool like
+<a href="https://github.com/PASApipeline/PASApipeline/wik">PASA</a> to update the
+existing annotations if they exist. I've run that pipeline. It's very quirky, a
+pain to get running, and if you don't need genomic coordinates I'd avoid it. You
+could also use Salmon/Kallisto with StringTie's transcripts, without using its
+quantification, but this seems to be an unnecessary step.</p>
+<p><strong>Genome and Transcriptome Are Poor</strong></p>
+<ol>
+<li>Assemble transcriptome (Trinity)</li>
+<li>Pseudoalignment-based abundance estimation (Salmon, Kallisto)</li>
+<li>Aggregate abundances per gene from transcripts (tximport)</li>
+<li>DEG Analysis (DESeq2, edgeR)</li>
+</ol>
+<p>In this case you're going to want to do a thorough <em>de-novo</em> transcriptome
+assembly using something like
+<a href="https://github.com/trinityrnaseq/trinityrnaseq/wiki">Trinity</a>. This
+transcriptome can then be used for pseudoalignment-based abundance estimation and
+then DEGs can be determined after aggregation of isoform abundances. Trinity can
+be quite a resource hog, so you're going to want to
+<a href="https://downloadmoreram.com/">get more ram</a>.</p>
+<h3>Why Not Cufflinks/Stringtie For Transcript Assembly In Model Organisms?</h3>
+<p>First of all, don't use Cufflinks. Stringtie is essentially a more modern
+Cufflinks that's
+<a href="https://ccb.jhu.edu/software/stringtie/index.shtml?t=faq#comp">faster and more accurate</a>.
+Secondly, if you're working in a well annotated genome chances are that "novel
+transcripts" you find are more likely noise, or not biologically meaningful
+(unless you know better for your use-case!).</p>
+<h3>Concluding Thoughts</h3>
+<p>The paper detailing that transcript abundances, when aggregated to gene level,
+improve DEG analysis is particularly interesting. This makes me rethink my usual
+assumption and I now believe that tools like Salmon or Kallisto should be the go
+to tools for DEG analysis when you have a good transcriptome to work with.</p>
+<p>However, I still think it's worthwhile to align your reads and generate a .bam
+file. There are many types of visualizations and comparisons that you simply
+can't do without them. For example, calculating coverage over featutres of
+interest. If you must compare expression of genes across multiple samples or from
+different experiments then you'll probably want to convert your expression values
+to some normalized measurement. In this case you can use FPKM or TPM, though the
+consensus seems to be that TPM is the way to go these days.</p>
+<p>And, at the end of the day you know that an out-of-date collaborator is probably
+going to ask you for FPKM measurements or something anyway.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/thoughts.html">thoughts</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatician. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

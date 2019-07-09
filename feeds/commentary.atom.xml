@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician. - commentary</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/commentary.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-07-09T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
+&lt;a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank"&gt;The Mosher Lab&lt;/a&gt;
+@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Variations on RNAseq Workflows for DEG Analysis</title><link href="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html" rel="alternate"></link><published>2019-07-09T00:00:00-07:00</published><updated>2019-07-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-07-09:/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html</id><summary type="html">&lt;p&gt;When analyzing RNAseq you're faced with many possible analysis pipelines. The
+biggest decision you need to make is what the purpose of your experiment is. I
+will make the assumption that &lt;em&gt;most&lt;/em&gt; of the time people want to determine which
+genes are differentially expressed between two samples, genotypes, conditions,
+etc …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When analyzing RNAseq you're faced with many possible analysis pipelines. The
+biggest decision you need to make is what the purpose of your experiment is. I
+will make the assumption that &lt;em&gt;most&lt;/em&gt; of the time people want to determine which
+genes are differentially expressed between two samples, genotypes, conditions,
+etc. In DEG analyss you are interested in gene-level expression. This means you
+are &lt;strong&gt;not&lt;/strong&gt; interested in differential isoforms/transcripts or alternative
+splicing.The absolute most simple version of this is simply having control and
+experimental samples (preferably with &amp;gt;= 3 biological replicates each). However,
+this isn't as straightforward as firing up your favorite aligner and going to
+town on the data. There are other considerations.&lt;/p&gt;
+&lt;h3&gt;I Have a High Quality Annotated Reference Genome or Transcriptome&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;My Reference Genome is High Quality&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Align reads to reference genome (STAR, HISAT2)&lt;/li&gt;
+&lt;li&gt;Count reads per gene (HTSeq-count, summarizeOverlaps, featurecounts)&lt;/li&gt;
+&lt;li&gt;DEG Analysis (DESeq2, edgeR)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is the standard workflow that you're probably accustomed to. Note: it is
+very important to use a &lt;em&gt;modern&lt;/em&gt; splicing-aware aligner. Do not use bowtie. Both
+STAR and HISAT2 are very fast compared to older aligners and are designed for
+RNAseq. Their default options are generally appropriate for most simple
+experimental designs. As a bonus, STAR can actually do step 2 itself, although
+the output format is kind of clunky.&lt;/p&gt;
+&lt;p&gt;This workflow is a good general purpose one in model organisms, and nobody will
+fault you for using it there. However, there are potentially better options.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;My Annotation/transcriptome is High Quality&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Pseudoalignment-based abundance estimation (Salmon, Kallisto)&lt;/li&gt;
+&lt;li&gt;Aggregate abundances per gene from transcripts (tximport)&lt;/li&gt;
+&lt;li&gt;DEG Analysis (DESeq2, edgeR)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This workflow may actually be better
+(&lt;a href="https://f1000research.com/articles/4-1521/v2"&gt;ref&lt;/a&gt;) even if you have a
+reference genome. I've always assumed that reference-genome alignment is superior
+when you have a good reference, but apparently this is not necessarily the case
+for the reasons detailed here.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pros:&lt;/strong&gt; very fast, potentially more accurate.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Cons:&lt;/strong&gt; no .bam file is generated so you can't look at positional information
+from your reads, no ability to discover new transcripts later from your
+alignments.&lt;/p&gt;
+&lt;p&gt;Either of these workflows will work fine in this situation, and the better your
+genome is the closer the first will likely approximate the second. Though, I now
+believe that the second workflow should be the standard if your goal is purely
+DEG analysis. There are still a lot of good reasons to want a .bam file, though
+nothing is stopping you from aligning your reads anyway for future-use.&lt;/p&gt;
+&lt;h3&gt;My Genome/Transcriptome is Incomplete&lt;/h3&gt;
+&lt;p&gt;In this case you have some deicsions to make, yet again.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Genome is Good but Annotations Are Poor&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Align to reference genome (STAR, HISAT2)&lt;/li&gt;
+&lt;li&gt;Assemble transcripts, genome-guided (Stringtie)&lt;/li&gt;
+&lt;li&gt;Aggregate abundances per gene from transcripts (tximport)&lt;/li&gt;
+&lt;li&gt;DEG Analysis (DESeq2, edgeR)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Another option here is to use a tool like
+&lt;a href="https://github.com/PASApipeline/PASApipeline/wik"&gt;PASA&lt;/a&gt; to update the
+existing annotations if they exist. I've run that pipeline. It's very quirky, a
+pain to get running, and if you don't need genomic coordinates I'd avoid it. You
+could also use Salmon/Kallisto with StringTie's transcripts, without using its
+quantification, but this seems to be an unnecessary step.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Genome and Transcriptome Are Poor&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Assemble transcriptome (Trinity)&lt;/li&gt;
+&lt;li&gt;Pseudoalignment-based abundance estimation (Salmon, Kallisto)&lt;/li&gt;
+&lt;li&gt;Aggregate abundances per gene from transcripts (tximport)&lt;/li&gt;
+&lt;li&gt;DEG Analysis (DESeq2, edgeR)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In this case you're going to want to do a thorough &lt;em&gt;de-novo&lt;/em&gt; transcriptome
+assembly using something like
+&lt;a href="https://github.com/trinityrnaseq/trinityrnaseq/wiki"&gt;Trinity&lt;/a&gt;. This
+transcriptome can then be used for pseudoalignment-based abundance estimation and
+then DEGs can be determined after aggregation of isoform abundances. Trinity can
+be quite a resource hog, so you're going to want to
+&lt;a href="https://downloadmoreram.com/"&gt;get more ram&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Why Not Cufflinks/Stringtie For Transcript Assembly In Model Organisms?&lt;/h3&gt;
+&lt;p&gt;First of all, don't use Cufflinks. Stringtie is essentially a more modern
+Cufflinks that's
+&lt;a href="https://ccb.jhu.edu/software/stringtie/index.shtml?t=faq#comp"&gt;faster and more accurate&lt;/a&gt;.
+Secondly, if you're working in a well annotated genome chances are that "novel
+transcripts" you find are more likely noise, or not biologically meaningful
+(unless you know better for your use-case!).&lt;/p&gt;
+&lt;h3&gt;Concluding Thoughts&lt;/h3&gt;
+&lt;p&gt;The paper detailing that transcript abundances, when aggregated to gene level,
+improve DEG analysis is particularly interesting. This makes me rethink my usual
+assumption and I now believe that tools like Salmon or Kallisto should be the go
+to tools for DEG analysis when you have a good transcriptome to work with.&lt;/p&gt;
+&lt;p&gt;However, I still think it's worthwhile to align your reads and generate a .bam
+file. There are many types of visualizations and comparisons that you simply
+can't do without them. For example, calculating coverage over featutres of
+interest. If you must compare expression of genes across multiple samples or from
+different experiments then you'll probably want to convert your expression values
+to some normalized measurement. In this case you can use FPKM or TPM, though the
+consensus seems to be that TPM is the way to go these days.&lt;/p&gt;
+&lt;p&gt;And, at the end of the day you know that an out-of-date collaborator is probably
+going to ask you for FPKM measurements or something anyway.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="thoughts"></category></entry></feed>
