@@ -1,0 +1,624 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="Working with large amounts of tabular data is a daily occurance for both bioinformaticians and data scientists. There&#39;s a lot the two groups can learn from each other (great future post material). However, I recently ran into a situation that I was sure had to be relatively common. Apparently it …" />
+<meta name="keywords" content="bioinformatics, data-science, r, python, big-data">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:title" content="Efficiently Filtering While Reading Data Into R (With Python?!)"/>
+<meta property="og:description" content="Working with large amounts of tabular data is a daily occurance for both bioinformaticians and data scientists. There&#39;s a lot the two groups can learn from each other (great future post material). However, I recently ran into a situation that I was sure had to be relatively common. Apparently it …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2019-07-17_efficiently-filtering-while-reading-data-into-r-with-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-07-17 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="how-to"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="data-science"/>
+<meta property="article:tag" content="r"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="big-data"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatician. &ndash; Efficiently Filtering While Reading Data Into R (With Python?!)</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="efficiently-filtering-while-reading-data-into-r-with-python">Efficiently Filtering While Reading Data Into R (With Python?!)</h1>
+    <p>
+          Posted on Wed 17 July 2019 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Working with large amounts of tabular data is a daily occurance for both
+bioinformaticians and data scientists. There's a lot the two groups can learn
+from each other (great future post material). However, I recently ran into a
+situation that I was sure had to be relatively common. Apparently it wasn't and I
+had very little luck checking for a solution in my usual genomics/bioinformatics
+cirlces, as well as the data science material I had on-hand.</p>
+<h3>The Problem</h3>
+<p>I recently received output from a large BLAST search. Something on the order of
+200,000 queries. Some of those queries had many thousand hits. This is because
+the search was completed with minimal filtering. The idea being, it's easy to
+post-filter it, but you can't get the hits back that are thrown away. Fair
+enough. It was also split between 100+ files. The files were also output in
+BLAST's "format 7" (run with --outfmt 7). This means it's tabular (.tsv) with
+comment lines throughout. This collection of files was actually too big to load
+them into R (where I do most exploratory data analysis) and then filter them. So,
+I figured there had to be a way to combine loading and filtering in a
+satisfactory way. Of course, you could also pre-filter it with awk or Python
+line-by-line and write it out to the hard drive, but this problem interested me.</p>
+<h3><strong>TLDR</strong></h3>
+<p>If you have to load <strong>AND</strong> filter you should use the lesser-known
+<a href="http://readr.tidyverse.org">readr</a> function <code>read_delim_chunked()</code> (and its
+derivatives, <code>read_{tsv|csv|table}_chunked()</code>) or write a parser in Python and
+translate the resulting object (list of lists, dictionary of lists, or Pandas
+dataframe) to R with 
+<a href="https://rstudio.github.io/reticulate/index.html">reticulate</a>. The reason behind
+this is that iterating through a file and filtering line-by-line, while a
+seemingly common thing to do, is horrifically slow in R as far as I can tell. I'm
+happy to eat my words if other useRs can prove I'm wrong.</p>
+<h3>Attempt #1: Writing a Line-by-line Parser in R</h3>
+<p>I read all the warnings. They say that R is slow. But is this really true? I
+frequently read pretty large files into R with <a href="https://readr.tidyverse.org/">readr</a>
+or <a href="https://github.com/Rdatatable/data.table/wiki">data.table</a>, and they're
+<em>wicked fast</em>. What I failed to immediately realize is that these packages are
+fast because they're written in C/C++ and are effectively compiled programs that
+interact with R through its API.</p>
+<p>I decided I would test this on both a subset of the data, one of the smaller
+files (~2.6 GB), and the first 10,000 lines. The tsv files have comment lines
+denoted with '#' and 12 columns which vary between character, float, and
+integers:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Example data</span>
+<span class="n">input_file</span> <span class="o">&lt;-</span> <span class="s">&#39;test_blast_fmt7.out&#39;</span>
+<span class="nf">system</span><span class="p">(</span><span class="s">&#39;head -n 10000 test_blast_fmt7.out &gt; test_blast_fmt7.head10000.out&#39;</span><span class="p">)</span>
+<span class="n">input_file_head</span> <span class="o">&lt;-</span> <span class="s">&#39;test_blast_fmt7.head10000.out&#39;</span>
+<span class="n">col_names</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;subject&#39;</span><span class="p">,</span> <span class="s">&#39;identity&#39;</span><span class="p">,</span> <span class="s">&#39;align_length&#39;</span><span class="p">,</span>
+               <span class="s">&#39;mismatches&#39;</span><span class="p">,</span> <span class="s">&#39;gap_opens&#39;</span><span class="p">,</span> <span class="s">&#39;q_start&#39;</span><span class="p">,</span> <span class="s">&#39;q_end&#39;</span><span class="p">,</span>
+               <span class="s">&#39;s_start&#39;</span><span class="p">,</span> <span class="s">&#39;s_end&#39;</span><span class="p">,</span> <span class="s">&#39;evalue&#39;</span><span class="p">,</span> <span class="s">&#39;bit_score&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I first attempted to solve this problem by writing the following function (don't
+do this).</p>
+<div class="highlight"><pre><span></span><span class="n">read_filter_blast7_lbl_base</span> <span class="o">&lt;-</span> <span class="nf">function </span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">min_perc_id</span><span class="p">,</span> <span class="n">min_al_len</span><span class="p">,</span> <span class="n">max_evalue</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># Initialize a line counter</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="m">1</span>
+
+  <span class="c1"># Open a file connection, yield one line at a time</span>
+  <span class="n">out_list</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span>
+  <span class="n">conn</span> <span class="o">&lt;-</span> <span class="nf">file</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">open</span> <span class="o">=</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+  <span class="nf">while </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">n_line</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">warn</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">))</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1"># Split the line at the separator to yield a list, turn into a vector</span>
+    <span class="n">line</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">n_line</span><span class="p">,</span> <span class="s">&#39;\t&#39;</span><span class="p">))</span>
+
+    <span class="c1"># Skip comment lines</span>
+    <span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">startsWith</span><span class="p">(</span><span class="n">line[1]</span><span class="p">,</span> <span class="s">&#39;#&#39;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1"># Include filtering conditions here in this if statement</span>
+      <span class="nf">if </span><span class="p">(</span><span class="n">line[3]</span> <span class="o">&gt;=</span> <span class="n">min_perc_id</span> <span class="o">&amp;</span> <span class="n">line[4]</span> <span class="o">&gt;=</span> <span class="n">min_al_len</span> <span class="o">&amp;</span> <span class="n">line[11]</span> <span class="o">&lt;=</span> <span class="n">max_evalue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">out_list[[i]]</span> <span class="o">&lt;-</span> <span class="n">line</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1"># Count lines</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="m">1</span>
+  <span class="p">}</span>
+  <span class="nf">close</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+
+  <span class="c1"># Bind the lines as a data frame, don&#39;t convert strings to factors</span>
+  <span class="n">out_df</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="n">out_list</span><span class="p">),</span> <span class="n">stringsAsFactors</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+  <span class="nf">colnames</span><span class="p">(</span><span class="n">out_df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">header</span>
+
+  <span class="c1"># Set the column classes</span>
+  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="n">header[3</span><span class="o">:</span><span class="m">12</span><span class="n">]</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">out_df[</span><span class="p">,</span> <span class="n">i]</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">out_df[</span><span class="p">,</span> <span class="n">i]</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="c1"># The out_df object will include filtered data, all columns as character vectors</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">out_df</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Wow! What an abomination. I'm not sure if this says more about R's unsuitability
+to this kind of task or my obvious "Python-think" that's seeping in here. It's a
+mess. And it's slow. I tried testing on the first 10,000 lines of one of the
+files:</p>
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span>
+
+<span class="c1"># Benchmark 100 iterations (default) over the first 10000 lines</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_lbl_base</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">milliseconds</span>
+                                                                         <span class="n">expr</span>
+ <span class="nf">read_filter_blast7_lbl_base</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span>      <span class="m">1e-50</span><span class="p">)</span>
+      <span class="n">min</span>       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>    <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">338.4403</span> <span class="m">346.2422</span> <span class="m">351.0633</span> <span class="m">349.2319</span> <span class="m">352.5961</span> <span class="m">404.62</span>   <span class="m">100</span>
+</pre></div>
+
+
+<p>It works, but this doesn't scale up to a full file (it sat for ages until I
+killed it), and it suffers from R's problems with growing lists in a loop leading
+to copying rather than appending. There are clearly other issues too because my
+attempts to pre-allocate a list or data frame of the correct size did not spee
+it up. This means that I might be doing something wrong. Regardless, this is too
+much work to do something so simple. I welcome others to find a pure base R
+implementation that's better. It seems like there <em>should</em> be a way to do it.</p>
+<p>However, there are better options.</p>
+<h3>Attempt #2: Using <a href="https://www.rdocumentation.org/packages/sqldf/versions/0.4-11"><strong>sqldf</strong></a> to Filter a Temporary sqlite Database</h3>
+<p>The internet led me to believe that this isn't really something people do in R.
+And if you can't load it all into memory then you should use a database and query
+that. It seems excessive, but the <a href="https://github.com/ggrothendieck/sqldf">sqldf</a>
+R package can do this. It even includes a function to create the DB on the fly
+while reading (<code>read.csv.sql()</code>) I totally understand using SQL or similar to query
+a DB when you have a reason to query it often and it's stored as an SQL DB. I
+question the wisdom of this suggestion though for this purpose. I was able to use
+it as follows:</p>
+<div class="highlight"><pre><span></span><span class="n">read_filter_blast7_sqldf</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">min_perc_id</span><span class="p">,</span> <span class="n">min_al_len</span><span class="p">,</span> <span class="n">max_evalue</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">temp_df</span> <span class="o">&lt;-</span> <span class="nf">read.csv.sql</span><span class="p">(</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">input_file</span><span class="p">,</span>
+    <span class="n">filter</span> <span class="o">=</span> <span class="s">&quot;sed -e &#39;/^#/d&#39;&quot;</span><span class="p">,</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#39;SELECT * FROM file WHERE V3 &gt;= &#39;</span><span class="p">,</span> <span class="n">min_perc_id</span><span class="p">,</span>
+                 <span class="s">&#39; AND V4 &gt;= &#39;</span><span class="p">,</span> <span class="n">min_al_len</span><span class="p">,</span> <span class="s">&#39; AND V11 &lt;= &#39;</span><span class="p">,</span> <span class="n">max_evalue</span><span class="p">),</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
+    <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">,</span>
+    <span class="n">colClasses</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="s">&#39;character&#39;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="s">&#39;numeric&#39;</span><span class="p">,</span> <span class="nf">rep</span><span class="p">(</span><span class="s">&#39;integer&#39;</span><span class="p">,</span> <span class="m">7</span><span class="p">),</span> <span class="nf">rep</span><span class="p">(</span><span class="s">&#39;numeric&#39;</span><span class="p">,</span> <span class="m">2</span><span class="p">)),</span>
+  <span class="p">)</span>
+  <span class="nf">colnames</span><span class="p">(</span><span class="n">temp_df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">header</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">temp_df</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>One of the key limitations here is that you need to pipe through a shell command
+(sed) to remove comment lines. Not the biggest deal, but having to write a sed
+command does take you out of your flow in an R or jupyter notebook. Let's see
+how that performs:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Benchmark 100 iterations (default) over the first 10000 lines</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_sqldf</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">milliseconds</span>
+                                                                      <span class="n">expr</span>
+ <span class="nf">read_filter_blast7_sqldf</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span>      <span class="m">1e-50</span><span class="p">)</span>
+      <span class="n">min</span>       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">72.27077</span> <span class="m">73.30782</span> <span class="m">93.27967</span> <span class="m">79.38143</span> <span class="m">103.4807</span> <span class="m">199.8507</span>   <span class="m">100</span>
+</pre></div>
+
+
+<p>What's going on here? The max is much slower than the min. This is because the
+first iteration reads this into a temporary <strong>file</strong>! This will take
+even more time for a larger file, and that temporary database will be the size of
+the full, unfiltered file. Usually you load each file once, and each file needs
+its own temp sqlite DB. So, the max time is actually the only timing that
+matters! Plus, it has the problem of filling up your /tmp directory. What happens
+when I try to load the smallest whole file (2.6 GB)?</p>
+<div class="highlight"><pre><span></span><span class="c1"># Benchmark the whole file once</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_sqldf</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">seconds</span>
+                                                            <span class="n">expr</span>      <span class="n">min</span>
+ <span class="nf">read_filter_blast7_sqldf</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">)</span> <span class="m">165.4224</span>
+       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">165.4224</span> <span class="m">165.4224</span> <span class="m">165.4224</span> <span class="m">165.4224</span> <span class="m">165.4224</span>     <span class="m">1</span>
+</pre></div>
+
+
+<p>That's decent performance, but because it makes temporary files it will fill up
+your /tmp directory:</p>
+<div class="highlight"><pre><span></span>$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+dev             <span class="m">7</span>.8G     <span class="m">0</span>  <span class="m">7</span>.8G   <span class="m">0</span>% /dev
+run             <span class="m">7</span>.8G  <span class="m">1</span>.4M  <span class="m">7</span>.8G   <span class="m">1</span>% /run
+/dev/nvme0n1p2  423G   34G  368G   <span class="m">9</span>% /
+tmpfs           <span class="m">7</span>.8G  170M  <span class="m">7</span>.6G   <span class="m">3</span>% /dev/shm
+tmpfs           <span class="m">7</span>.8G     <span class="m">0</span>  <span class="m">7</span>.8G   <span class="m">0</span>% /sys/fs/cgroup
+tmpfs           <span class="m">7</span>.8G  <span class="m">6</span>.9G  913M  <span class="m">89</span>% /tmp
+/dev/nvme0n1p1  300M  348K  300M   <span class="m">1</span>% /boot/efi
+tmpfs           <span class="m">1</span>.6G   32K  <span class="m">1</span>.6G   <span class="m">1</span>% /run/user/1000
+</pre></div>
+
+
+<p>And running it on a second file fails:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Benchmark the whole file once</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_sqldf</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">Error</span> <span class="n">in</span> <span class="nf">connection_import_file</span><span class="p">(</span><span class="n">conn</span><span class="o">@</span><span class="n">ptr</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">eol</span><span class="p">,</span> <span class="n">skip</span><span class="p">)</span> <span class="o">:</span> 
+  <span class="n">RS_sqlite_import</span><span class="o">:</span> <span class="n">database</span> <span class="n">or</span> <span class="n">disk</span> <span class="n">is</span> <span class="n">full</span>
+<span class="n">In</span> <span class="n">addition</span><span class="o">:</span> <span class="n">Warning</span> <span class="n">message</span><span class="o">:</span>
+<span class="n">In</span> <span class="nf">.Internal</span><span class="p">(</span><span class="nf">gc</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="n">reset</span><span class="p">,</span> <span class="n">full</span><span class="p">))</span> <span class="o">:</span>
+  <span class="n">closing</span> <span class="n">unused</span> <span class="n">connection</span> <span class="m">4</span> <span class="p">(</span><span class="n">test_blast_fmt7.out</span><span class="p">)</span>
+<span class="n">Error</span> <span class="n">in</span> <span class="nf">result_create</span><span class="p">(</span><span class="n">conn</span><span class="o">@</span><span class="n">ptr</span><span class="p">,</span> <span class="n">statement</span><span class="p">)</span> <span class="o">:</span> 
+  <span class="n">cannot</span> <span class="n">rollback</span> <span class="o">-</span> <span class="n">no</span> <span class="n">transaction</span> <span class="n">is</span> <span class="n">active</span>
+</pre></div>
+
+
+<p>I then had to <code>sudo rm -r /tmp/Rtmp*</code> because my ssd was full.</p>
+<p>On a system with tons of space it could be fine. I'm running this on my laptop
+during a flight so that doesn't help. You could also specify where those
+databases are made. However, the largest file I needed to work with is 30 GB and
+there were several. And this exact problem happened with that on our lab's
+server. (Note to self: Ask my PI to upgrade the root drive).</p>
+<p>Still not a great solution.</p>
+<h3>Attempt #3: <a href="https://readr.tidyverse.org/"><strong>readr</strong></a> <code>read_delim_chunked()</code></h3>
+<p>This function isn't well-documented, but is the fastest option I found. It's not
+quite the line-by-line implementation I thought up, but it's similar. Basically,
+it will use readr and a function (user-definable) to bind together dataframes
+which are read in chunks. Getting the best performance would require optimizing
+the chunk size to the largest you can reasonably handle in memory. I stuck with
+10,000 because I was comparing to other options.</p>
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
+
+<span class="n">read_filter_blast7_readr_chunked</span> <span class="o">&lt;-</span> <span class="nf">function </span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">min_perc_id</span><span class="p">,</span> <span class="n">min_al_len</span><span class="p">,</span> <span class="n">max_evalue</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">f</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> <span class="nf">subset</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">identity</span> <span class="o">&gt;=</span> <span class="n">min_perc_id</span> <span class="o">&amp;</span> <span class="n">align_length</span> <span class="o">&gt;=</span> <span class="n">min_al_len</span> <span class="o">&amp;</span> <span class="n">evalue</span> <span class="o">&lt;=</span> <span class="n">max_evalue</span><span class="p">)</span>
+  <span class="n">out_df</span> <span class="o">&lt;-</span> <span class="nf">read_tsv_chunked</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="m">10000</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="s">&#39;#&#39;</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">DataFrameCallback</span><span class="o">$</span><span class="nf">new</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Benchmarking results in some very very solid performance:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Benchmark 100 iterations (default) over the first 10000 lines</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_readr_chunked</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">milliseconds</span>
+                                                                              <span class="n">expr</span>
+ <span class="nf">read_filter_blast7_readr_chunked</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span>      <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">)</span>
+      <span class="n">min</span>       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">28.90464</span> <span class="m">29.10356</span> <span class="m">30.87358</span> <span class="m">29.92421</span> <span class="m">31.28273</span> <span class="m">92.10364</span>   <span class="m">100</span>
+</pre></div>
+
+
+<p>That's not too surprising, since it's basically just reading in the whole file at
+once and readr is fast. So, how's it work on the full file?</p>
+<div class="highlight"><pre><span></span><span class="c1"># Benchmark the whole file once</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_sqldf</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">seconds</span>
+                                                                         <span class="n">expr</span>
+ <span class="nf">read_filter_blast7_readr_chunked</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span>      <span class="m">1e-50</span><span class="p">)</span>
+      <span class="n">min</span>       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">76.59867</span> <span class="m">76.59867</span> <span class="m">76.59867</span> <span class="m">76.59867</span> <span class="m">76.59867</span> <span class="m">76.59867</span>     <span class="m">1</span>
+</pre></div>
+
+
+<p>Really good performance. You can tune it better as well, the. This is probably your best bet without getting too
+weird. But let's get weird ;)</p>
+<h3>Attempt #4: Parse With Python Translate to R With <a href="https://rstudio.github.io/reticulate/index.html"><strong>reticulate</strong></a></h3>
+<p>Let's do this in Python! Sort of...</p>
+<p>Writing a function to read and filter something in a for loop is a common thing
+for me in python. I usually don't use Python for exploratory analysis though and
+am less familiar with Pandas <em>et al.</em> than I am with R's ecosystem. However, I
+was able to figure out that it will automatically turn a list of lists into a
+dataframe, which is pretty neat. A solid win over R's functionality:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">filter_blast7</span><span class="p">(</span><span class="n">input_blast_results</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">min_perc_id</span><span class="p">,</span> <span class="n">min_al_len</span><span class="p">,</span>
+                  <span class="n">max_evalue</span><span class="p">):</span>
+    <span class="n">df_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_blast_results</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_handle</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">input_handle</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+                <span class="n">entry</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">perc_id</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">al_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">evalue</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">perc_id</span> <span class="o">&gt;=</span> <span class="n">min_perc_id</span> <span class="ow">and</span> <span class="n">al_len</span> <span class="o">&gt;=</span> <span class="n">min_al_len</span>
+                        <span class="ow">and</span> <span class="n">evalue</span> <span class="o">&lt;=</span> <span class="n">max_evalue</span><span class="p">):</span>
+                    <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This function, when tested in python returns a data frame as expected:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">filter_blast7</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">432</span><span class="p">,</span> <span class="mf">1e-50</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+   <span class="n">query</span>     <span class="n">subject</span>    <span class="n">identity</span> <span class="n">align_length</span> <span class="n">mismatches</span>  <span class="o">...</span> <span class="n">q_end</span> <span class="n">s_start</span> <span class="n">s_end</span>  <span class="n">evalue</span> <span class="n">bit_score</span>
+<span class="mi">0</span>  <span class="n">query_1</span>  <span class="n">scaffold88</span>  <span class="mf">100.000</span>          <span class="mi">869</span>          <span class="mi">0</span>  <span class="o">...</span>   <span class="mi">869</span>  <span class="mi">733052</span>  <span class="mi">733920</span>    <span class="mf">0.0</span>      <span class="mi">1605</span>
+<span class="mi">1</span>  <span class="n">query_1</span>  <span class="n">scaffold88</span>   <span class="mf">95.732</span>          <span class="mi">867</span>         <span class="mi">34</span>  <span class="o">...</span>   <span class="mi">869</span>  <span class="mi">734435</span>  <span class="mi">735298</span>    <span class="mf">0.0</span>      <span class="mi">1393</span>
+<span class="mi">2</span>  <span class="n">query_1</span>   <span class="n">scaffold1</span>  <span class="mf">100.000</span>          <span class="mi">869</span>          <span class="mi">0</span>  <span class="o">...</span>   <span class="mi">869</span>    <span class="mi">4053</span>    <span class="mi">4921</span>    <span class="mf">0.0</span>      <span class="mi">1605</span>
+<span class="mi">3</span>  <span class="n">query_1</span>   <span class="n">scaffold1</span>   <span class="mf">95.732</span>          <span class="mi">867</span>         <span class="mi">34</span>  <span class="o">...</span>   <span class="mi">869</span>    <span class="mi">5436</span>    <span class="mi">6299</span>    <span class="mf">0.0</span>      <span class="mi">1393</span>
+<span class="mi">4</span>  <span class="n">query_3</span>  <span class="n">scaffold88</span>  <span class="mf">100.000</span>          <span class="mi">786</span>          <span class="mi">0</span>  <span class="o">...</span>   <span class="mi">786</span>  <span class="mi">735004</span>  <span class="mi">735789</span>    <span class="mf">0.0</span>      <span class="mi">1452</span>
+</pre></div>
+
+
+<p>Nice, but I thought we were using R? Well, we can actually use the R package
+<a href="https://rstudio.github.io/reticulate/index.html">reticulate</a> to run this python
+code and translate its output to an R data frame. Pretty neat! You can get it
+from CRAN with <code>install.packages('reticulate')</code>. With it installed you'll want to
+make sure it can find your python installation:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="n">reticulate</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nf">py_discover_config</span><span class="p">()</span>
+<span class="n">python</span><span class="o">:</span>         <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">groverj3</span><span class="o">/</span><span class="n">.pyenv</span><span class="o">/</span><span class="n">shims</span><span class="o">/</span><span class="n">python</span>
+<span class="n">libpython</span><span class="o">:</span>      <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">groverj3</span><span class="o">/</span><span class="n">.pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="m">3.7.2</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libpython3.7m.so</span>
+<span class="n">pythonhome</span><span class="o">:</span>     <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">groverj3</span><span class="o">/</span><span class="n">.pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="m">3.7.2</span><span class="o">:/</span><span class="n">home</span><span class="o">/</span><span class="n">groverj3</span><span class="o">/</span><span class="n">.pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="m">3.7.2</span>
+<span class="n">version</span><span class="o">:</span>        <span class="m">3.7.2</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Mar</span> <span class="m">17</span> <span class="m">2019</span><span class="p">,</span> <span class="m">02</span><span class="o">:</span><span class="m">15</span><span class="o">:</span><span class="m">50</span><span class="p">)</span>  <span class="n">[GCC</span> <span class="m">8.2.1</span> <span class="m">20181127</span><span class="n">]</span>
+<span class="n">numpy</span><span class="o">:</span>          <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">groverj3</span><span class="o">/</span><span class="n">.local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span>
+<span class="n">numpy_version</span><span class="o">:</span>  <span class="m">1.16.4</span>
+
+<span class="n">python</span> <span class="n">versions</span> <span class="n">found</span><span class="o">:</span> 
+ <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">groverj3</span><span class="o">/</span><span class="n">.pyenv</span><span class="o">/</span><span class="n">shims</span><span class="o">/</span><span class="n">python</span>
+ <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python</span>
+ <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python3</span>
+<span class="o">&gt;</span> <span class="nf">py_available</span><span class="p">()</span>
+<span class="n">[1]</span> <span class="kc">FALSE</span>
+<span class="o">&gt;</span> <span class="nf">py_available</span><span class="p">(</span><span class="n">initialize</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">[1]</span> <span class="kc">TRUE</span>
+</pre></div>
+
+
+<p>Even though it found my python installation <code>py_available()</code> returns false? I
+just forced it to true. I think this is because I use
+<a href="https://github.com/pyenv/pyenv">pyenv</a> to manage my non-system python
+installation. This also required making sure the python shared library is
+installed (which it is not when installed with pyenv). Now, you can either
+source the python parsing function from a saved .py script, or run it inline as
+follows, and coerce it to an R function:</p>
+<div class="highlight"><pre><span></span><span class="n">read_filter_blast7_lbl_py</span> <span class="o">&lt;-</span> <span class="nf">py_run_string</span><span class="p">(</span>
+<span class="s">&quot;import pandas as pd</span>
+
+<span class="s">def filter_blast7(input_blast_results, header, min_perc_id, min_al_len,</span>
+<span class="s">                   max_evalue):</span>
+<span class="s">    df_list = []</span>
+<span class="s">    with open(input_blast_results, &#39;r&#39;) as input_handle:</span>
+<span class="s">        for line in input_handle:</span>
+<span class="s">            if not line.startswith(&#39;#&#39;):</span>
+<span class="s">                entry = line.strip().split()</span>
+<span class="s">                perc_id = float(entry[2])</span>
+<span class="s">                al_len = int(entry[3])</span>
+<span class="s">                evalue = float(entry[10])</span>
+<span class="s">                if (</span>
+<span class="s">                    perc_id &gt;= min_perc_id</span>
+<span class="s">                    and al_len &gt;= min_al_len</span>
+<span class="s">                    and evalue &lt;= max_evalue</span>
+<span class="s">                ):</span>
+<span class="s">                    df_list.append(entry)</span>
+<span class="s">    return pd.DataFrame(df_list, columns=header)&quot;</span>
+<span class="p">)</span><span class="o">$</span><span class="n">filter_blast7</span>
+</pre></div>
+
+
+<p>Which shows up as a "python.builtin.function."</p>
+<div class="highlight"><pre><span></span><span class="nf">class</span><span class="p">(</span><span class="n">read_filter_blast7_lbl_py</span><span class="p">)</span>
+<span class="n">[1]</span> <span class="s">&quot;python.builtin.function&quot;</span> <span class="s">&quot;python.builtin.object&quot;</span>  
+</pre></div>
+
+
+<p>Now, let's benchmark that:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Benchmark 100 iterations over the first 10000 lines</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_lbl_py</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">milliseconds</span>
+                                                                       <span class="n">expr</span>
+ <span class="nf">read_filter_blast7_lbl_py</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span>      <span class="m">1e-50</span><span class="p">)</span>
+      <span class="n">min</span>       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">60.73332</span> <span class="m">62.57396</span> <span class="m">67.58808</span> <span class="m">63.75887</span> <span class="m">69.98544</span> <span class="m">105.8659</span>   <span class="m">100</span>
+<span class="o">&gt;</span> 
+<span class="o">&gt;</span> <span class="c1"># Benchmark the whole file once</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_filter_blast7_lbl_py</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">seconds</span>
+                                                             <span class="n">expr</span>      <span class="n">min</span>
+ <span class="nf">read_filter_blast7_lbl_py</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">)</span> <span class="m">139.1212</span>
+       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">139.1212</span> <span class="m">139.1212</span> <span class="m">139.1212</span> <span class="m">139.1212</span> <span class="m">139.1212</span>     <span class="m">1</span>
+<span class="o">&gt;</span> 
+</pre></div>
+
+
+<p>It also returns a data frame identical to the python one:</p>
+<div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="nf">read_filter_blast7_lbl_py</span><span class="p">(</span><span class="n">input_file_head</span><span class="p">,</span> <span class="n">col_names</span><span class="p">,</span> <span class="m">80</span><span class="p">,</span> <span class="m">432</span><span class="p">,</span> <span class="m">1e-50</span><span class="p">))</span>
+  <span class="n">query</span>    <span class="n">subject</span>    <span class="n">identity</span> <span class="n">align_length</span> <span class="n">mismatches</span>
+<span class="m">1</span> <span class="n">query_1</span> <span class="n">scaffold88</span>  <span class="m">100.000</span>          <span class="m">869</span>          <span class="m">0</span>
+<span class="m">2</span> <span class="n">query_1</span> <span class="n">scaffold88</span>   <span class="m">95.732</span>          <span class="m">867</span>         <span class="m">34</span>
+<span class="m">3</span> <span class="n">query_1</span>  <span class="n">scaffold1</span>  <span class="m">100.000</span>          <span class="m">869</span>          <span class="m">0</span>
+<span class="m">4</span> <span class="n">query_1</span>  <span class="n">scaffold1</span>   <span class="m">95.732</span>          <span class="m">867</span>         <span class="m">34</span>
+<span class="m">5</span> <span class="n">query_3</span> <span class="n">scaffold88</span>  <span class="m">100.000</span>          <span class="m">786</span>          <span class="m">0</span>
+<span class="m">6</span> <span class="n">query_3</span>  <span class="n">scaffold1</span>  <span class="m">100.000</span>          <span class="m">786</span>          <span class="m">0</span>
+  <span class="n">gap_opens</span> <span class="n">q_start</span> <span class="n">q_end</span> <span class="n">s_start</span>  <span class="n">s_end</span> <span class="n">evalue</span> <span class="n">bit_score</span>
+<span class="m">1</span>         <span class="m">0</span>       <span class="m">1</span>   <span class="m">869</span>  <span class="m">733052</span> <span class="m">733920</span>    <span class="m">0.0</span>      <span class="m">1605</span>
+<span class="m">2</span>         <span class="m">1</span>       <span class="m">3</span>   <span class="m">869</span>  <span class="m">734435</span> <span class="m">735298</span>    <span class="m">0.0</span>      <span class="m">1393</span>
+<span class="m">3</span>         <span class="m">0</span>       <span class="m">1</span>   <span class="m">869</span>    <span class="m">4053</span>   <span class="m">4921</span>    <span class="m">0.0</span>      <span class="m">1605</span>
+<span class="m">4</span>         <span class="m">1</span>       <span class="m">3</span>   <span class="m">869</span>    <span class="m">5436</span>   <span class="m">6299</span>    <span class="m">0.0</span>      <span class="m">1393</span>
+<span class="m">5</span>         <span class="m">0</span>       <span class="m">1</span>   <span class="m">786</span>  <span class="m">735004</span> <span class="m">735789</span>    <span class="m">0.0</span>      <span class="m">1452</span>
+<span class="m">6</span>         <span class="m">0</span>       <span class="m">1</span>   <span class="m">786</span>    <span class="m">6005</span>   <span class="m">6790</span>    <span class="m">0.0</span>      <span class="m">1452</span>
+</pre></div>
+
+
+<p>It's definitely not as fast as reading it chunked with readr. However, that
+Python function was easy to write and performed far better than the base R way to
+read and filter line-by-line. In the future, if I have something that I know how
+to do in Python I may not try to translate it to R. Just run the python code with
+reticulate! </p>
+<h3>Wrapping Things Up</h3>
+<p>You would think that is a commonly done thing, to filter huge datasets while
+reading. Apparently, it's not common enough in R for good documentation to exist.
+In the end readr wins again with <code>read_delim_chunked()</code>. This does require some
+tuning to get the best performance, but if you pick some sane chunk_size then
+further opitmization is probably unnecessary and it will work fine. However, the
+revelation that communicating between python and R works so well opens up a lot
+of future possibilities! Some things are just better suited to one language or
+another. While Python has pandas dataframes and a large ecosystem around them
+none of it is as intuitive as the <a href="https://www.tidyverse.org/">tidyverse</a> (to
+me). Something like the two winners here are ideal for situations where you have
+a huge file to load, but you know that most of the file will not meet your
+filtering criteria.</p>
+<p>Using Python to do general purpose programming and communicating those results to
+R for statistical testing and visualization is definitely something to consider.</p>
+<h3>Addendum: What's the Overhead of Filtering While reading?</h3>
+<p>Let's check it out, first the readr method:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_tsv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="o">=</span><span class="n">col_names</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s">&#39;#&#39;</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">Parsed</span> <span class="n">with</span> <span class="n">column</span> <span class="n">specification</span><span class="o">:</span>
+<span class="nf">cols</span><span class="p">(</span>
+  <span class="n">query</span> <span class="o">=</span> <span class="nf">col_character</span><span class="p">(),</span>
+  <span class="n">subject</span> <span class="o">=</span> <span class="nf">col_character</span><span class="p">(),</span>
+  <span class="n">identity</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">align_length</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">mismatches</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">gap_opens</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">q_start</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">q_end</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">s_start</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">s_end</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">evalue</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
+  <span class="n">bit_score</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="o">|=================================================================|</span> <span class="m">100</span>% <span class="m">2685</span> <span class="n">MB</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">seconds</span>
+                                                       <span class="n">expr</span>      <span class="n">min</span>       <span class="n">lq</span>
+ <span class="nf">read_tsv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="n">col_names</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="s">&quot;#&quot;</span><span class="p">)</span> <span class="m">64.35369</span> <span class="m">64.35369</span>
+     <span class="n">mean</span>   <span class="n">median</span>       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">64.35369</span> <span class="m">64.35369</span> <span class="m">64.35369</span> <span class="m">64.35369</span>     <span class="m">1</span>
+</pre></div>
+
+
+<p>This is compared with 76.59867 ms for filtering. That's basically no difference.
+How about the reading it in with Python using Pandas read_csv:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">read_csv_py</span> <span class="o">&lt;-</span> <span class="nf">py_run_string</span><span class="p">(</span>
+<span class="s">&quot;def read_blast7(input_blast_results, header):</span>
+<span class="s">    return pd.read_csv(input_blast_results, sep=&#39;\t&#39;, comment=&#39;#&#39;)&quot;</span>
+<span class="p">)</span><span class="o">$</span><span class="n">read_blast7</span>
+
+<span class="o">&gt;</span> <span class="c1"># Benchmark the whole file once</span>
+<span class="o">&gt;</span> <span class="nf">microbenchmark</span><span class="p">(</span><span class="nf">read_csv_py</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">Unit</span><span class="o">:</span> <span class="n">seconds</span>
+                               <span class="n">expr</span>      <span class="n">min</span>       <span class="n">lq</span>     <span class="n">mean</span>   <span class="n">median</span>
+ <span class="nf">read_csv_py</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">col_names</span><span class="p">)</span> <span class="m">97.45004</span> <span class="m">97.45004</span> <span class="m">97.45004</span> <span class="m">97.45004</span>
+       <span class="n">uq</span>      <span class="n">max</span> <span class="n">neval</span>
+ <span class="m">97.45004</span> <span class="m">97.45004</span>     <span class="m">1</span>
+</pre></div>
+
+
+<p>There's clearly a bit of overhead with both of these methods, but it's pretty
+minor, on the order of 10-30 ms for a 2.6 gb file.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/data-science.html">data-science</a>
+      <a href="https://groverj3.github.io/tag/r.html">r</a>
+      <a href="https://groverj3.github.io/tag/python.html">python</a>
+      <a href="https://groverj3.github.io/tag/big-data.html">big-data</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatician. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
