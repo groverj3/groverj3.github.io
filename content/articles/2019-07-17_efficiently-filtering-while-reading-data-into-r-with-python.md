@@ -122,7 +122,7 @@ Unit: milliseconds
 It works, but this doesn't scale up to a full file (it sat for ages until I
 killed it), and it suffers from R's problems with growing lists in a loop leading
 to copying rather than appending. There are clearly other issues too because my
-attempts to pre-allocate a list or data frame of the correct size did not spee
+attempts to pre-allocate a list or data frame of the correct size did not speed
 it up. This means that I might be doing something wrong. Regardless, this is too
 much work to do something so simple. I welcome others to find a pure base R
 implementation that's better. It seems like there *should* be a way to do it.
