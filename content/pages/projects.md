@@ -1,7 +1,7 @@
 Title: Projects
 Date: 2019-06-19
 
-### Enabling Reproducible Bioinformatics Workflows
+## Enabling Reproducible Bioinformatics Workflows
 #### [**LoadExp+**](https://genomevolution.org/coge/LoadExperiment.pl)
 
 As the prices for sequencing techologies have decreasaed many researchers are now
@@ -29,24 +29,19 @@ including those uploaded by users themselves.
 
 #### **Automated Analysis Pipelines With [Snakemake](https://snakemake.readthedocs.io/en/stable/) and [Singularity](https://sylabs.io/)**
 
-If you or your lab are already comfortable working with bioinformatics tools on
-a command-line you still face challenges. While the simple solution of writing a
-BASH script for each step of a workflow does work, as you run more types of
-analyses this gets old very quickly. Your directory structure becomes a mess,
-your sysadmin (if you have one) doesn't like you very much, and you fail to make
-efficient use of available resources for a workflow (i.e. step 1 needs 8 cores,
-step 2 only needs 1, how do I leverage my 28 core system for this?). Even more
-concerning, when there are different versions of piecemeal shell scripts floating
-around and nobody knows which was used to for sample X.
+While the simple solution of writing a BASH script for each step of a workflow
+does work, as you run more types of analyses this doesn't scale well. Your
+directory structure becomes a mess and you fail to make efficient use of
+available resources for a workflow (i.e. step 1 needs 8 cores, step 2 only needs
+1, how do I leverage my 28 core system for this?). Even more concerning, when
+there are different versions of piecemeal shell scripts floating around and
+nobody knows which was used to for sample X.
 
-Enter workflow managers. Snakemake is based on Python and therefore integrates
-well with a team accustomed to that language. It intelligently replaces processes
-in a workflow to paralellize jobs up to your maximum resources at run-time.
-
-Once a pipeline has been tested and works well, it can be packaged into a
-container with Singularity. Similar to Docker, Singularity is optimized for HPC
-environments, where normal users can't acquire the permissions to use Docker
-containers. This also keeps HPC sysadmins happy because they don't need to
+Snakemake is simple and full featured workflow manager based on Python. It
+intelligently replaces processes in a workflow to paralellize jobs up to your
+maximum resources at run-time. Once a pipeline has been tested it can be packaged
+into a container with Singularity. Similar to Docker, Singularity is optimized
+for HPC environments. This keeps HPC sysadmins happy because they don't need to
 manage your software, plus you can port the analysis to any system you want!
 
 Work is ongoing to implement our lab's pipelines for
@@ -54,6 +49,49 @@ Work is ongoing to implement our lab's pipelines for
 [whole-genome bisulfite](https://github.com/groverj3/wgbs_snakemake) sequencing
 in such a framework.
 
-### The Role of RNA-directed DNA Methylation in Seed Production
+## The Role of RNA-directed DNA Methylation in Seed Development
 
-### Genomic Imprinting as a Function of Epigenome State
+#### **[Maternal components of RNA‐directed DNA methylation are required for seed development in <i>Brassica rapa</i>](https://onlinelibrary.wiley.com/doi/full/10.1111/tpj.13910)**
+
+It's been widely observed that RdDM and 24 nucleotide small RNAs are correlated
+with reproductive processes. This is due to specific methylation patterns in
+reproductive tissues and the high abundance of small RNAs in seeds and flowers.
+Most of this work has been done in *Arabidopsis thaliana* a premier model
+organism in plant biology. However, *A. thaliana's* small, TE-poor, genome is not
+typical of most plants and therefore we are investigating the connection between
+plant reproduction and RdDM in *Brassica rapa* a closely related, recently
+outbreeding species which shows severe defects in seed development in RdDM
+mutants.
+
+We have identified mutations in several RdDM pathway genes, annotated RNA Pol
+IV/RDR2-dependent small RNA loci, and determined which genes are differentially
+expressed in RdDM mutant ovules and seeds. We have also found that it is the
+maternal sporophytic genome that determines whether the seed developmental
+defect will be present.
+
+[**You can check out the publication here!**](https://onlinelibrary.wiley.com/doi/full/10.1111/tpj.13910).
+
+#### **Spatiotemporal Dynamics of sRNA Expression and DNA Methylation in Seed Development**
+
+Our finding that seed development in *B. rapa* depends on the RdDM machinery
+opens up many new avenues of discovery. Currently, we are focused on how the
+sRNA-ome and methylome changes throughout seed development and compared to
+sporophytic tissues. This work is ongoing.
+
+## Genomic Imprinting as a Function of Epigenome State
+
+#### **Does RdDM Control Genomic Imprinting at Developmentally Important Genes?**
+
+Genomic imprinting, or biased expression of parental alleles is a phenomenon seen
+in both plants and animals. In plants known examples occur in the endosperm, a
+nutritive tissue within the seed that provides energy for the growing embryo. In
+this case biased expression would mean a deviation from the expected 3:1 ratio of
+maternal to paternal gene expression, as the endosperm is a triploid tissue and
+created by the fusion of a single sperm with the diploid central cell during
+double fertilization.
+
+Previous work has implicated small RNAs and DNA methylation in genomic impriting
+and we are investigating it in *Brassica rapa* with a focus on RdDM. *B . rapa*
+is a recently outbreeding species and therefore it is expected that there would
+be increased conflict between parental genomes compared with *Arabidopsis 
+thaliana*, where most work on imprinting has been done.
