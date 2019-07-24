@@ -345,12 +345,11 @@ python versions found:
 ```
 
 Even though it found my python installation `py_available()` returns false? I
-just forced it to true. I think this is because I use
-[pyenv](https://github.com/pyenv/pyenv) to manage my non-system python
-installation. This also required making sure the python shared library is
-installed (which it is not when installed with pyenv). Now, you can either
-source the python parsing function from a saved .py script, or run it inline as
-follows, and coerce it to an R function:
+actually forgot to initialize it with `use_python()` but you can either do that
+or use `py_available(initialize = TRUE)`. You also must have the python shared
+library installed installed (which it is not when using pyenv). Now, you can
+either source the python parsing function from a saved .py script, or run it
+inline as follows, and coerce it to an R function:
 
 ```R
 read_filter_blast7_lbl_py <- py_run_string(
