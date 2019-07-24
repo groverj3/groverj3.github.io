@@ -429,12 +429,11 @@ make sure it can find your python installation:</p>
 
 
 <p>Even though it found my python installation <code>py_available()</code> returns false? I
-just forced it to true. I think this is because I use
-<a href="https://github.com/pyenv/pyenv">pyenv</a> to manage my non-system python
-installation. This also required making sure the python shared library is
-installed (which it is not when installed with pyenv). Now, you can either
-source the python parsing function from a saved .py script, or run it inline as
-follows, and coerce it to an R function:</p>
+actually forgot to initialize it with <code>use_python()</code> but you can either do that
+or use <code>py_available(initialize = TRUE)</code>. You also must have the python shared
+library installed installed (which it is not when using pyenv). Now, you can
+either source the python parsing function from a saved .py script, or run it
+inline as follows, and coerce it to an R function:</p>
 <div class="highlight"><pre><span></span><span class="n">read_filter_blast7_lbl_py</span> <span class="o">&lt;-</span> <span class="nf">py_run_string</span><span class="p">(</span>
 <span class="s">&quot;import pandas as pd</span>
 

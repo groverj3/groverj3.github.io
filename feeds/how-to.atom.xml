@@ -314,12 +314,11 @@ make sure it can find your python installation:&lt;/p&gt;
 
 
 &lt;p&gt;Even though it found my python installation &lt;code&gt;py_available()&lt;/code&gt; returns false? I
-just forced it to true. I think this is because I use
-&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; to manage my non-system python
-installation. This also required making sure the python shared library is
-installed (which it is not when installed with pyenv). Now, you can either
-source the python parsing function from a saved .py script, or run it inline as
-follows, and coerce it to an R function:&lt;/p&gt;
+actually forgot to initialize it with &lt;code&gt;use_python()&lt;/code&gt; but you can either do that
+or use &lt;code&gt;py_available(initialize = TRUE)&lt;/code&gt;. You also must have the python shared
+library installed installed (which it is not when using pyenv). Now, you can
+either source the python parsing function from a saved .py script, or run it
+inline as follows, and coerce it to an R function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;read_filter_blast7_lbl_py&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;py_run_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
 &lt;span class="s"&gt;&amp;quot;import pandas as pd&lt;/span&gt;
 
