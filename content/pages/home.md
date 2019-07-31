@@ -3,7 +3,8 @@ Date: 2019-06-14
 save_as: index.html
 
 I live at the intersection between big data and biology (and buzzwords), and am
-very interested in applying data science concepts outside of bioinformatics.
+interested in applying concepts from data and computer science in bioinformatics
+and beyond!
 
 <i class="fas fa-code" style="width:24px;height:24px;"></i>
 I code in <img src="/images/Python-Logo.png" alt="Python" style="width:100px;height:24px;">,
