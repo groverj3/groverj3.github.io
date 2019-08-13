@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="Bioinformatic analyses often require lengthy workflows or pipleines, where the output of program A feeds into program B, and so on. These programs may also not output their results in a format which is convenient to use in the subsequent steps, requiring writing a conversion script, or piping its output …" />
+<meta name="keywords" content="bioinformatics, thoughts, workflows">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:title" content="Suggestions for Reproducible Bioinformatic Analyses"/>
+<meta property="og:description" content="Bioinformatic analyses often require lengthy workflows or pipleines, where the output of program A feeds into program B, and so on. These programs may also not output their results in a format which is convenient to use in the subsequent steps, requiring writing a conversion script, or piping its output …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-09 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="commentary"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="thoughts"/>
+<meta property="article:tag" content="workflows"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatician. &ndash; Suggestions for Reproducible Bioinformatic Analyses</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="suggestions-for-reproducible-bioinformatic-analyses">Suggestions for Reproducible Bioinformatic Analyses</h1>
+    <p>
+          Posted on Fri 09 August 2019 in <a href="https://groverj3.github.io/category/commentary.html">commentary</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Bioinformatic analyses often require lengthy workflows or pipleines, where the
+output of program A feeds into program B, and so on. These programs may also not
+output their results in a format which is convenient to use in the subsequent
+steps, requiring writing a conversion script, or piping its output through yet
+another program. This means that something as simple as running a differential
+expression experiment still requires several steps. If you aren't careful this
+can result in an incredibly messy filesystem. Worse, you may not remember which
+programs or scripts were run on each file, and with which options. This is a huge
+issue out there and likely a good reason why it's so hard to reproduce results
+even when the same underlying data is used. Additionally, you'll inevitably need
+to spend time doing iterative analysis. This also needs to be documented and
+reproducible.</p>
+<p>In this post I'll be explaining a few methods that we can use organize this
+situation before it drives you or your coworkers mad. Depending, of course, on
+the level of automation and reproucibility required of the workflow.</p>
+<h3>Suggestion 1: Interactive Terminal Sessions Are For Development <strong>Only</strong></h3>
+<p>There is most definitely a time and a place for testing things out in your
+terminal. When you're learning to use a new program, needing to check the
+<code>--help</code> or <code>man</code> pages, figuring out how to glue together programs A and B, etc.
+However, in-depth analyses for publication should not be done in this manner.</p>
+<p>This is because after running your analysis you may have absolutely no record of
+what was run! Of course, some (but, criticall, not all!) programs will export a
+log file. However, not all do. You can quickly end up in a situation where you
+have no idea which script was run on which file. So, reserve the interactive
+terminal sessions for those use cases above.</p>
+<h3>Suggestion 2: Interactive Data Manipulation Should Be Performed in R or Jupyter Notebooks</h3>
+<p>Don't use Excel. I repeat, don't use Excel.</p>
+<p>Ok, Excel has its uses. However, if you're doing complex data analysis
+it's very easy to get to the scale that you'll regret using Excel quickly.
+Luckily the <em>entire</em> <a href="R programming language">https://www.r-project.org/</a> was 
+designed for this, and <a href="https://www.python.org/">Python</a> with
+<a href="https://pandas.pydata.org/index.html">Pandas</a> provides some similar tools. In
+addition to scale, you also have no real record of what was done in an Excel
+workbook. When you combine R or Python with computational notebooks you can run
+code, and see the direct output of that code below it. This tracks everything
+that you've run and its outputs.</p>
+<p>Even though I do most of my interactive analysis and figure-making in R, I still
+prefer Jupyter Notebooks over R Notebooks. This is because they're more widely
+used, and Jupyter is extensible to multiple languages. Installing the
+<a href="https://irkernel.github.io/">R Kernel</a> is very simple.</p>
+<h3>Suggestion 3: Single-run Pipelines Should be Automated With Shell Scripts</h3>
+<p>When you write a one-off pipeline it should still be automated with a script.
+This enables reproducibility. In a perfect world you'd list the version of each
+piece of software in the pipeline as well. This could result in a single shell
+script file, or separate ones for each step. You may not know the next step
+a-priori. These shell scripts should clearly indicate the date of creation and
+the script's purpose. This is a simple example for one step in a single-use
+pipeline:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="c1"># Author: Jeffrey Grover</span>
+<span class="c1"># Date: 2019-07-24</span>
+<span class="c1"># Purpose: Extract reads over small RNA loci groups with bedtools intersect</span>
+
+<span class="c1"># Use bedtools intersect and pipe to bam2fq</span>
+
+<span class="nv">align_dir</span><span class="o">=</span><span class="s2">&quot;~/large_data/2019-06-28_aligned_reads&quot;</span>
+
+<span class="k">for</span> bed_file in ./srna_groups/*.bed<span class="p">;</span> <span class="k">do</span>
+
+    <span class="nv">bed_filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$bed_file</span><span class="k">)</span>
+    <span class="nv">out_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">bed_filename</span><span class="p">%.bed</span><span class="si">}</span>_reads
+    mkdir <span class="s2">&quot;./</span><span class="nv">$out_dir</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> bamfile in <span class="si">${</span><span class="nv">align_dir</span><span class="si">}</span>/*.bam<span class="p">;</span> <span class="k">do</span>
+
+        <span class="nv">bamfile_name</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$bamfile</span><span class="k">)</span>
+
+        bedtools intersect <span class="se">\</span>
+                -ubam <span class="se">\</span>
+                -a <span class="s2">&quot;</span><span class="nv">$bamfile</span><span class="s2">&quot;</span> <span class="se">\</span>
+                -b <span class="s2">&quot;</span><span class="nv">$srna_file</span><span class="s2">&quot;</span> <span class="se">\</span>
+            <span class="p">|</span> samtools bam2fq -n - &gt; <span class="s2">&quot;./</span><span class="nv">$out_dir</span><span class="s2">/</span><span class="nv">$bamfile_name</span><span class="s2">.fq&quot;</span>
+    <span class="k">done</span>
+
+    pigz -p <span class="m">10</span> ./<span class="nv">$out_dir</span>/*.fq
+<span class="k">done</span>
+</pre></div>
+
+
+<p>I work with a lot of small RNA sequencing, and I recently needed to extract reads
+from several different groups of small RNA loci I'd defined. It's relatively
+simple to use <code>bedtools intersect</code> with your interesting loci as a .bed file and
+pipe that output to <code>samtools bam2fq</code>. This isn't the kind of thing that's a
+standard analysis I need to do and it's not very long. Therefore, to enable it to
+be reproducible writing a quick shell script like this is the way to go. The
+comment lines also carry enough information to tell someone what it does.</p>
+<h3>Suggestion 4: Long Pipelines Should Have a <strong>W i d e</strong> Directory Structure</h3>
+<p>What does this mean? It means this:</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>groverj3@x1-carbon wgbs_snakemake<span class="o">]</span>$ ls
+1_fastqc_raw                4_methyldackel_mbias    config.yaml  README.md         Snakefile
+2_trim_galore               5_methyldackel_extract  input_data   reference_genome  temp_data
+3_aligned_sorted_markdupes  6_mosdepth              LICENSE      scripts
+</pre></div>
+
+
+<p>and not this:</p>
+<div class="highlight"><pre><span></span>wgbs_snakemake/1_fastqc_raw/2_trim_galore/3_aligned_sorted_markdupes/4_methyldackel_mbias/5_methyldackel_extract/6_mosdepth
+</pre></div>
+
+
+<p>This makes navigating your directory structure much less of a pain. Especially
+when a pipeline is several steps long.</p>
+<h3>Suggestion 5: Automate Often-run Pipelines With Workflow Managers</h3>
+<p>If there is a particular pipeline that you run frequently then consider using a
+workflow manager. Options include:</p>
+<ol>
+<li><a href="https://snakemake.readthedocs.io/en/stable/">snakemake</a></li>
+<li><a href="https://www.nextflow.io/">Nextflow</a></li>
+<li><a href="http://scipipe.org/">scipipe</a></li>
+<li><a href="https://github.com/pharmbio/sciluigi">SciLuigi</a></li>
+</ol>
+<p>My vote goes to Snakemake with Nextflow as a close second. These tools require
+some fiddling to transfer over an existing pipeline to fit their framework, but
+what you gain is reproducibility and automation. Additionally, they all utilize
+threading with parallel steps better than your BASH script does. They also work
+with HPC job submission frameworks (SLURM, PBS, etc.) and containers.</p>
+<p>Writing these workflows is beyond the scope of this article, but definitely worth
+writing in detail about in a future one!</p>
+<p>A word of caution: it's easy to think, "Oh, I'm only going to analyze bisulfite
+sequencing this one time" only to find yourself running your workflow several
+times as you acquire more data. There are also some freely available workflows
+already written that you can check out!</p>
+<p>(Shameless plug for <a href="https://github.com/groverj3/wgbs_snakemake">mine</a>)</p>
+<h3>Suggestion 6: Containerize!</h3>
+<p>Wrap-up your workflow and its required software in a container for the ultimate
+write once run anywhere solution. You can make a 
+<a href="https://www.docker.com/">Docker</a> container with your entire workflow which can
+then be used on your server, or cloud computing. However, in order to run this in
+an HPC environment you'll need to run it through 
+<a href="https://sylabs.io/">Singularity</a> instead. That's fine though! Singularity can
+run Docker containers, and you'll already have one to use for cloud compute if
+needed.</p>
+<h3>Wrapping up</h3>
+<p>Hopefully you've found this informative and helpful. Next time I'll be back with
+more practical examples.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/thoughts.html">thoughts</a>
+      <a href="https://groverj3.github.io/tag/workflows.html">workflows</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatician. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
