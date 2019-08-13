@@ -38,7 +38,7 @@ at [The University of Arizona](https://www.arizona.edu/). I work here in the
 studying RNA-directed DNA methylation with next-generation sequencing techniques. 
 
 While you're here you can learn something [about me](/pages/about.html) or check
-out my [blog](/pages/blog.html) where I post how-tos, thoughts on bioinformatics,
+out my [blog](/blog.html) where I post how-tos, thoughts on bioinformatics,
 and general nonsense.
 
 <center>

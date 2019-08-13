@@ -1,7 +1,7 @@
 Title: Variations on RNAseq Workflows for DEG Analysis
 Date: 2019-07-09
 Category: commentary 
-tags: bioinformatics, thoughts
+tags: bioinformatics, thoughts, rnaseq, workflows
 
 When analyzing RNAseq you're faced with many possible analysis pipelines. The
 biggest decision you need to make is what the purpose of your experiment is. I
