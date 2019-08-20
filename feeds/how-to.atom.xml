@@ -106,7 +106,7 @@ development and fill it with this:&lt;/p&gt;
 readability right now. The only &lt;code&gt;param&lt;/code&gt; we're currently passing to it is the
 output directory, but this is where your options would be. Snakemake will check
 whether the &lt;code&gt;input&lt;/code&gt; for a rule can be made before allowing the workflow to start.
-Therefore, if yur workflow starts, it &lt;em&gt;should&lt;/em&gt; finish. However, we need a rule
+Therefore, if your workflow starts, it &lt;em&gt;should&lt;/em&gt; finish. However, we need a rule
 "all" which will tell it to be run.&lt;/p&gt;
 &lt;p&gt;Add the following to the Snakefile &lt;strong&gt;before&lt;/strong&gt; the fastqc rule:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
