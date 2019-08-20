@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="Over the past few years the use of workflow managers in genomics and bioinformatics has grown greatly. This is a great thing for the field and adds to our ability to perform reproducible analyses, especially for pipelines with many steps. These are common in bioinformatics, but prior to the use …" />
+<meta name="keywords" content="bioinformatics, python, workflows, snakemake">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:title" content="The Snakemake Tutorial I Wish I Had"/>
+<meta property="og:description" content="Over the past few years the use of workflow managers in genomics and bioinformatics has grown greatly. This is a great thing for the field and adds to our ability to perform reproducible analyses, especially for pipelines with many steps. These are common in bioinformatics, but prior to the use …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-19 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="how-to"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="workflows"/>
+<meta property="article:tag" content="snakemake"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatician. &ndash; The Snakemake Tutorial I Wish I Had</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="the-snakemake-tutorial-i-wish-i-had">The Snakemake Tutorial I Wish I Had</h1>
+    <p>
+          Posted on Mon 19 August 2019 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Over the past few years the use of workflow managers in genomics and
+bioinformatics has grown greatly. This is a great thing for the field and adds to
+our ability to perform reproducible analyses, especially for pipelines with many
+steps. These are common in bioinformatics, but prior to the use of workflow
+managers they were mostly handled with BASH scripts. While a good BASH script is
+perfectly acceptable much of the time they aren't very portable and don't handle
+multithreading and concurrent processes without annoying hacks. For a one-off
+analysis that's all fine, but what about a pipeline you need to run many times?
+This is where a workflow manager really shines, especially when combined with
+containers.</p>
+<p>I decided to implement two pipelines that we use often here in the Mosher Lab as
+Snakemake workflows. We work with a lot of small RNA sequencing and recently some
+whole-genome bisulfite sequencing data. There are already available pipelines for
+WGBS, but they seem like overkill and writing my own is a good way to learn the
+ins and outs of Snakemake.</p>
+<p>I chose Snakemake over other workflow managers due to its already frequent use in
+bioinformatics workflows and my familiarity with Python. However, Nextflow also
+seems like a solid option as well. I found much of the official documentation
+very lacking in useful examples though. I ended up consulting numerous workflows
+available on Github. The issue there is also that a lot of them are trying to do
+too much IMHO. So, I figured I'd write the tutorial I wish I had been able to
+find.</p>
+<h3>Step 0 - Install Snakemake and Your Workflow's Software Dependencies</h3>
+<p>I'm assuming you're on some kind of Linux system. Though, these directions may
+also work on macOS. Your first step should be to install Snakemake:</p>
+<div class="highlight"><pre><span></span>pip install --user Snakemake
+</pre></div>
+
+
+<p>I always recommend <em>not</em> using your system python. If you're on a non-rolling
+release distribution, or on macOS it's probably super outdated. I use
+<a href="https://github.com/pyenv/pyenv">pyenv</a> to manage my Python installations, though
+there are other options. I also <strong>never</strong> use <code>sudo</code> to install python packages.</p>
+<p>The WGBS workflow consists of several steps which can be represented by this DAG
+(Snakemake can make these! Neat-o!)</p>
+<p><center>
+<img alt="Snakemake WGBS Workflow" src="https://github.com/groverj3/wgbs_snakemake/raw/master/dag.png">
+</center></p>
+<p>You can boil it down to:</p>
+<ol>
+<li>Index the reference genome with <a href="https://github.com/brentp/bwa-meth">bwa-meth</a> (needed for bwa-meth alignment)</li>
+<li>Index the reference genome with <a href="http://www.htslib.org/doc/faidx.html">samtools faidx</a> (needed for MethylDackel)</li>
+<li>Quality reporting with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a></li>
+<li>Trimming adapters with <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a></li>
+<li>Quality reporting on trimmed reads (FastQC again)</li>
+<li>Alignment with bwa-meth</li>
+<li>Sorting with <a href="http://www.htslib.org/doc/samtools.html">samtools sort</a></li>
+<li>Marking PCR duplicates with <a href="https://broadinstitute.github.io/picard/">Picard Tools</a></li>
+<li>Detecting bias and extracting per-cytosine percent methylation with <a href="https://github.com/dpryan79/MethylDackel">MethylDackel</a></li>
+<li>Determining fold-coverage with <a href="https://github.com/brentp/mosdepth">mosdepth</a> and a little <a href="https://github.com/groverj3/wgbs_snakemake/blob/master/scripts/mosdepth_to_x_coverage.py">python script</a></li>
+</ol>
+<p>Not a super complicated workflow, but enough to demonstrate a read-world use of
+Snakemake. A workflow that's complicated enough you don't want to run each step
+separately either.</p>
+<p>I don't expect anyone to replicate this exact workflow, but it's a useful
+example.</p>
+<h3>Step 1 - Learn Some Snakemake Basics</h3>
+<p>There are some basics to explain before I start throwing code around. Firstly,
+Snakemake does <strong>not</strong> work you way you might think, it actually works
+<strong>backwards</strong> from a set of <strong>target</strong> files through a set of <strong>rules</strong>. You may
+think this sounds unnecessarily confusing, but there is a good reason for this.
+When Snakemake begins a workflow, this ensures that (as long as you don't do
+anything too weird) it will not fail for trivial reasons like files not being
+generated as inputs to other rules. It creates a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">directed acyclic graph</a>
+representing the workflow for <em>each sample</em> that it can match through wildcards
+to your <strong>targets</strong>. It will use the <strong>rules</strong> you define in its main script
+(the Snakefile) to create a path from <strong>targets</strong> to <strong>inputs (samples)</strong>. This
+is backwards from the way we think, and there are workflow managers that do
+<em>push</em> rather than <em>pull</em>. Each has their advantages and disadvantages.</p>
+<p>Another key concept is that your <strong>rules</strong> live in a <code>Snakefile</code>, just a Python
+script with extra syntax. So, you can use Python code in it! Keep this in mind,
+and you can do some neat things (creating sample tables for differential
+expression, etc.).</p>
+<p>Typically, the first <strong>rule</strong> in a Snakefile is called "all" and this rule will
+indicate the <strong>targets</strong> that you want to generate. This tells Snakemake to
+start and use the rules to try to make them based on wildcard matching with the
+inputs.</p>
+<p>Additionally, it's good practice to include the options you'd like a user to be
+able to configure in a .json or .yaml file. You can think of these files like
+a python dictionary in static file form (<a href="https://en.wikipedia.org/wiki/Serialization">pickling</a>).</p>
+<h3>Step 2 - Create a Rule</h3>
+<p>Create a blank file called <code>Snakefile</code> in the directory you're using for
+development and fill it with this:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Run fastqc on the raw .fastq.gz files</span>
+<span class="n">rule</span> <span class="n">fastqc_raw</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s1">&#39;input_data/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">.fastq.gz&#39;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_fastqc.html&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_fastqc.zip&#39;</span>
+    <span class="n">params</span><span class="p">:</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="s1">&#39;1_fastqc_raw/&#39;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s1">&#39;fastqc -o </span><span class="si">{params.out_dir}</span><span class="s1"> </span><span class="si">{input}</span><span class="s1">&#39;</span>
+</pre></div>
+
+
+<p>This is the first rule in our workflow, running FastQC on the input files. In the
+<code>{}</code> are <strong>wildcards</strong>. While they have names, they are only there for
+readability right now. The only <code>param</code> we're currently passing to it is the
+output directory, but this is where your options would be. Snakemake will check
+whether the <code>input</code> for a rule can be made before allowing the workflow to start.
+Therefore, if yur workflow starts, it <em>should</em> finish. However, we need a rule
+"all" which will tell it to be run.</p>
+<p>Add the following to the Snakefile <strong>before</strong> the fastqc rule:</p>
+<div class="highlight"><pre><span></span><span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_fastqc.</span><span class="si">{ext}</span><span class="s1">&#39;</span><span class="p">,</span>
+               <span class="n">sample</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">,</span> <span class="n">mate</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">ext</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;zip&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p>This tells the workflow which <strong>targets</strong> to create. We're still missing a very
+important thing though! The samples! For that, create another file,
+<code>config.yaml</code>, in the same directory and add this to it:</p>
+<div class="highlight"><pre><span></span><span class="nt">samples</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sample1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sample2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">etc...</span>
+</pre></div>
+
+
+<p>Your <code>samples</code> are yaml entries without names (you could name them if you want),
+and should <strong>not</strong> include read pair numbers (so 1 ID for each pair). The sample
+IDs should match what is in <code>rule all</code> in place of <code>{sample}</code>. The <code>config.yaml</code>
+is also where the options for your workflow steps can live, under their own
+headings. Now, go back to your Snakefile and add this <em>above</em> your rules:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Get overall workflow parameters from config.yaml</span>
+<span class="n">configfile</span><span class="p">:</span> <span class="s1">&#39;config.yaml&#39;</span>
+
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;samples&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>This parses the config file into a Python dictionary. Do you see how <code>SAMPLES</code> is
+filled in for <code>{sample}</code> in <code>rule all</code> which then creates a <strong>target</strong> which can
+be generated by <code>rule fastqc_raw</code>. It's kind of a mind-bender at first, but it 
+all fits together.</p>
+<p>Save all these files and include some test data in a subdirectory called
+"input_data".</p>
+<h3>Step 2 - Running Your First Rules</h3>
+<p>I copied one sample to my <code>input_data</code> directory and added it to the .yaml file:</p>
+<div class="highlight"><pre><span></span><span class="nt">samples</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JWG3_2_2</span>
+</pre></div>
+
+
+<p>Now run the workflow from the directory you're developing in with
+<code>snakemake --cores #</code>:</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>groverj3@x1-carbon snakemake_test<span class="o">]</span>$ snakemake --cores <span class="m">2</span>
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: <span class="m">2</span>
+Rules claiming more threads will be scaled down.
+Job counts:
+        count   <span class="nb">jobs</span>
+        <span class="m">1</span>       all
+        <span class="m">2</span>       fastqc_raw
+        <span class="m">3</span>
+
+<span class="o">[</span>Mon Aug <span class="m">19</span> <span class="m">23</span>:30:46 <span class="m">2019</span><span class="o">]</span>
+rule fastqc_raw:
+    input: input_data/JWG3_2_2_R2.fastq.gz
+    output: 1_fastqc_raw/JWG3_2_2_R2_fastqc.html, 1_fastqc_raw/JWG3_2_2_R2_fastqc.zip
+    jobid: <span class="m">2</span>
+    wildcards: <span class="nv">sample</span><span class="o">=</span>JWG3_2_2, <span class="nv">mate</span><span class="o">=</span><span class="m">2</span>
+
+
+<span class="o">[</span>Mon Aug <span class="m">19</span> <span class="m">23</span>:30:46 <span class="m">2019</span><span class="o">]</span>
+rule fastqc_raw:
+    input: input_data/JWG3_2_2_R1.fastq.gz
+    output: 1_fastqc_raw/JWG3_2_2_R1_fastqc.html, 1_fastqc_raw/JWG3_2_2_R1_fastqc.zip
+    jobid: <span class="m">1</span>
+    wildcards: <span class="nv">sample</span><span class="o">=</span>JWG3_2_2, <span class="nv">mate</span><span class="o">=</span><span class="m">1</span>
+
+Started analysis of JWG3_2_2_R1.fastq.gzStarted analysis of JWG3_2_2_R2.fastq.gz
+</pre></div>
+
+
+<p>I ran it with <code>--cores 2</code>, but I did not include a <code>threads</code> parameter to the
+rule in addition in <code>input</code>, <code>output</code>, <code>params</code>, and <code>shell</code>. So, it only thinks
+the <code>rule fastqc_raw</code> requires one processor. This means it will parallelize
+samples through that rule up to the maximum you give it at run-time! This is
+handy. Do you see now how this is better than a bash script? It intelligently
+replaces processes that can be run in parallel, but if you specify a number of
+<code>threads</code> for the rule it will wait until those cores are available.</p>
+<p>Let's add a few more rules.</p>
+<h3>Step 3 - Add Rules</h3>
+<p>I'm going to add a bunch of rules. Don't freak out. Our <code>Snakefile</code> now looks
+like this:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Get overall workflow parameters from config.yaml</span>
+<span class="n">configfile</span><span class="p">:</span> <span class="s1">&#39;config.yaml&#39;</span>
+
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;samples&#39;</span><span class="p">]</span>
+<span class="n">REFERENCE_GENOME</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;reference_genome&#39;</span><span class="p">]</span>
+
+<span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s1">&#39;3_bwameth_aligned/</span><span class="si">{sample}</span><span class="s1">.bam&#39;</span><span class="p">,</span>
+               <span class="n">sample</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">),</span>
+        <span class="n">expand</span><span class="p">(</span><span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_val_</span><span class="si">{mate}</span><span class="s1">_fastqc.</span><span class="si">{ext}</span><span class="s1">&#39;</span><span class="p">,</span>
+               <span class="n">sample</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">,</span> <span class="n">mate</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">ext</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;zip&#39;</span><span class="p">])</span>
+
+
+<span class="c1"># Index the reference genome</span>
+<span class="c1"># ancient() will assume the reference is older than output files if they exist</span>
+<span class="n">rule</span> <span class="n">bwameth_index</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="n">ancient</span><span class="p">(</span><span class="n">REFERENCE_GENOME</span><span class="p">)</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="n">REFERENCE_GENOME</span> <span class="o">+</span> <span class="s1">&#39;.bwameth.c2t&#39;</span><span class="p">,</span>
+        <span class="n">REFERENCE_GENOME</span> <span class="o">+</span> <span class="s1">&#39;.bwameth.c2t.amb&#39;</span><span class="p">,</span>
+        <span class="n">REFERENCE_GENOME</span> <span class="o">+</span> <span class="s1">&#39;.bwameth.c2t.ann&#39;</span><span class="p">,</span>
+        <span class="n">REFERENCE_GENOME</span> <span class="o">+</span> <span class="s1">&#39;.bwameth.c2t.bwt&#39;</span><span class="p">,</span>
+        <span class="n">REFERENCE_GENOME</span> <span class="o">+</span> <span class="s1">&#39;.bwameth.c2t.pac&#39;</span><span class="p">,</span>
+        <span class="n">REFERENCE_GENOME</span> <span class="o">+</span> <span class="s1">&#39;.bwameth.c2t.sa&#39;</span>
+    <span class="n">params</span><span class="p">:</span>
+        <span class="n">bwameth_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">][</span><span class="s1">&#39;bwameth_path&#39;</span><span class="p">],</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s1">&#39;</span><span class="si">{params.bwameth_path}</span><span class="s1"> index </span><span class="si">{input}</span><span class="s1">&#39;</span>
+
+
+<span class="c1"># Run fastqc on the raw .fastq.gz files</span>
+<span class="n">rule</span> <span class="n">fastqc_raw</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s1">&#39;input_data/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">.fastq.gz&#39;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_fastqc.html&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_fastqc.zip&#39;</span>
+    <span class="n">params</span><span class="p">:</span>
+        <span class="n">fastqc_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">][</span><span class="s1">&#39;fastqc_path&#39;</span><span class="p">],</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="s1">&#39;1_fastqc_raw/&#39;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s1">&#39;</span><span class="si">{params.fastqc_path}</span><span class="s1"> -o </span><span class="si">{params.out_dir}</span><span class="s1"> </span><span class="si">{input}</span><span class="s1">&#39;</span>
+
+
+<span class="c1"># Trim the read pairs</span>
+<span class="n">rule</span> <span class="n">trim_galore</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R1_fastqc.html&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R1_fastqc.zip&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R2_fastqc.html&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R2_fastqc.zip&#39;</span><span class="p">,</span>
+        <span class="n">R1</span> <span class="o">=</span> <span class="s1">&#39;input_data/</span><span class="si">{sample}</span><span class="s1">_R1.fastq.gz&#39;</span><span class="p">,</span>
+        <span class="n">R2</span> <span class="o">=</span> <span class="s1">&#39;input_data/</span><span class="si">{sample}</span><span class="s1">_R2.fastq.gz&#39;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R1_val_1.fq.gz&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R1.fastq.gz_trimming_report.txt&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R2_val_2.fq.gz&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R2.fastq.gz_trimming_report.txt&#39;</span>
+    <span class="n">params</span><span class="p">:</span>
+        <span class="n">adapter_seq</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;trim_galore&#39;</span><span class="p">][</span><span class="s1">&#39;adapter_seq&#39;</span><span class="p">],</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="s1">&#39;2_trim_galore&#39;</span><span class="p">,</span>
+        <span class="n">trim_galore_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">][</span><span class="s1">&#39;trim_galore_path&#39;</span><span class="p">]</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        {params.trim_galore_path} \</span>
+<span class="sd">        --a {params.adapter_seq} \</span>
+<span class="sd">        --gzip \</span>
+<span class="sd">        --trim-n \</span>
+<span class="sd">        --quality 20 \</span>
+<span class="sd">        --output_dir {params.out_dir} \</span>
+<span class="sd">        --paired \</span>
+<span class="sd">        {input.R1} {input.R2} \</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+
+<span class="c1"># Run fastqc on the trimmmed reads</span>
+<span class="n">rule</span> <span class="n">fastqc_trimmmed</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">.fastq.gz_trimming_report.txt&#39;</span><span class="p">,</span>
+        <span class="n">fq_gz</span> <span class="o">=</span> <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_val_</span><span class="si">{mate}</span><span class="s1">.fq.gz&#39;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_val_</span><span class="si">{mate}</span><span class="s1">_fastqc.html&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_val_</span><span class="si">{mate}</span><span class="s1">_fastqc.zip&#39;</span>
+    <span class="n">params</span><span class="p">:</span>
+        <span class="n">fastqc_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">][</span><span class="s1">&#39;fastqc_path&#39;</span><span class="p">],</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="s1">&#39;2_trim_galore/&#39;</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="s1">&#39;</span><span class="si">{params.fastqc_path}</span><span class="s1"> -o </span><span class="si">{params.out_dir}</span><span class="s1"> </span><span class="si">{input.fq_gz}</span><span class="s1">&#39;</span>
+
+
+<span class="c1"># Align to the reference</span>
+<span class="n">rule</span> <span class="n">bwameth_align</span><span class="p">:</span>
+    <span class="nb">input</span><span class="p">:</span>
+        <span class="p">{</span><span class="n">rules</span><span class="o">.</span><span class="n">bwameth_index</span><span class="o">.</span><span class="n">output</span><span class="p">},</span>
+        <span class="n">R1</span> <span class="o">=</span> <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R1_val_1.fq.gz&#39;</span><span class="p">,</span>
+        <span class="n">R2</span> <span class="o">=</span> <span class="s1">&#39;2_trim_galore/</span><span class="si">{sample}</span><span class="s1">_R2_val_2.fq.gz&#39;</span>
+    <span class="n">output</span><span class="p">:</span>
+        <span class="s1">&#39;3_bwameth_aligned/</span><span class="si">{sample}</span><span class="s1">.bam&#39;</span>
+    <span class="n">log</span><span class="p">:</span>
+        <span class="s1">&#39;3_bwameth_aligned/</span><span class="si">{sample}</span><span class="s1">.bwameth.log&#39;</span>
+    <span class="n">threads</span><span class="p">:</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;bwameth&#39;</span><span class="p">][</span><span class="s1">&#39;threads&#39;</span><span class="p">]</span>
+    <span class="n">params</span><span class="p">:</span>
+        <span class="n">bwameth_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">][</span><span class="s1">&#39;bwameth_path&#39;</span><span class="p">],</span>
+        <span class="n">genome</span> <span class="o">=</span> <span class="n">REFERENCE_GENOME</span>
+    <span class="n">shell</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        {params.bwameth_path} \</span>
+<span class="sd">        -t {threads} \</span>
+<span class="sd">        --reference {params.genome} \</span>
+<span class="sd">        {input.R1} {input.R2} \</span>
+<span class="sd">        2&gt; {log} \</span>
+<span class="sd">        | samtools view -b - \</span>
+<span class="sd">        &gt; {output}</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</pre></div>
+
+
+<p>And the <code>config.yaml</code> looks like this:</p>
+<div class="highlight"><pre><span></span><span class="nt">samples</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JWG3_2_2_</span>
+    <span class="c1"># Samples should be reported by ID rather than filenames, and exclude the</span>
+    <span class="c1"># trailing &quot;R1&quot; and &quot;R2&quot;, one sample ID per pair. If samples are supplied as</span>
+    <span class="c1"># separate .fastq.gz files within each pair concatenate them to a single R1 and</span>
+    <span class="c1"># R2 file prior to running.</span>
+
+<span class="nt">reference_genome</span><span class="p">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">reference_genome/ref_genome.fasta</span>
+    <span class="l l-Scalar l-Scalar-Plain"># Path to reference genome here with .fasta extension</span>
+
+
+<span class="c1"># Options for individual workflow steps</span>
+<span class="c1"># Configure threads for each step as desired, this is a sane starting point</span>
+
+<span class="nt">trim_galore</span><span class="p">:</span>
+    <span class="nt">adapter_seq </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</span>
+    <span class="nt">quality </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
+
+<span class=" -Error"> </span><span class="nt">bwameth</span><span class="p">:</span>
+    <span class="nt">threads </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>   
+
+
+<span class="c1"># Paths to individual tools</span>
+<span class="c1"># You probably don&#39;t need to change this unless programs are not in your $PATH</span>
+
+<span class="nt">paths</span><span class="p">:</span>
+  <span class="nt">fastqc_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fastqc</span>
+  <span class="nt">trim_galore_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">trim_galore</span>
+  <span class="nt">bwameth_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bwameth.py</span>
+</pre></div>
+
+
+<p>That's a lot to take in, so a few words of explanation are in order. I have moved
+paths for the individual programs toa section in the config file. This is to help
+with potential portability problems. On some server you may have tools installed
+in directories outside your <code>$PATH</code>. They are pre-filled with just the tool
+name, so they work fine when programs are executable from a command prompt but
+this allows configuration (it's also at the bottom of the file because most users
+shouldn't have to change it). I also now have a section for options for each
+tool that's run. Which you can pull out of the dictionary made from the
+<code>config.yaml</code> in each step's <code>params</code>. I've also allocated 10 threads to the
+alignment step. This means it won't run if there aren't 10 threads available due
+to other rules running more than 10 concurrent processes.</p>
+<p>There are also multiple <strong>targets</strong> now. This is because the output from 
+<code>rule fastqc_trimmed</code> is not used as input to another rule. Unless you explicitly
+tell Snakemake to run that rule to generate its <strong>target</strong> it will not run and
+you will get very annoyed.</p>
+<p>It's a lot to take in, but this is essentially a usable workflow.</p>
+<h3>Step 4 - Wrapping Up + A Few Tips</h3>
+<p>You can now add <strong>rules</strong> to your heart's content. Keep in mind though, you need
+to change your <strong>targets</strong>! Otherwise, it won't run your new rules :(.</p>
+<p>Also, you're probably wondering what happens when you don't actually have enough
+CPUs to run that rule with 10 threads. Just change the <code>--cores</code> argument at
+run-time to a lower number. It will reduce that rule's <code>threads</code> to the number
+specified at run-time.</p>
+<p>Another thing to consider if that Snakemake has the ability to work with HPC job
+submission frameworks like SLURM and PBS. Though, it's not really that difficult
+to include <code>snakemake --cores #</code> in a normal .pbs script. It also plays nice with
+containers (Docker and Singularity). So, if you package up your software in one
+you have automation and deployability all-in-one!</p>
+<p>If you're curious what the full workflow looks like then <a href="https://github.com/groverj3/wgbs_snakemake">check it out!</a></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/python.html">python</a>
+      <a href="https://groverj3.github.io/tag/workflows.html">workflows</a>
+      <a href="https://groverj3.github.io/tag/snakemake.html">snakemake</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatician. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

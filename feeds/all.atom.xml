@@ -1,7 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-08-09T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-08-19T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
 &lt;a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank"&gt;The Mosher Lab&lt;/a&gt;
-@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Suggestions for Reproducible Bioinformatic Analyses</title><link href="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html" rel="alternate"></link><published>2019-08-09T00:00:00-07:00</published><updated>2019-08-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-09:/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html</id><summary type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
+@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>The Snakemake Tutorial I Wish I Had</title><link href="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html" rel="alternate"></link><published>2019-08-19T00:00:00-07:00</published><updated>2019-08-19T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-19:/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html</id><summary type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
+bioinformatics has grown greatly. This is a great thing for the field and adds to
+our ability to perform reproducible analyses, especially for pipelines with many
+steps. These are common in bioinformatics, but prior to the use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
+bioinformatics has grown greatly. This is a great thing for the field and adds to
+our ability to perform reproducible analyses, especially for pipelines with many
+steps. These are common in bioinformatics, but prior to the use of workflow
+managers they were mostly handled with BASH scripts. While a good BASH script is
+perfectly acceptable much of the time they aren't very portable and don't handle
+multithreading and concurrent processes without annoying hacks. For a one-off
+analysis that's all fine, but what about a pipeline you need to run many times?
+This is where a workflow manager really shines, especially when combined with
+containers.&lt;/p&gt;
+&lt;p&gt;I decided to implement two pipelines that we use often here in the Mosher Lab as
+Snakemake workflows. We work with a lot of small RNA sequencing and recently some
+whole-genome bisulfite sequencing data. There are already available pipelines for
+WGBS, but they seem like overkill and writing my own is a good way to learn the
+ins and outs of Snakemake.&lt;/p&gt;
+&lt;p&gt;I chose Snakemake over other workflow managers due to its already frequent use in
+bioinformatics workflows and my familiarity with Python. However, Nextflow also
+seems like a solid option as well. I found much of the official documentation
+very lacking in useful examples though. I ended up consulting numerous workflows
+available on Github. The issue there is also that a lot of them are trying to do
+too much IMHO. So, I figured I'd write the tutorial I wish I had been able to
+find.&lt;/p&gt;
+&lt;h3&gt;Step 0 - Install Snakemake and Your Workflow's Software Dependencies&lt;/h3&gt;
+&lt;p&gt;I'm assuming you're on some kind of Linux system. Though, these directions may
+also work on macOS. Your first step should be to install Snakemake:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --user Snakemake
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I always recommend &lt;em&gt;not&lt;/em&gt; using your system python. If you're on a non-rolling
+release distribution, or on macOS it's probably super outdated. I use
+&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; to manage my Python installations, though
+there are other options. I also &lt;strong&gt;never&lt;/strong&gt; use &lt;code&gt;sudo&lt;/code&gt; to install python packages.&lt;/p&gt;
+&lt;p&gt;The WGBS workflow consists of several steps which can be represented by this DAG
+(Snakemake can make these! Neat-o!)&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;img alt="Snakemake WGBS Workflow" src="https://github.com/groverj3/wgbs_snakemake/raw/master/dag.png"&gt;
+&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;You can boil it down to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Index the reference genome with &lt;a href="https://github.com/brentp/bwa-meth"&gt;bwa-meth&lt;/a&gt; (needed for bwa-meth alignment)&lt;/li&gt;
+&lt;li&gt;Index the reference genome with &lt;a href="http://www.htslib.org/doc/faidx.html"&gt;samtools faidx&lt;/a&gt; (needed for MethylDackel)&lt;/li&gt;
+&lt;li&gt;Quality reporting with &lt;a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/"&gt;FastQC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Trimming adapters with &lt;a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/"&gt;Trim Galore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Quality reporting on trimmed reads (FastQC again)&lt;/li&gt;
+&lt;li&gt;Alignment with bwa-meth&lt;/li&gt;
+&lt;li&gt;Sorting with &lt;a href="http://www.htslib.org/doc/samtools.html"&gt;samtools sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Marking PCR duplicates with &lt;a href="https://broadinstitute.github.io/picard/"&gt;Picard Tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Detecting bias and extracting per-cytosine percent methylation with &lt;a href="https://github.com/dpryan79/MethylDackel"&gt;MethylDackel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Determining fold-coverage with &lt;a href="https://github.com/brentp/mosdepth"&gt;mosdepth&lt;/a&gt; and a little &lt;a href="https://github.com/groverj3/wgbs_snakemake/blob/master/scripts/mosdepth_to_x_coverage.py"&gt;python script&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Not a super complicated workflow, but enough to demonstrate a read-world use of
+Snakemake. A workflow that's complicated enough you don't want to run each step
+separately either.&lt;/p&gt;
+&lt;p&gt;I don't expect anyone to replicate this exact workflow, but it's a useful
+example.&lt;/p&gt;
+&lt;h3&gt;Step 1 - Learn Some Snakemake Basics&lt;/h3&gt;
+&lt;p&gt;There are some basics to explain before I start throwing code around. Firstly,
+Snakemake does &lt;strong&gt;not&lt;/strong&gt; work you way you might think, it actually works
+&lt;strong&gt;backwards&lt;/strong&gt; from a set of &lt;strong&gt;target&lt;/strong&gt; files through a set of &lt;strong&gt;rules&lt;/strong&gt;. You may
+think this sounds unnecessarily confusing, but there is a good reason for this.
+When Snakemake begins a workflow, this ensures that (as long as you don't do
+anything too weird) it will not fail for trivial reasons like files not being
+generated as inputs to other rules. It creates a &lt;a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph"&gt;directed acyclic graph&lt;/a&gt;
+representing the workflow for &lt;em&gt;each sample&lt;/em&gt; that it can match through wildcards
+to your &lt;strong&gt;targets&lt;/strong&gt;. It will use the &lt;strong&gt;rules&lt;/strong&gt; you define in its main script
+(the Snakefile) to create a path from &lt;strong&gt;targets&lt;/strong&gt; to &lt;strong&gt;inputs (samples)&lt;/strong&gt;. This
+is backwards from the way we think, and there are workflow managers that do
+&lt;em&gt;push&lt;/em&gt; rather than &lt;em&gt;pull&lt;/em&gt;. Each has their advantages and disadvantages.&lt;/p&gt;
+&lt;p&gt;Another key concept is that your &lt;strong&gt;rules&lt;/strong&gt; live in a &lt;code&gt;Snakefile&lt;/code&gt;, just a Python
+script with extra syntax. So, you can use Python code in it! Keep this in mind,
+and you can do some neat things (creating sample tables for differential
+expression, etc.).&lt;/p&gt;
+&lt;p&gt;Typically, the first &lt;strong&gt;rule&lt;/strong&gt; in a Snakefile is called "all" and this rule will
+indicate the &lt;strong&gt;targets&lt;/strong&gt; that you want to generate. This tells Snakemake to
+start and use the rules to try to make them based on wildcard matching with the
+inputs.&lt;/p&gt;
+&lt;p&gt;Additionally, it's good practice to include the options you'd like a user to be
+able to configure in a .json or .yaml file. You can think of these files like
+a python dictionary in static file form (&lt;a href="https://en.wikipedia.org/wiki/Serialization"&gt;pickling&lt;/a&gt;).&lt;/p&gt;
+&lt;h3&gt;Step 2 - Create a Rule&lt;/h3&gt;
+&lt;p&gt;Create a blank file called &lt;code&gt;Snakefile&lt;/code&gt; in the directory you're using for
+development and fill it with this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Run fastqc on the raw .fastq.gz files&lt;/span&gt;
+&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="n"&gt;fastqc_raw&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;input_data/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;.fastq.gz&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.zip&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;out_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;fastqc -o &lt;/span&gt;&lt;span class="si"&gt;{params.out_dir}&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;{input}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is the first rule in our workflow, running FastQC on the input files. In the
+&lt;code&gt;{}&lt;/code&gt; are &lt;strong&gt;wildcards&lt;/strong&gt;. While they have names, they are only there for
+readability right now. The only &lt;code&gt;param&lt;/code&gt; we're currently passing to it is the
+output directory, but this is where your options would be. Snakemake will check
+whether the &lt;code&gt;input&lt;/code&gt; for a rule can be made before allowing the workflow to start.
+Therefore, if yur workflow starts, it &lt;em&gt;should&lt;/em&gt; finish. However, we need a rule
+"all" which will tell it to be run.&lt;/p&gt;
+&lt;p&gt;Add the following to the Snakefile &lt;strong&gt;before&lt;/strong&gt; the fastqc rule:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;expand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.&lt;/span&gt;&lt;span class="si"&gt;{ext}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SAMPLES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;ext&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This tells the workflow which &lt;strong&gt;targets&lt;/strong&gt; to create. We're still missing a very
+important thing though! The samples! For that, create another file,
+&lt;code&gt;config.yaml&lt;/code&gt;, in the same directory and add this to it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Sample1&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Sample2&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;etc...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Your &lt;code&gt;samples&lt;/code&gt; are yaml entries without names (you could name them if you want),
+and should &lt;strong&gt;not&lt;/strong&gt; include read pair numbers (so 1 ID for each pair). The sample
+IDs should match what is in &lt;code&gt;rule all&lt;/code&gt; in place of &lt;code&gt;{sample}&lt;/code&gt;. The &lt;code&gt;config.yaml&lt;/code&gt;
+is also where the options for your workflow steps can live, under their own
+headings. Now, go back to your Snakefile and add this &lt;em&gt;above&lt;/em&gt; your rules:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Get overall workflow parameters from config.yaml&lt;/span&gt;
+&lt;span class="n"&gt;configfile&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;config.yaml&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;SAMPLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;samples&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This parses the config file into a Python dictionary. Do you see how &lt;code&gt;SAMPLES&lt;/code&gt; is
+filled in for &lt;code&gt;{sample}&lt;/code&gt; in &lt;code&gt;rule all&lt;/code&gt; which then creates a &lt;strong&gt;target&lt;/strong&gt; which can
+be generated by &lt;code&gt;rule fastqc_raw&lt;/code&gt;. It's kind of a mind-bender at first, but it 
+all fits together.&lt;/p&gt;
+&lt;p&gt;Save all these files and include some test data in a subdirectory called
+"input_data".&lt;/p&gt;
+&lt;h3&gt;Step 2 - Running Your First Rules&lt;/h3&gt;
+&lt;p&gt;I copied one sample to my &lt;code&gt;input_data&lt;/code&gt; directory and added it to the .yaml file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JWG3_2_2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now run the workflow from the directory you're developing in with
+&lt;code&gt;snakemake --cores #&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;groverj3@x1-carbon snakemake_test&lt;span class="o"&gt;]&lt;/span&gt;$ snakemake --cores &lt;span class="m"&gt;2&lt;/span&gt;
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: &lt;span class="m"&gt;2&lt;/span&gt;
+Rules claiming more threads will be scaled down.
+Job counts:
+        count   &lt;span class="nb"&gt;jobs&lt;/span&gt;
+        &lt;span class="m"&gt;1&lt;/span&gt;       all
+        &lt;span class="m"&gt;2&lt;/span&gt;       fastqc_raw
+        &lt;span class="m"&gt;3&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt;Mon Aug &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;23&lt;/span&gt;:30:46 &lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+rule fastqc_raw:
+    input: input_data/JWG3_2_2_R2.fastq.gz
+    output: 1_fastqc_raw/JWG3_2_2_R2_fastqc.html, 1_fastqc_raw/JWG3_2_2_R2_fastqc.zip
+    jobid: &lt;span class="m"&gt;2&lt;/span&gt;
+    wildcards: &lt;span class="nv"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;JWG3_2_2, &lt;span class="nv"&gt;mate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
+
+
+&lt;span class="o"&gt;[&lt;/span&gt;Mon Aug &lt;span class="m"&gt;19&lt;/span&gt; &lt;span class="m"&gt;23&lt;/span&gt;:30:46 &lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+rule fastqc_raw:
+    input: input_data/JWG3_2_2_R1.fastq.gz
+    output: 1_fastqc_raw/JWG3_2_2_R1_fastqc.html, 1_fastqc_raw/JWG3_2_2_R1_fastqc.zip
+    jobid: &lt;span class="m"&gt;1&lt;/span&gt;
+    wildcards: &lt;span class="nv"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;JWG3_2_2, &lt;span class="nv"&gt;mate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+
+Started analysis of JWG3_2_2_R1.fastq.gzStarted analysis of JWG3_2_2_R2.fastq.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I ran it with &lt;code&gt;--cores 2&lt;/code&gt;, but I did not include a &lt;code&gt;threads&lt;/code&gt; parameter to the
+rule in addition in &lt;code&gt;input&lt;/code&gt;, &lt;code&gt;output&lt;/code&gt;, &lt;code&gt;params&lt;/code&gt;, and &lt;code&gt;shell&lt;/code&gt;. So, it only thinks
+the &lt;code&gt;rule fastqc_raw&lt;/code&gt; requires one processor. This means it will parallelize
+samples through that rule up to the maximum you give it at run-time! This is
+handy. Do you see now how this is better than a bash script? It intelligently
+replaces processes that can be run in parallel, but if you specify a number of
+&lt;code&gt;threads&lt;/code&gt; for the rule it will wait until those cores are available.&lt;/p&gt;
+&lt;p&gt;Let's add a few more rules.&lt;/p&gt;
+&lt;h3&gt;Step 3 - Add Rules&lt;/h3&gt;
+&lt;p&gt;I'm going to add a bunch of rules. Don't freak out. Our &lt;code&gt;Snakefile&lt;/code&gt; now looks
+like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Get overall workflow parameters from config.yaml&lt;/span&gt;
+&lt;span class="n"&gt;configfile&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;config.yaml&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;SAMPLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;samples&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;reference_genome&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;expand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;3_bwameth_aligned/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;.bam&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SAMPLES&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;expand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_val_&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.&lt;/span&gt;&lt;span class="si"&gt;{ext}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SAMPLES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;ext&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Index the reference genome&lt;/span&gt;
+&lt;span class="c1"&gt;# ancient() will assume the reference is older than output files if they exist&lt;/span&gt;
+&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="n"&gt;bwameth_index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;ancient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.bwameth.c2t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.bwameth.c2t.amb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.bwameth.c2t.ann&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.bwameth.c2t.bwt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.bwameth.c2t.pac&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.bwameth.c2t.sa&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;bwameth_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;paths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bwameth_path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{params.bwameth_path}&lt;/span&gt;&lt;span class="s1"&gt; index &lt;/span&gt;&lt;span class="si"&gt;{input}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Run fastqc on the raw .fastq.gz files&lt;/span&gt;
+&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="n"&gt;fastqc_raw&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;input_data/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;.fastq.gz&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.zip&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;fastqc_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;paths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;fastqc_path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="n"&gt;out_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{params.fastqc_path}&lt;/span&gt;&lt;span class="s1"&gt; -o &lt;/span&gt;&lt;span class="si"&gt;{params.out_dir}&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;{input}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Trim the read pairs&lt;/span&gt;
+&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="n"&gt;trim_galore&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R1_fastqc.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R1_fastqc.zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R2_fastqc.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R2_fastqc.zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;R1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;input_data/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R1.fastq.gz&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;R2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;input_data/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R2.fastq.gz&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R1_val_1.fq.gz&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R1.fastq.gz_trimming_report.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R2_val_2.fq.gz&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R2.fastq.gz_trimming_report.txt&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;adapter_seq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;trim_galore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;adapter_seq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="n"&gt;out_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2_trim_galore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;trim_galore_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;paths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;trim_galore_path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;        {params.trim_galore_path} \&lt;/span&gt;
+&lt;span class="sd"&gt;        --a {params.adapter_seq} \&lt;/span&gt;
+&lt;span class="sd"&gt;        --gzip \&lt;/span&gt;
+&lt;span class="sd"&gt;        --trim-n \&lt;/span&gt;
+&lt;span class="sd"&gt;        --quality 20 \&lt;/span&gt;
+&lt;span class="sd"&gt;        --output_dir {params.out_dir} \&lt;/span&gt;
+&lt;span class="sd"&gt;        --paired \&lt;/span&gt;
+&lt;span class="sd"&gt;        {input.R1} {input.R2} \&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Run fastqc on the trimmmed reads&lt;/span&gt;
+&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="n"&gt;fastqc_trimmmed&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;.fastq.gz_trimming_report.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;fq_gz&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_val_&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;.fq.gz&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_val_&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_val_&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.zip&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;fastqc_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;paths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;fastqc_path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="n"&gt;out_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{params.fastqc_path}&lt;/span&gt;&lt;span class="s1"&gt; -o &lt;/span&gt;&lt;span class="si"&gt;{params.out_dir}&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;{input.fq_gz}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Align to the reference&lt;/span&gt;
+&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="n"&gt;bwameth_align&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;rules&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bwameth_index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="n"&gt;R1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R1_val_1.fq.gz&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;R2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2_trim_galore/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R2_val_2.fq.gz&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;3_bwameth_aligned/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;.bam&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;3_bwameth_aligned/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;.bwameth.log&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;threads&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bwameth&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;threads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;bwameth_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;paths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;bwameth_path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="n"&gt;genome&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;REFERENCE_GENOME&lt;/span&gt;
+    &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;        {params.bwameth_path} \&lt;/span&gt;
+&lt;span class="sd"&gt;        -t {threads} \&lt;/span&gt;
+&lt;span class="sd"&gt;        --reference {params.genome} \&lt;/span&gt;
+&lt;span class="sd"&gt;        {input.R1} {input.R2} \&lt;/span&gt;
+&lt;span class="sd"&gt;        2&amp;gt; {log} \&lt;/span&gt;
+&lt;span class="sd"&gt;        | samtools view -b - \&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;gt; {output}&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the &lt;code&gt;config.yaml&lt;/code&gt; looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JWG3_2_2_&lt;/span&gt;
+    &lt;span class="c1"&gt;# Samples should be reported by ID rather than filenames, and exclude the&lt;/span&gt;
+    &lt;span class="c1"&gt;# trailing &amp;quot;R1&amp;quot; and &amp;quot;R2&amp;quot;, one sample ID per pair. If samples are supplied as&lt;/span&gt;
+    &lt;span class="c1"&gt;# separate .fastq.gz files within each pair concatenate them to a single R1 and&lt;/span&gt;
+    &lt;span class="c1"&gt;# R2 file prior to running.&lt;/span&gt;
+
+&lt;span class="nt"&gt;reference_genome&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;reference_genome/ref_genome.fasta&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;# Path to reference genome here with .fasta extension&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Options for individual workflow steps&lt;/span&gt;
+&lt;span class="c1"&gt;# Configure threads for each step as desired, this is a sane starting point&lt;/span&gt;
+
+&lt;span class="nt"&gt;trim_galore&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;adapter_seq &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC&lt;/span&gt;
+    &lt;span class="nt"&gt;quality &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;20&lt;/span&gt;
+
+&lt;span class=" -Error"&gt; &lt;/span&gt;&lt;span class="nt"&gt;bwameth&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;threads &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;10&lt;/span&gt;   
+
+
+&lt;span class="c1"&gt;# Paths to individual tools&lt;/span&gt;
+&lt;span class="c1"&gt;# You probably don&amp;#39;t need to change this unless programs are not in your $PATH&lt;/span&gt;
+
+&lt;span class="nt"&gt;paths&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;fastqc_path &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;fastqc&lt;/span&gt;
+  &lt;span class="nt"&gt;trim_galore_path &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;trim_galore&lt;/span&gt;
+  &lt;span class="nt"&gt;bwameth_path &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;bwameth.py&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That's a lot to take in, so a few words of explanation are in order. I have moved
+paths for the individual programs toa section in the config file. This is to help
+with potential portability problems. On some server you may have tools installed
+in directories outside your &lt;code&gt;$PATH&lt;/code&gt;. They are pre-filled with just the tool
+name, so they work fine when programs are executable from a command prompt but
+this allows configuration (it's also at the bottom of the file because most users
+shouldn't have to change it). I also now have a section for options for each
+tool that's run. Which you can pull out of the dictionary made from the
+&lt;code&gt;config.yaml&lt;/code&gt; in each step's &lt;code&gt;params&lt;/code&gt;. I've also allocated 10 threads to the
+alignment step. This means it won't run if there aren't 10 threads available due
+to other rules running more than 10 concurrent processes.&lt;/p&gt;
+&lt;p&gt;There are also multiple &lt;strong&gt;targets&lt;/strong&gt; now. This is because the output from 
+&lt;code&gt;rule fastqc_trimmed&lt;/code&gt; is not used as input to another rule. Unless you explicitly
+tell Snakemake to run that rule to generate its &lt;strong&gt;target&lt;/strong&gt; it will not run and
+you will get very annoyed.&lt;/p&gt;
+&lt;p&gt;It's a lot to take in, but this is essentially a usable workflow.&lt;/p&gt;
+&lt;h3&gt;Step 4 - Wrapping Up + A Few Tips&lt;/h3&gt;
+&lt;p&gt;You can now add &lt;strong&gt;rules&lt;/strong&gt; to your heart's content. Keep in mind though, you need
+to change your &lt;strong&gt;targets&lt;/strong&gt;! Otherwise, it won't run your new rules :(.&lt;/p&gt;
+&lt;p&gt;Also, you're probably wondering what happens when you don't actually have enough
+CPUs to run that rule with 10 threads. Just change the &lt;code&gt;--cores&lt;/code&gt; argument at
+run-time to a lower number. It will reduce that rule's &lt;code&gt;threads&lt;/code&gt; to the number
+specified at run-time.&lt;/p&gt;
+&lt;p&gt;Another thing to consider if that Snakemake has the ability to work with HPC job
+submission frameworks like SLURM and PBS. Though, it's not really that difficult
+to include &lt;code&gt;snakemake --cores #&lt;/code&gt; in a normal .pbs script. It also plays nice with
+containers (Docker and Singularity). So, if you package up your software in one
+you have automation and deployability all-in-one!&lt;/p&gt;
+&lt;p&gt;If you're curious what the full workflow looks like then &lt;a href="https://github.com/groverj3/wgbs_snakemake"&gt;check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="bioinformatics"></category><category term="python"></category><category term="workflows"></category><category term="snakemake"></category></entry><entry><title>Suggestions for Reproducible Bioinformatic Analyses</title><link href="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html" rel="alternate"></link><published>2019-08-09T00:00:00-07:00</published><updated>2019-08-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-09:/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html</id><summary type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
 output of program A feeds into program B, and so on. These programs may also not
 output their results in a format which is convenient to use in the subsequent
 steps, requiring writing a conversion script, or piping its output …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
