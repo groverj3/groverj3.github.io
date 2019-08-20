@@ -484,8 +484,8 @@ to change your <strong>targets</strong>! Otherwise, it won't run your new rules 
 <p>Also, you're probably wondering what happens when you don't actually have enough
 CPUs to run that rule with 10 threads. Just change the <code>--cores</code> argument at
 run-time to a lower number. It will reduce that rule's <code>threads</code> to the number
-specified at run-time.</p>
-<p>Another thing to consider if that Snakemake has the ability to work with HPC job
+specified.</p>
+<p>Another thing to consider is that Snakemake has the ability to work with HPC job
 submission frameworks like SLURM and PBS. Though, it's not really that difficult
 to include <code>snakemake --cores #</code> in a normal .pbs script. It also plays nice with
 containers (Docker and Singularity). So, if you package up your software in one
