@@ -122,7 +122,7 @@ This is the first rule in our workflow, running FastQC on the input files. In th
 readability right now. The only `param` we're currently passing to it is the
 output directory, but this is where your options would be. Snakemake will check
 whether the `input` for a rule can be made before allowing the workflow to start.
-Therefore, if yur workflow starts, it *should* finish. However, we need a rule
+Therefore, if your workflow starts, it *should* finish. However, we need a rule
 "all" which will tell it to be run.
 
 Add the following to the Snakefile **before** the fastqc rule:
@@ -407,9 +407,9 @@ to change your **targets**! Otherwise, it won't run your new rules :(.
 Also, you're probably wondering what happens when you don't actually have enough
 CPUs to run that rule with 10 threads. Just change the `--cores` argument at
 run-time to a lower number. It will reduce that rule's `threads` to the number
-specified at run-time.
+specified.
 
-Another thing to consider if that Snakemake has the ability to work with HPC job
+Another thing to consider is that Snakemake has the ability to work with HPC job
 submission frameworks like SLURM and PBS. Though, it's not really that difficult
 to include `snakemake --cores #` in a normal .pbs script. It also plays nice with
 containers (Docker and Singularity). So, if you package up your software in one
