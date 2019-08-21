@@ -134,9 +134,13 @@ rule all:
                sample=SAMPLES, mate=[1, 2], ext=['html', 'zip'])
 ```
 
-This tells the workflow which **targets** to create. We're still missing a very
-important thing though! The samples! For that, create another file,
-`config.yaml`, in the same directory and add this to it:
+This tells the workflow which **targets** to create. In this command, `expand`
+instructs Snakemake to fill in all things which match the wildcards. So, this
+indicates that **all** files which match this pattern when filled in are the
+**targets**. You can use `expand` in other rules, too. When you want multiple
+files as input that may be created asynchronously in previous rules. We're still
+missing a very important thing though! The input files! For that, create another
+file, `config.yaml`, in the same directory and add this to it:
 
 ```yaml
 samples:
@@ -381,16 +385,16 @@ paths:
 
 
 That's a lot to take in, so a few words of explanation are in order. I have moved
-paths for the individual programs toa section in the config file. This is to help
-with potential portability problems. On some server you may have tools installed
-in directories outside your `$PATH`. They are pre-filled with just the tool
-name, so they work fine when programs are executable from a command prompt but
-this allows configuration (it's also at the bottom of the file because most users
-shouldn't have to change it). I also now have a section for options for each
-tool that's run. Which you can pull out of the dictionary made from the
-`config.yaml` in each step's `params`. I've also allocated 10 threads to the
-alignment step. This means it won't run if there aren't 10 threads available due
-to other rules running more than 10 concurrent processes.
+paths for the individual programs to a section in the config file. This is to
+help with potential portability problems. On some server you may have tools
+installed in directories outside your `$PATH`. They are pre-filled with just the
+tool name, so they work fine when programs are executable from a command prompt
+but this allows configuration (it's also at the bottom of the file because most
+users shouldn't have to change it). I also now have a section containing options
+for each tool that's run. Which you can pull out of the dictionary made from the
+`config.yaml` in each step's `params` using . (dot) notation. I've  allocated 10
+threads to the alignment step. This means it won't run if there aren't 10 threads
+available due to other rules running more than 10 concurrent processes.
 
 There are also multiple **targets** now. This is because the output from 
 `rule fastqc_trimmed` is not used as input to another rule. Unless you explicitly
