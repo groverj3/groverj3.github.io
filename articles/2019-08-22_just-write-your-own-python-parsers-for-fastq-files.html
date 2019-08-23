@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="In contrast to the zen of python there are actually many ways to handle sequence data in Python. There are several packages on PyPI that provide parsers for sequence formats like .fastq and .fasta. I&#39;ve never bothered with these, including the oft-used Biopython. I vaguely remembered Biopython being slower than …" />
+<meta name="keywords" content="bioinformatics, python">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:title" content="Just Write Your Own Python Parsers for .fastq Files"/>
+<meta property="og:description" content="In contrast to the zen of python there are actually many ways to handle sequence data in Python. There are several packages on PyPI that provide parsers for sequence formats like .fastq and .fasta. I&#39;ve never bothered with these, including the oft-used Biopython. I vaguely remembered Biopython being slower than …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-22 00:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="commentary"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatician. &ndash; Just Write Your Own Python Parsers for .fastq Files</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Bioinformatician/Ph.D. Candidate<br>
+<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
+@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="just-write-your-own-python-parsers-for-fastq-files">Just Write Your Own Python Parsers for .fastq Files</h1>
+    <p>
+          Posted on Thu 22 August 2019 in <a href="https://groverj3.github.io/category/commentary.html">commentary</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>In contrast to the <a href="https://en.wikipedia.org/wiki/Zen_of_Python">zen of python</a>
+there are actually many ways to handle sequence data in Python. There are several
+packages on <a href="https://pypi.org">PyPI</a> that provide parsers for sequence formats
+like .fastq and .fasta. I've never bothered with these, including the oft-used
+<a href="https://biopython.org">Biopython</a>. I vaguely remembered Biopython being slower
+than any parser I'd written myself early-on in learning bioinformatics, and it
+not actually being simpler to implement. However, I'd never looked at this in
+detail. Additionally, I'd recently run across a few posts on
+<a href="https://www.biostars.org/">biostars</a> posts where users were deriding people for
+asking "What is the most efficient way to parse a huge .fastq file" for something
+similar.</p>
+<p>First of all, don't discourage people who are trying to learn. Secondly, this is
+a good question! As scientists, we should know that just because data exists
+doesn't meant it's good. Likewise, just because software exists doesn't mean it's
+the best tool for any given job. Plus, writing simple parsers for common formats
+is a good way to practice file processing for when you eventually need to do
+something hard and no ready-made parser exists in a package.</p>
+<p>Rather than vaguely saying "X package is slow, do this instead" I thought it'd be
+best to actually benchmark some different .fastq parser options.</p>
+<h3>The Contenders</h3>
+<p>There are several packages that include parsers for biological sequence data.
+These include:</p>
+<ol>
+<li><a href="https://biopython.org">Biopython</a></li>
+<li><a href="https://htseq.readthedocs.io">HTSeq</a></li>
+<li><a href="http://scikit-bio.org/">scikit-bio</a></li>
+</ol>
+<p>I'm familiar with Biopython from the recommendations that abound in the community
+for exactly this task, and HTSeq mostly for <code>HTSeq-count</code>. Scikit-bio seems to be
+newer and under current development, so results from testing that are subject to
+change. Just in case someone looks at this yers after it's written and wonders
+why I got the performance that I did.</p>
+<p>When it comes to dealing with .fastq files I checked through my library of Python
+scripts and came across two patterns that I'll also test compared to these
+packages:</p>
+<ol>
+<li>Reading line-by-line, using a counter to yield records</li>
+<li>Reading line-by-line, using <code>zip_longest()</code> from <code>itertools</code> to yield records</li>
+</ol>
+<h3>Setting up the Test</h3>
+<p>I did this in a <a href="https://jupyter.org">jupyter</a> notebook, since that's what I use
+on a day-to-day basis. Most of my interactive "data science" work is done in R,
+which is mostly a consequence of at one point needing to use some R packages that
+have no Python equivalents, and just rolling with that. So, actually using Python
+in jupyter is a bit of a departure from the norm for me.</p>
+<p>First, you need the necessary packages. I just use pip with
+<a href="https://github.com/pyenv/pyenv">pyenv</a>:</p>
+<div class="highlight"><pre><span></span>pip install biopython HTSeq scikit-bio
+</pre></div>
+
+
+<p>Then, started a new jupyter notebook with
+<a href="https://jupyterlab.readthedocs.io">jupyterlab</a> (a sweet new UI for jupyter that
+you should use!). Your first step is always to do your imports.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Bio</span> <span class="k">import</span> <span class="n">SeqIO</span>
+<span class="kn">from</span> <span class="nn">HTSeq</span> <span class="k">import</span> <span class="n">FastqReader</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">zip_longest</span>
+<span class="kn">import</span> <span class="nn">skbio</span>
+</pre></div>
+
+
+<p>I'm only using one function from skbio, but it's just called <code>read()</code> which is
+too generic a name to just import that single function without causing all sorts
+of annoyances and gnashing of teeth.</p>
+<h3>Define Some Functions to Test</h3>
+<p>In order to make the benchmarking easier to follow, I figured I'd define the
+functions I want to bechmark in a consistent way:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Using Biopython</span>
+<span class="k">def</span> <span class="nf">parse_biopython</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">SeqIO</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">,</span> <span class="s1">&#39;fastq&#39;</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">record</span>
+
+<span class="c1"># Using HTSeq</span>
+<span class="k">def</span> <span class="nf">parse_htseq</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">FastqReader</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">record</span>
+
+<span class="c1"># HTSeq raw</span>
+<span class="k">def</span> <span class="nf">parse_htseq_raw</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">FastqReader</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">,</span> <span class="n">raw_iterator</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">record</span>
+
+<span class="c1"># Skbio</span>
+<span class="k">def</span> <span class="nf">parse_skbio</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">skbio</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;fastq&#39;</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">record</span>
+
+<span class="c1"># Line by line with counter</span>
+<span class="k">def</span> <span class="nf">parse_lbl_counter</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_handle</span><span class="p">:</span>
+        <span class="n">record</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">input_handle</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">record</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">record</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">fq_record</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Line by line with zip_longest</span>
+<span class="k">def</span> <span class="nf">parse_zip_longest</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_handle</span><span class="p">:</span>
+        <span class="n">fastq_iterator</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">input_handle</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">zip_longest</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">fastq_iterator</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">record</span>
+</pre></div>
+
+
+<p>Here I intended to use two different methods from HTSeq, one which just returns
+bare tuples rather than objects with other kinds of validation based on the
+definition of the format. However, neither HTSeq method worked. Instead, giving a
+<code>StopIteration</code> error when it reached the end of a file. Trying to catch that
+with a <code>try:</code> <code>except:</code> block didn't seem to work? It did parse until it reached
+the end of a file though. I think this is a bug, and I may raise it with the
+HTSeq people. So it is, regrettably, not included in my benchmarking results.
+Also, in both custom parsers, <code>str.rstrip()</code> was marginally faster than
+<code>str.strip()</code> so I went with that instead.</p>
+<h3>Run Some Benchmarks</h3>
+<p>I decided I would try each of these with 1 million reads from a whole-genome
+bisulfite experiment. These are the R1 mates from 75bp paired end reads:</p>
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_biopython</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
+<span class="mf">2.86</span> <span class="n">s</span> <span class="err">±</span> <span class="mf">56.7</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_skbio</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
+<span class="mi">1</span><span class="nb">min</span> <span class="mi">33</span><span class="n">s</span> <span class="err">±</span> <span class="mf">13.7</span> <span class="n">s</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_lbl_counter</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
+<span class="mi">295</span> <span class="n">ms</span> <span class="err">±</span> <span class="mf">14.7</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_zip_longest</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
+<span class="mi">249</span> <span class="n">ms</span> <span class="err">±</span> <span class="mf">2.57</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The <code>%timeit</code> function there is some ipython "line magic." It simplifies timing
+a single line of code. The <code>%%timeit</code> is the "cell magic" version.</p>
+<p>It seems that skbio isn't ready for primetime just yet. The real question then
+is, would biopython suffice for day-to-day work? Perhaps yes, ~1M reads in &lt; 3s
+(349650.35 reads per second) is a timescale that people might be willing to work
+with. Keep in mind this is on my personal laptop, so it's hardly a compute
+cluster. In contrast, the very simple line counter-based parser that I wrote as a
+master's student back in 2013 as a python-learning exercise is nearly 10x faster!
+There is also an improvement in speed for using <code>zip_longest()</code> from <code>itertools</code>
+(a trick I'm pretty sure I saw in a post from Brent Pedersen on stackoverflow).</p>
+<h3>To Wrap Things Up</h3>
+<p>I'm not saying you should never use biopython, I suspect its parser does some
+extra validation that my simple parsers don't. It also returns objects with some
+possibly useful methods. However, if you just want to read files quckly then the
+simple line-by-line parsers aren't actually very complicated to write. Plus, you
+don't even need to import anything unless you want a speed boost from
+<code>itertools</code>. Additionally, if you didn't need to strip newlines you'd get a boost
+from not calling an <code>str.strip()</code> method on each line.</p>
+<p>If you're ok with living dangerously, and are sure your files are formatted
+correctly you can easily write something that will outperform standard
+implementations with little effort when it comes to .fastq parsing.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatician. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

@@ -1,7 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-08-19T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-08-22T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
 &lt;a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank"&gt;The Mosher Lab&lt;/a&gt;
-@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>The Snakemake Tutorial I Wish I Had</title><link href="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html" rel="alternate"></link><published>2019-08-19T00:00:00-07:00</published><updated>2019-08-19T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-19:/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html</id><summary type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
+@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Just Write Your Own Python Parsers for .fastq Files</title><link href="https://groverj3.github.io/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html" rel="alternate"></link><published>2019-08-22T00:00:00-07:00</published><updated>2019-08-22T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-22:/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html</id><summary type="html">&lt;p&gt;In contrast to the &lt;a href="https://en.wikipedia.org/wiki/Zen_of_Python"&gt;zen of python&lt;/a&gt;
+there are actually many ways to handle sequence data in Python. There are several
+packages on &lt;a href="https://pypi.org"&gt;PyPI&lt;/a&gt; that provide parsers for sequence formats
+like .fastq and .fasta. I've never bothered with these, including the oft-used
+&lt;a href="https://biopython.org"&gt;Biopython&lt;/a&gt;. I vaguely remembered Biopython being slower
+than …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In contrast to the &lt;a href="https://en.wikipedia.org/wiki/Zen_of_Python"&gt;zen of python&lt;/a&gt;
+there are actually many ways to handle sequence data in Python. There are several
+packages on &lt;a href="https://pypi.org"&gt;PyPI&lt;/a&gt; that provide parsers for sequence formats
+like .fastq and .fasta. I've never bothered with these, including the oft-used
+&lt;a href="https://biopython.org"&gt;Biopython&lt;/a&gt;. I vaguely remembered Biopython being slower
+than any parser I'd written myself early-on in learning bioinformatics, and it
+not actually being simpler to implement. However, I'd never looked at this in
+detail. Additionally, I'd recently run across a few posts on
+&lt;a href="https://www.biostars.org/"&gt;biostars&lt;/a&gt; posts where users were deriding people for
+asking "What is the most efficient way to parse a huge .fastq file" for something
+similar.&lt;/p&gt;
+&lt;p&gt;First of all, don't discourage people who are trying to learn. Secondly, this is
+a good question! As scientists, we should know that just because data exists
+doesn't meant it's good. Likewise, just because software exists doesn't mean it's
+the best tool for any given job. Plus, writing simple parsers for common formats
+is a good way to practice file processing for when you eventually need to do
+something hard and no ready-made parser exists in a package.&lt;/p&gt;
+&lt;p&gt;Rather than vaguely saying "X package is slow, do this instead" I thought it'd be
+best to actually benchmark some different .fastq parser options.&lt;/p&gt;
+&lt;h3&gt;The Contenders&lt;/h3&gt;
+&lt;p&gt;There are several packages that include parsers for biological sequence data.
+These include:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://biopython.org"&gt;Biopython&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://htseq.readthedocs.io"&gt;HTSeq&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://scikit-bio.org/"&gt;scikit-bio&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I'm familiar with Biopython from the recommendations that abound in the community
+for exactly this task, and HTSeq mostly for &lt;code&gt;HTSeq-count&lt;/code&gt;. Scikit-bio seems to be
+newer and under current development, so results from testing that are subject to
+change. Just in case someone looks at this yers after it's written and wonders
+why I got the performance that I did.&lt;/p&gt;
+&lt;p&gt;When it comes to dealing with .fastq files I checked through my library of Python
+scripts and came across two patterns that I'll also test compared to these
+packages:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reading line-by-line, using a counter to yield records&lt;/li&gt;
+&lt;li&gt;Reading line-by-line, using &lt;code&gt;zip_longest()&lt;/code&gt; from &lt;code&gt;itertools&lt;/code&gt; to yield records&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Setting up the Test&lt;/h3&gt;
+&lt;p&gt;I did this in a &lt;a href="https://jupyter.org"&gt;jupyter&lt;/a&gt; notebook, since that's what I use
+on a day-to-day basis. Most of my interactive "data science" work is done in R,
+which is mostly a consequence of at one point needing to use some R packages that
+have no Python equivalents, and just rolling with that. So, actually using Python
+in jupyter is a bit of a departure from the norm for me.&lt;/p&gt;
+&lt;p&gt;First, you need the necessary packages. I just use pip with
+&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install biopython HTSeq scikit-bio
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then, started a new jupyter notebook with
+&lt;a href="https://jupyterlab.readthedocs.io"&gt;jupyterlab&lt;/a&gt; (a sweet new UI for jupyter that
+you should use!). Your first step is always to do your imports.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Bio&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SeqIO&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;HTSeq&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FastqReader&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;skbio&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I'm only using one function from skbio, but it's just called &lt;code&gt;read()&lt;/code&gt; which is
+too generic a name to just import that single function without causing all sorts
+of annoyances and gnashing of teeth.&lt;/p&gt;
+&lt;h3&gt;Define Some Functions to Test&lt;/h3&gt;
+&lt;p&gt;In order to make the benchmarking easier to follow, I figured I'd define the
+functions I want to bechmark in a consistent way:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Using Biopython&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_biopython&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;SeqIO&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Using HTSeq&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_htseq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;FastqReader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
+
+&lt;span class="c1"&gt;# HTSeq raw&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_htseq_raw&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;FastqReader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;raw_iterator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Skbio&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_skbio&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;skbio&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;format&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Line by line with counter&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_lbl_counter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;input_handle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;input_handle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rstrip&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
+                &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+                &lt;span class="n"&gt;fq_record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Line by line with zip_longest&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;input_handle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;fastq_iterator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rstrip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;input_handle&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;fastq_iterator&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here I intended to use two different methods from HTSeq, one which just returns
+bare tuples rather than objects with other kinds of validation based on the
+definition of the format. However, neither HTSeq method worked. Instead, giving a
+&lt;code&gt;StopIteration&lt;/code&gt; error when it reached the end of a file. Trying to catch that
+with a &lt;code&gt;try:&lt;/code&gt; &lt;code&gt;except:&lt;/code&gt; block didn't seem to work? It did parse until it reached
+the end of a file though. I think this is a bug, and I may raise it with the
+HTSeq people. So it is, regrettably, not included in my benchmarking results.
+Also, in both custom parsers, &lt;code&gt;str.rstrip()&lt;/code&gt; was marginally faster than
+&lt;code&gt;str.strip()&lt;/code&gt; so I went with that instead.&lt;/p&gt;
+&lt;h3&gt;Run Some Benchmarks&lt;/h3&gt;
+&lt;p&gt;I decided I would try each of these with 1 million reads from a whole-genome
+bisulfite experiment. These are the R1 mates from 75bp paired end reads:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_biopython&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="mf"&gt;2.86&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="mf"&gt;56.7&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;per&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;loops&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_skbio&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nb"&gt;min&lt;/span&gt; &lt;span class="mi"&gt;33&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="mf"&gt;13.7&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;per&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;loops&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_lbl_counter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="mi"&gt;295&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="mf"&gt;14.7&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;per&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;loops&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="mi"&gt;249&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="mf"&gt;2.57&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;per&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;loops&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;%timeit&lt;/code&gt; function there is some ipython "line magic." It simplifies timing
+a single line of code. The &lt;code&gt;%%timeit&lt;/code&gt; is the "cell magic" version.&lt;/p&gt;
+&lt;p&gt;It seems that skbio isn't ready for primetime just yet. The real question then
+is, would biopython suffice for day-to-day work? Perhaps yes, ~1M reads in &amp;lt; 3s
+(349650.35 reads per second) is a timescale that people might be willing to work
+with. Keep in mind this is on my personal laptop, so it's hardly a compute
+cluster. In contrast, the very simple line counter-based parser that I wrote as a
+master's student back in 2013 as a python-learning exercise is nearly 10x faster!
+There is also an improvement in speed for using &lt;code&gt;zip_longest()&lt;/code&gt; from &lt;code&gt;itertools&lt;/code&gt;
+(a trick I'm pretty sure I saw in a post from Brent Pedersen on stackoverflow).&lt;/p&gt;
+&lt;h3&gt;To Wrap Things Up&lt;/h3&gt;
+&lt;p&gt;I'm not saying you should never use biopython, I suspect its parser does some
+extra validation that my simple parsers don't. It also returns objects with some
+possibly useful methods. However, if you just want to read files quckly then the
+simple line-by-line parsers aren't actually very complicated to write. Plus, you
+don't even need to import anything unless you want a speed boost from
+&lt;code&gt;itertools&lt;/code&gt;. Additionally, if you didn't need to strip newlines you'd get a boost
+from not calling an &lt;code&gt;str.strip()&lt;/code&gt; method on each line.&lt;/p&gt;
+&lt;p&gt;If you're ok with living dangerously, and are sure your files are formatted
+correctly you can easily write something that will outperform standard
+implementations with little effort when it comes to .fastq parsing.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="python"></category></entry><entry><title>The Snakemake Tutorial I Wish I Had</title><link href="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html" rel="alternate"></link><published>2019-08-19T00:00:00-07:00</published><updated>2019-08-19T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-19:/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html</id><summary type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
 bioinformatics has grown greatly. This is a great thing for the field and adds to
 our ability to perform reproducible analyses, especially for pipelines with many
 steps. These are common in bioinformatics, but prior to the use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
