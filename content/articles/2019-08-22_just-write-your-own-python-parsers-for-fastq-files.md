@@ -11,8 +11,8 @@ like .fastq and .fasta. I've never bothered with these, including the oft-used
 than any parser I'd written myself early-on in learning bioinformatics, and it
 not actually being simpler to implement. However, I'd never looked at this in
 detail. Additionally, I'd recently run across a few posts on
-[biostars](https://www.biostars.org/) posts where users were deriding people for
-asking "What is the most efficient way to parse a huge .fastq file" for something
+[biostars](https://www.biostars.org/) where users were deriding people for asking 
+"What is the most efficient way to parse a huge .fastq file" for something
 similar.
 
 First of all, don't discourage people who are trying to learn. Secondly, this is
