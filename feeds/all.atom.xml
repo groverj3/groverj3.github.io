@@ -70,6 +70,26 @@ you should use!). Your first step is always to do your imports.&lt;/p&gt;
 &lt;p&gt;I'm only using one function from skbio, but it's just called &lt;code&gt;read()&lt;/code&gt; which is
 too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.&lt;/p&gt;
+&lt;p&gt;Also, it's important with any parsing problem to understand the file format. The
+.fastq format is ubiquitous in bioinformatics and looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;@SEQ_ID&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;((((&lt;/span&gt;&lt;span class="o"&gt;***+&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;%%%++&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="o"&gt;%%%%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="o"&gt;***-+*&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;55&lt;/span&gt;&lt;span class="n"&gt;CCF&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;CCCCCCC65&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/FASTQ_format"&gt;Source&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can understand it as a repeated series of four lines:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Sequence ID, starting with "@"&lt;/li&gt;
+&lt;li&gt;Sequence (ATCG)&lt;/li&gt;
+&lt;li&gt;Separator (+)&lt;/li&gt;
+&lt;li&gt;Quality score for each base call (same length as sequence)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The catch here is that you can't use @ as a record separator. It's a valid
+character in the score line, too. So, you really do need to group the lines in
+batches of four, as it's possible @ will exist in position 1 of the score line.&lt;/p&gt;
 &lt;h3&gt;Define Some Functions to Test&lt;/h3&gt;
 &lt;p&gt;In order to make the benchmarking easier to follow, I figured I'd define the
 functions I want to bechmark in a consistent way:&lt;/p&gt;
