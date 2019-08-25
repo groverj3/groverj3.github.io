@@ -180,6 +180,26 @@ you should use!). Your first step is always to do your imports.</p>
 <p>I'm only using one function from skbio, but it's just called <code>read()</code> which is
 too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.</p>
+<p>Also, it's important with any parsing problem to understand the file format. The
+.fastq format is ubiquitous in bioinformatics and looks like this:</p>
+<div class="highlight"><pre><span></span><span class="nv">@SEQ_ID</span><span class="w"></span>
+<span class="n">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span><span class="w"></span>
+<span class="o">+</span><span class="w"></span>
+<span class="err">!</span><span class="s1">&#39;&#39;</span><span class="o">*</span><span class="p">((((</span><span class="o">***+</span><span class="p">))</span><span class="o">%%%++</span><span class="p">)(</span><span class="o">%%%%</span><span class="p">)</span><span class="mf">.1</span><span class="o">***-+*</span><span class="s1">&#39;&#39;</span><span class="p">))</span><span class="o">**</span><span class="mi">55</span><span class="n">CCF</span><span class="o">&gt;&gt;&gt;&gt;&gt;&gt;</span><span class="n">CCCCCCC65</span><span class="w"></span>
+</pre></div>
+
+
+<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">Source</a></p>
+<p>You can understand it as a repeated series of four lines:</p>
+<ol>
+<li>Sequence ID, starting with "@"</li>
+<li>Sequence (ATCG)</li>
+<li>Separator (+)</li>
+<li>Quality score for each base call (same length as sequence)</li>
+</ol>
+<p>The catch here is that you can't use @ as a record separator. It's a valid
+character in the score line, too. So, you really do need to group the lines in
+batches of four, as it's possible @ will exist in position 1 of the score line.</p>
 <h3>Define Some Functions to Test</h3>
 <p>In order to make the benchmarking easier to follow, I figured I'd define the
 functions I want to bechmark in a consistent way:</p>
@@ -295,7 +315,7 @@ example it's fine.</p>
 "grammar of graphics." It's based on
 <a href="https://vega.github.io/vega-lite/">vega-lite</a> under the hood and allows you to
 easily save your plot from jupyterlab. Here's the code:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Plot without skbio</span>
+<div class="highlight"><pre><span></span><span class="c1"># Plot as a scatterplot</span>
 
 <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">timing_data</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Reads&#39;</span><span class="p">,</span>
@@ -332,7 +352,7 @@ plot backgrounds it requres a light theme.</p>
 extra validation that my simple parsers don't. It also returns objects with some
 possibly useful methods. However, if you just want to read files quckly then the
 simple line-by-line parsers aren't actually very complicated to write. Plus, you
-don't even need to import anything unless you want a speed boost from
+don't even need to import anything unless you want a minor speed boost from
 <code>itertools</code>. Additionally, if you didn't need to strip newlines you'd get a boost
 from not calling an <code>str.strip()</code> method on each line.</p>
 <p>If you're ok with living dangerously, and are sure your files are formatted
