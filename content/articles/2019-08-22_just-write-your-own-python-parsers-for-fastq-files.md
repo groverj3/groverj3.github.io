@@ -77,28 +77,6 @@ I'm only using one function from skbio, but it's just called `read()` which is
 too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.
 
-Also, it's important with any parsing problem to understand the file format. The
-.fastq format is ubiquitous in bioinformatics and looks like this:
-
-```
-@SEQ_ID
-GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
-+
-!''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
-```
-[Source](https://en.wikipedia.org/wiki/FASTQ_format)
-
-You can understand it as a repeated series of four lines:
-
-1. Sequence ID, starting with "@"
-2. Sequence (ATCG)
-3. Separator (+)
-4. Quality score for each base call (same length as sequence)
-
-The catch here is that you can't use @ as a record separator. It's a valid
-character in the score line, too. So, you really do need to group the lines in
-batches of four, as it's possible @ will exist in position 1 of the score line.
-
 ### Define Some Functions to Test
 
 In order to make the benchmarking easier to follow, I figured I'd define the
@@ -179,13 +157,87 @@ The `%timeit` function there is some ipython "line magic." It simplifies timing
 a single line of code. The `%%timeit` is the "cell magic" version.
 
 It seems that skbio isn't ready for primetime just yet. The real question then
-is, would biopython suffice for day-to-day work? Perhaps yes, ~1M reads in < 3s
-(349650.35 reads per second) is a timescale that people might be willing to work
+is, would biopython suffice for day-to-day work? Perhaps yes, ~1M lines in < 3s
+(349650.35 lines per second) is a timescale that people might be willing to work
 with. Keep in mind this is on my personal laptop, so it's hardly a compute
 cluster. In contrast, the very simple line counter-based parser that I wrote as a
 master's student back in 2013 as a python-learning exercise is nearly 10x faster!
 There is also an improvement in speed for using `zip_longest()` from `itertools`
 (a trick I'm pretty sure I saw in a post from Brent Pedersen on stackoverflow).
+
+### Visualize
+
+I'm usually a ggplot2 useR for visualizations, but I'm already in python here so
+let's use this as an excuse to try the great python plotting library
+[altair](https://altair-viz.github.io/). It's declarative, like ggplot2, and you
+build your plot by "mapping" your "variables" (columns) to "encodings" (analogous
+to "aesthetics" in ggplot2). I ran several other benchmarks and turned them into
+a [pandas](https://pandas.pydata.org/) data frame. First you'll need to do some
+imports:
+
+```python3
+import pandas as pd
+import numpy as np
+import altair as alt
+```
+
+Then make the data frame
+
+```python3
+# Create a dataframe Pandas style
+
+timing_data = pd.DataFrame({'Method': np.repeat(['biopython', 'skbio', 'lbl', 'zip'], 5),
+                            'Reads': (np.tile([100, 1000, 10000, 100000, 1000000], 4) / 4),
+                            'Time (s)': [(670 / 1e6), (4.4 / 1000), (40.49 / 1000), (418 / 1000), 2.86,
+                                         (14.2 /1000), (132 / 1000), 1.32, 13.9, (60 + 33),
+                                         (181 / 1e6), (442 / 1e6), (3.92 / 1000), (40.5 / 1000), (295 / 1000),
+                                         (70.2 / 1e6), (352 / 1e6), (3.19 / 1000), (32.5 / 1000), (249 / 1000)]})
+```
+
+Since each record is 4 lines, converting lines to # of reads requires dividing by
+four. Likewise, the benchmarking results are in various time units, so I've
+converted all of them to seconds. Not particular efficiently, but for this simple
+example it's fine.
+
+Now we can visualize with Altair. It has a very nice syntax inspired by ggplot2's
+"grammar of graphics." It's based on
+[vega-lite](https://vega.github.io/vega-lite/) under the hood and allows you to
+easily save your plot from jupyterlab. Here's the code:
+
+```python3
+# Plot without skbio
+
+alt.Chart(timing_data).mark_point().encode(
+    x='Reads',
+    y='Time (s)',
+    color='Method'
+)
+
+# Plot on log scale
+
+alt.Chart(timing_data).mark_point().encode(
+    alt.X('Reads', scale=alt.Scale(type='log', base=10)),
+    alt.Y('Time (s)', scale=alt.Scale(type='log', base=10)),
+    color='Method'
+)
+```
+
+<center>
+![Scatterplot](/figures/2019-08-22_just-write-your-own-python-parsers-for-fastq-files/benchmark.png)
+![Log scale scatterplot](/figures/2019-08-22_just-write-your-own-python-parsers-for-fastq-files/benchmark_log.png)
+</center>
+
+Everything scales linearly, but at massively different rates. Sci-kit bio is in
+another universe in terms of time, such that you can't even visualize it with the
+others in a meaningful way until you log scale everything. By the log scale, you
+can essentially see that biopython is an order of magnitude faster than skbio,
+and either simple parser are an order of magnitude faster again. The difference
+between the two simple parsers is pretty insignificant.
+
+Note: Altair is great! Not quite as full-featured as ggplot2 in R, but it's
+definitely promising and something to watch for in the future. They definitely
+should make it work with jupyterlab's dark theme though. Due to the transparent
+plot backgrounds it requres a light theme.
 
 ### To Wrap Things Up
 
