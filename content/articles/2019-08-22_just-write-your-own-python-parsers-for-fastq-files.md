@@ -77,6 +77,28 @@ I'm only using one function from skbio, but it's just called `read()` which is
 too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.
 
+Also, it's important with any parsing problem to understand the file format. The
+.fastq format is ubiquitous in bioinformatics and looks like this:
+
+```
+@SEQ_ID
+GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
++
+!''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
+```
+[Source](https://en.wikipedia.org/wiki/FASTQ_format)
+
+You can understand it as a repeated series of four lines:
+
+1. Sequence ID, starting with "@"
+2. Sequence (ATCG)
+3. Separator (+)
+4. Quality score for each base call (same length as sequence)
+
+The catch here is that you can't use @ as a record separator. It's a valid
+character in the score line, too. So, you really do need to group the lines in
+batches of four, as it's possible @ will exist in position 1 of the score line.
+
 ### Define Some Functions to Test
 
 In order to make the benchmarking easier to follow, I figured I'd define the
@@ -205,7 +227,7 @@ Now we can visualize with Altair. It has a very nice syntax inspired by ggplot2'
 easily save your plot from jupyterlab. Here's the code:
 
 ```python3
-# Plot without skbio
+# Plot as a scatterplot
 
 alt.Chart(timing_data).mark_point().encode(
     x='Reads',
@@ -245,7 +267,7 @@ I'm not saying you should never use biopython, I suspect its parser does some
 extra validation that my simple parsers don't. It also returns objects with some
 possibly useful methods. However, if you just want to read files quckly then the
 simple line-by-line parsers aren't actually very complicated to write. Plus, you
-don't even need to import anything unless you want a speed boost from
+don't even need to import anything unless you want a minor speed boost from
 `itertools`. Additionally, if you didn't need to strip newlines you'd get a boost
 from not calling an `str.strip()` method on each line.
 
