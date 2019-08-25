@@ -70,26 +70,6 @@ you should use!). Your first step is always to do your imports.&lt;/p&gt;
 &lt;p&gt;I'm only using one function from skbio, but it's just called &lt;code&gt;read()&lt;/code&gt; which is
 too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.&lt;/p&gt;
-&lt;p&gt;Also, it's important with any parsing problem to understand the file format. The
-.fastq format is ubiquitous in bioinformatics and looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;@SEQ_ID&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;((((&lt;/span&gt;&lt;span class="o"&gt;***+&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;%%%++&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="o"&gt;%%%%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="o"&gt;***-+*&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;55&lt;/span&gt;&lt;span class="n"&gt;CCF&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;CCCCCCC65&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/FASTQ_format"&gt;Source&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can understand it as a repeated series of four lines:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Sequence ID, starting with "@"&lt;/li&gt;
-&lt;li&gt;Sequence (ATCG)&lt;/li&gt;
-&lt;li&gt;Separator (+)&lt;/li&gt;
-&lt;li&gt;Quality score for each base call (same length as sequence)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The catch here is that you can't use @ as a record separator. It's a valid
-character in the score line, too. So, you really do need to group the lines in
-batches of four, as it's possible @ will exist in position 1 of the score line.&lt;/p&gt;
 &lt;h3&gt;Define Some Functions to Test&lt;/h3&gt;
 &lt;p&gt;In order to make the benchmarking easier to follow, I figured I'd define the
 functions I want to bechmark in a consistent way:&lt;/p&gt;
@@ -164,13 +144,79 @@ bisulfite experiment. These are the R1 mates from 75bp paired end reads:&lt;/p&g
 &lt;p&gt;The &lt;code&gt;%timeit&lt;/code&gt; function there is some ipython "line magic." It simplifies timing
 a single line of code. The &lt;code&gt;%%timeit&lt;/code&gt; is the "cell magic" version.&lt;/p&gt;
 &lt;p&gt;It seems that skbio isn't ready for primetime just yet. The real question then
-is, would biopython suffice for day-to-day work? Perhaps yes, ~1M reads in &amp;lt; 3s
-(349650.35 reads per second) is a timescale that people might be willing to work
+is, would biopython suffice for day-to-day work? Perhaps yes, ~1M lines in &amp;lt; 3s
+(349650.35 lines per second) is a timescale that people might be willing to work
 with. Keep in mind this is on my personal laptop, so it's hardly a compute
 cluster. In contrast, the very simple line counter-based parser that I wrote as a
 master's student back in 2013 as a python-learning exercise is nearly 10x faster!
 There is also an improvement in speed for using &lt;code&gt;zip_longest()&lt;/code&gt; from &lt;code&gt;itertools&lt;/code&gt;
 (a trick I'm pretty sure I saw in a post from Brent Pedersen on stackoverflow).&lt;/p&gt;
+&lt;h3&gt;Visualize&lt;/h3&gt;
+&lt;p&gt;I'm usually a ggplot2 useR for visualizations, but I'm already in python here so
+let's use this as an excuse to try the great python plotting library
+&lt;a href="https://altair-viz.github.io/"&gt;altair&lt;/a&gt;. It's declarative, like ggplot2, and you
+build your plot by "mapping" your "variables" (columns) to "encodings" (analogous
+to "aesthetics" in ggplot2). I ran several other benchmarks and turned them into
+a &lt;a href="https://pandas.pydata.org/"&gt;pandas&lt;/a&gt; data frame. First you'll need to do some
+imports:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;altair&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;alt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then make the data frame&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Create a dataframe Pandas style&lt;/span&gt;
+
+&lt;span class="n"&gt;timing_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Method&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;repeat&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;biopython&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;skbio&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;lbl&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                            &lt;span class="s1"&gt;&amp;#39;Reads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tile&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000000&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                            &lt;span class="s1"&gt;&amp;#39;Time (s)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mi"&gt;670&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;4.4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;40.49&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;418&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mf"&gt;2.86&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;14.2&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;132&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mf"&gt;1.32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;13.9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;33&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                                         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;181&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;442&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.92&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;40.5&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;295&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                                         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;70.2&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;352&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.19&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;32.5&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;249&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)]})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Since each record is 4 lines, converting lines to # of reads requires dividing by
+four. Likewise, the benchmarking results are in various time units, so I've
+converted all of them to seconds. Not particular efficiently, but for this simple
+example it's fine.&lt;/p&gt;
+&lt;p&gt;Now we can visualize with Altair. It has a very nice syntax inspired by ggplot2's
+"grammar of graphics." It's based on
+&lt;a href="https://vega.github.io/vega-lite/"&gt;vega-lite&lt;/a&gt; under the hood and allows you to
+easily save your plot from jupyterlab. Here's the code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Plot without skbio&lt;/span&gt;
+
+&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timing_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_point&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Reads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Time (s)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Method&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Plot on log scale&lt;/span&gt;
+
+&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timing_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_point&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Reads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Scale&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+    &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Time (s)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Scale&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+    &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Method&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt="Scatterplot" src="/figures/2019-08-22_just-write-your-own-python-parsers-for-fastq-files/benchmark.png"&gt;
+&lt;img alt="Log scale scatterplot" src="/figures/2019-08-22_just-write-your-own-python-parsers-for-fastq-files/benchmark_log.png"&gt;
+&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;Everything scales linearly, but at massively different rates. Sci-kit bio is in
+another universe in terms of time, such that you can't even visualize it with the
+others in a meaningful way until you log scale everything. By the log scale, you
+can essentially see that biopython is an order of magnitude faster than skbio,
+and either simple parser are an order of magnitude faster again. The difference
+between the two simple parsers is pretty insignificant.&lt;/p&gt;
+&lt;p&gt;Note: Altair is great! Not quite as full-featured as ggplot2 in R, but it's
+definitely promising and something to watch for in the future. They definitely
+should make it work with jupyterlab's dark theme though. Due to the transparent
+plot backgrounds it requres a light theme.&lt;/p&gt;
 &lt;h3&gt;To Wrap Things Up&lt;/h3&gt;
 &lt;p&gt;I'm not saying you should never use biopython, I suspect its parser does some
 extra validation that my simple parsers don't. It also returns objects with some
