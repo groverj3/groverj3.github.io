@@ -158,7 +158,7 @@ Also, in both custom parsers, `str.rstrip()` was marginally faster than
 
 ### Run Some Benchmarks
 
-I decided I would try each of these with 1 million reads from a whole-genome
+I decided I would try each of these with 1 million lines from a whole-genome
 bisulfite experiment. These are the R1 mates from 75bp paired end reads:
 
 ```python3

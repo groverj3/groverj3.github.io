@@ -92,7 +92,27 @@ MCB304: Molecular Genetics (3rd/4th Year: Genetics)
 
 **Tool Development**
 
-**LoadExp+**<br>
+**[WGBS Snakemake Pipeleine](https://github.com/groverj3/wgbs_snakemake)**<br>
+An automated whole-genome bisulfite sequencing pipeline. Available on
+[Github](https://github.com/groverj3/wgbs_snakemake) and as a Docker container
+(work-in-progress). Compatible with Singularity for deployment on HPC
+systems.
+
+**[sRNAseq Snakemake Pipeleine](https://github.com/boseHere/sRNA_snakemake_workflow)**<br>
+An automated small-RNA sequencing pipeline. Available on
+[Github](https://github.com/boseHere/sRNA_snakemake_workflow) and as a [Docker
+container](https://hub.docker.com/r/bose1/mosher_lab_srna). Compatible with
+Singularity for deployment on HPC systems.
+
+- Supervised its creation by undergraduate student, Maya Bose.
+- The pipeline is based on the methods from [Grover et al. 2018](https://doi.org/10.1111/tpj.13910)
+
+**sRNA Toolkit**<br>
+A collection of useful Python-based utilities for the efficient processing of
+small-RNA sequencing data. The toolkit is distributed as a self-contained linux
+binary, from PyPI, and on Github.
+
+**[LoadExp+](https://genomevolution.org/wiki/index.php/LoadExp%2B)**<br>
 Web-based analysis pipelines next-generation sequencing experiments
 [CoGe](https://genomevolution.org). Integrated with the
 [CyVerse](www.cyverse.org) datastore.
