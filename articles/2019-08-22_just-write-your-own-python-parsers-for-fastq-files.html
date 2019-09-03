@@ -255,7 +255,7 @@ HTSeq people. So it is, regrettably, not included in my benchmarking results.
 Also, in both custom parsers, <code>str.rstrip()</code> was marginally faster than
 <code>str.strip()</code> so I went with that instead.</p>
 <h3>Run Some Benchmarks</h3>
-<p>I decided I would try each of these with 1 million reads from a whole-genome
+<p>I decided I would try each of these with 1 million lines from a whole-genome
 bisulfite experiment. These are the R1 mates from 75bp paired end reads:</p>
 <div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_biopython</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
 <span class="mf">2.86</span> <span class="n">s</span> <span class="err">±</span> <span class="mf">56.7</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
