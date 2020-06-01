@@ -8,9 +8,8 @@ SITENAME = 'Jeff Grover. Bioinformatician.'
 SITEURL = ''
 SITELOGO = '/images/jeff.jpg'
 SITETITLE = AUTHOR
-SITESUBTITLE = '''Bioinformatician/Ph.D. Candidate<br>
-<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
-@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a>'''
+SITESUBTITLE = '''Bioinformatician<br>
+Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a>'''
 
 TIMEZONE = 'America/Phoenix'
 DEFAULT_LANG = 'en'

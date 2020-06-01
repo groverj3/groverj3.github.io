@@ -6,13 +6,14 @@ save_as: pages/cv.html
 <center>**E-mail:** [jeffrey.w.grover@gmail.com](mailto:jeffrey.w.grover@gmail.com)</center>
 
 #### **Education**
-**2020 (Expected) – Ph.D. – Molecular and Cellular Biology**<br>
+**2020 – Ph.D. – Molecular and Cellular Biology**<br>
 **The University of Arizona**<br>
 Advisor: Dr. Rebecca Mosher<br>
-Dissertation: Determining the role of RNA-direted DNA methylation during seed 
-development in *Brassica rapa* (working title)
+Dissertation: Investigating the Role of RNA-directed DNA Methylation in Plant
+Reproduction and Development of Computational Resources Enbaling Epigenomic
+Research
 
-**2015 – Professional Science Masters – Applied Biosciences**<br>
+**2015 – Professional Science Masters (PSM) – Applied Biosciences**<br>
 **Specialization: Molecular and Cellular Biology**<br>
 **The University of Arizona**<br>
 Advisor: Dr. Rebecca Mosher<br>
@@ -24,7 +25,18 @@ RNA-directed DNA Methylation in *Arabidopsis thaliana*
 **Michigan State University**
 
 #### **Professional/Research Experience**
-**2014-Present – Graduate Assistant, The University of Arizona**<br>
+**2020-Present - Genomics Scientist, Seven Bridges**<br>
+**Boston, MA**
+**Public Programs Division**
+
+- Facilitated multi-omics data analysis from multi-site sequencing pilot experiments
+- Coordinated availability of sequencing data and metadata on the [Cancer Genoimcs Cloud (CGC)](http://www.cancergenomicscloud.org/)
+- Developed and validated bioinformatics workflows on the CGC using Common Workflow Language (CWL)
+- Enabled discoverability of sequencing data and metadata with R Shiny-bashed dashboards
+- Advised on data visualization techniques for multi-omics data
+
+**2014-2020 – Graduate Assistant, The University of Arizona**<br>
+**Tucson, AZ**
 **Lab: Dr. Rebecca Mosher - Molecular and Cellular Biology & The School of Plant Sciences**
 
 - Integrated small RNA seq, whole-genome bisulfite sequencing, and RNAseq analyses.
@@ -36,7 +48,8 @@ RNA-directed DNA Methylation in *Arabidopsis thaliana*
 - Designed and performed methylation-sensitive quantitative PCR assays.
 - Assessed protein localization using confocal microscopy and western blot.
 
-**2011-2013 – Research Associate, MPI Research Inc. (Mattawan, MI)**<br>
+**2011-2013 – Research Associate, MPI Research Inc.**<br>
+**Mattawan, MI**
 **Cellular, Molecular, and Biochemical Sciences Department**
 
 - Performed qPCR-based biodistribution assays and expression profiling by qPCR arrays.
@@ -45,6 +58,7 @@ RNA-directed DNA Methylation in *Arabidopsis thaliana*
 - Authored GLP-compliant experimental protocols and reviewed data for GLP compliance.
 
 **2007-2011 – Undergraduate Research Assistant, Michigan State University**<br>
+**East Lansing, MI**
 **Lab: Dr. Robert Last - Department of Biochemistry and Molecular Biology**
 
 - Assayed Arabidopsis thaliana mutants for lipid content by gas chromatography.
@@ -69,7 +83,7 @@ RNA-directed DNA Methylation in *Arabidopsis thaliana*
 - Protein analysis – SDS-PAGE and western blotting
 
 #### **Mentorship**
-**2019-Present – Mosher Lab, University of Arizona**<br>
+**2019-2020 – Mosher Lab, University of Arizona**<br>
 Mentored an undergraduate student working on a project with next-generation
 sequencing data analysis and reproducible analysis pipelines.
 
@@ -94,9 +108,9 @@ MCB304: Molecular Genetics (3rd/4th Year: Genetics)
 
 **[WGBS Snakemake Pipeleine](https://github.com/groverj3/wgbs_snakemake)**<br>
 An automated whole-genome bisulfite sequencing pipeline. Available on
-[Github](https://github.com/groverj3/wgbs_snakemake) and as a Docker container
-(work-in-progress). Compatible with Singularity for deployment on HPC
-systems.
+[Github](https://github.com/groverj3/wgbs_snakemake) and as a [Docker
+container](https://hub.docker.com/r/groverj3/mosher_lab_wgbs). Compatible with
+Singularity for deployment on HPC systems.
 
 **[sRNAseq Snakemake Pipeleine](https://github.com/boseHere/sRNA_snakemake_workflow)**<br>
 An automated small-RNA sequencing pipeline. Available on
@@ -106,11 +120,6 @@ Singularity for deployment on HPC systems.
 
 - Supervised its creation by undergraduate student, Maya Bose.
 - The pipeline is based on the methods from [Grover et al. 2018](https://doi.org/10.1111/tpj.13910)
-
-**sRNA Toolkit**<br>
-A collection of useful Python-based utilities for the efficient processing of
-small-RNA sequencing data. The toolkit is distributed as a self-contained linux
-binary, from PyPI, and on Github.
 
 **[LoadExp+](https://genomevolution.org/wiki/index.php/LoadExp%2B)**<br>
 Web-based analysis pipelines next-generation sequencing experiments
@@ -128,6 +137,12 @@ NCBI SRA Accession: [SRP114469](https://www.ncbi.nlm.nih.gov/sra/SRP114469)
 
 RNA Sequencing from *B. rapa* R-o-18 and *nrpd1* mutant ovules and seeds<br>
 NCBI SRA Accession: [SRP132223](https://www.ncbi.nlm.nih.gov/sra/SRP132223)
+
+*B. rapa* Seed Epigenome Profiling<br>
+- Tissues: Whole seeds, dissected seed tissues, ovules, and leaves<br>
+- Genotypes: RdDM mutants, wild-types of two *B. rapa* varieties, and reciprocal crosses<br>
+- Data Types: Small RNAseq, whole-genome bisulfite sequencing, and mRNA-seq<br>
+- NCBI SRA Accession: [SRP229027](https://www.ncbi.nlm.nih.gov/sra/SRP229027)
 
 #### **Conference Presentations**
 
@@ -161,6 +176,12 @@ Investigation of Nuclear-Cytoplasmic Shuttling of AGO4 and its Effect on
 RNA-directed DNA Methylation in *Arabidopsis thaliana*
 
 #### **Publications**
+**Grover JW**, Burgess D, Kendall T, Baten A, Pokhrel S, King GJ, Meyers BC, Freeling M,
+Mosher RA. Abundant expression of maternal siRNAs is a conserved feature of seed
+development. bioRxiv. 2019. [https://doi.org/10.1101/866806](https://doi.org/10.1101/866806)<br>
+- Preprint available before peer review and final publication
+
+
 **Grover JW\***, Kendall T\*, Baten A, Burgess D, Freeling M, King GJ, and Mosher RA. *Maternal
 components of RNA‐directed DNA methylation are required for seed development in Brassica
 rapa.* The Plant Journal. 2018. [https://doi.org/10.1111/tpj.13910](https://doi.org/10.1111/tpj.13910)

@@ -31,9 +31,8 @@ resources, or create visualizations and explore data in a
 notebook.
 
 <i class="fas fa-user-graduate" style="width:24px;height:24px;"></i> I'm a Ph.D.
-candidate in the
-[Molecular and Cellular Biology Graduate Program](http://http://bmcb.biology.arizona.edu/)
-at [The University of Arizona](https://www.arizona.edu/). I work here in the
+graduate of the [Molecular and Cellular Biology Graduate Program](http://http://bmcb.biology.arizona.edu/)
+at [The University of Arizona](https://www.arizona.edu/). There, I worked in the
 [Mosher Lab](https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html)
 studying RNA-directed DNA methylation with next-generation sequencing techniques. 
 

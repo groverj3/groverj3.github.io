@@ -71,27 +71,23 @@ defect will be present.
 
 [**You can check out the publication here!**](https://onlinelibrary.wiley.com/doi/full/10.1111/tpj.13910).
 
-#### **Spatiotemporal Dynamics of sRNA Expression and DNA Methylation in Seed Development**
+#### **[Abundant expression of maternal siRNAs is a conserved feature of seed development](https://doi.org/10.1101/866806)**
 
 Our finding that seed development in *B. rapa* depends on the RdDM machinery
-opens up many new avenues of discovery. Currently, we are focused on how the
-sRNA-ome and methylome changes throughout seed development and compared to
-sporophytic tissues. This work is ongoing.
+opens up many new avenues of discovery. We expanded upon this research by
+investigating the dynamics of small RNA expression and accumulation genome-wide
+in seeds. From this large collection of sequencing data we identified a subset of
+small RNA loci that account for the vast majority of small RNA expression in
+seeds. These loci were identified as siren loci, after a similar category that
+had been observed in rice endosperm.
 
-## Genomic Imprinting as a Function of Epigenome State
+Siren loci are unique amongst small RNA loci. They accumulate Pol IV-dependent
+small RNAs and direct DNA methylation, but in a tissue-specific manner.
+Additionally, siren RNAs tend to be expressed only from maternal chromosomes even
+when functional paternal RdDM machinery is present in the endosperm. Finally,
+siren loci and siren RNAs are dependent only on maternal RdDM machinery in the
+seed and are present in multiple species. This indicates that siren loci may be
+a general feature of seeds, and may be required for seed production in some
+species.
 
-#### **Does RdDM Control Genomic Imprinting at Developmentally Important Genes?**
-
-Genomic imprinting, or biased expression of parental alleles is a phenomenon seen
-in both plants and animals. In plants known examples occur in the endosperm, a
-nutritive tissue within the seed that provides energy for the growing embryo. In
-this case biased expression would mean a deviation from the expected 3:1 ratio of
-maternal to paternal gene expression, as the endosperm is a triploid tissue and
-created by the fusion of a single sperm with the diploid central cell during
-double fertilization.
-
-Previous work has implicated small RNAs and DNA methylation in genomic impriting
-and we are investigating it in *Brassica rapa* with a focus on RdDM. *B . rapa*
-is a recently outbreeding species and therefore it is expected that there would
-be increased conflict between parental genomes compared with *Arabidopsis 
-thaliana*, where most work on imprinting has been done.
+[**You can check out the publication here!**](https://doi.org/10.1101/866806).
