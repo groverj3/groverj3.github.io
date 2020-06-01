@@ -54,9 +54,8 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician/Ph.D. Candidate<br>
-<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
-@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+<p>Bioinformatician<br>
+Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
       <nav>
         <ul class="list">
 
@@ -165,7 +164,7 @@ script file, or separate ones for each step. You may not know the next step
 a-priori. These shell scripts should clearly indicate the date of creation and
 the script's purpose. This is a simple example for one step in a single-use
 pipeline:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="c1"># Author: Jeffrey Grover</span>
 <span class="c1"># Date: 2019-07-24</span>
@@ -194,7 +193,7 @@ pipeline:</p>
 
     pigz -p <span class="m">10</span> ./<span class="nv">$out_dir</span>/*.fq
 <span class="k">done</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>I work with a lot of small RNA sequencing, and I recently needed to extract reads
@@ -206,16 +205,16 @@ be reproducible writing a quick shell script like this is the way to go. The
 comment lines also carry enough information to tell someone what it does.</p>
 <h3>Suggestion 4: Long Pipelines Should Have a <strong>W i d e</strong> Directory Structure</h3>
 <p>What does this mean? It means this:</p>
-<div class="highlight"><pre><span></span><span class="o">[</span>groverj3@x1-carbon wgbs_snakemake<span class="o">]</span>$ ls
+<div class="highlight"><pre><span></span><code><span class="o">[</span>groverj3@x1-carbon wgbs_snakemake<span class="o">]</span>$ ls
 1_fastqc_raw                4_methyldackel_mbias    config.yaml  README.md         Snakefile
 2_trim_galore               5_methyldackel_extract  input_data   reference_genome  temp_data
 3_aligned_sorted_markdupes  6_mosdepth              LICENSE      scripts
-</pre></div>
+</code></pre></div>
 
 
 <p>and not this:</p>
-<div class="highlight"><pre><span></span>wgbs_snakemake/1_fastqc_raw/2_trim_galore/3_aligned_sorted_markdupes/4_methyldackel_mbias/5_methyldackel_extract/6_mosdepth
-</pre></div>
+<div class="highlight"><pre><span></span><code>wgbs_snakemake/1_fastqc_raw/2_trim_galore/3_aligned_sorted_markdupes/4_methyldackel_mbias/5_methyldackel_extract/6_mosdepth
+</code></pre></div>
 
 
 <p>This makes navigating your directory structure much less of a pain. Especially

@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2019-08-22T00:00:00-07:00</updated><subtitle>Bioinformatician/Ph.D. Candidate&lt;br&gt;
-&lt;a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank"&gt;The Mosher Lab&lt;/a&gt;
-@ &lt;a href="https://www.arizona.edu/" target="_blank"&gt;The University of Arizona&lt;/a&gt;</subtitle><entry><title>Just Write Your Own Python Parsers for .fastq Files</title><link href="https://groverj3.github.io/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html" rel="alternate"></link><published>2019-08-22T00:00:00-07:00</published><updated>2019-08-22T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-22:/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html</id><summary type="html">&lt;p&gt;In contrast to the &lt;a href="https://en.wikipedia.org/wiki/Zen_of_Python"&gt;zen of python&lt;/a&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2020-05-30T00:00:00-07:00</updated><subtitle>Bioinformatician&lt;br&gt;
+Genomics Scientist @ &lt;a href="https://www.sevenbridges.com/" target="_blank"&gt;Seven Bridges&lt;/a&gt;</subtitle><entry><title>Publications, Dissertations, Job Hunts, and a Pandemic</title><link href="https://groverj3.github.io/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html" rel="alternate"></link><published>2020-05-30T00:00:00-07:00</published><updated>2020-05-30T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2020-05-30:/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html</id><summary type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
+my random musings on bioinformatics, Linux, data science, and etc. I made a few
+reasonably cogent posts, but then life got in the way! It's been a really busy
+time, a very eventful year. I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
+my random musings on bioinformatics, Linux, data science, and etc. I made a few
+reasonably cogent posts, but then life got in the way! It's been a really busy
+time, a very eventful year. I'm now in a very different position than I was last
+summer. It's exciting progress, but hanging over all of it is the COVID-19
+pandemic. I'm going to write another post specifically dealing with job hunting
+as a Ph.D. student, but here I thought I'd kick off my blog again with a general
+update since it's been a while.&lt;/p&gt;
+&lt;h3&gt;Wrappig up Grad School During the COVID-19 Pandemic&lt;/h3&gt;
+&lt;p&gt;My lack of posts began mostly as a consequence of the need to grind harder than I
+ever had before on my dissertation research. However, I was succcessful and
+finished my third publication during my Ph.D. program. It's since been accepted
+in PNAS, but I'm not sure when the final version will be available. Until then,
+you can read the bioRxiv version:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://doi.org/10.1101/866806"&gt;Abundant expression of maternal siRNAs is a conserved feature of seed development&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As with many things in grad school, progress on this paper wasn't consistent. It
+happened in a series of spurts, with a large portion of the work really only
+happening once we got the final sequencing samples we had been waiting on last
+summer.&lt;/p&gt;
+&lt;p&gt;Along with that comes the need to write a dissertation. Since I had thee papers
+my committee was happy for me to do what's called a "staple dissertation." The
+name here is a bit incorrect, I did have to write more besides putting together
+my papers. However, this also took a significant amount of time.&lt;/p&gt;
+&lt;p&gt;While this was all going on, I attempted a short-lived bioinformatics/data
+science student group. Though, in the end wrangling grad students is a bit like
+herding cats. Still, I think it probably helped other grad students, which was
+the point.&lt;/p&gt;
+&lt;p&gt;Back in January I really started to look at job postings more seriously because I
+had known from the very beginning that my goal was to go back to industry. Mostly
+I was looking at bioinformatics scientist-type positions. I really threw myself
+into this, and I think all-in-all I probably put out 150 applications.&lt;/p&gt;
+&lt;p&gt;Then, as we all know, the pandemic hit in a big way for all of us. Labs were
+shut down, jobs were lost, colleges went online. I was in the phase of my Ph.D.
+where I needed to write my dissertation and apply for jobs, so I wasn't disrupted
+as much as most. However, it was definitely disheartening to have my job
+interviews dry up. Luckily, it seems that people with bioinformatics experience
+are still in high demand though and I was able to land a good job regardless. Not
+without becoming more and more concerned on a daily basis and the rejection
+emails started to roll in. Overall though, I think that the prospects for biology
+and bioinformatics in particular are still strong. We might not be "essential"
+workers, but it's hard to justify to employing people like us at a time when we
+could actually discover something vitally important to help with the current
+situation. Or, at the very least, the pandemic underscores that biology is
+important, and needs to be taken seriously, funded, and considered more by
+society in general. The pandemic will be temporary, but perhaps society will
+continue to think about biologists more frequently.&lt;/p&gt;
+&lt;p&gt;Just last week, I defended my Ph.D. It was a fantastic moment, even if it had to
+happen over a Zoom meeting. Following this, and wrapping up everything, I'll be
+moving to Boston to be closer to my new employer,
+&lt;a href="https://www.sevenbridges.com/"&gt;Seven Bridges Genomics&lt;/a&gt;. There, I will be working
+as a "Genomics Scientist" to aid bioinformatics workflow development and
+coordination of data and metadata availability for their public programs. It's
+a great way to move on from grad school.&lt;/p&gt;
+&lt;p&gt;Moving forward, I'm going to try to keep up with posting things. Lots of exciting
+things happening! Hopefully I can keep my skills sharp, and I think this blog
+will be essential for that.&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;
+&lt;img src="/images/defense.jpg", style="width:700px;"&gt;
+&lt;/center&gt;&lt;/p&gt;</content><category term="commentary"></category><category term="grad school"></category><category term="jobs"></category></entry><entry><title>Just Write Your Own Python Parsers for .fastq Files</title><link href="https://groverj3.github.io/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html" rel="alternate"></link><published>2019-08-22T00:00:00-07:00</published><updated>2019-08-22T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-22:/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html</id><summary type="html">&lt;p&gt;In contrast to the &lt;a href="https://en.wikipedia.org/wiki/Zen_of_Python"&gt;zen of python&lt;/a&gt;
 there are actually many ways to handle sequence data in Python. There are several
 packages on &lt;a href="https://pypi.org"&gt;PyPI&lt;/a&gt; that provide parsers for sequence formats
 like .fastq and .fasta. I've never bothered with these, including the oft-used
@@ -53,18 +113,18 @@ have no Python equivalents, and just rolling with that. So, actually using Pytho
 in jupyter is a bit of a departure from the norm for me.&lt;/p&gt;
 &lt;p&gt;First, you need the necessary packages. I just use pip with
 &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install biopython HTSeq scikit-bio
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install biopython HTSeq scikit-bio
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then, started a new jupyter notebook with
 &lt;a href="https://jupyterlab.readthedocs.io"&gt;jupyterlab&lt;/a&gt; (a sweet new UI for jupyter that
 you should use!). Your first step is always to do your imports.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Bio&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SeqIO&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;HTSeq&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FastqReader&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Bio&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SeqIO&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;HTSeq&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FastqReader&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;skbio&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I'm only using one function from skbio, but it's just called &lt;code&gt;read()&lt;/code&gt; which is
@@ -72,11 +132,11 @@ too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.&lt;/p&gt;
 &lt;p&gt;Also, it's important with any parsing problem to understand the file format. The
 .fastq format is ubiquitous in bioinformatics and looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;@SEQ_ID&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;((((&lt;/span&gt;&lt;span class="o"&gt;***+&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;%%%++&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="o"&gt;%%%%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="o"&gt;***-+*&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;55&lt;/span&gt;&lt;span class="n"&gt;CCF&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;CCCCCCC65&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;@SEQ_ID&lt;/span&gt;
+&lt;span class="err"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;
+&lt;span class="err"&gt;+&lt;/span&gt;
+&lt;span class="err"&gt;!&amp;#39;&amp;#39;*((((***+))%%%++)(%%%%).1***-+*&amp;#39;&amp;#39;))**55CCF&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;CCCCCCC65&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/FASTQ_format"&gt;Source&lt;/a&gt;&lt;/p&gt;
@@ -93,7 +153,7 @@ batches of four, as it's possible @ will exist in position 1 of the score line.&
 &lt;h3&gt;Define Some Functions to Test&lt;/h3&gt;
 &lt;p&gt;In order to make the benchmarking easier to follow, I figured I'd define the
 functions I want to bechmark in a consistent way:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Using Biopython&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Using Biopython&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse_biopython&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;SeqIO&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_fastq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
@@ -132,7 +192,7 @@ functions I want to bechmark in a consistent way:&lt;/p&gt;
         &lt;span class="n"&gt;fastq_iterator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rstrip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;input_handle&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;fastq_iterator&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Here I intended to use two different methods from HTSeq, one which just returns
@@ -147,7 +207,7 @@ Also, in both custom parsers, &lt;code&gt;str.rstrip()&lt;/code&gt; was marginal
 &lt;h3&gt;Run Some Benchmarks&lt;/h3&gt;
 &lt;p&gt;I decided I would try each of these with 1 million lines from a whole-genome
 bisulfite experiment. These are the R1 mates from 75bp paired end reads:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_biopython&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_biopython&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
 &lt;span class="mf"&gt;2.86&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="mf"&gt;56.7&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;per&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;loops&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_skbio&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
@@ -158,7 +218,7 @@ bisulfite experiment. These are the R1 mates from 75bp paired end reads:&lt;/p&g
 
 &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse_zip_longest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;JWG3_2_2_R1.head.fastq&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
 &lt;span class="mi"&gt;249&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="mf"&gt;2.57&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;per&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;loops&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The &lt;code&gt;%timeit&lt;/code&gt; function there is some ipython "line magic." It simplifies timing
@@ -179,14 +239,14 @@ build your plot by "mapping" your "variables" (columns) to "encodings" (analogou
 to "aesthetics" in ggplot2). I ran several other benchmarks and turned them into
 a &lt;a href="https://pandas.pydata.org/"&gt;pandas&lt;/a&gt; data frame. First you'll need to do some
 imports:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;altair&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;alt&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then make the data frame&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Create a dataframe Pandas style&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Create a dataframe Pandas style&lt;/span&gt;
 
 &lt;span class="n"&gt;timing_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Method&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;repeat&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;biopython&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;skbio&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;lbl&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                             &lt;span class="s1"&gt;&amp;#39;Reads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tile&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1000000&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
@@ -194,7 +254,7 @@ imports:&lt;/p&gt;
                                          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;14.2&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;132&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mf"&gt;1.32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;13.9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;33&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                                          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;181&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;442&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.92&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;40.5&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;295&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                                          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;70.2&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;352&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.19&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;32.5&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;249&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)]})&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Since each record is 4 lines, converting lines to # of reads requires dividing by
@@ -205,7 +265,7 @@ example it's fine.&lt;/p&gt;
 "grammar of graphics." It's based on
 &lt;a href="https://vega.github.io/vega-lite/"&gt;vega-lite&lt;/a&gt; under the hood and allows you to
 easily save your plot from jupyterlab. Here's the code:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Plot as a scatterplot&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Plot as a scatterplot&lt;/span&gt;
 
 &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timing_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_point&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Reads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -220,7 +280,7 @@ easily save your plot from jupyterlab. Here's the code:&lt;/p&gt;
     &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Time (s)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Scale&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
     &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Method&amp;#39;&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;center&gt;
@@ -247,7 +307,7 @@ don't even need to import anything unless you want a minor speed boost from
 from not calling an &lt;code&gt;str.strip()&lt;/code&gt; method on each line.&lt;/p&gt;
 &lt;p&gt;If you're ok with living dangerously, and are sure your files are formatted
 correctly you can easily write something that will outperform standard
-implementations with little effort when it comes to .fastq parsing.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="python"></category></entry><entry><title>The Snakemake Tutorial I Wish I Had</title><link href="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html" rel="alternate"></link><published>2019-08-19T00:00:00-07:00</published><updated>2019-08-19T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-19:/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html</id><summary type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
+implementations with little effort when it comes to .fastq parsing.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="python"></category></entry><entry><title>The Snakemake Tutorial I Wish I Had</title><link href="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html" rel="alternate"></link><published>2019-08-19T00:00:00-07:00</published><updated>2019-08-19T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-19:/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html</id><summary type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
 bioinformatics has grown greatly. This is a great thing for the field and adds to
 our ability to perform reproducible analyses, especially for pipelines with many
 steps. These are common in bioinformatics, but prior to the use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
@@ -275,8 +335,8 @@ find.&lt;/p&gt;
 &lt;h3&gt;Step 0 - Install Snakemake and Your Workflow's Software Dependencies&lt;/h3&gt;
 &lt;p&gt;I'm assuming you're on some kind of Linux system. Though, these directions may
 also work on macOS. Your first step should be to install Snakemake:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --user Snakemake
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install --user Snakemake
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I always recommend &lt;em&gt;not&lt;/em&gt; using your system python. If you're on a non-rolling
@@ -333,7 +393,7 @@ a python dictionary in static file form (&lt;a href="https://en.wikipedia.org/wi
 &lt;h3&gt;Step 2 - Create a Rule&lt;/h3&gt;
 &lt;p&gt;Create a blank file called &lt;code&gt;Snakefile&lt;/code&gt; in the directory you're using for
 development and fill it with this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Run fastqc on the raw .fastq.gz files&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Run fastqc on the raw .fastq.gz files&lt;/span&gt;
 &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="n"&gt;fastqc_raw&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="s1"&gt;&amp;#39;input_data/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;.fastq.gz&amp;#39;&lt;/span&gt;
@@ -344,7 +404,7 @@ development and fill it with this:&lt;/p&gt;
         &lt;span class="n"&gt;out_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&amp;#39;&lt;/span&gt;
     &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="s1"&gt;&amp;#39;fastqc -o &lt;/span&gt;&lt;span class="si"&gt;{params.out_dir}&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;{input}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This is the first rule in our workflow, running FastQC on the input files. In the
@@ -355,11 +415,11 @@ whether the &lt;code&gt;input&lt;/code&gt; for a rule can be made before allowin
 Therefore, if your workflow starts, it &lt;em&gt;should&lt;/em&gt; finish. However, we need a rule
 "all" which will tell it to be run.&lt;/p&gt;
 &lt;p&gt;Add the following to the Snakefile &lt;strong&gt;before&lt;/strong&gt; the fastqc rule:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;expand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;1_fastqc_raw/&lt;/span&gt;&lt;span class="si"&gt;{sample}&lt;/span&gt;&lt;span class="s1"&gt;_R&lt;/span&gt;&lt;span class="si"&gt;{mate}&lt;/span&gt;&lt;span class="s1"&gt;_fastqc.&lt;/span&gt;&lt;span class="si"&gt;{ext}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SAMPLES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;ext&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This tells the workflow which &lt;strong&gt;targets&lt;/strong&gt; to create. In this command, &lt;code&gt;expand&lt;/code&gt;
@@ -369,11 +429,11 @@ indicates that &lt;strong&gt;all&lt;/strong&gt; files which match this pattern w
 files as input that may be created asynchronously in previous rules. We're still
 missing a very important thing though! The input files! For that, create another
 file, &lt;code&gt;config.yaml&lt;/code&gt;, in the same directory and add this to it:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Sample1&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Sample2&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;etc...&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Your &lt;code&gt;samples&lt;/code&gt; are yaml entries without names (you could name them if you want),
@@ -381,11 +441,11 @@ and should &lt;strong&gt;not&lt;/strong&gt; include read pair numbers (so 1 ID f
 IDs should match what is in &lt;code&gt;rule all&lt;/code&gt; in place of &lt;code&gt;{sample}&lt;/code&gt;. The &lt;code&gt;config.yaml&lt;/code&gt;
 is also where the options for your workflow steps can live, under their own
 headings. Now, go back to your Snakefile and add this &lt;em&gt;above&lt;/em&gt; your rules:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Get overall workflow parameters from config.yaml&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Get overall workflow parameters from config.yaml&lt;/span&gt;
 &lt;span class="n"&gt;configfile&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;config.yaml&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;SAMPLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;samples&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This parses the config file into a Python dictionary. Do you see how &lt;code&gt;SAMPLES&lt;/code&gt; is
@@ -396,14 +456,14 @@ all fits together.&lt;/p&gt;
 "input_data".&lt;/p&gt;
 &lt;h3&gt;Step 2 - Running Your First Rules&lt;/h3&gt;
 &lt;p&gt;I copied one sample to my &lt;code&gt;input_data&lt;/code&gt; directory and added it to the .yaml file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JWG3_2_2&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now run the workflow from the directory you're developing in with
 &lt;code&gt;snakemake --cores #&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;groverj3@x1-carbon snakemake_test&lt;span class="o"&gt;]&lt;/span&gt;$ snakemake --cores &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;groverj3@x1-carbon snakemake_test&lt;span class="o"&gt;]&lt;/span&gt;$ snakemake --cores &lt;span class="m"&gt;2&lt;/span&gt;
 Building DAG of jobs...
 Using shell: /usr/bin/bash
 Provided cores: &lt;span class="m"&gt;2&lt;/span&gt;
@@ -430,7 +490,7 @@ rule fastqc_raw:
     wildcards: &lt;span class="nv"&gt;sample&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;JWG3_2_2, &lt;span class="nv"&gt;mate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
 
 Started analysis of JWG3_2_2_R1.fastq.gzStarted analysis of JWG3_2_2_R2.fastq.gz
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I ran it with &lt;code&gt;--cores 2&lt;/code&gt;, but I did not include a &lt;code&gt;threads&lt;/code&gt; parameter to the
@@ -444,7 +504,7 @@ replaces processes that can be run in parallel, but if you specify a number of
 &lt;h3&gt;Step 3 - Add Rules&lt;/h3&gt;
 &lt;p&gt;I'm going to add a bunch of rules. Don't freak out. Our &lt;code&gt;Snakefile&lt;/code&gt; now looks
 like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Get overall workflow parameters from config.yaml&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Get overall workflow parameters from config.yaml&lt;/span&gt;
 &lt;span class="n"&gt;configfile&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;config.yaml&amp;#39;&lt;/span&gt;
 
 &lt;span class="n"&gt;SAMPLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;samples&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -561,11 +621,11 @@ like this:&lt;/p&gt;
 &lt;span class="sd"&gt;        | samtools view -b - \&lt;/span&gt;
 &lt;span class="sd"&gt;        &amp;gt; {output}&lt;/span&gt;
 &lt;span class="sd"&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;And the &lt;code&gt;config.yaml&lt;/code&gt; looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;samples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;JWG3_2_2_&lt;/span&gt;
     &lt;span class="c1"&gt;# Samples should be reported by ID rather than filenames, and exclude the&lt;/span&gt;
     &lt;span class="c1"&gt;# trailing &amp;quot;R1&amp;quot; and &amp;quot;R2&amp;quot;, one sample ID per pair. If samples are supplied as&lt;/span&gt;
@@ -595,7 +655,7 @@ like this:&lt;/p&gt;
   &lt;span class="nt"&gt;fastqc_path &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;fastqc&lt;/span&gt;
   &lt;span class="nt"&gt;trim_galore_path &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;trim_galore&lt;/span&gt;
   &lt;span class="nt"&gt;bwameth_path &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;bwameth.py&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;That's a lot to take in, so a few words of explanation are in order. I have moved
@@ -626,7 +686,7 @@ submission frameworks like SLURM and PBS. Though, it's not really that difficult
 to include &lt;code&gt;snakemake --cores #&lt;/code&gt; in a normal .pbs script. It also plays nice with
 containers (Docker and Singularity). So, if you package up your software in one
 you have automation and deployability all-in-one!&lt;/p&gt;
-&lt;p&gt;If you're curious what the full workflow looks like then &lt;a href="https://github.com/groverj3/wgbs_snakemake"&gt;check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="bioinformatics"></category><category term="python"></category><category term="workflows"></category><category term="snakemake"></category></entry><entry><title>Suggestions for Reproducible Bioinformatic Analyses</title><link href="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html" rel="alternate"></link><published>2019-08-09T00:00:00-07:00</published><updated>2019-08-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-09:/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html</id><summary type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
+&lt;p&gt;If you're curious what the full workflow looks like then &lt;a href="https://github.com/groverj3/wgbs_snakemake"&gt;check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="how-to"></category><category term="bioinformatics"></category><category term="python"></category><category term="workflows"></category><category term="snakemake"></category></entry><entry><title>Suggestions for Reproducible Bioinformatic Analyses</title><link href="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html" rel="alternate"></link><published>2019-08-09T00:00:00-07:00</published><updated>2019-08-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-09:/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html</id><summary type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
 output of program A feeds into program B, and so on. These programs may also not
 output their results in a format which is convenient to use in the subsequent
 steps, requiring writing a conversion script, or piping its output …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
@@ -677,7 +737,7 @@ script file, or separate ones for each step. You may not know the next step
 a-priori. These shell scripts should clearly indicate the date of creation and
 the script's purpose. This is a simple example for one step in a single-use
 pipeline:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Author: Jeffrey Grover&lt;/span&gt;
 &lt;span class="c1"&gt;# Date: 2019-07-24&lt;/span&gt;
@@ -706,7 +766,7 @@ pipeline:&lt;/p&gt;
 
     pigz -p &lt;span class="m"&gt;10&lt;/span&gt; ./&lt;span class="nv"&gt;$out_dir&lt;/span&gt;/*.fq
 &lt;span class="k"&gt;done&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I work with a lot of small RNA sequencing, and I recently needed to extract reads
@@ -718,16 +778,16 @@ be reproducible writing a quick shell script like this is the way to go. The
 comment lines also carry enough information to tell someone what it does.&lt;/p&gt;
 &lt;h3&gt;Suggestion 4: Long Pipelines Should Have a &lt;strong&gt;W i d e&lt;/strong&gt; Directory Structure&lt;/h3&gt;
 &lt;p&gt;What does this mean? It means this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;groverj3@x1-carbon wgbs_snakemake&lt;span class="o"&gt;]&lt;/span&gt;$ ls
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;groverj3@x1-carbon wgbs_snakemake&lt;span class="o"&gt;]&lt;/span&gt;$ ls
 1_fastqc_raw                4_methyldackel_mbias    config.yaml  README.md         Snakefile
 2_trim_galore               5_methyldackel_extract  input_data   reference_genome  temp_data
 3_aligned_sorted_markdupes  6_mosdepth              LICENSE      scripts
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;and not this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wgbs_snakemake/1_fastqc_raw/2_trim_galore/3_aligned_sorted_markdupes/4_methyldackel_mbias/5_methyldackel_extract/6_mosdepth
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wgbs_snakemake/1_fastqc_raw/2_trim_galore/3_aligned_sorted_markdupes/4_methyldackel_mbias/5_methyldackel_extract/6_mosdepth
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This makes navigating your directory structure much less of a pain. Especially
@@ -764,7 +824,7 @@ run Docker containers, and you'll already have one to use for cloud compute if
 needed.&lt;/p&gt;
 &lt;h3&gt;Wrapping up&lt;/h3&gt;
 &lt;p&gt;Hopefully you've found this informative and helpful. Next time I'll be back with
-more practical examples.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="thoughts"></category><category term="workflows"></category></entry><entry><title>Efficiently Filtering While Reading Data Into R (With Python?!)</title><link href="https://groverj3.github.io/articles/2019-07-17_efficiently-filtering-while-reading-data-into-r-with-python.html" rel="alternate"></link><published>2019-07-17T00:00:00-07:00</published><updated>2019-07-17T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-07-17:/articles/2019-07-17_efficiently-filtering-while-reading-data-into-r-with-python.html</id><summary type="html">&lt;p&gt;Working with large amounts of tabular data is a daily occurance for both
+more practical examples.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="thoughts"></category><category term="workflows"></category></entry><entry><title>Efficiently Filtering While Reading Data Into R (With Python?!)</title><link href="https://groverj3.github.io/articles/2019-07-17_efficiently-filtering-while-reading-data-into-r-with-python.html" rel="alternate"></link><published>2019-07-17T00:00:00-07:00</published><updated>2019-07-17T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-07-17:/articles/2019-07-17_efficiently-filtering-while-reading-data-into-r-with-python.html</id><summary type="html">&lt;p&gt;Working with large amounts of tabular data is a daily occurance for both
 bioinformaticians and data scientists. There's a lot the two groups can learn
 from each other (great future post material). However, I recently ran into a
 situation that I was sure had to be relatively common. Apparently it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Working with large amounts of tabular data is a daily occurance for both
@@ -806,19 +866,19 @@ interact with R through its API.&lt;/p&gt;
 files (~2.6 GB), and the first 10,000 lines. The tsv files have comment lines
 denoted with '#' and 12 columns which vary between character, float, and
 integers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Example data&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Example data&lt;/span&gt;
 &lt;span class="n"&gt;input_file&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;test_blast_fmt7.out&amp;#39;&lt;/span&gt;
 &lt;span class="nf"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;head -n 10000 test_blast_fmt7.out &amp;gt; test_blast_fmt7.head10000.out&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;input_file_head&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;test_blast_fmt7.head10000.out&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;col_names&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;query&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;subject&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;identity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;align_length&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                &lt;span class="s"&gt;&amp;#39;mismatches&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;gap_opens&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;q_start&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;q_end&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                &lt;span class="s"&gt;&amp;#39;s_start&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;s_end&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;evalue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;bit_score&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I first attempted to solve this problem by writing the following function (don't
 do this).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;read_filter_blast7_lbl_base&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;read_filter_blast7_lbl_base&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="c1"&gt;# Initialize a line counter&lt;/span&gt;
   &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
 
@@ -831,10 +891,10 @@ do this).&lt;/p&gt;
     &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;unlist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;strsplit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
     &lt;span class="c1"&gt;# Skip comment lines&lt;/span&gt;
-    &lt;span class="nf"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nf"&gt;startsWith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line[1]&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;#&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nf"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nf"&gt;startsWith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;#&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
       &lt;span class="c1"&gt;# Include filtering conditions here in this if statement&lt;/span&gt;
-      &lt;span class="nf"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line[3]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;line[4]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;line[11]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;out_list[[i]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
+      &lt;span class="nf"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;11&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;out_list&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
       &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="c1"&gt;# Count lines&lt;/span&gt;
@@ -847,21 +907,21 @@ do this).&lt;/p&gt;
   &lt;span class="nf"&gt;colnames&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out_df&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;
 
   &lt;span class="c1"&gt;# Set the column classes&lt;/span&gt;
-  &lt;span class="nf"&gt;for &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;header[3&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;12&lt;/span&gt;&lt;span class="n"&gt;]&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;out_df[&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out_df[&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i]&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nf"&gt;for &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;12&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;out_df&lt;/span&gt;&lt;span class="p"&gt;[,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out_df&lt;/span&gt;&lt;span class="p"&gt;[,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
   &lt;span class="p"&gt;}&lt;/span&gt;
 
   &lt;span class="c1"&gt;# The out_df object will include filtered data, all columns as character vectors&lt;/span&gt;
   &lt;span class="nf"&gt;return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out_df&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Wow! What an abomination. I'm not sure if this says more about R's unsuitability
 to this kind of task or my obvious "Python-think" that's seeping in here. It's a
 mess. And it's slow. I tried testing on the first 10,000 lines of one of the
 files:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Benchmark 100 iterations (default) over the first 10000 lines&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_lbl_base&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -870,7 +930,7 @@ files:&lt;/p&gt;
  &lt;span class="nf"&gt;read_filter_blast7_lbl_base&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="n"&gt;min&lt;/span&gt;       &lt;span class="n"&gt;lq&lt;/span&gt;     &lt;span class="n"&gt;mean&lt;/span&gt;   &lt;span class="n"&gt;median&lt;/span&gt;       &lt;span class="n"&gt;uq&lt;/span&gt;    &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;338.4403&lt;/span&gt; &lt;span class="m"&gt;346.2422&lt;/span&gt; &lt;span class="m"&gt;351.0633&lt;/span&gt; &lt;span class="m"&gt;349.2319&lt;/span&gt; &lt;span class="m"&gt;352.5961&lt;/span&gt; &lt;span class="m"&gt;404.62&lt;/span&gt;   &lt;span class="m"&gt;100&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;It works, but this doesn't scale up to a full file (it sat for ages until I
@@ -890,7 +950,7 @@ while reading (&lt;code&gt;read.csv.sql()&lt;/code&gt;) I totally understand usi
 a DB when you have a reason to query it often and it's stored as an SQL DB. I
 question the wisdom of this suggestion though for this purpose. I was able to use
 it as follows:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;read_filter_blast7_sqldf&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;read_filter_blast7_sqldf&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="n"&gt;temp_df&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;read.csv.sql&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;sed -e &amp;#39;/^#/d&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -903,21 +963,21 @@ it as follows:&lt;/p&gt;
   &lt;span class="nf"&gt;colnames&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;temp_df&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;
   &lt;span class="nf"&gt;return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;temp_df&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;One of the key limitations here is that you need to pipe through a shell command
 (sed) to remove comment lines. Not the biggest deal, but having to write a sed
 command does take you out of your flow in an R or jupyter notebook. Let's see
 how that performs:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Benchmark 100 iterations (default) over the first 10000 lines&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Benchmark 100 iterations (default) over the first 10000 lines&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_sqldf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;milliseconds&lt;/span&gt;
                                                                       &lt;span class="n"&gt;expr&lt;/span&gt;
  &lt;span class="nf"&gt;read_filter_blast7_sqldf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="n"&gt;min&lt;/span&gt;       &lt;span class="n"&gt;lq&lt;/span&gt;     &lt;span class="n"&gt;mean&lt;/span&gt;   &lt;span class="n"&gt;median&lt;/span&gt;       &lt;span class="n"&gt;uq&lt;/span&gt;      &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;72.27077&lt;/span&gt; &lt;span class="m"&gt;73.30782&lt;/span&gt; &lt;span class="m"&gt;93.27967&lt;/span&gt; &lt;span class="m"&gt;79.38143&lt;/span&gt; &lt;span class="m"&gt;103.4807&lt;/span&gt; &lt;span class="m"&gt;199.8507&lt;/span&gt;   &lt;span class="m"&gt;100&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;What's going on here? The max is much slower than the min. This is because the
@@ -927,19 +987,19 @@ the full, unfiltered file. Usually you load each file once, and each file needs
 its own temp sqlite DB. So, the max time is actually the only timing that
 matters! Plus, it has the problem of filling up your /tmp directory. What happens
 when I try to load the smallest whole file (2.6 GB)?&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Benchmark the whole file once&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Benchmark the whole file once&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_sqldf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;
                                                             &lt;span class="n"&gt;expr&lt;/span&gt;      &lt;span class="n"&gt;min&lt;/span&gt;
  &lt;span class="nf"&gt;read_filter_blast7_sqldf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="m"&gt;165.4224&lt;/span&gt;
        &lt;span class="n"&gt;lq&lt;/span&gt;     &lt;span class="n"&gt;mean&lt;/span&gt;   &lt;span class="n"&gt;median&lt;/span&gt;       &lt;span class="n"&gt;uq&lt;/span&gt;      &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;165.4224&lt;/span&gt; &lt;span class="m"&gt;165.4224&lt;/span&gt; &lt;span class="m"&gt;165.4224&lt;/span&gt; &lt;span class="m"&gt;165.4224&lt;/span&gt; &lt;span class="m"&gt;165.4224&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;That's decent performance, but because it makes temporary files it will fill up
 your /tmp directory:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ df -h
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 dev             &lt;span class="m"&gt;7&lt;/span&gt;.8G     &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="m"&gt;7&lt;/span&gt;.8G   &lt;span class="m"&gt;0&lt;/span&gt;% /dev
 run             &lt;span class="m"&gt;7&lt;/span&gt;.8G  &lt;span class="m"&gt;1&lt;/span&gt;.4M  &lt;span class="m"&gt;7&lt;/span&gt;.8G   &lt;span class="m"&gt;1&lt;/span&gt;% /run
@@ -949,11 +1009,11 @@ tmpfs           &lt;span class="m"&gt;7&lt;/span&gt;.8G     &lt;span class="m"&g
 tmpfs           &lt;span class="m"&gt;7&lt;/span&gt;.8G  &lt;span class="m"&gt;6&lt;/span&gt;.9G  913M  &lt;span class="m"&gt;89&lt;/span&gt;% /tmp
 /dev/nvme0n1p1  300M  348K  300M   &lt;span class="m"&gt;1&lt;/span&gt;% /boot/efi
 tmpfs           &lt;span class="m"&gt;1&lt;/span&gt;.6G   32K  &lt;span class="m"&gt;1&lt;/span&gt;.6G   &lt;span class="m"&gt;1&lt;/span&gt;% /run/user/1000
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;And running it on a second file fails:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Benchmark the whole file once&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Benchmark the whole file once&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_sqldf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Error&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="nf"&gt;connection_import_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;eol&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;skip&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; 
   &lt;span class="n"&gt;RS_sqlite_import&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;database&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;disk&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;full&lt;/span&gt;
@@ -962,7 +1022,7 @@ tmpfs           &lt;span class="m"&gt;1&lt;/span&gt;.6G   32K  &lt;span class="m
   &lt;span class="n"&gt;closing&lt;/span&gt; &lt;span class="n"&gt;unused&lt;/span&gt; &lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;test_blast_fmt7.out&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Error&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="nf"&gt;result_create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; 
   &lt;span class="n"&gt;cannot&lt;/span&gt; &lt;span class="n"&gt;rollback&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;transaction&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I then had to &lt;code&gt;sudo rm -r /tmp/Rtmp*&lt;/code&gt; because my ssd was full.&lt;/p&gt;
@@ -979,37 +1039,37 @@ it will use readr and a function (user-definable) to bind together dataframes
 which are read in chunks. Getting the best performance would require optimizing
 the chunk size to the largest you can reasonably handle in memory. I stuck with
 10,000 because I was comparing to other options.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;readr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;readr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="n"&gt;read_filter_blast7_readr_chunked&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 
   &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nf"&gt;subset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;identity&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;align_length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;evalue&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;out_df&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;read_tsv_chunked&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;chunk_size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;comment&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;#&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;callback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DataFrameCallback&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Benchmarking results in some very very solid performance:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Benchmark 100 iterations (default) over the first 10000 lines&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Benchmark 100 iterations (default) over the first 10000 lines&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_readr_chunked&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;milliseconds&lt;/span&gt;
                                                                               &lt;span class="n"&gt;expr&lt;/span&gt;
  &lt;span class="nf"&gt;read_filter_blast7_readr_chunked&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="n"&gt;min&lt;/span&gt;       &lt;span class="n"&gt;lq&lt;/span&gt;     &lt;span class="n"&gt;mean&lt;/span&gt;   &lt;span class="n"&gt;median&lt;/span&gt;       &lt;span class="n"&gt;uq&lt;/span&gt;      &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;28.90464&lt;/span&gt; &lt;span class="m"&gt;29.10356&lt;/span&gt; &lt;span class="m"&gt;30.87358&lt;/span&gt; &lt;span class="m"&gt;29.92421&lt;/span&gt; &lt;span class="m"&gt;31.28273&lt;/span&gt; &lt;span class="m"&gt;92.10364&lt;/span&gt;   &lt;span class="m"&gt;100&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;That's not too surprising, since it's basically just reading in the whole file at
 once and readr is fast. So, how's it work on the full file?&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Benchmark the whole file once&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Benchmark the whole file once&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_sqldf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;
                                                                          &lt;span class="n"&gt;expr&lt;/span&gt;
  &lt;span class="nf"&gt;read_filter_blast7_readr_chunked&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="n"&gt;min&lt;/span&gt;       &lt;span class="n"&gt;lq&lt;/span&gt;     &lt;span class="n"&gt;mean&lt;/span&gt;   &lt;span class="n"&gt;median&lt;/span&gt;       &lt;span class="n"&gt;uq&lt;/span&gt;      &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;76.59867&lt;/span&gt; &lt;span class="m"&gt;76.59867&lt;/span&gt; &lt;span class="m"&gt;76.59867&lt;/span&gt; &lt;span class="m"&gt;76.59867&lt;/span&gt; &lt;span class="m"&gt;76.59867&lt;/span&gt; &lt;span class="m"&gt;76.59867&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Really good performance. You can tune it better as well, the. This is probably your best bet without getting too
@@ -1021,7 +1081,7 @@ for me in python. I usually don't use Python for exploratory analysis though and
 am less familiar with Pandas &lt;em&gt;et al.&lt;/em&gt; than I am with R's ecosystem. However, I
 was able to figure out that it will automatically turn a list of lists into a
 dataframe, which is pretty neat. A solid win over R's functionality:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;filter_blast7&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_blast_results&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_perc_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_al_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                   &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1037,18 +1097,18 @@ dataframe, which is pretty neat. A solid win over R's functionality:&lt;/p&gt;
                         &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;evalue&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_evalue&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
                     &lt;span class="n"&gt;df_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;entry&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This function, when tested in python returns a data frame as expected:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;filter_blast7&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;filter_blast7&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
    &lt;span class="n"&gt;query&lt;/span&gt;     &lt;span class="n"&gt;subject&lt;/span&gt;    &lt;span class="n"&gt;identity&lt;/span&gt; &lt;span class="n"&gt;align_length&lt;/span&gt; &lt;span class="n"&gt;mismatches&lt;/span&gt;  &lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="n"&gt;q_end&lt;/span&gt; &lt;span class="n"&gt;s_start&lt;/span&gt; &lt;span class="n"&gt;s_end&lt;/span&gt;  &lt;span class="n"&gt;evalue&lt;/span&gt; &lt;span class="n"&gt;bit_score&lt;/span&gt;
 &lt;span class="mi"&gt;0&lt;/span&gt;  &lt;span class="n"&gt;query_1&lt;/span&gt;  &lt;span class="n"&gt;scaffold88&lt;/span&gt;  &lt;span class="mf"&gt;100.000&lt;/span&gt;          &lt;span class="mi"&gt;869&lt;/span&gt;          &lt;span class="mi"&gt;0&lt;/span&gt;  &lt;span class="o"&gt;...&lt;/span&gt;   &lt;span class="mi"&gt;869&lt;/span&gt;  &lt;span class="mi"&gt;733052&lt;/span&gt;  &lt;span class="mi"&gt;733920&lt;/span&gt;    &lt;span class="mf"&gt;0.0&lt;/span&gt;      &lt;span class="mi"&gt;1605&lt;/span&gt;
 &lt;span class="mi"&gt;1&lt;/span&gt;  &lt;span class="n"&gt;query_1&lt;/span&gt;  &lt;span class="n"&gt;scaffold88&lt;/span&gt;   &lt;span class="mf"&gt;95.732&lt;/span&gt;          &lt;span class="mi"&gt;867&lt;/span&gt;         &lt;span class="mi"&gt;34&lt;/span&gt;  &lt;span class="o"&gt;...&lt;/span&gt;   &lt;span class="mi"&gt;869&lt;/span&gt;  &lt;span class="mi"&gt;734435&lt;/span&gt;  &lt;span class="mi"&gt;735298&lt;/span&gt;    &lt;span class="mf"&gt;0.0&lt;/span&gt;      &lt;span class="mi"&gt;1393&lt;/span&gt;
 &lt;span class="mi"&gt;2&lt;/span&gt;  &lt;span class="n"&gt;query_1&lt;/span&gt;   &lt;span class="n"&gt;scaffold1&lt;/span&gt;  &lt;span class="mf"&gt;100.000&lt;/span&gt;          &lt;span class="mi"&gt;869&lt;/span&gt;          &lt;span class="mi"&gt;0&lt;/span&gt;  &lt;span class="o"&gt;...&lt;/span&gt;   &lt;span class="mi"&gt;869&lt;/span&gt;    &lt;span class="mi"&gt;4053&lt;/span&gt;    &lt;span class="mi"&gt;4921&lt;/span&gt;    &lt;span class="mf"&gt;0.0&lt;/span&gt;      &lt;span class="mi"&gt;1605&lt;/span&gt;
 &lt;span class="mi"&gt;3&lt;/span&gt;  &lt;span class="n"&gt;query_1&lt;/span&gt;   &lt;span class="n"&gt;scaffold1&lt;/span&gt;   &lt;span class="mf"&gt;95.732&lt;/span&gt;          &lt;span class="mi"&gt;867&lt;/span&gt;         &lt;span class="mi"&gt;34&lt;/span&gt;  &lt;span class="o"&gt;...&lt;/span&gt;   &lt;span class="mi"&gt;869&lt;/span&gt;    &lt;span class="mi"&gt;5436&lt;/span&gt;    &lt;span class="mi"&gt;6299&lt;/span&gt;    &lt;span class="mf"&gt;0.0&lt;/span&gt;      &lt;span class="mi"&gt;1393&lt;/span&gt;
 &lt;span class="mi"&gt;4&lt;/span&gt;  &lt;span class="n"&gt;query_3&lt;/span&gt;  &lt;span class="n"&gt;scaffold88&lt;/span&gt;  &lt;span class="mf"&gt;100.000&lt;/span&gt;          &lt;span class="mi"&gt;786&lt;/span&gt;          &lt;span class="mi"&gt;0&lt;/span&gt;  &lt;span class="o"&gt;...&lt;/span&gt;   &lt;span class="mi"&gt;786&lt;/span&gt;  &lt;span class="mi"&gt;735004&lt;/span&gt;  &lt;span class="mi"&gt;735789&lt;/span&gt;    &lt;span class="mf"&gt;0.0&lt;/span&gt;      &lt;span class="mi"&gt;1452&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Nice, but I thought we were using R? Well, we can actually use the R package
@@ -1056,24 +1116,24 @@ dataframe, which is pretty neat. A solid win over R's functionality:&lt;/p&gt;
 code and translate its output to an R data frame. Pretty neat! You can get it
 from CRAN with &lt;code&gt;install.packages('reticulate')&lt;/code&gt;. With it installed you'll want to
 make sure it can find your python installation:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reticulate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reticulate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;py_discover_config&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;         &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;shims&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
-&lt;span class="n"&gt;libpython&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;      &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;versions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;3.7.2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libpython3.7m.so&lt;/span&gt;
-&lt;span class="n"&gt;pythonhome&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;     &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;versions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;3.7.2&lt;/span&gt;&lt;span class="o"&gt;:/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;versions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;3.7.2&lt;/span&gt;
-&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;        &lt;span class="m"&gt;3.7.2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Mar&lt;/span&gt; &lt;span class="m"&gt;17&lt;/span&gt; &lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;02&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;15&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="n"&gt;[GCC&lt;/span&gt; &lt;span class="m"&gt;8.2.1&lt;/span&gt; &lt;span class="m"&gt;20181127&lt;/span&gt;&lt;span class="n"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;libpython&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;      &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;versions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;3.7&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libpython3.7m.so&lt;/span&gt;
+&lt;span class="n"&gt;pythonhome&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;     &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;versions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;3.7&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;:/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;versions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;3.7&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;        &lt;span class="m"&gt;3.7&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Mar&lt;/span&gt; &lt;span class="m"&gt;17&lt;/span&gt; &lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;02&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;15&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;GCC&lt;/span&gt; &lt;span class="m"&gt;8.2&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;20181127&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;numpy&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;          &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python3.7&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;numpy&lt;/span&gt;
-&lt;span class="n"&gt;numpy_version&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;  &lt;span class="m"&gt;1.16.4&lt;/span&gt;
+&lt;span class="n"&gt;numpy_version&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;  &lt;span class="m"&gt;1.16&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;
 
 &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;versions&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
  &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;groverj3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;.pyenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;shims&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
  &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
  &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python3&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;py_available&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;[1]&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;py_available&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;initialize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;[1]&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Even though it found my python installation &lt;code&gt;py_available()&lt;/code&gt; returns false? I
@@ -1082,7 +1142,7 @@ or use &lt;code&gt;py_available(initialize = TRUE)&lt;/code&gt;. You also must h
 library installed installed (which it is not when using pyenv). Now, you can
 either source the python parsing function from a saved .py script, or run it
 inline as follows, and coerce it to an R function:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;read_filter_blast7_lbl_py&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;py_run_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;read_filter_blast7_lbl_py&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;py_run_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
 &lt;span class="s"&gt;&amp;quot;import pandas as pd&lt;/span&gt;
 
 &lt;span class="s"&gt;def filter_blast7(input_blast_results, header, min_perc_id, min_al_len,&lt;/span&gt;
@@ -1103,17 +1163,17 @@ inline as follows, and coerce it to an R function:&lt;/p&gt;
 &lt;span class="s"&gt;                    df_list.append(entry)&lt;/span&gt;
 &lt;span class="s"&gt;    return pd.DataFrame(df_list, columns=header)&amp;quot;&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;filter_blast7&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Which shows up as a "python.builtin.function."&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;class&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;read_filter_blast7_lbl_py&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;[1]&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;python.builtin.function&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;python.builtin.object&amp;quot;&lt;/span&gt;  
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;class&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;read_filter_blast7_lbl_py&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;python.builtin.function&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;python.builtin.object&amp;quot;&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now, let's benchmark that:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# Benchmark 100 iterations over the first 10000 lines&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# Benchmark 100 iterations over the first 10000 lines&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_lbl_py&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Unit&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;milliseconds&lt;/span&gt;
                                                                        &lt;span class="n"&gt;expr&lt;/span&gt;
@@ -1129,11 +1189,11 @@ inline as follows, and coerce it to an R function:&lt;/p&gt;
        &lt;span class="n"&gt;lq&lt;/span&gt;     &lt;span class="n"&gt;mean&lt;/span&gt;   &lt;span class="n"&gt;median&lt;/span&gt;       &lt;span class="n"&gt;uq&lt;/span&gt;      &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;139.1212&lt;/span&gt; &lt;span class="m"&gt;139.1212&lt;/span&gt; &lt;span class="m"&gt;139.1212&lt;/span&gt; &lt;span class="m"&gt;139.1212&lt;/span&gt; &lt;span class="m"&gt;139.1212&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;It also returns a data frame identical to the python one:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_lbl_py&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_filter_blast7_lbl_py&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file_head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;432&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1e-50&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
   &lt;span class="n"&gt;query&lt;/span&gt;    &lt;span class="n"&gt;subject&lt;/span&gt;    &lt;span class="n"&gt;identity&lt;/span&gt; &lt;span class="n"&gt;align_length&lt;/span&gt; &lt;span class="n"&gt;mismatches&lt;/span&gt;
 &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;query_1&lt;/span&gt; &lt;span class="n"&gt;scaffold88&lt;/span&gt;  &lt;span class="m"&gt;100.000&lt;/span&gt;          &lt;span class="m"&gt;869&lt;/span&gt;          &lt;span class="m"&gt;0&lt;/span&gt;
 &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="n"&gt;query_1&lt;/span&gt; &lt;span class="n"&gt;scaffold88&lt;/span&gt;   &lt;span class="m"&gt;95.732&lt;/span&gt;          &lt;span class="m"&gt;867&lt;/span&gt;         &lt;span class="m"&gt;34&lt;/span&gt;
@@ -1148,7 +1208,7 @@ inline as follows, and coerce it to an R function:&lt;/p&gt;
 &lt;span class="m"&gt;4&lt;/span&gt;         &lt;span class="m"&gt;1&lt;/span&gt;       &lt;span class="m"&gt;3&lt;/span&gt;   &lt;span class="m"&gt;869&lt;/span&gt;    &lt;span class="m"&gt;5436&lt;/span&gt;   &lt;span class="m"&gt;6299&lt;/span&gt;    &lt;span class="m"&gt;0.0&lt;/span&gt;      &lt;span class="m"&gt;1393&lt;/span&gt;
 &lt;span class="m"&gt;5&lt;/span&gt;         &lt;span class="m"&gt;0&lt;/span&gt;       &lt;span class="m"&gt;1&lt;/span&gt;   &lt;span class="m"&gt;786&lt;/span&gt;  &lt;span class="m"&gt;735004&lt;/span&gt; &lt;span class="m"&gt;735789&lt;/span&gt;    &lt;span class="m"&gt;0.0&lt;/span&gt;      &lt;span class="m"&gt;1452&lt;/span&gt;
 &lt;span class="m"&gt;6&lt;/span&gt;         &lt;span class="m"&gt;0&lt;/span&gt;       &lt;span class="m"&gt;1&lt;/span&gt;   &lt;span class="m"&gt;786&lt;/span&gt;    &lt;span class="m"&gt;6005&lt;/span&gt;   &lt;span class="m"&gt;6790&lt;/span&gt;    &lt;span class="m"&gt;0.0&lt;/span&gt;      &lt;span class="m"&gt;1452&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;It's definitely not as fast as reading it chunked with readr. However, that
@@ -1173,7 +1233,7 @@ filtering criteria.&lt;/p&gt;
 R for statistical testing and visualization is definitely something to consider.&lt;/p&gt;
 &lt;h3&gt;Addendum: What's the Overhead of Filtering While reading?&lt;/h3&gt;
 &lt;p&gt;Let's check it out, first the readr method:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_tsv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;#&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;microbenchmark&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read_tsv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;#&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Parsed&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;column&lt;/span&gt; &lt;span class="n"&gt;specification&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
 &lt;span class="nf"&gt;cols&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
   &lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;col_character&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
@@ -1195,12 +1255,12 @@ R for statistical testing and visualization is definitely something to consider.
  &lt;span class="nf"&gt;read_tsv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;comment&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="m"&gt;64.35369&lt;/span&gt; &lt;span class="m"&gt;64.35369&lt;/span&gt;
      &lt;span class="n"&gt;mean&lt;/span&gt;   &lt;span class="n"&gt;median&lt;/span&gt;       &lt;span class="n"&gt;uq&lt;/span&gt;      &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;64.35369&lt;/span&gt; &lt;span class="m"&gt;64.35369&lt;/span&gt; &lt;span class="m"&gt;64.35369&lt;/span&gt; &lt;span class="m"&gt;64.35369&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This is compared with 76.59867 ms for filtering. That's basically no difference.
 How about the reading it in with Python using Pandas read_csv:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;read_csv_py&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;py_run_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;read_csv_py&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;py_run_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
 &lt;span class="s"&gt;&amp;quot;def read_blast7(input_blast_results, header):&lt;/span&gt;
 &lt;span class="s"&gt;    return pd.read_csv(input_blast_results, sep=&amp;#39;\t&amp;#39;, comment=&amp;#39;#&amp;#39;)&amp;quot;&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;read_blast7&lt;/span&gt;
@@ -1212,11 +1272,11 @@ How about the reading it in with Python using Pandas read_csv:&lt;/p&gt;
  &lt;span class="nf"&gt;read_csv_py&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="m"&gt;97.45004&lt;/span&gt; &lt;span class="m"&gt;97.45004&lt;/span&gt; &lt;span class="m"&gt;97.45004&lt;/span&gt; &lt;span class="m"&gt;97.45004&lt;/span&gt;
        &lt;span class="n"&gt;uq&lt;/span&gt;      &lt;span class="n"&gt;max&lt;/span&gt; &lt;span class="n"&gt;neval&lt;/span&gt;
  &lt;span class="m"&gt;97.45004&lt;/span&gt; &lt;span class="m"&gt;97.45004&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;There's clearly a bit of overhead with both of these methods, but it's pretty
-minor, on the order of 10-30 ms for a 2.6 gb file.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-science"></category><category term="r"></category><category term="python"></category><category term="big-data"></category></entry><entry><title>Variations on RNAseq Workflows for DEG Analysis</title><link href="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html" rel="alternate"></link><published>2019-07-09T00:00:00-07:00</published><updated>2019-07-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-07-09:/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html</id><summary type="html">&lt;p&gt;When analyzing RNAseq you're faced with many possible analysis pipelines. The
+minor, on the order of 10-30 ms for a 2.6 gb file.&lt;/p&gt;</content><category term="how-to"></category><category term="bioinformatics"></category><category term="data-science"></category><category term="r"></category><category term="python"></category><category term="big-data"></category></entry><entry><title>Variations on RNAseq Workflows for DEG Analysis</title><link href="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html" rel="alternate"></link><published>2019-07-09T00:00:00-07:00</published><updated>2019-07-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-07-09:/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html</id><summary type="html">&lt;p&gt;When analyzing RNAseq you're faced with many possible analysis pipelines. The
 biggest decision you need to make is what the purpose of your experiment is. I
 will make the assumption that &lt;em&gt;most&lt;/em&gt; of the time people want to determine which
 genes are differentially expressed between two samples, genotypes, conditions,
@@ -1314,7 +1374,7 @@ different experiments then you'll probably want to convert your expression value
 to some normalized measurement. In this case you can use FPKM or TPM, though the
 consensus seems to be that TPM is the way to go these days.&lt;/p&gt;
 &lt;p&gt;And, at the end of the day you know that an out-of-date collaborator is probably
-going to ask you for FPKM measurements or something anyway.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="thoughts"></category><category term="rnaseq"></category><category term="workflows"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 2</title><link href="https://groverj3.github.io/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html" rel="alternate"></link><published>2019-06-28T00:00:00-07:00</published><updated>2019-06-28T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-28:/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html</id><summary type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
+going to ask you for FPKM measurements or something anyway.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="thoughts"></category><category term="rnaseq"></category><category term="workflows"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 2</title><link href="https://groverj3.github.io/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html" rel="alternate"></link><published>2019-06-28T00:00:00-07:00</published><updated>2019-06-28T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-28:/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html</id><summary type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
 prepared our data using Deeptools.&lt;/p&gt;
 &lt;p&gt;Now we're going to do something kind of scandalous. R and python, living together
 in peace. What is this madness? I like R's ecosystem for manipulating data and
@@ -1333,17 +1393,17 @@ package on-top like &lt;a href="https://seaborn.pydata.org/"&gt;Seaborn&lt;/a&gt
 &lt;h3&gt;1. Investigate Deeptools' Metaplot Output&lt;/h3&gt;
 &lt;p&gt;Your first task with any new data is just to see what it looks like. In a
 terminal my initial instinct is always to call:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;head &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;filename&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;head &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;filename&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;But you can also just open deeptools metaplot table in your text editor of
 choice. What you'll find is:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;bin&lt;/span&gt; &lt;span class="nv"&gt;labels&lt;/span&gt;    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;Kb&lt;/span&gt;    ...    &lt;span class="nv"&gt;start&lt;/span&gt;    ...    &lt;span class="k"&gt;end&lt;/span&gt;    ...    &lt;span class="mi"&gt;1&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;Kb&lt;/span&gt;
-&lt;span class="nv"&gt;bins&lt;/span&gt;        &lt;span class="mi"&gt;1&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt; ...
-&lt;span class="nv"&gt;sample_name&lt;/span&gt; &lt;span class="nv"&gt;genes&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; ...
-&lt;span class="nv"&gt;sample_name&lt;/span&gt; &lt;span class="nv"&gt;genes&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; &lt;span class="nv"&gt;score&lt;/span&gt; ...
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;bin labels    -1.0Kb    ...    start    ...    end    ...    1.0Kb&lt;/span&gt;
+&lt;span class="err"&gt;bins        1.0 2.0 3.0 ...&lt;/span&gt;
+&lt;span class="err"&gt;sample_name genes score score score ...&lt;/span&gt;
+&lt;span class="err"&gt;sample_name genes score score score ...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;A tab delimited table of bin labels, bin numbers, and scores (data to plot) for
@@ -1355,8 +1415,8 @@ values in the whole row. The &lt;code&gt;--upstream&lt;/code&gt;, &lt;code&gt;--
 it's a bit unwieldly.&lt;/p&gt;
 &lt;h3&gt;2. Load Data Into R&lt;/h3&gt;
 &lt;p&gt;Before getting started here make sure you have the tidyverse packages installed:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;tidyverse&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;tidyverse&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;There are no built-in functions to read a "transposed tsv" file like this, but
@@ -1367,7 +1427,7 @@ standard .tsv file with &lt;code&gt;read_tsv()&lt;/code&gt; or base &lt;code&gt;
 first row exactly as it appears, despite most of it technically being empty,
 we'll need the blank labels later. So, from that stackoverflow post I was able
 to edit a few things:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;read_deeptools_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;read_deeptools_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 
   &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;count.fields&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;na.rm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;readLines&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1380,11 +1440,11 @@ to edit a few things:&lt;/p&gt;
 
   &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cbind&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nf"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;.splitvar&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
   &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;paste&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;collapse&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;plot_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;na.omit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read.csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;[&lt;/span&gt;&lt;span class="m"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;]&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Remove first row with &amp;quot;gene&amp;quot; label&lt;/span&gt;
+  &lt;span class="n"&gt;plot_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;na.omit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read.csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="m"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;,])&lt;/span&gt;  &lt;span class="c1"&gt;# Remove first row with &amp;quot;gene&amp;quot; label&lt;/span&gt;
 
   &lt;span class="nf"&gt;return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plot_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Essentially, this function is finding the length of the lines, reading the lines
@@ -1392,7 +1452,7 @@ as character vectors, splitting the vectors by the tab character, and creating a
 new table from the vectors. Reading the data with this gives us a nice dataframe.
 From here on I will be using the tidyverse packages so feel free to load them
 with &lt;code&gt;library('tidyverse')&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;table_test&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;read_deeptools_table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;metaplot.tab&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;table_test&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;read_deeptools_table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;metaplot.tab&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;as_tibble&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;table_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="c1"&gt;# A tibble: 600 x 4&lt;/span&gt;
    &lt;span class="n"&gt;bin.labels&lt;/span&gt;  &lt;span class="n"&gt;bins&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt;            &lt;span class="n"&gt;sample_2&lt;/span&gt;
@@ -1407,7 +1467,7 @@ with &lt;code&gt;library('tidyverse')&lt;/code&gt;.&lt;/p&gt;
  &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;8&lt;/span&gt; &lt;span class="m"&gt;0.5392670157068064&lt;/span&gt;  &lt;span class="m"&gt;0.0&lt;/span&gt;
  &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;             &lt;span class="m"&gt;9&lt;/span&gt; &lt;span class="m"&gt;0.9617801047120418&lt;/span&gt;  &lt;span class="m"&gt;0.0020942408376963353&lt;/span&gt;
 &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;            &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="m"&gt;1.403664921465969&lt;/span&gt;   &lt;span class="m"&gt;0.01099476439790576&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;3. Convert the Data to Long Format&lt;/h3&gt;
@@ -1418,12 +1478,12 @@ and can be plotted. This results in a new data frame which concatenates the
 current sample columns into one, replicates bin.labels and bins as needed, and
 creates a new column with the sample ID for each row. The easiest way to do this
 is with the &lt;code&gt;gather()&lt;/code&gt; function in tidyr:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;gather&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plot_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sample&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;score&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bin.labels&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;long_table&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;gather&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plot_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sample&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;score&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bin.labels&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;You can check out what this looks like as follows:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;bin.labels&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;   &lt;span class="n"&gt;sample&lt;/span&gt;              &lt;span class="n"&gt;score&lt;/span&gt;
 &lt;span class="m"&gt;1&lt;/span&gt;     &lt;span class="m"&gt;-1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;    &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt; &lt;span class="m"&gt;0.7382198952879583&lt;/span&gt;
 &lt;span class="m"&gt;2&lt;/span&gt;               &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="n"&gt;sample_1&lt;/span&gt; &lt;span class="m"&gt;0.9565445026178011&lt;/span&gt;
@@ -1439,7 +1499,7 @@ is with the &lt;code&gt;gather()&lt;/code&gt; function in tidyr:&lt;/p&gt;
 &lt;span class="m"&gt;1198&lt;/span&gt;             &lt;span class="m"&gt;598&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.017277486910994764&lt;/span&gt;
 &lt;span class="m"&gt;1199&lt;/span&gt;             &lt;span class="m"&gt;599&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.020942408376963352&lt;/span&gt;
 &lt;span class="m"&gt;1200&lt;/span&gt;      &lt;span class="m"&gt;1.0&lt;/span&gt;&lt;span class="n"&gt;Kb&lt;/span&gt;  &lt;span class="m"&gt;600&lt;/span&gt; &lt;span class="n"&gt;sample_2&lt;/span&gt; &lt;span class="m"&gt;0.012565445026178013&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This would be annoying to work with by hand, but ggplot2 understands it just
@@ -1447,11 +1507,11 @@ fine.&lt;/p&gt;
 &lt;h3&gt;4. Build the ggplot Command&lt;/h3&gt;
 &lt;p&gt;Now that our data is in the right format it's time to get plotting! We'll start
 simple, and make it more complex from there:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;ggplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nf"&gt;aes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;ggplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nf"&gt;aes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nf"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
   &lt;span class="nf"&gt;geom_line&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
   &lt;span class="nf"&gt;scale_x_continuous&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;breaks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                      &lt;span class="n"&gt;labels&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="n"&gt;bin.labels&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This will get us started with a simple line plot. The key here is that the x axis
@@ -1461,8 +1521,8 @@ have some sensible plot defaults that I use often, which I have saved to a code
 snippet on my &lt;a href="https://github.com/groverj3/genomics_visualizations/blob/master/ggplot2_pub_settings.r"&gt;github&lt;/a&gt;.
 I'll use these as a starting point for the theming. Another feature we may want
 to add is the ability to smooth the line. This can be accomplished by using:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;geom_smooth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;method&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;loess&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;se&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;geom_smooth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;method&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;loess&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;se&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This will smooth the data with
@@ -1474,7 +1534,7 @@ stretch or shrink its aspect ratio. This can also be controlled by ggplot2 using
 ability to specify the colors rather than just using the defaults. It's best to
 use a colorblind-friendly palette when possible. Putting this all together, our
 plot command becomes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;metaplot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_axis_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;metaplot&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nf"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;long_table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_axis_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;span&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                      &lt;span class="n"&gt;out_prefix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;smooth&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;aspect&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                      &lt;span class="n"&gt;colors&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 
@@ -1507,7 +1567,7 @@ plot command becomes:&lt;/p&gt;
            &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
            &lt;span class="n"&gt;height&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;With a few if statements we actually can plot both the smoothed and line plots on
@@ -1525,7 +1585,7 @@ showing error when replicates are plotted, but it's pretty good for now.&lt;/p&g
 clean visualizations is necessary to get your point across. I've tidied this up
 a bit and pushed the full code to github. Bonus: it runs as a standalone script
 and works with any number of input samples!
-&lt;a href="https://github.com/groverj3/genomics_visualizations/blob/master/metaplotteR.r"&gt;Check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 1</title><link href="https://groverj3.github.io/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html" rel="alternate"></link><published>2019-06-27T00:00:00-07:00</published><updated>2019-06-27T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-27:/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html</id><summary type="html">&lt;p&gt;Commonly, in bioinformatics we're in the business of determining whether
+&lt;a href="https://github.com/groverj3/genomics_visualizations/blob/master/metaplotteR.r"&gt;Check it out!&lt;/a&gt;&lt;/p&gt;</content><category term="how-to"></category><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 1</title><link href="https://groverj3.github.io/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html" rel="alternate"></link><published>2019-06-27T00:00:00-07:00</published><updated>2019-06-27T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-27:/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html</id><summary type="html">&lt;p&gt;Commonly, in bioinformatics we're in the business of determining whether
 something, be it gene expression, or DNA methylation, or splicing, etc. is
 different between multiple conditions. Typically this would be done by comparing
 those data and using some kind of statistical test. However, with the continued
@@ -1564,13 +1624,13 @@ you can play around with later, and ggplot2 from the
 &lt;a href="https://www.tidyverse.org/"&gt;tidyverse&lt;/a&gt;. The tidyverse is a collection of R
 libraries designed by Hadley Wickham that make data science a snap. You can
 install them as follows in a terminal:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --user deeptools
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install --user deeptools
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Launch the R interpreter by typing &lt;code&gt;R&lt;/code&gt; and then:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;tidyverse&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;tidyverse&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;I recommend installing them into a user-specific library by either the &lt;code&gt;--user&lt;/code&gt;
@@ -1585,8 +1645,8 @@ use the package manager of your choice if conda is more your jam.&lt;/p&gt;
 again. But you should be able to use other inputs to the later steps as well. If
 using expression data you can use your bam file you can use Deeptools'
 bamCoverage tool. First, you need to index the alignment .bam file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;samtools index &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="p"&gt;%.bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;samtools index &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="p"&gt;%.bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;code&gt;${}&lt;/code&gt; is the syntax for using a previously declared variable in BASH and I'll use
@@ -1596,14 +1656,14 @@ specified.&lt;/p&gt;
 file in bigWig format. This is a binary format but contains similar data to a
 &lt;a href="https://genome.ucsc.edu/goldenPath/help/bedgraph.html"&gt;bedGraph&lt;/a&gt;. You can use
 the bamCoverage tool:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;bamCoverage &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bamCoverage &lt;span class="se"&gt;\&lt;/span&gt;
     -p &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;threads_to_use&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --binSize &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --normalizeUsing &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;RPKM&lt;/span&gt;&lt;span class="p"&gt;|CPM|BPM|RPGC&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --outFileFormat bigwig &lt;span class="se"&gt;\&lt;/span&gt;
     --bam &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --outFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_bam&lt;/span&gt;&lt;span class="p"&gt;%.bam&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.bigWig
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;A &lt;code&gt;--binsize&lt;/code&gt; of 1 will just generate per-base converage. This may be slow, and
@@ -1617,7 +1677,7 @@ together at the end.&lt;/p&gt;
 coverages or other values of interest. This step can be done on any score data in
 a bedGraph/bigWig file, even if you did not generate it with Deeptools. So, if
 you're using data from a tool other than bamCoverage this is your starting point.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;computeMatrix scale-regions &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;computeMatrix scale-regions &lt;span class="se"&gt;\&lt;/span&gt;
     -p &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --startLabel start &lt;span class="se"&gt;\&lt;/span&gt;
     --endLabel end &lt;span class="se"&gt;\&lt;/span&gt;
@@ -1627,7 +1687,7 @@ you're using data from a tool other than bamCoverage this is your starting point
     --regionsFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;regions_bed&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --scoreFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input1_bigWig&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input2_bigWig&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --outFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;output_matrix&lt;/span&gt;&lt;span class="p"&gt;.gz&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The &lt;code&gt;--startLabel&lt;/code&gt; and &lt;code&gt;--endLabel&lt;/code&gt; values can be changed as desired, but don't
@@ -1639,14 +1699,14 @@ previous step will be used where indicated. Multiple files can be input,
 space separated. You can specify that the matrix be gzipped by simply adding .gz
 to the name of your output file. Now, the final step is to generate the plot and
 also output the raw data:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plotProfile &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;plotProfile &lt;span class="se"&gt;\&lt;/span&gt;
     --startLabel start &lt;span class="se"&gt;\&lt;/span&gt;
     --endLabel end &lt;span class="se"&gt;\&lt;/span&gt;
     --averageType &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;|median&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --matrixFile &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;input_matrix&lt;/span&gt;&lt;span class="p"&gt;.gz&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --outFileName &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;metaplot&lt;/span&gt;&lt;span class="p"&gt;.svg&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     --outFileNameData &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;metaplot&lt;/span&gt;&lt;span class="p"&gt;.tab&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This will generate a plot, but also output the table of per-bin values that were
@@ -1658,7 +1718,7 @@ plotted. I made this with it:&lt;/p&gt;
 are more limited than I'd like. In particular, smoothing the lines requires
 smoothing the underlying data in the scoreMatrix step. Which I am not a huge fan
 of. Now, let's load that table into R and make something prettier in
-&lt;a href="/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html"&gt;Part 2&lt;/a&gt;.&lt;/p&gt;</content><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Managing Software on a Multiuser Linux System</title><link href="https://groverj3.github.io/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html" rel="alternate"></link><published>2019-06-25T00:00:00-07:00</published><updated>2019-06-25T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-25:/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html</id><summary type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
+&lt;a href="/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html"&gt;Part 2&lt;/a&gt;.&lt;/p&gt;</content><category term="how-to"></category><category term="bioinformatics"></category><category term="data-visualization"></category></entry><entry><title>Managing Software on a Multiuser Linux System</title><link href="https://groverj3.github.io/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html" rel="alternate"></link><published>2019-06-25T00:00:00-07:00</published><updated>2019-06-25T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-25:/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html</id><summary type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
 environment on my own computers. Mostly as a hobby. My advisor had bought a small
 server several years previous for a post-doc's project and I was offered this
 system to use for my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When I started my Ph.D. I had a good amount of experience working in a Linux
@@ -1706,13 +1766,13 @@ You'll have to do enough annoying things. Don't make this annoying.&lt;/p&gt;
 about this on their private server (if they have one). It's hard to overstate the
 terrible time you'll have as a sysadmin if another one of your users types the
 dreaded:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo rm -r /
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo rm -r /
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;or&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo rm -r /*
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo rm -r /*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;It's easy to forget that "." before the "/". &lt;/p&gt;
@@ -1720,8 +1780,8 @@ dreaded:&lt;/p&gt;
 Meaning, you, the humble pseudo-sysadmin who's not actually getting paid for
 sysadmin tasks, will have to spend time fixing it.&lt;/p&gt;
 &lt;p&gt;All it takes is for you, the SUPER USER, the GOD OF THE SERVER, to run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo deluser &lt;span class="o"&gt;{&lt;/span&gt;USERNAME&lt;span class="o"&gt;}&lt;/span&gt; sudo
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo deluser &lt;span class="o"&gt;{&lt;/span&gt;USERNAME&lt;span class="o"&gt;}&lt;/span&gt; sudo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Replace {USERNAME} with the user to remove.&lt;/p&gt;
@@ -1744,8 +1804,8 @@ from the directory structure. You also make everything available in the $PATH an
 runnable with just the program name.&lt;/p&gt;
 &lt;p&gt;The worst thing that can happen in a broken symlink if you change software
 versions, and that's an easy fix with a:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s /path/to/binary /usr/local/bin
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo ln -s /path/to/binary /usr/local/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;4. Encourage Users To Test Software in ~/bin&lt;/h3&gt;
@@ -1753,11 +1813,11 @@ versions, and that's an easy fix with a:&lt;/p&gt;
 pre-configured in each user's path. If not you'll need to add it to each user's
 .bashrc or .profile or .bash_profile, depending on which is the preferred method
 for your distro:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# set PATH so it includes user&amp;#39;s private bin if it exists&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# set PATH so it includes user&amp;#39;s private bin if it exists&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/bin&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
     &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/bin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 &lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Let your users test and if multiple people need it, or they're running something
@@ -1778,32 +1838,32 @@ harder to break things. Plus, the users get the latest Python features.&lt;/p&gt
 instructions.&lt;/p&gt;
 &lt;h3&gt;6. Use User-specific Language Libraries/Packages&lt;/h3&gt;
 &lt;p&gt;This pops up for us with both python and R. It boils down to never, ever, using:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pip install &lt;span class="o"&gt;{&lt;/span&gt;PACKAGE_NAME&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo pip install &lt;span class="o"&gt;{&lt;/span&gt;PACKAGE_NAME&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;or&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;R&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;R&lt;/span&gt;
 &lt;span class="nf"&gt;install.packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;PACKAGE_NAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;If users can't use sudo there's no danger here anyway, but using user-specific
 libraries and packages keeps things consistent. It also means that, once again,
 you don't have to manage something. The following will solve this for Python:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --user &lt;span class="o"&gt;{&lt;/span&gt;PACKAGE_NAME&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install --user &lt;span class="o"&gt;{&lt;/span&gt;PACKAGE_NAME&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This installs packages to ~/.local/lib/python{VERSION}/site-packages &lt;/p&gt;
 &lt;p&gt;R requires a bit more doing. To create a user-library I recommend creating a
 .Renviron in each user's home directory and adding the following to it.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# .Renviron is run every time a new R session is started&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# .Renviron is run every time a new R session is started&lt;/span&gt;
 &lt;span class="c1"&gt;# Use .Renviron to set environment variables for R&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Use the local R library&lt;/span&gt;
 &lt;span class="n"&gt;R_LIBS_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;~/.local/lib/R/site-library&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Wrapping up&lt;/h3&gt;
@@ -1817,7 +1877,7 @@ good investment in 2019. Submitting jobs to a queue is fine when you're not doin
 iterative work, but if you want to quickly test things it gets old really quick.
 Likewise, you can easily get hardware on-par with a remote VM and it's more
 readily accessed.&lt;/p&gt;
-&lt;p&gt;Tune in next time for something more bioinformatics-focused!&lt;/p&gt;</content><category term="sysadmin"></category></entry><entry><title>Setting up a Static Site With Pelican and GitHub Pages</title><link href="https://groverj3.github.io/articles/2019-06-15_setting-up-a-static-site-with-pelican-and-github-pages.html" rel="alternate"></link><published>2019-06-15T00:00:00-07:00</published><updated>2019-06-15T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-15:/articles/2019-06-15_setting-up-a-static-site-with-pelican-and-github-pages.html</id><summary type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
+&lt;p&gt;Tune in next time for something more bioinformatics-focused!&lt;/p&gt;</content><category term="how-to"></category><category term="sysadmin"></category></entry><entry><title>Setting up a Static Site With Pelican and GitHub Pages</title><link href="https://groverj3.github.io/articles/2019-06-15_setting-up-a-static-site-with-pelican-and-github-pages.html" rel="alternate"></link><published>2019-06-15T00:00:00-07:00</published><updated>2019-06-15T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-15:/articles/2019-06-15_setting-up-a-static-site-with-pelican-and-github-pages.html</id><summary type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
 personal/professional website. It needed to look good, contain links to my
 relevant social and job-search profiles, host some examples of work from my Ph.D.
 , showcase my skillset, and host my CV. GitHub pages …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In an effort to aid in my future job searching I decided I needed a
@@ -1991,4 +2051,4 @@ source&lt;/code&gt; when you want to update the source code.&lt;/p&gt;
 &lt;p&gt;You're now done! And you can switch between branches to see the source and output
 from Pelican's rendering. I'll make another post later to detail some more
 configuration details. Until then, the &lt;a href="https://docs.getpelican.com"&gt;docs&lt;/a&gt; are a
-wonderful resource.&lt;/p&gt;</content><category term="tutorial"></category><category term="pelican"></category></entry></feed>
+wonderful resource.&lt;/p&gt;</content><category term="how-to"></category><category term="tutorial"></category><category term="pelican"></category></entry></feed>

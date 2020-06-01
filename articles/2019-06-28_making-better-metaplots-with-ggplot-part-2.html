@@ -53,9 +53,8 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician/Ph.D. Candidate<br>
-<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
-@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+<p>Bioinformatician<br>
+Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
       <nav>
         <ul class="list">
 
@@ -130,17 +129,17 @@ package on-top like <a href="https://seaborn.pydata.org/">Seaborn</a>.</p>
 <h3>1. Investigate Deeptools' Metaplot Output</h3>
 <p>Your first task with any new data is just to see what it looks like. In a
 terminal my initial instinct is always to call:</p>
-<div class="highlight"><pre><span></span>head <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>head <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
+</code></pre></div>
 
 
 <p>But you can also just open deeptools metaplot table in your text editor of
 choice. What you'll find is:</p>
-<div class="highlight"><pre><span></span><span class="nv">bin</span> <span class="nv">labels</span>    <span class="o">-</span><span class="mi">1</span>.<span class="mi">0</span><span class="nv">Kb</span>    ...    <span class="nv">start</span>    ...    <span class="k">end</span>    ...    <span class="mi">1</span>.<span class="mi">0</span><span class="nv">Kb</span>
-<span class="nv">bins</span>        <span class="mi">1</span>.<span class="mi">0</span> <span class="mi">2</span>.<span class="mi">0</span> <span class="mi">3</span>.<span class="mi">0</span> ...
-<span class="nv">sample_name</span> <span class="nv">genes</span> <span class="nv">score</span> <span class="nv">score</span> <span class="nv">score</span> ...
-<span class="nv">sample_name</span> <span class="nv">genes</span> <span class="nv">score</span> <span class="nv">score</span> <span class="nv">score</span> ...
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">bin labels    -1.0Kb    ...    start    ...    end    ...    1.0Kb</span>
+<span class="err">bins        1.0 2.0 3.0 ...</span>
+<span class="err">sample_name genes score score score ...</span>
+<span class="err">sample_name genes score score score ...</span>
+</code></pre></div>
 
 
 <p>A tab delimited table of bin labels, bin numbers, and scores (data to plot) for
@@ -152,8 +151,8 @@ values in the whole row. The <code>--upstream</code>, <code>--startLabel</code>,
 it's a bit unwieldly.</p>
 <h3>2. Load Data Into R</h3>
 <p>Before getting started here make sure you have the tidyverse packages installed:</p>
-<div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyverse&#39;</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyverse&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>There are no built-in functions to read a "transposed tsv" file like this, but
@@ -164,7 +163,7 @@ standard .tsv file with <code>read_tsv()</code> or base <code>read.csv()</code> 
 first row exactly as it appears, despite most of it technically being empty,
 we'll need the blank labels later. So, from that stackoverflow post I was able
 to edit a few things:</p>
-<div class="highlight"><pre><span></span><span class="n">read_deeptools_table</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="n">read_deeptools_table</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
 
   <span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="nf">count.fields</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">),</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
   <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
@@ -177,11 +176,11 @@ to edit a few things:</p>
 
   <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">do.call</span><span class="p">(</span><span class="n">cbind</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">.splitvar</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">))</span>
   <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">paste</span><span class="p">,</span> <span class="n">collapse</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">)</span>
-  <span class="n">plot_table</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">)</span><span class="n">[</span><span class="m">-1</span><span class="p">,</span><span class="n">]</span><span class="p">)</span>  <span class="c1"># Remove first row with &quot;gene&quot; label</span>
+  <span class="n">plot_table</span> <span class="o">&lt;-</span> <span class="nf">na.omit</span><span class="p">(</span><span class="nf">read.csv</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#39;\t&#39;</span><span class="p">)[</span><span class="m">-1</span><span class="p">,])</span>  <span class="c1"># Remove first row with &quot;gene&quot; label</span>
 
   <span class="nf">return</span><span class="p">(</span><span class="n">plot_table</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Essentially, this function is finding the length of the lines, reading the lines
@@ -189,7 +188,7 @@ as character vectors, splitting the vectors by the tab character, and creating a
 new table from the vectors. Reading the data with this gives us a nice dataframe.
 From here on I will be using the tidyverse packages so feel free to load them
 with <code>library('tidyverse')</code>.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">table_test</span> <span class="o">&lt;-</span> <span class="nf">read_deeptools_table</span><span class="p">(</span><span class="s">&#39;metaplot.tab&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;</span> <span class="n">table_test</span> <span class="o">&lt;-</span> <span class="nf">read_deeptools_table</span><span class="p">(</span><span class="s">&#39;metaplot.tab&#39;</span><span class="p">)</span>
 <span class="o">&gt;</span> <span class="nf">as_tibble</span><span class="p">(</span><span class="n">table_test</span><span class="p">)</span>
 <span class="c1"># A tibble: 600 x 4</span>
    <span class="n">bin.labels</span>  <span class="n">bins</span> <span class="n">sample_1</span>            <span class="n">sample_2</span>
@@ -204,7 +203,7 @@ with <code>library('tidyverse')</code>.</p>
  <span class="m">8</span> <span class="s">&quot;&quot;</span>             <span class="m">8</span> <span class="m">0.5392670157068064</span>  <span class="m">0.0</span>
  <span class="m">9</span> <span class="s">&quot;&quot;</span>             <span class="m">9</span> <span class="m">0.9617801047120418</span>  <span class="m">0.0020942408376963353</span>
 <span class="m">10</span> <span class="s">&quot;&quot;</span>            <span class="m">10</span> <span class="m">1.403664921465969</span>   <span class="m">0.01099476439790576</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>3. Convert the Data to Long Format</h3>
@@ -215,12 +214,12 @@ and can be plotted. This results in a new data frame which concatenates the
 current sample columns into one, replicates bin.labels and bins as needed, and
 creates a new column with the sample ID for each row. The easiest way to do this
 is with the <code>gather()</code> function in tidyr:</p>
-<div class="highlight"><pre><span></span><span class="n">long_table</span> <span class="o">&lt;-</span> <span class="nf">gather</span><span class="p">(</span><span class="n">plot_table</span><span class="p">,</span> <span class="s">&#39;sample&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">bin.labels</span><span class="p">,</span> <span class="o">-</span><span class="n">bins</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">long_table</span> <span class="o">&lt;-</span> <span class="nf">gather</span><span class="p">(</span><span class="n">plot_table</span><span class="p">,</span> <span class="s">&#39;sample&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">bin.labels</span><span class="p">,</span> <span class="o">-</span><span class="n">bins</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>You can check out what this looks like as follows:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">long_table</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">long_table</span><span class="p">)</span>
   <span class="n">bin.labels</span> <span class="n">bins</span>   <span class="n">sample</span>              <span class="n">score</span>
 <span class="m">1</span>     <span class="m">-1.0</span><span class="n">Kb</span>    <span class="m">1</span> <span class="n">sample_1</span> <span class="m">0.7382198952879583</span>
 <span class="m">2</span>               <span class="m">2</span> <span class="n">sample_1</span> <span class="m">0.9565445026178011</span>
@@ -236,7 +235,7 @@ is with the <code>gather()</code> function in tidyr:</p>
 <span class="m">1198</span>             <span class="m">598</span> <span class="n">sample_2</span> <span class="m">0.017277486910994764</span>
 <span class="m">1199</span>             <span class="m">599</span> <span class="n">sample_2</span> <span class="m">0.020942408376963352</span>
 <span class="m">1200</span>      <span class="m">1.0</span><span class="n">Kb</span>  <span class="m">600</span> <span class="n">sample_2</span> <span class="m">0.012565445026178013</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This would be annoying to work with by hand, but ggplot2 understands it just
@@ -244,11 +243,11 @@ fine.</p>
 <h3>4. Build the ggplot Command</h3>
 <p>Now that our data is in the right format it's time to get plotting! We'll start
 simple, and make it more complex from there:</p>
-<div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="n">sample</span><span class="p">))</span> <span class="o">+</span>
+<div class="highlight"><pre><span></span><code><span class="n">plot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="n">sample</span><span class="p">))</span> <span class="o">+</span>
   <span class="nf">geom_line</span><span class="p">()</span> <span class="o">+</span>
   <span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span> <span class="o">=</span> <span class="n">long_table</span><span class="o">$</span><span class="n">bins</span><span class="p">,</span>
                      <span class="n">labels</span> <span class="o">=</span> <span class="n">long_table</span><span class="o">$</span><span class="n">bin.labels</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This will get us started with a simple line plot. The key here is that the x axis
@@ -258,8 +257,8 @@ have some sensible plot defaults that I use often, which I have saved to a code
 snippet on my <a href="https://github.com/groverj3/genomics_visualizations/blob/master/ggplot2_pub_settings.r">github</a>.
 I'll use these as a starting point for the theming. Another feature we may want
 to add is the ability to smooth the line. This can be accomplished by using:</p>
-<div class="highlight"><pre><span></span><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;loess&#39;</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;loess&#39;</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>This will smooth the data with
@@ -271,7 +270,7 @@ stretch or shrink its aspect ratio. This can also be controlled by ggplot2 using
 ability to specify the colors rather than just using the defaults. It's best to
 use a colorblind-friendly palette when possible. Putting this all together, our
 plot command becomes:</p>
-<div class="highlight"><pre><span></span><span class="n">metaplot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="n">start_label</span><span class="p">,</span> <span class="n">end_label</span><span class="p">,</span> <span class="n">y_axis_label</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">metaplot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">long_table</span><span class="p">,</span> <span class="n">start_label</span><span class="p">,</span> <span class="n">end_label</span><span class="p">,</span> <span class="n">y_axis_label</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span>
                      <span class="n">out_prefix</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="n">smooth</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">aspect</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
                      <span class="n">colors</span><span class="p">)</span> <span class="p">{</span>
 
@@ -304,7 +303,7 @@ plot command becomes:</p>
            <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">,</span>
            <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>With a few if statements we actually can plot both the smoothed and line plots on

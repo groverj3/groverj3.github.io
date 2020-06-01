@@ -52,9 +52,8 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician/Ph.D. Candidate<br>
-<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
-@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+<p>Bioinformatician<br>
+Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
       <nav>
         <ul class="list">
 
@@ -160,13 +159,13 @@ You'll have to do enough annoying things. Don't make this annoying.</p>
 about this on their private server (if they have one). It's hard to overstate the
 terrible time you'll have as a sysadmin if another one of your users types the
 dreaded:</p>
-<div class="highlight"><pre><span></span>sudo rm -r /
-</pre></div>
+<div class="highlight"><pre><span></span><code>sudo rm -r /
+</code></pre></div>
 
 
 <p>or</p>
-<div class="highlight"><pre><span></span>sudo rm -r /*
-</pre></div>
+<div class="highlight"><pre><span></span><code>sudo rm -r /*
+</code></pre></div>
 
 
 <p>It's easy to forget that "." before the "/". </p>
@@ -174,8 +173,8 @@ dreaded:</p>
 Meaning, you, the humble pseudo-sysadmin who's not actually getting paid for
 sysadmin tasks, will have to spend time fixing it.</p>
 <p>All it takes is for you, the SUPER USER, the GOD OF THE SERVER, to run:</p>
-<div class="highlight"><pre><span></span>sudo deluser <span class="o">{</span>USERNAME<span class="o">}</span> sudo
-</pre></div>
+<div class="highlight"><pre><span></span><code>sudo deluser <span class="o">{</span>USERNAME<span class="o">}</span> sudo
+</code></pre></div>
 
 
 <p>Replace {USERNAME} with the user to remove.</p>
@@ -198,8 +197,8 @@ from the directory structure. You also make everything available in the $PATH an
 runnable with just the program name.</p>
 <p>The worst thing that can happen in a broken symlink if you change software
 versions, and that's an easy fix with a:</p>
-<div class="highlight"><pre><span></span>sudo ln -s /path/to/binary /usr/local/bin
-</pre></div>
+<div class="highlight"><pre><span></span><code>sudo ln -s /path/to/binary /usr/local/bin
+</code></pre></div>
 
 
 <h3>4. Encourage Users To Test Software in ~/bin</h3>
@@ -207,11 +206,11 @@ versions, and that's an easy fix with a:</p>
 pre-configured in each user's path. If not you'll need to add it to each user's
 .bashrc or .profile or .bash_profile, depending on which is the preferred method
 for your distro:</p>
-<div class="highlight"><pre><span></span><span class="c1"># set PATH so it includes user&#39;s private bin if it exists</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># set PATH so it includes user&#39;s private bin if it exists</span>
 <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
     <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Let your users test and if multiple people need it, or they're running something
@@ -232,32 +231,32 @@ harder to break things. Plus, the users get the latest Python features.</p>
 instructions.</p>
 <h3>6. Use User-specific Language Libraries/Packages</h3>
 <p>This pops up for us with both python and R. It boils down to never, ever, using:</p>
-<div class="highlight"><pre><span></span>sudo pip install <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>sudo pip install <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
+</code></pre></div>
 
 
 <p>or</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">R</span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">R</span>
 <span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;PACKAGE_NAME&#39;</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>If users can't use sudo there's no danger here anyway, but using user-specific
 libraries and packages keeps things consistent. It also means that, once again,
 you don't have to manage something. The following will solve this for Python:</p>
-<div class="highlight"><pre><span></span>pip install --user <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>pip install --user <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
+</code></pre></div>
 
 
 <p>This installs packages to ~/.local/lib/python{VERSION}/site-packages </p>
 <p>R requires a bit more doing. To create a user-library I recommend creating a
 .Renviron in each user's home directory and adding the following to it.</p>
-<div class="highlight"><pre><span></span><span class="c1"># .Renviron is run every time a new R session is started</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># .Renviron is run every time a new R session is started</span>
 <span class="c1"># Use .Renviron to set environment variables for R</span>
 
 <span class="c1"># Use the local R library</span>
 <span class="n">R_LIBS_USER</span><span class="o">=</span><span class="s">&quot;~/.local/lib/R/site-library&quot;</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>Wrapping up</h3>

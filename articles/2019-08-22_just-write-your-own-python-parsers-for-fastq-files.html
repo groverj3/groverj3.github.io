@@ -53,9 +53,8 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician/Ph.D. Candidate<br>
-<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
-@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+<p>Bioinformatician<br>
+Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
       <nav>
         <ul class="list">
 
@@ -163,18 +162,18 @@ have no Python equivalents, and just rolling with that. So, actually using Pytho
 in jupyter is a bit of a departure from the norm for me.</p>
 <p>First, you need the necessary packages. I just use pip with
 <a href="https://github.com/pyenv/pyenv">pyenv</a>:</p>
-<div class="highlight"><pre><span></span>pip install biopython HTSeq scikit-bio
-</pre></div>
+<div class="highlight"><pre><span></span><code>pip install biopython HTSeq scikit-bio
+</code></pre></div>
 
 
 <p>Then, started a new jupyter notebook with
 <a href="https://jupyterlab.readthedocs.io">jupyterlab</a> (a sweet new UI for jupyter that
 you should use!). Your first step is always to do your imports.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Bio</span> <span class="k">import</span> <span class="n">SeqIO</span>
-<span class="kn">from</span> <span class="nn">HTSeq</span> <span class="k">import</span> <span class="n">FastqReader</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">zip_longest</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">SeqIO</span>
+<span class="kn">from</span> <span class="nn">HTSeq</span> <span class="kn">import</span> <span class="n">FastqReader</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
 <span class="kn">import</span> <span class="nn">skbio</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>I'm only using one function from skbio, but it's just called <code>read()</code> which is
@@ -182,11 +181,11 @@ too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.</p>
 <p>Also, it's important with any parsing problem to understand the file format. The
 .fastq format is ubiquitous in bioinformatics and looks like this:</p>
-<div class="highlight"><pre><span></span><span class="nv">@SEQ_ID</span><span class="w"></span>
-<span class="n">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span><span class="w"></span>
-<span class="o">+</span><span class="w"></span>
-<span class="err">!</span><span class="s1">&#39;&#39;</span><span class="o">*</span><span class="p">((((</span><span class="o">***+</span><span class="p">))</span><span class="o">%%%++</span><span class="p">)(</span><span class="o">%%%%</span><span class="p">)</span><span class="mf">.1</span><span class="o">***-+*</span><span class="s1">&#39;&#39;</span><span class="p">))</span><span class="o">**</span><span class="mi">55</span><span class="n">CCF</span><span class="o">&gt;&gt;&gt;&gt;&gt;&gt;</span><span class="n">CCCCCCC65</span><span class="w"></span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">@SEQ_ID</span>
+<span class="err">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span>
+<span class="err">+</span>
+<span class="err">!&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65</span>
+</code></pre></div>
 
 
 <p><a href="https://en.wikipedia.org/wiki/FASTQ_format">Source</a></p>
@@ -203,7 +202,7 @@ batches of four, as it's possible @ will exist in position 1 of the score line.<
 <h3>Define Some Functions to Test</h3>
 <p>In order to make the benchmarking easier to follow, I figured I'd define the
 functions I want to bechmark in a consistent way:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Using Biopython</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using Biopython</span>
 <span class="k">def</span> <span class="nf">parse_biopython</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">SeqIO</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">input_fastq</span><span class="p">,</span> <span class="s1">&#39;fastq&#39;</span><span class="p">):</span>
         <span class="k">yield</span> <span class="n">record</span>
@@ -242,7 +241,7 @@ functions I want to bechmark in a consistent way:</p>
         <span class="n">fastq_iterator</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">input_handle</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">zip_longest</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">fastq_iterator</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">):</span>
             <span class="k">yield</span> <span class="n">record</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Here I intended to use two different methods from HTSeq, one which just returns
@@ -257,7 +256,7 @@ Also, in both custom parsers, <code>str.rstrip()</code> was marginally faster th
 <h3>Run Some Benchmarks</h3>
 <p>I decided I would try each of these with 1 million lines from a whole-genome
 bisulfite experiment. These are the R1 mates from 75bp paired end reads:</p>
-<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_biopython</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_biopython</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
 <span class="mf">2.86</span> <span class="n">s</span> <span class="err">±</span> <span class="mf">56.7</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
 
 <span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_skbio</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
@@ -268,7 +267,7 @@ bisulfite experiment. These are the R1 mates from 75bp paired end reads:</p>
 
 <span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="p">[</span><span class="n">record</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">parse_zip_longest</span><span class="p">(</span><span class="s1">&#39;JWG3_2_2_R1.head.fastq&#39;</span><span class="p">)]</span>
 <span class="mi">249</span> <span class="n">ms</span> <span class="err">±</span> <span class="mf">2.57</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>The <code>%timeit</code> function there is some ipython "line magic." It simplifies timing
@@ -289,14 +288,14 @@ build your plot by "mapping" your "variables" (columns) to "encodings" (analogou
 to "aesthetics" in ggplot2). I ran several other benchmarks and turned them into
 a <a href="https://pandas.pydata.org/">pandas</a> data frame. First you'll need to do some
 imports:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Then make the data frame</p>
-<div class="highlight"><pre><span></span><span class="c1"># Create a dataframe Pandas style</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a dataframe Pandas style</span>
 
 <span class="n">timing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Method&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="s1">&#39;biopython&#39;</span><span class="p">,</span> <span class="s1">&#39;skbio&#39;</span><span class="p">,</span> <span class="s1">&#39;lbl&#39;</span><span class="p">,</span> <span class="s1">&#39;zip&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">),</span>
                             <span class="s1">&#39;Reads&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span>
@@ -304,7 +303,7 @@ imports:</p>
                                          <span class="p">(</span><span class="mf">14.2</span> <span class="o">/</span><span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mi">132</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="mf">1.32</span><span class="p">,</span> <span class="mf">13.9</span><span class="p">,</span> <span class="p">(</span><span class="mi">60</span> <span class="o">+</span> <span class="mi">33</span><span class="p">),</span>
                                          <span class="p">(</span><span class="mi">181</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mi">442</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mf">3.92</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mf">40.5</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mi">295</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
                                          <span class="p">(</span><span class="mf">70.2</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mi">352</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mf">3.19</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mf">32.5</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mi">249</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)]})</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Since each record is 4 lines, converting lines to # of reads requires dividing by
@@ -315,7 +314,7 @@ example it's fine.</p>
 "grammar of graphics." It's based on
 <a href="https://vega.github.io/vega-lite/">vega-lite</a> under the hood and allows you to
 easily save your plot from jupyterlab. Here's the code:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Plot as a scatterplot</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Plot as a scatterplot</span>
 
 <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">timing_data</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Reads&#39;</span><span class="p">,</span>
@@ -330,7 +329,7 @@ easily save your plot from jupyterlab. Here's the code:</p>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">10</span><span class="p">)),</span>
     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Method&#39;</span>
 <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p><center>

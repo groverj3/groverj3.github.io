@@ -53,9 +53,8 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician/Ph.D. Candidate<br>
-<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
-@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+<p>Bioinformatician<br>
+Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
       <nav>
         <ul class="list">
 
@@ -151,13 +150,13 @@ you can play around with later, and ggplot2 from the
 <a href="https://www.tidyverse.org/">tidyverse</a>. The tidyverse is a collection of R
 libraries designed by Hadley Wickham that make data science a snap. You can
 install them as follows in a terminal:</p>
-<div class="highlight"><pre><span></span>pip install --user deeptools
-</pre></div>
+<div class="highlight"><pre><span></span><code>pip install --user deeptools
+</code></pre></div>
 
 
 <p>Launch the R interpreter by typing <code>R</code> and then:</p>
-<div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyverse&#39;</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyverse&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>I recommend installing them into a user-specific library by either the <code>--user</code>
@@ -172,8 +171,8 @@ use the package manager of your choice if conda is more your jam.</p>
 again. But you should be able to use other inputs to the later steps as well. If
 using expression data you can use your bam file you can use Deeptools'
 bamCoverage tool. First, you need to index the alignment .bam file:</p>
-<div class="highlight"><pre><span></span>samtools index <span class="si">${</span><span class="nv">input_bam</span><span class="si">}</span> <span class="si">${</span><span class="nv">input_bam</span><span class="p">%.bam</span><span class="si">}</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>samtools index <span class="si">${</span><span class="nv">input_bam</span><span class="si">}</span> <span class="si">${</span><span class="nv">input_bam</span><span class="p">%.bam</span><span class="si">}</span>
+</code></pre></div>
 
 
 <p><code>${}</code> is the syntax for using a previously declared variable in BASH and I'll use
@@ -183,14 +182,14 @@ specified.</p>
 file in bigWig format. This is a binary format but contains similar data to a
 <a href="https://genome.ucsc.edu/goldenPath/help/bedgraph.html">bedGraph</a>. You can use
 the bamCoverage tool:</p>
-<div class="highlight"><pre><span></span>bamCoverage <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>bamCoverage <span class="se">\</span>
     -p <span class="si">${</span><span class="nv">threads_to_use</span><span class="si">}</span> <span class="se">\</span>
     --binSize <span class="m">1</span> <span class="se">\</span>
     --normalizeUsing <span class="si">${</span><span class="nv">RPKM</span><span class="p">|CPM|BPM|RPGC</span><span class="si">}</span> <span class="se">\</span>
     --outFileFormat bigwig <span class="se">\</span>
     --bam <span class="si">${</span><span class="nv">input_bam</span><span class="si">}</span> <span class="se">\</span>
     --outFileName <span class="si">${</span><span class="nv">input_bam</span><span class="p">%.bam</span><span class="si">}</span>.bigWig
-</pre></div>
+</code></pre></div>
 
 
 <p>A <code>--binsize</code> of 1 will just generate per-base converage. This may be slow, and
@@ -204,7 +203,7 @@ together at the end.</p>
 coverages or other values of interest. This step can be done on any score data in
 a bedGraph/bigWig file, even if you did not generate it with Deeptools. So, if
 you're using data from a tool other than bamCoverage this is your starting point.</p>
-<div class="highlight"><pre><span></span>computeMatrix scale-regions <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>computeMatrix scale-regions <span class="se">\</span>
     -p <span class="m">10</span> <span class="se">\</span>
     --startLabel start <span class="se">\</span>
     --endLabel end <span class="se">\</span>
@@ -214,7 +213,7 @@ you're using data from a tool other than bamCoverage this is your starting point
     --regionsFileName <span class="si">${</span><span class="nv">regions_bed</span><span class="si">}</span> <span class="se">\</span>
     --scoreFileName <span class="si">${</span><span class="nv">input1_bigWig</span><span class="si">}</span> <span class="si">${</span><span class="nv">input2_bigWig</span><span class="si">}</span> <span class="se">\</span>
     --outFileName <span class="si">${</span><span class="nv">output_matrix</span><span class="p">.gz</span><span class="si">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>The <code>--startLabel</code> and <code>--endLabel</code> values can be changed as desired, but don't
@@ -226,14 +225,14 @@ previous step will be used where indicated. Multiple files can be input,
 space separated. You can specify that the matrix be gzipped by simply adding .gz
 to the name of your output file. Now, the final step is to generate the plot and
 also output the raw data:</p>
-<div class="highlight"><pre><span></span>plotProfile <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>plotProfile <span class="se">\</span>
     --startLabel start <span class="se">\</span>
     --endLabel end <span class="se">\</span>
     --averageType <span class="si">${</span><span class="nv">mean</span><span class="p">|median</span><span class="si">}</span> <span class="se">\</span>
     --matrixFile <span class="si">${</span><span class="nv">input_matrix</span><span class="p">.gz</span><span class="si">}</span> <span class="se">\</span>
     --outFileName <span class="si">${</span><span class="nv">metaplot</span><span class="p">.svg</span><span class="si">}</span> <span class="se">\</span>
     --outFileNameData <span class="si">${</span><span class="nv">metaplot</span><span class="p">.tab</span><span class="si">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This will generate a plot, but also output the table of per-bin values that were

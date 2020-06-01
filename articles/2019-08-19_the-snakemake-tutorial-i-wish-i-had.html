@@ -55,9 +55,8 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician/Ph.D. Candidate<br>
-<a href="https://cals.arizona.edu/research/mosherlab/Mosher_Lab/Home.html" target="_blank">The Mosher Lab</a>
-@ <a href="https://www.arizona.edu/" target="_blank">The University of Arizona</a></p>
+<p>Bioinformatician<br>
+Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
       <nav>
         <ul class="list">
 
@@ -143,8 +142,8 @@ find.</p>
 <h3>Step 0 - Install Snakemake and Your Workflow's Software Dependencies</h3>
 <p>I'm assuming you're on some kind of Linux system. Though, these directions may
 also work on macOS. Your first step should be to install Snakemake:</p>
-<div class="highlight"><pre><span></span>pip install --user Snakemake
-</pre></div>
+<div class="highlight"><pre><span></span><code>pip install --user Snakemake
+</code></pre></div>
 
 
 <p>I always recommend <em>not</em> using your system python. If you're on a non-rolling
@@ -201,7 +200,7 @@ a python dictionary in static file form (<a href="https://en.wikipedia.org/wiki/
 <h3>Step 2 - Create a Rule</h3>
 <p>Create a blank file called <code>Snakefile</code> in the directory you're using for
 development and fill it with this:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Run fastqc on the raw .fastq.gz files</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run fastqc on the raw .fastq.gz files</span>
 <span class="n">rule</span> <span class="n">fastqc_raw</span><span class="p">:</span>
     <span class="nb">input</span><span class="p">:</span>
         <span class="s1">&#39;input_data/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">.fastq.gz&#39;</span>
@@ -212,7 +211,7 @@ development and fill it with this:</p>
         <span class="n">out_dir</span> <span class="o">=</span> <span class="s1">&#39;1_fastqc_raw/&#39;</span>
     <span class="n">shell</span><span class="p">:</span>
         <span class="s1">&#39;fastqc -o </span><span class="si">{params.out_dir}</span><span class="s1"> </span><span class="si">{input}</span><span class="s1">&#39;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This is the first rule in our workflow, running FastQC on the input files. In the
@@ -223,11 +222,11 @@ whether the <code>input</code> for a rule can be made before allowing the workfl
 Therefore, if your workflow starts, it <em>should</em> finish. However, we need a rule
 "all" which will tell it to be run.</p>
 <p>Add the following to the Snakefile <strong>before</strong> the fastqc rule:</p>
-<div class="highlight"><pre><span></span><span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="n">rule</span> <span class="nb">all</span><span class="p">:</span>
     <span class="nb">input</span><span class="p">:</span>
         <span class="n">expand</span><span class="p">(</span><span class="s1">&#39;1_fastqc_raw/</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{mate}</span><span class="s1">_fastqc.</span><span class="si">{ext}</span><span class="s1">&#39;</span><span class="p">,</span>
                <span class="n">sample</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">,</span> <span class="n">mate</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">ext</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;zip&#39;</span><span class="p">])</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This tells the workflow which <strong>targets</strong> to create. In this command, <code>expand</code>
@@ -237,11 +236,11 @@ indicates that <strong>all</strong> files which match this pattern when filled i
 files as input that may be created asynchronously in previous rules. We're still
 missing a very important thing though! The input files! For that, create another
 file, <code>config.yaml</code>, in the same directory and add this to it:</p>
-<div class="highlight"><pre><span></span><span class="nt">samples</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sample1</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sample2</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">etc...</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Your <code>samples</code> are yaml entries without names (you could name them if you want),
@@ -249,11 +248,11 @@ and should <strong>not</strong> include read pair numbers (so 1 ID for each pair
 IDs should match what is in <code>rule all</code> in place of <code>{sample}</code>. The <code>config.yaml</code>
 is also where the options for your workflow steps can live, under their own
 headings. Now, go back to your Snakefile and add this <em>above</em> your rules:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Get overall workflow parameters from config.yaml</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get overall workflow parameters from config.yaml</span>
 <span class="n">configfile</span><span class="p">:</span> <span class="s1">&#39;config.yaml&#39;</span>
 
 <span class="n">SAMPLES</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;samples&#39;</span><span class="p">]</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This parses the config file into a Python dictionary. Do you see how <code>SAMPLES</code> is
@@ -264,14 +263,14 @@ all fits together.</p>
 "input_data".</p>
 <h3>Step 2 - Running Your First Rules</h3>
 <p>I copied one sample to my <code>input_data</code> directory and added it to the .yaml file:</p>
-<div class="highlight"><pre><span></span><span class="nt">samples</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JWG3_2_2</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Now run the workflow from the directory you're developing in with
 <code>snakemake --cores #</code>:</p>
-<div class="highlight"><pre><span></span><span class="o">[</span>groverj3@x1-carbon snakemake_test<span class="o">]</span>$ snakemake --cores <span class="m">2</span>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>groverj3@x1-carbon snakemake_test<span class="o">]</span>$ snakemake --cores <span class="m">2</span>
 Building DAG of jobs...
 Using shell: /usr/bin/bash
 Provided cores: <span class="m">2</span>
@@ -298,7 +297,7 @@ rule fastqc_raw:
     wildcards: <span class="nv">sample</span><span class="o">=</span>JWG3_2_2, <span class="nv">mate</span><span class="o">=</span><span class="m">1</span>
 
 Started analysis of JWG3_2_2_R1.fastq.gzStarted analysis of JWG3_2_2_R2.fastq.gz
-</pre></div>
+</code></pre></div>
 
 
 <p>I ran it with <code>--cores 2</code>, but I did not include a <code>threads</code> parameter to the
@@ -312,7 +311,7 @@ replaces processes that can be run in parallel, but if you specify a number of
 <h3>Step 3 - Add Rules</h3>
 <p>I'm going to add a bunch of rules. Don't freak out. Our <code>Snakefile</code> now looks
 like this:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Get overall workflow parameters from config.yaml</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get overall workflow parameters from config.yaml</span>
 <span class="n">configfile</span><span class="p">:</span> <span class="s1">&#39;config.yaml&#39;</span>
 
 <span class="n">SAMPLES</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;samples&#39;</span><span class="p">]</span>
@@ -429,11 +428,11 @@ like this:</p>
 <span class="sd">        | samtools view -b - \</span>
 <span class="sd">        &gt; {output}</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>And the <code>config.yaml</code> looks like this:</p>
-<div class="highlight"><pre><span></span><span class="nt">samples</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JWG3_2_2_</span>
     <span class="c1"># Samples should be reported by ID rather than filenames, and exclude the</span>
     <span class="c1"># trailing &quot;R1&quot; and &quot;R2&quot;, one sample ID per pair. If samples are supplied as</span>
@@ -463,7 +462,7 @@ like this:</p>
   <span class="nt">fastqc_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fastqc</span>
   <span class="nt">trim_galore_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">trim_galore</span>
   <span class="nt">bwameth_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bwameth.py</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>That's a lot to take in, so a few words of explanation are in order. I have moved
