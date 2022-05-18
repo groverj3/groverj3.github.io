@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
 
 
 
@@ -28,7 +28,7 @@
 <meta name="description" content="Bioinformatic analyses often require lengthy workflows or pipleines, where the output of program A feeds into program B, and so on. These programs may also not output their results in a format which is convenient to use in the subsequent steps, requiring writing a conversion script, or piping its output …" />
 <meta name="keywords" content="bioinformatics, thoughts, workflows">
 
-<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
 <meta property="og:title" content="Suggestions for Reproducible Bioinformatic Analyses"/>
 <meta property="og:description" content="Bioinformatic analyses often require lengthy workflows or pipleines, where the output of program A feeds into program B, and so on. These programs may also not output their results in a format which is convenient to use in the subsequent steps, requiring writing a conversion script, or piping its output …"/>
 <meta property="og:locale" content="en_US"/>
@@ -43,7 +43,7 @@
 <meta property="article:tag" content="workflows"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatician. &ndash; Suggestions for Reproducible Bioinformatic Analyses</title>
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Suggestions for Reproducible Bioinformatic Analyses</title>
 
 </head>
 <body>
@@ -54,8 +54,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician<br>
-Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
+<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -174,13 +173,13 @@ pipeline:</p>
 
 <span class="nv">align_dir</span><span class="o">=</span><span class="s2">&quot;~/large_data/2019-06-28_aligned_reads&quot;</span>
 
-<span class="k">for</span> bed_file in ./srna_groups/*.bed<span class="p">;</span> <span class="k">do</span>
+<span class="k">for</span> bed_file <span class="k">in</span> ./srna_groups/*.bed<span class="p">;</span> <span class="k">do</span>
 
     <span class="nv">bed_filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$bed_file</span><span class="k">)</span>
     <span class="nv">out_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">bed_filename</span><span class="p">%.bed</span><span class="si">}</span>_reads
     mkdir <span class="s2">&quot;./</span><span class="nv">$out_dir</span><span class="s2">&quot;</span>
 
-    <span class="k">for</span> bamfile in <span class="si">${</span><span class="nv">align_dir</span><span class="si">}</span>/*.bam<span class="p">;</span> <span class="k">do</span>
+    <span class="k">for</span> bamfile <span class="k">in</span> <span class="si">${</span><span class="nv">align_dir</span><span class="si">}</span>/*.bam<span class="p">;</span> <span class="k">do</span>
 
         <span class="nv">bamfile_name</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$bamfile</span><span class="k">)</span>
 
@@ -194,7 +193,6 @@ pipeline:</p>
     pigz -p <span class="m">10</span> ./<span class="nv">$out_dir</span>/*.fq
 <span class="k">done</span>
 </code></pre></div>
-
 
 <p>I work with a lot of small RNA sequencing, and I recently needed to extract reads
 from several different groups of small RNA loci I'd defined. It's relatively
@@ -211,11 +209,9 @@ comment lines also carry enough information to tell someone what it does.</p>
 3_aligned_sorted_markdupes  6_mosdepth              LICENSE      scripts
 </code></pre></div>
 
-
 <p>and not this:</p>
 <div class="highlight"><pre><span></span><code>wgbs_snakemake/1_fastqc_raw/2_trim_galore/3_aligned_sorted_markdupes/4_methyldackel_mbias/5_methyldackel_extract/6_mosdepth
 </code></pre></div>
-
 
 <p>This makes navigating your directory structure much less of a pain. Especially
 when a pipeline is several steps long.</p>
@@ -293,7 +289,7 @@ more practical examples.</p>
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Jeff Grover. Bioinformatician. ",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
   "url" : "https://groverj3.github.io",
   "image": "/images/jeff.jpg",
   "description": ""

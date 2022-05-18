@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
 
 
 
@@ -28,7 +28,7 @@
 <meta name="description" content="In contrast to the zen of python there are actually many ways to handle sequence data in Python. There are several packages on PyPI that provide parsers for sequence formats like .fastq and .fasta. I&#39;ve never bothered with these, including the oft-used Biopython. I vaguely remembered Biopython being slower than …" />
 <meta name="keywords" content="bioinformatics, python">
 
-<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
 <meta property="og:title" content="Just Write Your Own Python Parsers for .fastq Files"/>
 <meta property="og:description" content="In contrast to the zen of python there are actually many ways to handle sequence data in Python. There are several packages on PyPI that provide parsers for sequence formats like .fastq and .fasta. I&#39;ve never bothered with these, including the oft-used Biopython. I vaguely remembered Biopython being slower than …"/>
 <meta property="og:locale" content="en_US"/>
@@ -42,7 +42,7 @@
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatician. &ndash; Just Write Your Own Python Parsers for .fastq Files</title>
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Just Write Your Own Python Parsers for .fastq Files</title>
 
 </head>
 <body>
@@ -53,8 +53,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician<br>
-Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
+<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -165,7 +164,6 @@ in jupyter is a bit of a departure from the norm for me.</p>
 <div class="highlight"><pre><span></span><code>pip install biopython HTSeq scikit-bio
 </code></pre></div>
 
-
 <p>Then, started a new jupyter notebook with
 <a href="https://jupyterlab.readthedocs.io">jupyterlab</a> (a sweet new UI for jupyter that
 you should use!). Your first step is always to do your imports.</p>
@@ -175,18 +173,16 @@ you should use!). Your first step is always to do your imports.</p>
 <span class="kn">import</span> <span class="nn">skbio</span>
 </code></pre></div>
 
-
 <p>I'm only using one function from skbio, but it's just called <code>read()</code> which is
 too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.</p>
 <p>Also, it's important with any parsing problem to understand the file format. The
 .fastq format is ubiquitous in bioinformatics and looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="err">@SEQ_ID</span>
-<span class="err">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span>
-<span class="err">+</span>
-<span class="err">!&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65</span>
+<div class="highlight"><pre><span></span><code><span class="nv">@SEQ_ID</span><span class="w"></span>
+<span class="n">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span><span class="w"></span>
+<span class="o">+</span><span class="w"></span>
+<span class="err">!</span><span class="s1">&#39;&#39;</span><span class="o">*</span><span class="p">((((</span><span class="o">***+</span><span class="p">))</span><span class="o">%%%++</span><span class="p">)(</span><span class="o">%%%%</span><span class="p">)</span><span class="mf">.1</span><span class="o">***-+*</span><span class="s1">&#39;&#39;</span><span class="p">))</span><span class="o">**</span><span class="mi">55</span><span class="n">CCF</span><span class="o">&gt;&gt;&gt;&gt;&gt;&gt;</span><span class="n">CCCCCCC65</span><span class="w"></span>
 </code></pre></div>
-
 
 <p><a href="https://en.wikipedia.org/wiki/FASTQ_format">Source</a></p>
 <p>You can understand it as a repeated series of four lines:</p>
@@ -243,7 +239,6 @@ functions I want to bechmark in a consistent way:</p>
             <span class="k">yield</span> <span class="n">record</span>
 </code></pre></div>
 
-
 <p>Here I intended to use two different methods from HTSeq, one which just returns
 bare tuples rather than objects with other kinds of validation based on the
 definition of the format. However, neither HTSeq method worked. Instead, giving a
@@ -269,7 +264,6 @@ bisulfite experiment. These are the R1 mates from 75bp paired end reads:</p>
 <span class="mi">249</span> <span class="n">ms</span> <span class="err">±</span> <span class="mf">2.57</span> <span class="n">ms</span> <span class="n">per</span> <span class="n">loop</span> <span class="p">(</span><span class="n">mean</span> <span class="err">±</span> <span class="n">std</span><span class="o">.</span> <span class="n">dev</span><span class="o">.</span> <span class="n">of</span> <span class="mi">10</span> <span class="n">runs</span><span class="p">,</span> <span class="mi">10</span> <span class="n">loops</span> <span class="n">each</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>The <code>%timeit</code> function there is some ipython "line magic." It simplifies timing
 a single line of code. The <code>%%timeit</code> is the "cell magic" version.</p>
 <p>It seems that skbio isn't ready for primetime just yet. The real question then
@@ -293,7 +287,6 @@ imports:</p>
 <span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
 </code></pre></div>
 
-
 <p>Then make the data frame</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a dataframe Pandas style</span>
 
@@ -304,7 +297,6 @@ imports:</p>
                                          <span class="p">(</span><span class="mi">181</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mi">442</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mf">3.92</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mf">40.5</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mi">295</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
                                          <span class="p">(</span><span class="mf">70.2</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mi">352</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">),</span> <span class="p">(</span><span class="mf">3.19</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mf">32.5</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">(</span><span class="mi">249</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)]})</span>
 </code></pre></div>
-
 
 <p>Since each record is 4 lines, converting lines to # of reads requires dividing by
 four. Likewise, the benchmarking results are in various time units, so I've
@@ -330,7 +322,6 @@ easily save your plot from jupyterlab. Here's the code:</p>
     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Method&#39;</span>
 <span class="p">)</span>
 </code></pre></div>
-
 
 <p><center>
 <img alt="Scatterplot" src="/figures/2019-08-22_just-write-your-own-python-parsers-for-fastq-files/benchmark.png">
@@ -397,7 +388,7 @@ implementations with little effort when it comes to .fastq parsing.</p>
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Jeff Grover. Bioinformatician. ",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
   "url" : "https://groverj3.github.io",
   "image": "/images/jeff.jpg",
   "description": ""

@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
 
 
 
@@ -28,7 +28,7 @@
 <meta name="description" content="When I started my Ph.D. I had a good amount of experience working in a Linux environment on my own computers. Mostly as a hobby. My advisor had bought a small server several years previous for a post-doc&#39;s project and I was offered this system to use for my …" />
 <meta name="keywords" content="sysadmin">
 
-<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
 <meta property="og:title" content="Managing Software on a Multiuser Linux System"/>
 <meta property="og:description" content="When I started my Ph.D. I had a good amount of experience working in a Linux environment on my own computers. Mostly as a hobby. My advisor had bought a small server several years previous for a post-doc&#39;s project and I was offered this system to use for my …"/>
 <meta property="og:locale" content="en_US"/>
@@ -41,7 +41,7 @@
 <meta property="article:tag" content="sysadmin"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatician. &ndash; Managing Software on a Multiuser Linux System</title>
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Managing Software on a Multiuser Linux System</title>
 
 </head>
 <body>
@@ -52,8 +52,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician<br>
-Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
+<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -162,11 +161,9 @@ dreaded:</p>
 <div class="highlight"><pre><span></span><code>sudo rm -r /
 </code></pre></div>
 
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code>sudo rm -r /*
 </code></pre></div>
-
 
 <p>It's easy to forget that "." before the "/". </p>
 <p>Or, less catasrophically, that user may try installing software in a brittle way.
@@ -175,7 +172,6 @@ sysadmin tasks, will have to spend time fixing it.</p>
 <p>All it takes is for you, the SUPER USER, the GOD OF THE SERVER, to run:</p>
 <div class="highlight"><pre><span></span><code>sudo deluser <span class="o">{</span>USERNAME<span class="o">}</span> sudo
 </code></pre></div>
-
 
 <p>Replace {USERNAME} with the user to remove.</p>
 <h3>2. Don't Blindly Install Software From Your Distro's Repos</h3>
@@ -200,7 +196,6 @@ versions, and that's an easy fix with a:</p>
 <div class="highlight"><pre><span></span><code>sudo ln -s /path/to/binary /usr/local/bin
 </code></pre></div>
 
-
 <h3>4. Encourage Users To Test Software in ~/bin</h3>
 <p>Create a private bin directory inside each user's home folder. This is often
 pre-configured in each user's path. If not you'll need to add it to each user's
@@ -211,7 +206,6 @@ for your distro:</p>
     <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 </code></pre></div>
-
 
 <p>Let your users test and if multiple people need it, or they're running something
 all the time, then you can install it system-wide in /opt.</p>
@@ -234,19 +228,16 @@ instructions.</p>
 <div class="highlight"><pre><span></span><code>sudo pip install <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
 </code></pre></div>
 
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">R</span>
 <span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;PACKAGE_NAME&#39;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>If users can't use sudo there's no danger here anyway, but using user-specific
 libraries and packages keeps things consistent. It also means that, once again,
 you don't have to manage something. The following will solve this for Python:</p>
 <div class="highlight"><pre><span></span><code>pip install --user <span class="o">{</span>PACKAGE_NAME<span class="o">}</span>
 </code></pre></div>
-
 
 <p>This installs packages to ~/.local/lib/python{VERSION}/site-packages </p>
 <p>R requires a bit more doing. To create a user-library I recommend creating a
@@ -257,7 +248,6 @@ you don't have to manage something. The following will solve this for Python:</p
 <span class="c1"># Use the local R library</span>
 <span class="n">R_LIBS_USER</span><span class="o">=</span><span class="s">&quot;~/.local/lib/R/site-library&quot;</span>
 </code></pre></div>
-
 
 <h3>Wrapping up</h3>
 <p>In summary, administering a small multi-user system doesn't have to be
@@ -310,7 +300,7 @@ readily accessed.</p>
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Jeff Grover. Bioinformatician. ",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
   "url" : "https://groverj3.github.io",
   "image": "/images/jeff.jpg",
   "description": ""

@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
 
 
 
@@ -28,7 +28,7 @@
 <meta name="description" content="Commonly, in bioinformatics we&#39;re in the business of determining whether something, be it gene expression, or DNA methylation, or splicing, etc. is different between multiple conditions. Typically this would be done by comparing those data and using some kind of statistical test. However, with the continued advances in sequencing technologies …" />
 <meta name="keywords" content="bioinformatics, data-visualization">
 
-<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
 <meta property="og:title" content="Making Better Metaplots With ggplot, Part 1"/>
 <meta property="og:description" content="Commonly, in bioinformatics we&#39;re in the business of determining whether something, be it gene expression, or DNA methylation, or splicing, etc. is different between multiple conditions. Typically this would be done by comparing those data and using some kind of statistical test. However, with the continued advances in sequencing technologies …"/>
 <meta property="og:locale" content="en_US"/>
@@ -42,7 +42,7 @@
 <meta property="article:tag" content="data-visualization"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatician. &ndash; Making Better Metaplots With ggplot, Part 1</title>
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Making Better Metaplots With ggplot, Part 1</title>
 
 </head>
 <body>
@@ -53,8 +53,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician<br>
-Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
+<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -153,11 +152,9 @@ install them as follows in a terminal:</p>
 <div class="highlight"><pre><span></span><code>pip install --user deeptools
 </code></pre></div>
 
-
 <p>Launch the R interpreter by typing <code>R</code> and then:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyverse&#39;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>I recommend installing them into a user-specific library by either the <code>--user</code>
 flag for pip or setting up a .Renviron file with a path to a local library. You
@@ -174,7 +171,6 @@ bamCoverage tool. First, you need to index the alignment .bam file:</p>
 <div class="highlight"><pre><span></span><code>samtools index <span class="si">${</span><span class="nv">input_bam</span><span class="si">}</span> <span class="si">${</span><span class="nv">input_bam</span><span class="p">%.bam</span><span class="si">}</span>
 </code></pre></div>
 
-
 <p><code>${}</code> is the syntax for using a previously declared variable in BASH and I'll use
 that kind of representation throughout for places where values should be
 specified.</p>
@@ -190,7 +186,6 @@ the bamCoverage tool:</p>
     --bam <span class="si">${</span><span class="nv">input_bam</span><span class="si">}</span> <span class="se">\</span>
     --outFileName <span class="si">${</span><span class="nv">input_bam</span><span class="p">%.bam</span><span class="si">}</span>.bigWig
 </code></pre></div>
-
 
 <p>A <code>--binsize</code> of 1 will just generate per-base converage. This may be slow, and
 you could increase the value if you wish. There are also other ways of generating
@@ -215,7 +210,6 @@ you're using data from a tool other than bamCoverage this is your starting point
     --outFileName <span class="si">${</span><span class="nv">output_matrix</span><span class="p">.gz</span><span class="si">}</span>
 </code></pre></div>
 
-
 <p>The <code>--startLabel</code> and <code>--endLabel</code> values can be changed as desired, but don't
 forget them! The <code>--upstream</code> and <code>--downstream</code> values can be as desired. The
 <code>--regionBodyLength</code> is the value to which all features will be scaled. I suggest
@@ -233,7 +227,6 @@ also output the raw data:</p>
     --outFileName <span class="si">${</span><span class="nv">metaplot</span><span class="p">.svg</span><span class="si">}</span> <span class="se">\</span>
     --outFileNameData <span class="si">${</span><span class="nv">metaplot</span><span class="p">.tab</span><span class="si">}</span>
 </code></pre></div>
-
 
 <p>This will generate a plot, but also output the table of per-bin values that were
 plotted. I made this with it:</p>
@@ -285,7 +278,7 @@ of. Now, let's load that table into R and make something prettier in
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Jeff Grover. Bioinformatician. ",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
   "url" : "https://groverj3.github.io",
   "image": "/images/jeff.jpg",
   "description": ""

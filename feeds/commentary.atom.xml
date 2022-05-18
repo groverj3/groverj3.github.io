@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatician. - commentary</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/commentary.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2020-05-30T00:00:00-07:00</updated><subtitle>Bioinformatician&lt;br&gt;
-Genomics Scientist @ &lt;a href="https://www.sevenbridges.com/" target="_blank"&gt;Seven Bridges&lt;/a&gt;</subtitle><entry><title>Publications, Dissertations, Job Hunts, and a Pandemic</title><link href="https://groverj3.github.io/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html" rel="alternate"></link><published>2020-05-30T00:00:00-07:00</published><updated>2020-05-30T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2020-05-30:/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html</id><summary type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist. - commentary</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/commentary.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2020-05-30T00:00:00-07:00</updated><subtitle>Bioinformatics Scientist @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Publications, Dissertations, Job Hunts, and a Pandemic</title><link href="https://groverj3.github.io/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html" rel="alternate"></link><published>2020-05-30T00:00:00-07:00</published><updated>2020-05-30T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2020-05-30:/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html</id><summary type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
 my random musings on bioinformatics, Linux, data science, and etc. I made a few
 reasonably cogent posts, but then life got in the way! It's been a really busy
 time, a very eventful year. I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
@@ -116,7 +115,6 @@ in jupyter is a bit of a departure from the norm for me.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install biopython HTSeq scikit-bio
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;Then, started a new jupyter notebook with
 &lt;a href="https://jupyterlab.readthedocs.io"&gt;jupyterlab&lt;/a&gt; (a sweet new UI for jupyter that
 you should use!). Your first step is always to do your imports.&lt;/p&gt;
@@ -126,18 +124,16 @@ you should use!). Your first step is always to do your imports.&lt;/p&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;skbio&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;I'm only using one function from skbio, but it's just called &lt;code&gt;read()&lt;/code&gt; which is
 too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.&lt;/p&gt;
 &lt;p&gt;Also, it's important with any parsing problem to understand the file format. The
 .fastq format is ubiquitous in bioinformatics and looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;@SEQ_ID&lt;/span&gt;
-&lt;span class="err"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;
-&lt;span class="err"&gt;+&lt;/span&gt;
-&lt;span class="err"&gt;!&amp;#39;&amp;#39;*((((***+))%%%++)(%%%%).1***-+*&amp;#39;&amp;#39;))**55CCF&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;CCCCCCC65&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@SEQ_ID&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;((((&lt;/span&gt;&lt;span class="o"&gt;***+&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;%%%++&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="o"&gt;%%%%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="o"&gt;***-+*&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;55&lt;/span&gt;&lt;span class="n"&gt;CCF&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;CCCCCCC65&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/FASTQ_format"&gt;Source&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;You can understand it as a repeated series of four lines:&lt;/p&gt;
@@ -194,7 +190,6 @@ functions I want to bechmark in a consistent way:&lt;/p&gt;
             &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;Here I intended to use two different methods from HTSeq, one which just returns
 bare tuples rather than objects with other kinds of validation based on the
 definition of the format. However, neither HTSeq method worked. Instead, giving a
@@ -220,7 +215,6 @@ bisulfite experiment. These are the R1 mates from 75bp paired end reads:&lt;/p&g
 &lt;span class="mi"&gt;249&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="mf"&gt;2.57&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;per&lt;/span&gt; &lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt; &lt;span class="err"&gt;±&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;runs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;loops&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;The &lt;code&gt;%timeit&lt;/code&gt; function there is some ipython "line magic." It simplifies timing
 a single line of code. The &lt;code&gt;%%timeit&lt;/code&gt; is the "cell magic" version.&lt;/p&gt;
 &lt;p&gt;It seems that skbio isn't ready for primetime just yet. The real question then
@@ -244,7 +238,6 @@ imports:&lt;/p&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;altair&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;alt&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;Then make the data frame&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Create a dataframe Pandas style&lt;/span&gt;
 
@@ -255,7 +248,6 @@ imports:&lt;/p&gt;
                                          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;181&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;442&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.92&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;40.5&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;295&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                                          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;70.2&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;352&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1e6&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;3.19&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;32.5&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;249&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)]})&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;Since each record is 4 lines, converting lines to # of reads requires dividing by
 four. Likewise, the benchmarking results are in various time units, so I've
@@ -281,7 +273,6 @@ easily save your plot from jupyterlab. Here's the code:&lt;/p&gt;
     &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Method&amp;#39;&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;center&gt;
 &lt;img alt="Scatterplot" src="/figures/2019-08-22_just-write-your-own-python-parsers-for-fastq-files/benchmark.png"&gt;
@@ -368,13 +359,13 @@ pipeline:&lt;/p&gt;
 
 &lt;span class="nv"&gt;align_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;~/large_data/2019-06-28_aligned_reads&amp;quot;&lt;/span&gt;
 
-&lt;span class="k"&gt;for&lt;/span&gt; bed_file in ./srna_groups/*.bed&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; bed_file &lt;span class="k"&gt;in&lt;/span&gt; ./srna_groups/*.bed&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
 
     &lt;span class="nv"&gt;bed_filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$bed_file&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
     &lt;span class="nv"&gt;out_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;bed_filename&lt;/span&gt;&lt;span class="p"&gt;%.bed&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;_reads
     mkdir &lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="nv"&gt;$out_dir&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 
-    &lt;span class="k"&gt;for&lt;/span&gt; bamfile in &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;align_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/*.bam&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; bamfile &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;align_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/*.bam&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
 
         &lt;span class="nv"&gt;bamfile_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$bamfile&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
 
@@ -388,7 +379,6 @@ pipeline:&lt;/p&gt;
     pigz -p &lt;span class="m"&gt;10&lt;/span&gt; ./&lt;span class="nv"&gt;$out_dir&lt;/span&gt;/*.fq
 &lt;span class="k"&gt;done&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;I work with a lot of small RNA sequencing, and I recently needed to extract reads
 from several different groups of small RNA loci I'd defined. It's relatively
@@ -405,11 +395,9 @@ comment lines also carry enough information to tell someone what it does.&lt;/p&
 3_aligned_sorted_markdupes  6_mosdepth              LICENSE      scripts
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;and not this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wgbs_snakemake/1_fastqc_raw/2_trim_galore/3_aligned_sorted_markdupes/4_methyldackel_mbias/5_methyldackel_extract/6_mosdepth
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;This makes navigating your directory structure much less of a pain. Especially
 when a pipeline is several steps long.&lt;/p&gt;

@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
 
 
 
@@ -28,7 +28,7 @@
 <meta name="description" content="Last time we prepared our data using Deeptools. Now we&#39;re going to do something kind of scandalous. R and python, living together in peace. What is this madness? I like R&#39;s ecosystem for manipulating data and plotting with the tidyverse. It still requires some tweaking, but with a bit of …" />
 <meta name="keywords" content="bioinformatics, data-visualization">
 
-<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
 <meta property="og:title" content="Making Better Metaplots With ggplot, Part 2"/>
 <meta property="og:description" content="Last time we prepared our data using Deeptools. Now we&#39;re going to do something kind of scandalous. R and python, living together in peace. What is this madness? I like R&#39;s ecosystem for manipulating data and plotting with the tidyverse. It still requires some tweaking, but with a bit of …"/>
 <meta property="og:locale" content="en_US"/>
@@ -42,7 +42,7 @@
 <meta property="article:tag" content="data-visualization"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatician. &ndash; Making Better Metaplots With ggplot, Part 2</title>
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Making Better Metaplots With ggplot, Part 2</title>
 
 </head>
 <body>
@@ -53,8 +53,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician<br>
-Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
+<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -132,15 +131,13 @@ terminal my initial instinct is always to call:</p>
 <div class="highlight"><pre><span></span><code>head <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>
 </code></pre></div>
 
-
 <p>But you can also just open deeptools metaplot table in your text editor of
 choice. What you'll find is:</p>
-<div class="highlight"><pre><span></span><code><span class="err">bin labels    -1.0Kb    ...    start    ...    end    ...    1.0Kb</span>
-<span class="err">bins        1.0 2.0 3.0 ...</span>
-<span class="err">sample_name genes score score score ...</span>
-<span class="err">sample_name genes score score score ...</span>
+<div class="highlight"><pre><span></span><code><span class="nv">bin</span> <span class="nv">labels</span>    <span class="o">-</span><span class="mi">1</span>.<span class="mi">0</span><span class="nv">Kb</span>    ...    <span class="nv">start</span>    ...    <span class="k">end</span>    ...    <span class="mi">1</span>.<span class="mi">0</span><span class="nv">Kb</span>
+<span class="nv">bins</span>        <span class="mi">1</span>.<span class="mi">0</span> <span class="mi">2</span>.<span class="mi">0</span> <span class="mi">3</span>.<span class="mi">0</span> ...
+<span class="nv">sample_name</span> <span class="nv">genes</span> <span class="nv">score</span> <span class="nv">score</span> <span class="nv">score</span> ...
+<span class="nv">sample_name</span> <span class="nv">genes</span> <span class="nv">score</span> <span class="nv">score</span> <span class="nv">score</span> ...
 </code></pre></div>
-
 
 <p>A tab delimited table of bin labels, bin numbers, and scores (data to plot) for
 each of those bins. This is a rather odd format because it's horizontal, rather
@@ -153,7 +150,6 @@ it's a bit unwieldly.</p>
 <p>Before getting started here make sure you have the tidyverse packages installed:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyverse&#39;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>There are no built-in functions to read a "transposed tsv" file like this, but
 with a little <a href="https://stackoverflow.com/questions/17288197/reading-a-csv-file-organized-horizontally">googling</a>
@@ -182,7 +178,6 @@ to edit a few things:</p>
 <span class="p">}</span>
 </code></pre></div>
 
-
 <p>Essentially, this function is finding the length of the lines, reading the lines
 as character vectors, splitting the vectors by the tab character, and creating a
 new table from the vectors. Reading the data with this gives us a nice dataframe.
@@ -205,7 +200,6 @@ with <code>library('tidyverse')</code>.</p>
 <span class="m">10</span> <span class="s">&quot;&quot;</span>            <span class="m">10</span> <span class="m">1.403664921465969</span>   <span class="m">0.01099476439790576</span>
 </code></pre></div>
 
-
 <h3>3. Convert the Data to Long Format</h3>
 <p>A quirk of ggplot is that it really likes long format data. Where, instead of
 separate columns for the different samples you end up with a column of "scores"
@@ -216,7 +210,6 @@ creates a new column with the sample ID for each row. The easiest way to do this
 is with the <code>gather()</code> function in tidyr:</p>
 <div class="highlight"><pre><span></span><code><span class="n">long_table</span> <span class="o">&lt;-</span> <span class="nf">gather</span><span class="p">(</span><span class="n">plot_table</span><span class="p">,</span> <span class="s">&#39;sample&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">bin.labels</span><span class="p">,</span> <span class="o">-</span><span class="n">bins</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>You can check out what this looks like as follows:</p>
 <div class="highlight"><pre><span></span><code><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">long_table</span><span class="p">)</span>
@@ -237,7 +230,6 @@ is with the <code>gather()</code> function in tidyr:</p>
 <span class="m">1200</span>      <span class="m">1.0</span><span class="n">Kb</span>  <span class="m">600</span> <span class="n">sample_2</span> <span class="m">0.012565445026178013</span>
 </code></pre></div>
 
-
 <p>This would be annoying to work with by hand, but ggplot2 understands it just
 fine.</p>
 <h3>4. Build the ggplot Command</h3>
@@ -249,7 +241,6 @@ simple, and make it more complex from there:</p>
                      <span class="n">labels</span> <span class="o">=</span> <span class="n">long_table</span><span class="o">$</span><span class="n">bin.labels</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>This will get us started with a simple line plot. The key here is that the x axis
 breaks are the bin numbers, but are labeled as the bounds, start, and end of the
 features. However, this also creates a major gridline at each break. Not ideal. I
@@ -259,7 +250,6 @@ I'll use these as a starting point for the theming. Another feature we may want
 to add is the ability to smooth the line. This can be accomplished by using:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="s">&#39;loess&#39;</span><span class="p">,</span> <span class="n">se</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>This will smooth the data with
 <a href="https://en.wikipedia.org/wiki/Local_regression">loess</a> regression. The amount of
@@ -304,7 +294,6 @@ plot command becomes:</p>
            <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>With a few if statements we actually can plot both the smoothed and line plots on
 the same coordinate system if we want. Let's test it with some data small RNA
@@ -362,7 +351,7 @@ and works with any number of input samples!
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Jeff Grover. Bioinformatician. ",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
   "url" : "https://groverj3.github.io",
   "image": "/images/jeff.jpg",
   "description": ""

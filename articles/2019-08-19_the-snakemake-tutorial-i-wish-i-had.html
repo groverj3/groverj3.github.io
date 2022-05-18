@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatician. Atom">
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
 
 
 
@@ -28,7 +28,7 @@
 <meta name="description" content="Over the past few years the use of workflow managers in genomics and bioinformatics has grown greatly. This is a great thing for the field and adds to our ability to perform reproducible analyses, especially for pipelines with many steps. These are common in bioinformatics, but prior to the use …" />
 <meta name="keywords" content="bioinformatics, python, workflows, snakemake">
 
-<meta property="og:site_name" content="Jeff Grover. Bioinformatician."/>
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
 <meta property="og:title" content="The Snakemake Tutorial I Wish I Had"/>
 <meta property="og:description" content="Over the past few years the use of workflow managers in genomics and bioinformatics has grown greatly. This is a great thing for the field and adds to our ability to perform reproducible analyses, especially for pipelines with many steps. These are common in bioinformatics, but prior to the use …"/>
 <meta property="og:locale" content="en_US"/>
@@ -44,7 +44,7 @@
 <meta property="article:tag" content="snakemake"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatician. &ndash; The Snakemake Tutorial I Wish I Had</title>
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; The Snakemake Tutorial I Wish I Had</title>
 
 </head>
 <body>
@@ -55,8 +55,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatician<br>
-Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a></p>
+<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -145,7 +144,6 @@ also work on macOS. Your first step should be to install Snakemake:</p>
 <div class="highlight"><pre><span></span><code>pip install --user Snakemake
 </code></pre></div>
 
-
 <p>I always recommend <em>not</em> using your system python. If you're on a non-rolling
 release distribution, or on macOS it's probably super outdated. I use
 <a href="https://github.com/pyenv/pyenv">pyenv</a> to manage my Python installations, though
@@ -213,7 +211,6 @@ development and fill it with this:</p>
         <span class="s1">&#39;fastqc -o </span><span class="si">{params.out_dir}</span><span class="s1"> </span><span class="si">{input}</span><span class="s1">&#39;</span>
 </code></pre></div>
 
-
 <p>This is the first rule in our workflow, running FastQC on the input files. In the
 <code>{}</code> are <strong>wildcards</strong>. While they have names, they are only there for
 readability right now. The only <code>param</code> we're currently passing to it is the
@@ -228,7 +225,6 @@ Therefore, if your workflow starts, it <em>should</em> finish. However, we need 
                <span class="n">sample</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">,</span> <span class="n">mate</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">ext</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;zip&#39;</span><span class="p">])</span>
 </code></pre></div>
 
-
 <p>This tells the workflow which <strong>targets</strong> to create. In this command, <code>expand</code>
 instructs Snakemake to fill in all things which match the wildcards. So, this
 indicates that <strong>all</strong> files which match this pattern when filled in are the
@@ -236,12 +232,11 @@ indicates that <strong>all</strong> files which match this pattern when filled i
 files as input that may be created asynchronously in previous rules. We're still
 missing a very important thing though! The input files! For that, create another
 file, <code>config.yaml</code>, in the same directory and add this to it:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sample1</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Sample2</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">etc...</span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample1</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample2</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">etc...</span><span class="w"></span>
 </code></pre></div>
-
 
 <p>Your <code>samples</code> are yaml entries without names (you could name them if you want),
 and should <strong>not</strong> include read pair numbers (so 1 ID for each pair). The sample
@@ -254,7 +249,6 @@ headings. Now, go back to your Snakefile and add this <em>above</em> your rules:
 <span class="n">SAMPLES</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;samples&#39;</span><span class="p">]</span>
 </code></pre></div>
 
-
 <p>This parses the config file into a Python dictionary. Do you see how <code>SAMPLES</code> is
 filled in for <code>{sample}</code> in <code>rule all</code> which then creates a <strong>target</strong> which can
 be generated by <code>rule fastqc_raw</code>. It's kind of a mind-bender at first, but it 
@@ -263,10 +257,9 @@ all fits together.</p>
 "input_data".</p>
 <h3>Step 2 - Running Your First Rules</h3>
 <p>I copied one sample to my <code>input_data</code> directory and added it to the .yaml file:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JWG3_2_2</span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">JWG3_2_2</span><span class="w"></span>
 </code></pre></div>
-
 
 <p>Now run the workflow from the directory you're developing in with
 <code>snakemake --cores #</code>:</p>
@@ -298,7 +291,6 @@ rule fastqc_raw:
 
 Started analysis of JWG3_2_2_R1.fastq.gzStarted analysis of JWG3_2_2_R2.fastq.gz
 </code></pre></div>
-
 
 <p>I ran it with <code>--cores 2</code>, but I did not include a <code>threads</code> parameter to the
 rule in addition in <code>input</code>, <code>output</code>, <code>params</code>, and <code>shell</code>. So, it only thinks
@@ -430,40 +422,38 @@ like this:</p>
 <span class="sd">        &#39;&#39;&#39;</span>
 </code></pre></div>
 
-
 <p>And the <code>config.yaml</code> looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JWG3_2_2_</span>
-    <span class="c1"># Samples should be reported by ID rather than filenames, and exclude the</span>
-    <span class="c1"># trailing &quot;R1&quot; and &quot;R2&quot;, one sample ID per pair. If samples are supplied as</span>
-    <span class="c1"># separate .fastq.gz files within each pair concatenate them to a single R1 and</span>
-    <span class="c1"># R2 file prior to running.</span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">JWG3_2_2_</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># Samples should be reported by ID rather than filenames, and exclude the</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># trailing &quot;R1&quot; and &quot;R2&quot;, one sample ID per pair. If samples are supplied as</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># separate .fastq.gz files within each pair concatenate them to a single R1 and</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># R2 file prior to running.</span><span class="w"></span>
 
-<span class="nt">reference_genome</span><span class="p">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">reference_genome/ref_genome.fasta</span>
-    <span class="l l-Scalar l-Scalar-Plain"># Path to reference genome here with .fasta extension</span>
-
-
-<span class="c1"># Options for individual workflow steps</span>
-<span class="c1"># Configure threads for each step as desired, this is a sane starting point</span>
-
-<span class="nt">trim_galore</span><span class="p">:</span>
-    <span class="nt">adapter_seq </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</span>
-    <span class="nt">quality </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
-
-<span class=" -Error"> </span><span class="nt">bwameth</span><span class="p">:</span>
-    <span class="nt">threads </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>   
+<span class="nt">reference_genome</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">reference_genome/ref_genome.fasta</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain"># Path to reference genome here with .fasta extension</span><span class="w"></span>
 
 
-<span class="c1"># Paths to individual tools</span>
-<span class="c1"># You probably don&#39;t need to change this unless programs are not in your $PATH</span>
+<span class="c1"># Options for individual workflow steps</span><span class="w"></span>
+<span class="c1"># Configure threads for each step as desired, this is a sane starting point</span><span class="w"></span>
 
-<span class="nt">paths</span><span class="p">:</span>
-  <span class="nt">fastqc_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fastqc</span>
-  <span class="nt">trim_galore_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">trim_galore</span>
-  <span class="nt">bwameth_path </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bwameth.py</span>
+<span class="nt">trim_galore</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">adapter_seq </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</span><span class="w"></span>
+<span class="w">    </span><span class="nt">quality </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
+
+<span class="w w-Error"> </span><span class="nt">bwameth</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">threads </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">   </span>
+
+
+<span class="c1"># Paths to individual tools</span><span class="w"></span>
+<span class="c1"># You probably don&#39;t need to change this unless programs are not in your $PATH</span><span class="w"></span>
+
+<span class="nt">paths</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fastqc_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastqc</span><span class="w"></span>
+<span class="w">  </span><span class="nt">trim_galore_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trim_galore</span><span class="w"></span>
+<span class="w">  </span><span class="nt">bwameth_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bwameth.py</span><span class="w"></span>
 </code></pre></div>
-
 
 <p>That's a lot to take in, so a few words of explanation are in order. I have moved
 paths for the individual programs to a section in the config file. This is to
@@ -536,7 +526,7 @@ you have automation and deployability all-in-one!</p>
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Jeff Grover. Bioinformatician. ",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
   "url" : "https://groverj3.github.io",
   "image": "/images/jeff.jpg",
   "description": ""
