@@ -4,12 +4,11 @@ from __future__ import unicode_literals
 
 # Overall site settings
 AUTHOR = 'Jeffrey Grover'
-SITENAME = 'Jeff Grover. Bioinformatician.'
+SITENAME = 'Jeff Grover. Bioinformatics Scientist.'
 SITEURL = ''
 SITELOGO = '/images/jeff.jpg'
 SITETITLE = AUTHOR
-SITESUBTITLE = '''Bioinformatician<br>
-Genomics Scientist @ <a href="https://www.sevenbridges.com/" target="_blank">Seven Bridges</a>'''
+SITESUBTITLE = 'Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a>'
 
 TIMEZONE = 'America/Phoenix'
 DEFAULT_LANG = 'en'
