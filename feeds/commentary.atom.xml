@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist. - commentary</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/commentary.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2020-05-30T00:00:00-07:00</updated><subtitle>Bioinformatics Scientist @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Publications, Dissertations, Job Hunts, and a Pandemic</title><link href="https://groverj3.github.io/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html" rel="alternate"></link><published>2020-05-30T00:00:00-07:00</published><updated>2020-05-30T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2020-05-30:/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html</id><summary type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist. - commentary</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/commentary.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2020-05-30T00:00:00-04:00</updated><subtitle>Senior Scientist - NGS &amp; Bioinformatics @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Publications, Dissertations, Job Hunts, and a Pandemic</title><link href="https://groverj3.github.io/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html" rel="alternate"></link><published>2020-05-30T00:00:00-04:00</published><updated>2020-05-30T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2020-05-30:/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html</id><summary type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
 my random musings on bioinformatics, Linux, data science, and etc. I made a few
 reasonably cogent posts, but then life got in the way! It's been a really busy
 time, a very eventful year. I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
@@ -60,7 +60,7 @@ things happening! Hopefully I can keep my skills sharp, and I think this blog
 will be essential for that.&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;
 &lt;img src="/images/defense.jpg", style="width:700px;"&gt;
-&lt;/center&gt;&lt;/p&gt;</content><category term="commentary"></category><category term="grad school"></category><category term="jobs"></category></entry><entry><title>Just Write Your Own Python Parsers for .fastq Files</title><link href="https://groverj3.github.io/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html" rel="alternate"></link><published>2019-08-22T00:00:00-07:00</published><updated>2019-08-22T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-22:/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html</id><summary type="html">&lt;p&gt;In contrast to the &lt;a href="https://en.wikipedia.org/wiki/Zen_of_Python"&gt;zen of python&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;</content><category term="commentary"></category><category term="grad school"></category><category term="jobs"></category></entry><entry><title>Just Write Your Own Python Parsers for .fastq Files</title><link href="https://groverj3.github.io/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html" rel="alternate"></link><published>2019-08-22T00:00:00-04:00</published><updated>2019-08-22T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-22:/articles/2019-08-22_just-write-your-own-python-parsers-for-fastq-files.html</id><summary type="html">&lt;p&gt;In contrast to the &lt;a href="https://en.wikipedia.org/wiki/Zen_of_Python"&gt;zen of python&lt;/a&gt;
 there are actually many ways to handle sequence data in Python. There are several
 packages on &lt;a href="https://pypi.org"&gt;PyPI&lt;/a&gt; that provide parsers for sequence formats
 like .fastq and .fasta. I've never bothered with these, including the oft-used
@@ -112,7 +112,7 @@ have no Python equivalents, and just rolling with that. So, actually using Pytho
 in jupyter is a bit of a departure from the norm for me.&lt;/p&gt;
 &lt;p&gt;First, you need the necessary packages. I just use pip with
 &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install biopython HTSeq scikit-bio
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;biopython&lt;span class="w"&gt; &lt;/span&gt;HTSeq&lt;span class="w"&gt; &lt;/span&gt;scikit-bio
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Then, started a new jupyter notebook with
@@ -129,10 +129,10 @@ too generic a name to just import that single function without causing all sorts
 of annoyances and gnashing of teeth.&lt;/p&gt;
 &lt;p&gt;Also, it's important with any parsing problem to understand the file format. The
 .fastq format is ubiquitous in bioinformatics and looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@SEQ_ID&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;((((&lt;/span&gt;&lt;span class="o"&gt;***+&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;%%%++&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="o"&gt;%%%%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="o"&gt;***-+*&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;55&lt;/span&gt;&lt;span class="n"&gt;CCF&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;CCCCCCC65&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@SEQ_ID&lt;/span&gt;
+&lt;span class="n"&gt;GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt;
+&lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;((((&lt;/span&gt;&lt;span class="o"&gt;***+&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;%%%++&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="o"&gt;%%%%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="mf"&gt;.1&lt;/span&gt;&lt;span class="o"&gt;***-+*&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;55&lt;/span&gt;&lt;span class="n"&gt;CCF&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;CCCCCCC65&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/FASTQ_format"&gt;Source&lt;/a&gt;&lt;/p&gt;
@@ -298,7 +298,7 @@ don't even need to import anything unless you want a minor speed boost from
 from not calling an &lt;code&gt;str.strip()&lt;/code&gt; method on each line.&lt;/p&gt;
 &lt;p&gt;If you're ok with living dangerously, and are sure your files are formatted
 correctly you can easily write something that will outperform standard
-implementations with little effort when it comes to .fastq parsing.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="python"></category></entry><entry><title>Suggestions for Reproducible Bioinformatic Analyses</title><link href="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html" rel="alternate"></link><published>2019-08-09T00:00:00-07:00</published><updated>2019-08-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-09:/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html</id><summary type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
+implementations with little effort when it comes to .fastq parsing.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="python"></category></entry><entry><title>Suggestions for Reproducible Bioinformatic Analyses</title><link href="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html" rel="alternate"></link><published>2019-08-09T00:00:00-04:00</published><updated>2019-08-09T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-09:/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html</id><summary type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
 output of program A feeds into program B, and so on. These programs may also not
 output their results in a format which is convenient to use in the subsequent
 steps, requiring writing a conversion script, or piping its output …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Bioinformatic analyses often require lengthy workflows or pipleines, where the
@@ -359,24 +359,24 @@ pipeline:&lt;/p&gt;
 
 &lt;span class="nv"&gt;align_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;~/large_data/2019-06-28_aligned_reads&amp;quot;&lt;/span&gt;
 
-&lt;span class="k"&gt;for&lt;/span&gt; bed_file &lt;span class="k"&gt;in&lt;/span&gt; ./srna_groups/*.bed&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bed_file&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;./srna_groups/*.bed&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;
 
-    &lt;span class="nv"&gt;bed_filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$bed_file&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
-    &lt;span class="nv"&gt;out_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;bed_filename&lt;/span&gt;&lt;span class="p"&gt;%.bed&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;_reads
-    mkdir &lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="nv"&gt;$out_dir&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nv"&gt;bed_filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$bed_file&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nv"&gt;out_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;bed_filename&lt;/span&gt;&lt;span class="p"&gt;%.bed&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;_reads
+&lt;span class="w"&gt;    &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="nv"&gt;$out_dir&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 
-    &lt;span class="k"&gt;for&lt;/span&gt; bamfile &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;align_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/*.bam&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bamfile&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;align_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/*.bam&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;
 
-        &lt;span class="nv"&gt;bamfile_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$bamfile&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;bamfile_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$bamfile&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
 
-        bedtools intersect &lt;span class="se"&gt;\&lt;/span&gt;
-                -ubam &lt;span class="se"&gt;\&lt;/span&gt;
-                -a &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$bamfile&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-                -b &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$srna_file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-            &lt;span class="p"&gt;|&lt;/span&gt; samtools bam2fq -n - &amp;gt; &lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="nv"&gt;$out_dir&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$bamfile_name&lt;/span&gt;&lt;span class="s2"&gt;.fq&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;bedtools&lt;span class="w"&gt; &lt;/span&gt;intersect&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;-ubam&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;-a&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$bamfile&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$srna_file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;samtools&lt;span class="w"&gt; &lt;/span&gt;bam2fq&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="nv"&gt;$out_dir&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$bamfile_name&lt;/span&gt;&lt;span class="s2"&gt;.fq&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;
 
-    pigz -p &lt;span class="m"&gt;10&lt;/span&gt; ./&lt;span class="nv"&gt;$out_dir&lt;/span&gt;/*.fq
+&lt;span class="w"&gt;    &lt;/span&gt;pigz&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;./&lt;span class="nv"&gt;$out_dir&lt;/span&gt;/*.fq
 &lt;span class="k"&gt;done&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -389,10 +389,10 @@ be reproducible writing a quick shell script like this is the way to go. The
 comment lines also carry enough information to tell someone what it does.&lt;/p&gt;
 &lt;h3&gt;Suggestion 4: Long Pipelines Should Have a &lt;strong&gt;W i d e&lt;/strong&gt; Directory Structure&lt;/h3&gt;
 &lt;p&gt;What does this mean? It means this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;groverj3@x1-carbon wgbs_snakemake&lt;span class="o"&gt;]&lt;/span&gt;$ ls
-1_fastqc_raw                4_methyldackel_mbias    config.yaml  README.md         Snakefile
-2_trim_galore               5_methyldackel_extract  input_data   reference_genome  temp_data
-3_aligned_sorted_markdupes  6_mosdepth              LICENSE      scripts
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;groverj3@x1-carbon&lt;span class="w"&gt; &lt;/span&gt;wgbs_snakemake&lt;span class="o"&gt;]&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls
+1_fastqc_raw&lt;span class="w"&gt;                &lt;/span&gt;4_methyldackel_mbias&lt;span class="w"&gt;    &lt;/span&gt;config.yaml&lt;span class="w"&gt;  &lt;/span&gt;README.md&lt;span class="w"&gt;         &lt;/span&gt;Snakefile
+2_trim_galore&lt;span class="w"&gt;               &lt;/span&gt;5_methyldackel_extract&lt;span class="w"&gt;  &lt;/span&gt;input_data&lt;span class="w"&gt;   &lt;/span&gt;reference_genome&lt;span class="w"&gt;  &lt;/span&gt;temp_data
+3_aligned_sorted_markdupes&lt;span class="w"&gt;  &lt;/span&gt;6_mosdepth&lt;span class="w"&gt;              &lt;/span&gt;LICENSE&lt;span class="w"&gt;      &lt;/span&gt;scripts
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;and not this:&lt;/p&gt;
@@ -433,7 +433,7 @@ run Docker containers, and you'll already have one to use for cloud compute if
 needed.&lt;/p&gt;
 &lt;h3&gt;Wrapping up&lt;/h3&gt;
 &lt;p&gt;Hopefully you've found this informative and helpful. Next time I'll be back with
-more practical examples.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="thoughts"></category><category term="workflows"></category></entry><entry><title>Variations on RNAseq Workflows for DEG Analysis</title><link href="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html" rel="alternate"></link><published>2019-07-09T00:00:00-07:00</published><updated>2019-07-09T00:00:00-07:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-07-09:/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html</id><summary type="html">&lt;p&gt;When analyzing RNAseq you're faced with many possible analysis pipelines. The
+more practical examples.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="thoughts"></category><category term="workflows"></category></entry><entry><title>Variations on RNAseq Workflows for DEG Analysis</title><link href="https://groverj3.github.io/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html" rel="alternate"></link><published>2019-07-09T00:00:00-04:00</published><updated>2019-07-09T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-07-09:/articles/2019-07-09_variations-on-rnaseq-workflows-for-deg-analysis.html</id><summary type="html">&lt;p&gt;When analyzing RNAseq you're faced with many possible analysis pipelines. The
 biggest decision you need to make is what the purpose of your experiment is. I
 will make the assumption that &lt;em&gt;most&lt;/em&gt; of the time people want to determine which
 genes are differentially expressed between two samples, genotypes, conditions,

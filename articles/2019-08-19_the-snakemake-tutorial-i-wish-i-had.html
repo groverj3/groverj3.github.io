@@ -34,7 +34,7 @@
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-08-19 00:00:00-07:00"/>
+<meta property="article:published_time" content="2019-08-19 00:00:00-04:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
 <meta property="article:section" content="how-to"/>
@@ -55,7 +55,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
+<p>Senior Scientist - NGS & Bioinformatics @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -68,7 +68,7 @@
 
       <ul class="social">
           <li>
-            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@protonmail.com" target="_blank">
             <i class="fas fa-envelope">
             </i>
           </a></li>
@@ -141,7 +141,7 @@ find.</p>
 <h3>Step 0 - Install Snakemake and Your Workflow's Software Dependencies</h3>
 <p>I'm assuming you're on some kind of Linux system. Though, these directions may
 also work on macOS. Your first step should be to install Snakemake:</p>
-<div class="highlight"><pre><span></span><code>pip install --user Snakemake
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>Snakemake
 </code></pre></div>
 
 <p>I always recommend <em>not</em> using your system python. If you're on a non-rolling
@@ -232,10 +232,10 @@ indicates that <strong>all</strong> files which match this pattern when filled i
 files as input that may be created asynchronously in previous rules. We're still
 missing a very important thing though! The input files! For that, create another
 file, <code>config.yaml</code>, in the same directory and add this to it:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample1</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample2</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">etc...</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample2</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">etc...</span>
 </code></pre></div>
 
 <p>Your <code>samples</code> are yaml entries without names (you could name them if you want),
@@ -257,39 +257,39 @@ all fits together.</p>
 "input_data".</p>
 <h3>Step 2 - Running Your First Rules</h3>
 <p>I copied one sample to my <code>input_data</code> directory and added it to the .yaml file:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">JWG3_2_2</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">JWG3_2_2</span>
 </code></pre></div>
 
 <p>Now run the workflow from the directory you're developing in with
 <code>snakemake --cores #</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="o">[</span>groverj3@x1-carbon snakemake_test<span class="o">]</span>$ snakemake --cores <span class="m">2</span>
-Building DAG of jobs...
-Using shell: /usr/bin/bash
-Provided cores: <span class="m">2</span>
-Rules claiming more threads will be scaled down.
-Job counts:
-        count   <span class="nb">jobs</span>
-        <span class="m">1</span>       all
-        <span class="m">2</span>       fastqc_raw
-        <span class="m">3</span>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>groverj3@x1-carbon<span class="w"> </span>snakemake_test<span class="o">]</span>$<span class="w"> </span>snakemake<span class="w"> </span>--cores<span class="w"> </span><span class="m">2</span>
+Building<span class="w"> </span>DAG<span class="w"> </span>of<span class="w"> </span>jobs...
+Using<span class="w"> </span>shell:<span class="w"> </span>/usr/bin/bash
+Provided<span class="w"> </span>cores:<span class="w"> </span><span class="m">2</span>
+Rules<span class="w"> </span>claiming<span class="w"> </span>more<span class="w"> </span>threads<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>scaled<span class="w"> </span>down.
+Job<span class="w"> </span>counts:
+<span class="w">        </span>count<span class="w">   </span><span class="nb">jobs</span>
+<span class="w">        </span><span class="m">1</span><span class="w">       </span>all
+<span class="w">        </span><span class="m">2</span><span class="w">       </span>fastqc_raw
+<span class="w">        </span><span class="m">3</span>
 
-<span class="o">[</span>Mon Aug <span class="m">19</span> <span class="m">23</span>:30:46 <span class="m">2019</span><span class="o">]</span>
-rule fastqc_raw:
-    input: input_data/JWG3_2_2_R2.fastq.gz
-    output: 1_fastqc_raw/JWG3_2_2_R2_fastqc.html, 1_fastqc_raw/JWG3_2_2_R2_fastqc.zip
-    jobid: <span class="m">2</span>
-    wildcards: <span class="nv">sample</span><span class="o">=</span>JWG3_2_2, <span class="nv">mate</span><span class="o">=</span><span class="m">2</span>
+<span class="o">[</span>Mon<span class="w"> </span>Aug<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">23</span>:30:46<span class="w"> </span><span class="m">2019</span><span class="o">]</span>
+rule<span class="w"> </span>fastqc_raw:
+<span class="w">    </span>input:<span class="w"> </span>input_data/JWG3_2_2_R2.fastq.gz
+<span class="w">    </span>output:<span class="w"> </span>1_fastqc_raw/JWG3_2_2_R2_fastqc.html,<span class="w"> </span>1_fastqc_raw/JWG3_2_2_R2_fastqc.zip
+<span class="w">    </span>jobid:<span class="w"> </span><span class="m">2</span>
+<span class="w">    </span>wildcards:<span class="w"> </span><span class="nv">sample</span><span class="o">=</span>JWG3_2_2,<span class="w"> </span><span class="nv">mate</span><span class="o">=</span><span class="m">2</span>
 
 
-<span class="o">[</span>Mon Aug <span class="m">19</span> <span class="m">23</span>:30:46 <span class="m">2019</span><span class="o">]</span>
-rule fastqc_raw:
-    input: input_data/JWG3_2_2_R1.fastq.gz
-    output: 1_fastqc_raw/JWG3_2_2_R1_fastqc.html, 1_fastqc_raw/JWG3_2_2_R1_fastqc.zip
-    jobid: <span class="m">1</span>
-    wildcards: <span class="nv">sample</span><span class="o">=</span>JWG3_2_2, <span class="nv">mate</span><span class="o">=</span><span class="m">1</span>
+<span class="o">[</span>Mon<span class="w"> </span>Aug<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">23</span>:30:46<span class="w"> </span><span class="m">2019</span><span class="o">]</span>
+rule<span class="w"> </span>fastqc_raw:
+<span class="w">    </span>input:<span class="w"> </span>input_data/JWG3_2_2_R1.fastq.gz
+<span class="w">    </span>output:<span class="w"> </span>1_fastqc_raw/JWG3_2_2_R1_fastqc.html,<span class="w"> </span>1_fastqc_raw/JWG3_2_2_R1_fastqc.zip
+<span class="w">    </span>jobid:<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>wildcards:<span class="w"> </span><span class="nv">sample</span><span class="o">=</span>JWG3_2_2,<span class="w"> </span><span class="nv">mate</span><span class="o">=</span><span class="m">1</span>
 
-Started analysis of JWG3_2_2_R1.fastq.gzStarted analysis of JWG3_2_2_R2.fastq.gz
+Started<span class="w"> </span>analysis<span class="w"> </span>of<span class="w"> </span>JWG3_2_2_R1.fastq.gzStarted<span class="w"> </span>analysis<span class="w"> </span>of<span class="w"> </span>JWG3_2_2_R2.fastq.gz
 </code></pre></div>
 
 <p>I ran it with <code>--cores 2</code>, but I did not include a <code>threads</code> parameter to the
@@ -368,7 +368,7 @@ like this:</p>
         <span class="n">out_dir</span> <span class="o">=</span> <span class="s1">&#39;2_trim_galore&#39;</span><span class="p">,</span>
         <span class="n">trim_galore_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">][</span><span class="s1">&#39;trim_galore_path&#39;</span><span class="p">]</span>
     <span class="n">shell</span><span class="p">:</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        {params.trim_galore_path} \</span>
 <span class="sd">        --a {params.adapter_seq} \</span>
 <span class="sd">        --gzip \</span>
@@ -411,7 +411,7 @@ like this:</p>
         <span class="n">bwameth_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;paths&#39;</span><span class="p">][</span><span class="s1">&#39;bwameth_path&#39;</span><span class="p">],</span>
         <span class="n">genome</span> <span class="o">=</span> <span class="n">REFERENCE_GENOME</span>
     <span class="n">shell</span><span class="p">:</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        {params.bwameth_path} \</span>
 <span class="sd">        -t {threads} \</span>
 <span class="sd">        --reference {params.genome} \</span>
@@ -423,36 +423,36 @@ like this:</p>
 </code></pre></div>
 
 <p>And the <code>config.yaml</code> looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">JWG3_2_2_</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># Samples should be reported by ID rather than filenames, and exclude the</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># trailing &quot;R1&quot; and &quot;R2&quot;, one sample ID per pair. If samples are supplied as</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># separate .fastq.gz files within each pair concatenate them to a single R1 and</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># R2 file prior to running.</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nt">samples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">JWG3_2_2_</span>
+<span class="w">    </span><span class="c1"># Samples should be reported by ID rather than filenames, and exclude the</span>
+<span class="w">    </span><span class="c1"># trailing &quot;R1&quot; and &quot;R2&quot;, one sample ID per pair. If samples are supplied as</span>
+<span class="w">    </span><span class="c1"># separate .fastq.gz files within each pair concatenate them to a single R1 and</span>
+<span class="w">    </span><span class="c1"># R2 file prior to running.</span>
 
-<span class="nt">reference_genome</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">reference_genome/ref_genome.fasta</span><span class="w"></span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain"># Path to reference genome here with .fasta extension</span><span class="w"></span>
+<span class="nt">reference_genome</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">reference_genome/ref_genome.fasta</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain"># Path to reference genome here with .fasta extension</span>
 
 
-<span class="c1"># Options for individual workflow steps</span><span class="w"></span>
-<span class="c1"># Configure threads for each step as desired, this is a sane starting point</span><span class="w"></span>
+<span class="c1"># Options for individual workflow steps</span>
+<span class="c1"># Configure threads for each step as desired, this is a sane starting point</span>
 
-<span class="nt">trim_galore</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">adapter_seq </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</span><span class="w"></span>
-<span class="w">    </span><span class="nt">quality </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w"></span>
+<span class="nt">trim_galore</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">adapter_seq </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</span>
+<span class="w">    </span><span class="nt">quality </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
 
-<span class="w w-Error"> </span><span class="nt">bwameth</span><span class="p">:</span><span class="w"></span>
+<span class="w w-Error"> </span><span class="nt">bwameth</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">threads </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">   </span>
 
 
-<span class="c1"># Paths to individual tools</span><span class="w"></span>
-<span class="c1"># You probably don&#39;t need to change this unless programs are not in your $PATH</span><span class="w"></span>
+<span class="c1"># Paths to individual tools</span>
+<span class="c1"># You probably don&#39;t need to change this unless programs are not in your $PATH</span>
 
-<span class="nt">paths</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">fastqc_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastqc</span><span class="w"></span>
-<span class="w">  </span><span class="nt">trim_galore_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trim_galore</span><span class="w"></span>
-<span class="w">  </span><span class="nt">bwameth_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bwameth.py</span><span class="w"></span>
+<span class="nt">paths</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">fastqc_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fastqc</span>
+<span class="w">  </span><span class="nt">trim_galore_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trim_galore</span>
+<span class="w">  </span><span class="nt">bwameth_path </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bwameth.py</span>
 </code></pre></div>
 
 <p>That's a lot to take in, so a few words of explanation are in order. I have moved

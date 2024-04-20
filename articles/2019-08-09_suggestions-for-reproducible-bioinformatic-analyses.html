@@ -34,7 +34,7 @@
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://groverj3.github.io/articles/2019-08-09_suggestions-for-reproducible-bioinformatic-analyses.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2019-08-09 00:00:00-07:00"/>
+<meta property="article:published_time" content="2019-08-09 00:00:00-04:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
 <meta property="article:section" content="commentary"/>
@@ -54,7 +54,7 @@
       </a>
       <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
 
-<p>Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
+<p>Senior Scientist - NGS & Bioinformatics @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
       <nav>
         <ul class="list">
 
@@ -67,7 +67,7 @@
 
       <ul class="social">
           <li>
-            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@gmail.com" target="_blank">
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@protonmail.com" target="_blank">
             <i class="fas fa-envelope">
             </i>
           </a></li>
@@ -173,24 +173,24 @@ pipeline:</p>
 
 <span class="nv">align_dir</span><span class="o">=</span><span class="s2">&quot;~/large_data/2019-06-28_aligned_reads&quot;</span>
 
-<span class="k">for</span> bed_file <span class="k">in</span> ./srna_groups/*.bed<span class="p">;</span> <span class="k">do</span>
+<span class="k">for</span><span class="w"> </span>bed_file<span class="w"> </span><span class="k">in</span><span class="w"> </span>./srna_groups/*.bed<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 
-    <span class="nv">bed_filename</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$bed_file</span><span class="k">)</span>
-    <span class="nv">out_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">bed_filename</span><span class="p">%.bed</span><span class="si">}</span>_reads
-    mkdir <span class="s2">&quot;./</span><span class="nv">$out_dir</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">bed_filename</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="nv">$bed_file</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">out_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">bed_filename</span><span class="p">%.bed</span><span class="si">}</span>_reads
+<span class="w">    </span>mkdir<span class="w"> </span><span class="s2">&quot;./</span><span class="nv">$out_dir</span><span class="s2">&quot;</span>
 
-    <span class="k">for</span> bamfile <span class="k">in</span> <span class="si">${</span><span class="nv">align_dir</span><span class="si">}</span>/*.bam<span class="p">;</span> <span class="k">do</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>bamfile<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="si">${</span><span class="nv">align_dir</span><span class="si">}</span>/*.bam<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 
-        <span class="nv">bamfile_name</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$bamfile</span><span class="k">)</span>
+<span class="w">        </span><span class="nv">bamfile_name</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="nv">$bamfile</span><span class="k">)</span>
 
-        bedtools intersect <span class="se">\</span>
-                -ubam <span class="se">\</span>
-                -a <span class="s2">&quot;</span><span class="nv">$bamfile</span><span class="s2">&quot;</span> <span class="se">\</span>
-                -b <span class="s2">&quot;</span><span class="nv">$srna_file</span><span class="s2">&quot;</span> <span class="se">\</span>
-            <span class="p">|</span> samtools bam2fq -n - &gt; <span class="s2">&quot;./</span><span class="nv">$out_dir</span><span class="s2">/</span><span class="nv">$bamfile_name</span><span class="s2">.fq&quot;</span>
-    <span class="k">done</span>
+<span class="w">        </span>bedtools<span class="w"> </span>intersect<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>-ubam<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>-a<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bamfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>-b<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$srna_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="p">|</span><span class="w"> </span>samtools<span class="w"> </span>bam2fq<span class="w"> </span>-n<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;./</span><span class="nv">$out_dir</span><span class="s2">/</span><span class="nv">$bamfile_name</span><span class="s2">.fq&quot;</span>
+<span class="w">    </span><span class="k">done</span>
 
-    pigz -p <span class="m">10</span> ./<span class="nv">$out_dir</span>/*.fq
+<span class="w">    </span>pigz<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span><span class="w"> </span>./<span class="nv">$out_dir</span>/*.fq
 <span class="k">done</span>
 </code></pre></div>
 
@@ -203,10 +203,10 @@ be reproducible writing a quick shell script like this is the way to go. The
 comment lines also carry enough information to tell someone what it does.</p>
 <h3>Suggestion 4: Long Pipelines Should Have a <strong>W i d e</strong> Directory Structure</h3>
 <p>What does this mean? It means this:</p>
-<div class="highlight"><pre><span></span><code><span class="o">[</span>groverj3@x1-carbon wgbs_snakemake<span class="o">]</span>$ ls
-1_fastqc_raw                4_methyldackel_mbias    config.yaml  README.md         Snakefile
-2_trim_galore               5_methyldackel_extract  input_data   reference_genome  temp_data
-3_aligned_sorted_markdupes  6_mosdepth              LICENSE      scripts
+<div class="highlight"><pre><span></span><code><span class="o">[</span>groverj3@x1-carbon<span class="w"> </span>wgbs_snakemake<span class="o">]</span>$<span class="w"> </span>ls
+1_fastqc_raw<span class="w">                </span>4_methyldackel_mbias<span class="w">    </span>config.yaml<span class="w">  </span>README.md<span class="w">         </span>Snakefile
+2_trim_galore<span class="w">               </span>5_methyldackel_extract<span class="w">  </span>input_data<span class="w">   </span>reference_genome<span class="w">  </span>temp_data
+3_aligned_sorted_markdupes<span class="w">  </span>6_mosdepth<span class="w">              </span>LICENSE<span class="w">      </span>scripts
 </code></pre></div>
 
 <p>and not this:</p>
