@@ -1,5 +1,5 @@
-Title: I'm Jeff. A Bioinformatician.
-Date: 2019-06-14
+Title: I'm Jeff. A Bioinformatics Scientist.
+Date: 2024-04-20
 save_as: index.html
 
 I live at the intersection between big data and biology (and buzzwords), and am
@@ -14,7 +14,7 @@ and anything else that piques my interest.
 
 <i class="fas fa-server" style="width:24px;height:24px;"></i> I can manage a
 multi-user **Linux** <img src="/images/OS-Linux-icon.png" style="width:24px;height:24px;">
-server environment and I'm comfortable on the **command line**
+server environment and I live on the **command line**
 <img src="/images/terminal_icon.png" style="width:24px;height:24px;">.
 
 <i class="fas fa-flask" style="width:24px;height:24px;"></i> I believe in
@@ -25,8 +25,8 @@ server environment and I'm comfortable on the **command line**
 , and compared **methylomes** using sequencing data.
 
 <i class="fas fa-project-diagram" style="width:24px;height:24px;"></i> I can
-create an analysis pipeline and deploy it on high performance computing
-resources, or create visualizations and explore data in a
+create an analysis pipeline and deploy it on high performance computing clusters,
+cloud resources, or create visualizations and explore data in a
 <img src="/images/jupyter_logo.png" alt="Jupyter" style="width:89px;height:24px;">
 notebook.
 
@@ -39,8 +39,3 @@ studying RNA-directed DNA methylation with next-generation sequencing techniques
 While you're here you can learn something [about me](/pages/about.html) or check
 out my [blog](/blog.html) where I post how-tos, thoughts on bioinformatics,
 and general nonsense.
-
-<center>
-<img src="/images/doin_work.png" alt="Check Out Spacemacs!">
-Check out [Spacemacs](http://spacemacs.org/)!
-</center>

@@ -1,5 +1,13 @@
 Title: Projects
-Date: 2019-06-19
+Date: 2024-04-20
+
+This page details some of the projects I worked on during my graduate education.
+Due to the nature of employment, projects I have worked on since leaving grad
+school are the property of the companies which funded the work. However, assuming
+I update my blog on a reasonably consistent basis (wishful thinking) then you'll
+also get a sense of what I have done since then. Of course, if you have specific
+questions about a line item on my CV, a particular skill, or a consulting
+opportunity, then please feel free to reach out (email preferred!).
 
 ## Enabling Reproducible Bioinformatics Workflows
 #### [**LoadExp+**](https://genomevolution.org/coge/LoadExperiment.pl)

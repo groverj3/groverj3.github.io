@@ -8,9 +8,9 @@ SITENAME = 'Jeff Grover. Bioinformatics Scientist.'
 SITEURL = ''
 SITELOGO = '/images/jeff.jpg'
 SITETITLE = AUTHOR
-SITESUBTITLE = 'Bioinformatics Scientist @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a>'
+SITESUBTITLE = 'Senior Scientist - NGS & Bioinformatics @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a>'
 
-TIMEZONE = 'America/Phoenix'
+TIMEZONE = 'America/New_York'
 DEFAULT_LANG = 'en'
 PATH = 'content'
 ARTICLE_PATHS = ['articles']
@@ -53,7 +53,7 @@ LINKS = (
 
 # Social widget
 SOCIAL = (
-    ('envelope', 'mailto:jeffrey.w.grover@gmail.com'),
+    ('envelope', 'mailto:jeffrey.w.grover@protonmail.com'),
     ('linkedin', 'https://www.linkedin.com/in/jeffreygrover/'),
     ('github', 'https://github.com/groverj3'),
 )

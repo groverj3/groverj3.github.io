@@ -1,5 +1,5 @@
 Title: About Me
-Date: 2019-06-14
+Date: 2024-04-20
 save_as: pages/about.html
 
 I work with "big data" (and small, and medium data!) from "next-generation 
@@ -73,9 +73,8 @@ Bahstahn
 
 As we traveled forward through time, roughly at 1s/s (give or take), we ended up
 in 2020. We all know what happened in February and March. Just as I began my job
-search, suddenly everything shut down. And we have yet to go back all the way to
-what came before yet. Luckily, I was able, after roughly 200 applications to get
-a great opporunity at [Seven Bridges](https://www.sevenbridges.com/).
+search, suddenly everything shut down. Luckily, I was able, after roughly 200
+applications to get a great opporunity at [Seven Bridges](https://www.sevenbridges.com/).
 
 I worked with a lot of great people there, and was able to bring my practical
 experience running bioinformatics workflows to a company focused on implementing
