@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="One of the, if not the, most common downstream analysis task I&#39;m asked to perform on RNAseq data is to generate the venerable &#34;Volcano Plot.&#34; These are kind of the bioinformatics equivalent of saying &#34;Hey! Look how much data I have!&#34; Regardless, they are a pretty good way to quickly …" />
+<meta name="keywords" content="bioinformatics, data-visualization, rnaseq">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
+<meta property="og:title" content="Making Volcano Plots With ggplot2"/>
+<meta property="og:description" content="One of the, if not the, most common downstream analysis task I&#39;m asked to perform on RNAseq data is to generate the venerable &#34;Volcano Plot.&#34; These are kind of the bioinformatics equivalent of saying &#34;Hey! Look how much data I have!&#34; Regardless, they are a pretty good way to quickly …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2024-04-21_making-volcano-plots-with-ggplot2.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2024-04-21 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="how-to"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="data-visualization"/>
+<meta property="article:tag" content="rnaseq"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Making Volcano Plots With ggplot2</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Senior Scientist - NGS & Bioinformatics @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@protonmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="making-volcano-plots-with-ggplot2">Making Volcano Plots With ggplot2</h1>
+    <p>
+          Posted on Sun 21 April 2024 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>One of the, if not <em>the</em>, most common downstream analysis task I'm asked to perform on RNAseq data is to generate the
+venerable "Volcano Plot." These are kind of the bioinformatics equivalent of saying "Hey! Look how much data I have!"
+Regardless, they are a pretty good way to quickly summarize an RNAseq experiment. There are now lots of options for
+generating these visualizations. If you're looking for a plug and play option, the excellent bioconductor package
+<a href="https://bioconductor.org/packages/release/bioc/html/EnhancedVolcano.html">EnhancedVolcano</a>. However, if you are an R
+tidyverse user you actually already have everything you need to make these plots.</p>
+<p>Starting in grad school, I created a library of R and Python snippets that I still reuse. I've continued to update my
+volcano plot code over time and at this point I actually still reuse that rather than loading in another package. Below,
+I will share this code and explain the major concepts behind making it. I'm not a software engineer, so it's likely that
+there are lots of other ways to throw this together.</p>
+<h3>The Full Function</h3>
+<p>This function is also available <a href="https://github.com/groverj3/genomics_visualizations/blob/master/volcano_plotteR.r">here</a></p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span><span class="w">  </span><span class="c1"># For displaying gene labels, if you don&#39;t want them you can omit this library</span>
+
+<span class="n">volcplot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">padj_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">fc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">plot_title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;Volcano Plot&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">plot_subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">genelist_vector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">genelist_filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1"># Set the fold-change thresholds</span>
+<span class="w">  </span><span class="n">neg_log2fc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">-</span><span class="nf">log2</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span>
+<span class="w">  </span><span class="n">pos_log2fc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">log2</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Make a dataset for plotting, add the status as a new column</span>
+<span class="w">  </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">    </span><span class="nf">mutate_at</span><span class="p">(</span><span class="s">&#39;padj&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="nf">replace</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">.x</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">    </span><span class="nf">mutate_at</span><span class="p">(</span><span class="s">&#39;log2FoldChange&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="nf">replace</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">.x</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span>
+<span class="w">      </span><span class="n">log2fc_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">log2FoldChange</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">pos_log2fc</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">padj</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">padj_threshold</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;up&#39;</span><span class="p">,</span>
+<span class="w">                         </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">log2FoldChange</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">neg_log2fc</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">padj</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">padj_threshold</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;down&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ns&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">hgnc_symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">replace_na</span><span class="p">(</span><span class="n">hgnc_symbol</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;none&#39;</span><span class="p">))</span>
+
+<span class="w">  </span><span class="nf">if </span><span class="p">(</span><span class="n">genelist_filter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">hgnc_symbol</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">genelist_vector</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">genelist_vector</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">mutate</span><span class="p">(</span><span class="n">hgnc_symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">hgnc_symbol</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">genelist_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">padj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">padj_threshold</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">log2fc_threshold</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&#39;ns&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">hgnc_symbol</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># Get the number of up, down, and unchanged genes</span>
+<span class="w">  </span><span class="n">up_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">log2fc_threshold</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;up&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">nrow</span><span class="p">()</span>
+<span class="w">  </span><span class="n">down_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">log2fc_threshold</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;down&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">nrow</span><span class="p">()</span>
+<span class="w">  </span><span class="n">unchanged_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot_ready_data</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">log2fc_threshold</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;ns&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">nrow</span><span class="p">()</span>
+
+<span class="w">  </span><span class="c1"># Make the labels for the legend</span>
+<span class="w">  </span><span class="n">legend_labels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">      </span><span class="nf">str_c</span><span class="p">(</span><span class="s">&#39;Up: &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">up_genes</span><span class="p">),</span>
+<span class="w">      </span><span class="nf">str_c</span><span class="p">(</span><span class="s">&#39;NS: &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">unchanged_genes</span><span class="p">),</span>
+<span class="w">      </span><span class="nf">str_c</span><span class="p">(</span><span class="s">&#39;Down: &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">down_genes</span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Set the x axis limits, rounded to the next even number</span>
+<span class="w">  </span><span class="n">x_axis_limits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">DescTools</span><span class="o">::</span><span class="nf">RoundTo</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">max</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">plot_ready_data</span><span class="o">$</span><span class="n">log2FoldChange</span><span class="p">)),</span>
+<span class="w">    </span><span class="m">2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ceiling</span>
+<span class="w">  </span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1"># Set the plot colors</span>
+<span class="w">  </span><span class="n">plot_colors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">      </span><span class="s">&#39;up&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;firebrick1&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&#39;ns&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;gray&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&#39;down&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;dodgerblue1&#39;</span>
+<span class="w">  </span><span class="p">)</span>
+
+
+<span class="w">  </span><span class="c1"># Make the plot, these options are a reasonable strting point</span>
+<span class="w">  </span><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">plot_ready_data</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_point</span><span class="p">(</span>
+<span class="w">      </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span>
+<span class="w">      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">aes</span><span class="p">(</span>
+<span class="w">      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2FoldChange</span><span class="p">,</span>
+<span class="w">      </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">log10</span><span class="p">(</span><span class="n">padj</span><span class="p">),</span>
+<span class="w">      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2fc_threshold</span><span class="p">,</span>
+<span class="w">      </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hgnc_symbol</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_vline</span><span class="p">(</span>
+<span class="w">      </span><span class="n">xintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">neg_log2fc</span><span class="p">,</span><span class="w"> </span><span class="n">pos_log2fc</span><span class="p">),</span>
+<span class="w">      </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;dashed&#39;</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_hline</span><span class="p">(</span>
+<span class="w">      </span><span class="n">yintercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nf">log10</span><span class="p">(</span><span class="n">padj_threshold</span><span class="p">),</span>
+<span class="w">      </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;dashed&#39;</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">scale_x_continuous</span><span class="p">(</span>
+<span class="w">      </span><span class="s">&#39;log2(FC)&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="o">-</span><span class="n">x_axis_limits</span><span class="p">,</span><span class="w"> </span><span class="n">x_axis_limits</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">scale_color_manual</span><span class="p">(</span>
+<span class="w">      </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot_colors</span><span class="p">,</span>
+<span class="w">      </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legend_labels</span>
+<span class="w">      </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span>
+<span class="w">      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str_c</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;-fold, padj ≤&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">padj_threshold</span><span class="p">),</span>
+<span class="w">      </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot_title</span><span class="p">,</span>
+<span class="w">      </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot_subtitle</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme_bw</span><span class="p">(</span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">24</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span>
+<span class="w">      </span><span class="n">aspect.ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">      </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">),</span>
+<span class="w">      </span><span class="n">legend.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">margin</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span>
+<span class="w">      </span><span class="n">legend.box.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">margin</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">  </span><span class="c1"># Reduces dead area around legend</span>
+<span class="w">      </span><span class="n">legend.spacing.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;cm&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Add gene labels if needed</span>
+<span class="w">    </span><span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">genelist_vector</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="nf">geom_label_repel</span><span class="p">(</span>
+<span class="w">          </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span>
+<span class="w">          </span><span class="n">force</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span>
+<span class="w">          </span><span class="n">max.overlaps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100000</span><span class="p">,</span>
+<span class="w">          </span><span class="n">nudge_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">          </span><span class="n">segment.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="n">min.segment.length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<span class="w">          </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">plot</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Yes, this is rather long, but it's actually fairly straightforward to understand. Hopefully the comments help.</p>
+<h3>But What Does This Look Like?</h3>
+<p>Here's an example of a typical volcano plot this generates:</p>
+<p><center>
+<img src="https://raw.githubusercontent.com/groverj3/genomics_visualizations/master/volcano_plotteR.png">
+</center></p>
+<p>There are lots of places to customize, of course, since it's just a normal ggplot2 object.</p>
+<h3>How Is The Input Data Formatted?</h3>
+<p>This function works with DESeq2 output results as a data frame. So, you can get here by calling <code>as.data.frame(results({your_deseq_dataset_here}))</code>,
+follow-up with <code>rownamnes_to_column(var = 'ensembl_id')</code> to get your ensembl IDs into a real column and then doing a
+<code>left_join()</code> (or some kind of join) with a table of ensembl IDs and hgnc_symbols. I typically work with ensembl gene IDs
+as a ground truth identifier for genes, and also include gene symbols as a more human readable identifier. Since I'm
+primarily working with human cell lines at the moment there needs to be a column in your dataset called "hgnc_symbol."
+If you do work in mice, plants, etc. you can change references to that column to suit your needs.</p>
+<p>A note: I prefer not to do any filtering of the data when calling <code>results()</code> on the DESeq2 outputs. This way I can
+save this data frame and do my own filtering on the fly with dplyr <code>filter()</code>.</p>
+<h3>Brief Explanation</h3>
+<p>You can think of this function doing things in a few discrete steps:</p>
+<ol>
+<li>Set the fold chance thresholds for the plot based on what you provide for the variable <code>fc</code>, which defaults to 1 (no threshold).</li>
+<li>Set NAs in the <code>padj</code> column to 1 and in the <code>log2FoldChange</code> column to 0. Create a new variable with the gene's differential expression status (up, down, not significant).</li>
+<li>Filter the dataset on a list of hgnc symbols you supply (optional).</li>
+<li>Remove gene symbol labels if not differentially expressed and not a member of a list supplied when invoking the function (optional).</li>
+<li>Get the number of genes which are significantly up and down, and the number which are not significant for the legend.</li>
+<li>Create the legend labels based on number of differentially expressed genes.</li>
+<li>Set the X axis limits based on rounding to the next multiple of 2 (because log base 2) of the absolute value of the max in the log2FoldChange column.</li>
+<li>Set the colors for the plot, defaults can be easily changed but I like them.</li>
+<li>Build the ggplot object, simply using <code>geom_point()</code> and some vertical/horizontal lines based on your fold change and padj thresholds.</li>
+<li>Add labels to points based on hgnc_symbol (optional).</li>
+</ol>
+<h3>Some Gotchas</h3>
+<p>DESeq2 sets padj and log2foldchance to NA for many reasons. This may be because of the expression level and filtering out low-expressing
+genes prior to statistical testing. It may also be due to lack of replicates and too much variability. Regardless, it's
+something of a philosophical question as to whether you want these genes to show up in the "not significant" category
+or whether you should simply not include them in the results at all. At this point, I lean toward setting their p values
+to 1 and log fold changes to 0. This way, such genes end up in the "not significant" category. My reasoning, this heads
+off question about why the number of genes in each category may not add up to the number in the annotation set across
+comparisons. Now those genes which are significantly up, down, and not significant always add up to the same number
+assuming that you're using the same annotations.</p>
+<h3>Why Not Just Use EnhancedVolcano?</h3>
+<p>Honestly, there isn't really a good reason not to. However, I already had this code on-hand and therefore I find it
+pretty easy to just run this on the reg. If you're learning ggplot2 and the tidyverse I think this is a good way to learn
+with a real example.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/data-visualization.html">data-visualization</a>
+      <a href="https://groverj3.github.io/tag/rnaseq.html">rnaseq</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
