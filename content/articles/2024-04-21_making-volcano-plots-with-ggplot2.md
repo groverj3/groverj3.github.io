@@ -175,9 +175,9 @@ You can think of this function doing things in a few discrete steps:
 
 ### Some Gotchas
 
-DESeq2 sets padj and log2foldchance to NA for many reasons. This may be because of the expression level and filtering out low-expressing
-genes prior to statistical testing. It may also be due to lack of replicates and too much variability. Regardless, it's
-something of a philosophical question as to whether you want these genes to show up in the "not significant" category
+DESeq2 sets padj and log2foldchange to NA for many reasons. This may be because of the expression level and filtering out
+low-expressing genes prior to statistical testing. It may also be due to lack of replicates and too much variability. Regardless,
+it's something of a philosophical question as to whether you want these genes to show up in the "not significant" category
 or whether you should simply not include them in the results at all. At this point, I lean toward setting their p values
 to 1 and log fold changes to 0. This way, such genes end up in the "not significant" category. My reasoning, this heads
 off question about why the number of genes in each category may not add up to the number in the annotation set across
