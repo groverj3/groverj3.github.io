@@ -49,7 +49,7 @@ you don't need a "real" container registry, you can simply save them like so:
 podman save {container_name} | gzip > container_name.tar.gz
 ```
 
-If a container is only available for Docker, usually you have convert them to Apptainer/SIngularity format without any
+If a container is only available for Docker, usually you can convert them to Apptainer/SIngularity format without any
 fuss:
 
 ```bash
@@ -101,7 +101,7 @@ them run R in a container (a decent option, but makes some things awkward unless
 Rig lets you install R across the system, without depending on your system package manager. It also configures R to use
 the POSIT package manager by default. This is exciting because you no longer need to compile R packages. Yes, there were
 ways around this before, but none were very plug and play, and some methods required installing packages for the whole
-system. Running `install.package('package_name)` will default to a binary package and then falling back to compilation
+system. Running `install.package('package_name')` will default to a binary package and then falling back to compilation
 if required.
 
 This solution also defaults to user-specific package libraries. So, no need to manage that.
