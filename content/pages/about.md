@@ -99,10 +99,10 @@ Aside from biology, data science, and general computer nerdery I have a few
 hobbies. I'm an avid guitarist (mostly Jacksons, though my gear acquisition
 syndrome is equal opportunity), and I try to see one of my favorite 
 prog-rock/metal bands every chance I get. Related to that, I've dabbled in
-recording and music production. You can usually find me playing some classic RPGs
-as well (Chrono Trigger is a personal favorite). When I'm unwinding with friends
-you can find me wherever fine craft beers are sold (no thank you on the IPAs
-though)!
+recording and music production. You can usually find me relaxing with my wife
+and our cat, Hank (named for Hank Schrader from Breaking Bad). When I'm
+unwinding with friends you can find me wherever fine craft beers are served (no
+thank you on the IPAs though)!
 
 <center>
 <img src="/images/geetars.jpg", alt="I don't have a problem...">
