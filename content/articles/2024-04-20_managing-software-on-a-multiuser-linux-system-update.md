@@ -6,11 +6,11 @@ tags: sysadmin
 Back in 2019, the halcyon days of yore, near the end of my time in graduate school I wrote a well-intentioned article
 about software management for multi-user linux systems ([here](/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html)).
 This original article was written based on my experiences as the de-facto sysadmin of our lab's bioinformatics server.
-I am not a trained Linux sysadmin, I didn't even major in anything computer-related in college, however, I have been a
+I am not a trained Linux sysadmin, I didn't even major in anything computer-related in college. However, I have been a
 big nerd as long as I can remember and have been playing with Linux far longer than I was using it for a job. That
-article was a good starting point. However, lots of things have changed in the past few years. While my thoughts are
-similar as back then, I do have the benefit of additional experience to draw on, as well as some developments on the
-software and hardware side of things since then.
+article was a good starting point. Lots of things have changed in the past few years. While my thoughts are similar as
+back then, I do have the benefit of additional experience to draw on, as well as some developments on the software and
+hardware side of things since then.
 
 This is not a guide to setting up an HPC or cluster. It's also not a guide for setting up a cloud compute environment.
 If you're not at a university or a large company, then you're unlikely to have an HPC. On the flip side, I like cloud
@@ -21,7 +21,8 @@ cloud vendor of choice.
 
 As the only full-time bioinformatics scientist at a midsize biotech company I have once again found myself in the situation
 of managing a server for my own work. As we add more people, we need processes that scale well. My goal is to make this
-system, augmented with cloud resources, work until reaching 4-5 users.
+system, augmented with cloud resources, work as a primary compute server until reaching 4-5 users. At that point, it
+makes more sense to use such a system for testing and prototyping rather than a main compute resource.
 
 Consider these tips an addendum to my previous article on the subject.
 
