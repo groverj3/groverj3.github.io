@@ -1,5 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2020-05-30T00:00:00-04:00</updated><subtitle>Senior Scientist - NGS &amp; Bioinformatics @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Publications, Dissertations, Job Hunts, and a Pandemic</title><link href="https://groverj3.github.io/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html" rel="alternate"></link><published>2020-05-30T00:00:00-04:00</published><updated>2020-05-30T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2020-05-30:/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html</id><summary type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2024-04-20T00:00:00-04:00</updated><subtitle>Senior Scientist - NGS &amp; Bioinformatics @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Managing Software on a Multiuser Linux System - An Update</title><link href="https://groverj3.github.io/articles/2024-04-20_managing-software-on-a-multiuser-linux-system-an-update.html" rel="alternate"></link><published>2024-04-20T00:00:00-04:00</published><updated>2024-04-20T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2024-04-20:/articles/2024-04-20_managing-software-on-a-multiuser-linux-system-an-update.html</id><summary type="html">&lt;p&gt;Back in 2019, the halcyon days of yore, near the end of my time in graduate school I wrote a well-intentioned article
+about software management for multi-user linux systems (&lt;a href="/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html"&gt;here&lt;/a&gt;).
+This original article was written based on my experiences as the de-facto sysadmin of our lab's bioinformatics server.
+I am …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Back in 2019, the halcyon days of yore, near the end of my time in graduate school I wrote a well-intentioned article
+about software management for multi-user linux systems (&lt;a href="/articles/2019-06-25_managing-software-on-a-multiuser-linux-system.html"&gt;here&lt;/a&gt;).
+This original article was written based on my experiences as the de-facto sysadmin of our lab's bioinformatics server.
+I am not a trained Linux sysadmin, I didn't even major in anything computer-related in college, however, I have been a
+big nerd as long as I can remember and have been playing with Linux far longer than I was using it for a job. That
+article was a good starting point. However, lots of things have changed in the past few years. While my thoughts are
+similar as back then, I do have the benefit of additional experience to draw on, as well as some developments on the
+software and hardware side of things since then.&lt;/p&gt;
+&lt;p&gt;This is not a guide to setting up an HPC or cluster. It's also not a guide for setting up a cloud compute environment.
+If you're not at a university or a large company, then you're unlikely to have an HPC. On the flip side, I like cloud
+compute, but always like to have a local server for my work. It's just faster to develop on. If you have average compute
+needs for bioinformatics (alignment, variant calling, notebooks, etc.) then a single node local server does a very good
+job. Especially with modern processors and enough RAM. Plus, if you need more compute you can always get it through your
+cloud vendor of choice.&lt;/p&gt;
+&lt;p&gt;As the only full-time bioinformatics scientist at a midsize biotech company I have once again found myself in the situation
+of managing a server for my own work. As we add more people, we need processes that scale well. My goal is to make this
+system, augmented with cloud resources, work until reaching 4-5 users.&lt;/p&gt;
+&lt;p&gt;Consider these tips an addendum to my previous article on the subject.&lt;/p&gt;
+&lt;h3&gt;0. Make Your Life Easier With Containers&lt;/h3&gt;
+&lt;p&gt;What is the best way to avoid installing a bunch of random software for your small number of users? Just don't. Encourage
+every user to use containers. But how will they do so without &lt;code&gt;sudo&lt;/code&gt; privileges for Docker? Easy, have them use &lt;a href="https://apptainer.org/"&gt;Apptainer&lt;/a&gt;
+or &lt;a href="https://podman.io/"&gt;Podman&lt;/a&gt;. Neither of these options require superuser privileges. Apptainer split off from &lt;a href="https://sylabs.io/"&gt;Singularity&lt;/a&gt;,
+and that is also an option as well. Podman is a Red Hat product, but runs just fine on Ubuntu and other distros, plus it
+is &lt;em&gt;mostly&lt;/em&gt; CLI-identical to Docker. Docker is problematic in HPC and multi-user environments because it requires superuser
+permissions, or adding a user to the Docker group (which then allows control of all system containers, also problematic).&lt;/p&gt;
+&lt;p&gt;A wrinkle to using containers for scientific computing is that usually you don't want the container to continue running
+after the job is done. For Apptainer this is fine, it was designed with this use-case in mind. For Podman/Docker, simply
+include the &lt;code&gt;--rm&lt;/code&gt; option in your &lt;code&gt;docker run&lt;/code&gt; or &lt;code&gt;podman run&lt;/code&gt;. Another thing to remember is that you're going to have
+to mount your directory containing your input data, and output location as a volume for Podman/Docker, or if using
+Apptainer and you need to cross filesystem boundaries.&lt;/p&gt;
+&lt;p&gt;Managing containers is not a big hassle either. You might think that making your own, and putting together a registry is
+too much work. Firstly, most bioinformatics and data science software is already available in Docker containers. If not
+from the developers, it's likely available through &lt;a href="https://biocontainers.pro/"&gt;Biocontainers&lt;/a&gt;. In terms of storing them,
+you don't need a "real" container registry, you can simply save them like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;podman&lt;span class="w"&gt; &lt;/span&gt;save&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;container_name&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;gzip&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;container_name.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If a container is only available for Docker, usually you have convert them to Apptainer/SIngularity format without any
+fuss:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;apptainer&lt;span class="w"&gt; &lt;/span&gt;build&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;container_name&lt;span class="o"&gt;}&lt;/span&gt;.sif&lt;span class="w"&gt; &lt;/span&gt;docker-archive:&lt;span class="o"&gt;{&lt;/span&gt;container_name&lt;span class="o"&gt;}&lt;/span&gt;.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Just stick them somewhere consistent in your directory structure. I use a folder on a NAS called "container_library."&lt;/p&gt;
+&lt;h3&gt;1. Encourage Use of Virtual Environments For Python&lt;/h3&gt;
+&lt;p&gt;There is a great extension for pyenv called &lt;a href="https://github.com/pyenv/pyenv-virtualenv"&gt;pyenv-virtualenv&lt;/a&gt;. When working
+on a data science project, or developing a standalone program, one should start by creating a virtualenv for said project.
+This is a great solution, in combination with pyenv, for python's terrible package management and dependency resolution.&lt;/p&gt;
+&lt;p&gt;Yes, you could use Anaconda to do the same thing but Anaconda is bloated and its conda package manager is slow. Plus,
+you're then stuck using it for everything. It's pretty easy to install your own local version of python with pyenv, and
+then simply run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pyenv&lt;span class="w"&gt; &lt;/span&gt;virtualenv&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10.2&lt;span class="w"&gt; &lt;/span&gt;my-virtual-env-3.10.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The best part of this from a sysadmin perspective is that, again, it's the users' own responsibility to manage all this.
+You just give them the tools.&lt;/p&gt;
+&lt;h3&gt;2. Users Run Their Own Jupyter Notebook Servers&lt;/h3&gt;
+&lt;p&gt;There are options like &lt;a href="https://jupyter.org/hub"&gt;jupyterhub&lt;/a&gt;, or &lt;a href="https://tljh.jupyter.org/en/latest/"&gt;the littlest jupyterhub&lt;/a&gt;.
+However, it's even easier to just have users install jupyter in their own python libraries, assign them a port to serve
+it on, and have them start it like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter&lt;span class="w"&gt; &lt;/span&gt;lab&lt;span class="w"&gt; &lt;/span&gt;--no-browser&lt;span class="w"&gt; &lt;/span&gt;--port&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;assigned_port&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, they can forward that port to your local machine as such:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;-L&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;assigned_port&lt;span class="o"&gt;}&lt;/span&gt;:localhost:&lt;span class="o"&gt;{&lt;/span&gt;assigned_port&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;remote_user&lt;span class="o"&gt;}&lt;/span&gt;@&lt;span class="o"&gt;{&lt;/span&gt;remote_host_ip&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Easy peasy.&lt;/p&gt;
+&lt;h3&gt;3. Install R With &lt;a href="https://github.com/r-lib/rig"&gt;rig&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;One of the more exciting things to happen recently, is the R installation manager, rig. This provides &lt;em&gt;some&lt;/em&gt; of the same
+functionality that you get from pyenv in R. Though, you still can't leave installation of R up to users without having
+them run R in a container (a decent option, but makes some things awkward unless you start doing &lt;em&gt;everything&lt;/em&gt; that way).
+Rig lets you install R across the system, without depending on your system package manager. It also configures R to use
+the POSIT package manager by default. This is exciting because you no longer need to compile R packages. Yes, there were
+ways around this before, but none were very plug and play, and some methods required installing packages for the whole
+system. Running &lt;code&gt;install.package('package_name)&lt;/code&gt; will default to a binary package and then falling back to compilation
+if required.&lt;/p&gt;
+&lt;p&gt;This solution also defaults to user-specific package libraries. So, no need to manage that.&lt;/p&gt;
+&lt;h3&gt;4. Have A Real Storage And Backup Strategy&lt;/h3&gt;
+&lt;p&gt;It's not software, but this is a blog and there are no rules. I do what I want. To make sure you never lose critical
+data, even if this is just a testing system you need to have a backup strategy. I currently do the following on the
+server I manage for that purpose:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The / (root) directory is fast NVMe, but not terribly large. Only system files go here.&lt;/li&gt;
+&lt;li&gt;/home is on the same device as /, but users are encouraged to store data elsewhere.&lt;/li&gt;
+&lt;li&gt;/ is redundant with a RAID1 configuration storing a mirror of all data to a second identical NVMe drive.&lt;/li&gt;
+&lt;li&gt;/mnt/bulk_nvme is an array of 6 4TB configured as a single volume. Each user gets a directory here symlinked to their
+/home. This is where most work happens.&lt;/li&gt;
+&lt;li&gt;/mnt/bulk_nvme is backed up daily to a NAS directly connected to the server via an &lt;code&gt;rsync&lt;/code&gt; cron job over 10 gigabit ethernet.&lt;/li&gt;
+&lt;li&gt;Commonly used genome/transcriptome references, containers, and other files are available on /mnt/bulk_nvme as well as on the NAS.&lt;/li&gt;
+&lt;li&gt;On the NAS (affectionately named Dagobah, because it's a data "swamp"), there are directories for "data_archive" and
+"analysis_results" where raw data and analyzed data live, respectively.&lt;/li&gt;
+&lt;li&gt;The "data_archive," "analysis_results," and "container_library" are backed up to AWS S3 Glacier Instant Retrieval tier.&lt;/li&gt;
+&lt;li&gt;Computational notebooks (jupyter), scripts (BASH, R, Python), and workflow are versioned on github.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This works for now, and is likely to change in order to scale better. In particular, we are looking at automatically
+archiving data from a NAS using data lifecycle policies, as well as more complex solutions like &lt;a href="https://www.weka.io/"&gt;WEKA&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;5. Know Where You Draw The Line&lt;/h3&gt;
+&lt;p&gt;Cloud computing is more accessible than ever before. I am personally attached to having &lt;em&gt;some&lt;/em&gt; local compute for testing,
+lighter computation, and direct control. However, if you're not a large organization with existing HPC infrastructure and
+don't plan on buying into that, then cloud computing is the way to go. It becomes nearly impossible to predict your cloud
+bill, and that's a downside to this. However, if you have more than 2-5 people, and even by the time you get to 4 or 5,
+you're going to either need a fulltime &lt;em&gt;real&lt;/em&gt; sysadmin or you're going to have to use more cloud resources.&lt;/p&gt;
+&lt;p&gt;We supplement our on-prem compute with AWS. So, if there is a job that requires more RAM than available, uses more CPUs
+than we have in one server, or needs powerful GPUs then to the cloud it goes. There are also specific bioinformatics
+cloud platforms, and I have opinions on these, but that's for another post.&lt;/p&gt;
+&lt;h3&gt;Wrap-up&lt;/h3&gt;
+&lt;p&gt;I'm sure there are tens of people out there like me, who don't mind managing a system like this. Regardless, this may give
+you some ideas on how to manage your compute environment. I find having a local server more convenient than doing
+everything in "the cloud" (someone else's computer), but I have specific limits on this and once reached, augmenting with
+cloud resources is a smart thing to reduce admin overhead.&lt;/p&gt;
+&lt;p&gt;Now, let's see if I can manage more than one post every 4 years.&lt;/p&gt;</content><category term="how-to"></category><category term="sysadmin"></category></entry><entry><title>Publications, Dissertations, Job Hunts, and a Pandemic</title><link href="https://groverj3.github.io/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html" rel="alternate"></link><published>2020-05-30T00:00:00-04:00</published><updated>2020-05-30T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2020-05-30:/articles/2020-05-30_publications-dissertations-job-hunts-and-a-pandemic.html</id><summary type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
 my random musings on bioinformatics, Linux, data science, and etc. I made a few
 reasonably cogent posts, but then life got in the way! It's been a really busy
 time, a very eventful year. I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started this github site as a place to expand my professional reach by posting
@@ -1333,12 +1446,12 @@ different experiments then you'll probably want to convert your expression value
 to some normalized measurement. In this case you can use FPKM or TPM, though the
 consensus seems to be that TPM is the way to go these days.&lt;/p&gt;
 &lt;p&gt;And, at the end of the day you know that an out-of-date collaborator is probably
-going to ask you for FPKM measurements or something anyway.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="thoughts"></category><category term="rnaseq"></category><category term="workflows"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 2</title><link href="https://groverj3.github.io/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html" rel="alternate"></link><published>2019-06-28T00:00:00-04:00</published><updated>2019-06-28T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-28:/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html</id><summary type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
+going to ask you for FPKM measurements or something anyway.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="thoughts"></category><category term="rnaseq"></category><category term="workflows"></category></entry><entry><title>Making Better Metaplots With ggplot, Part 2</title><link href="https://groverj3.github.io/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html" rel="alternate"></link><published>2019-06-28T00:00:00-04:00</published><updated>2019-06-28T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-06-28:/articles/2019-06-28_making-better-metaplots-with-ggplot-part-2.html</id><summary type="html">&lt;p&gt;&lt;a href="/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html"&gt;Last time&lt;/a&gt; we
 prepared our data using Deeptools.&lt;/p&gt;
 &lt;p&gt;Now we're going to do something kind of scandalous. R and python, living together
 in peace. What is this madness? I like R's ecosystem for manipulating data and
 plotting with the &lt;a href="https://www.tidyverse.org/"&gt;tidyverse&lt;/a&gt;. It still requires some
-tweaking, but with a bit of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/articles/2019-06-28/making-better-metaplots-with-ggplot.html"&gt;Last time&lt;/a&gt; we
+tweaking, but with a bit of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html"&gt;Last time&lt;/a&gt; we
 prepared our data using Deeptools.&lt;/p&gt;
 &lt;p&gt;Now we're going to do something kind of scandalous. R and python, living together
 in peace. What is this madness? I like R's ecosystem for manipulating data and
