@@ -3,7 +3,7 @@ Date: 2019-06-28
 Category: how-to 
 tags: bioinformatics, data-visualization
 
-[Last time](/articles/2019-06-28/making-better-metaplots-with-ggplot.html) we
+[Last time](/articles/2019-06-27_making-better-metaplots-with-ggplot-part-1.html) we
 prepared our data using Deeptools.
 
 Now we're going to do something kind of scandalous. R and python, living together
