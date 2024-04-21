@@ -26,7 +26,7 @@ RNA-directed DNA Methylation in *Arabidopsis thaliana*
 
 ## **Professional/Research Experience**
 ### **Entrada Therapeutics - Boston, MA**
-**2022-Present – Senior Scientist I - NGS & Bioinformatics**<br>
+**2024-Present – Senior Scientist I - NGS & Bioinformatics**<br>
 **Quantitative Biology Division**
 
 - Acted as subject matter expert across therapeutic programs to assess feasibility and actionability of NGS, bioinformatics, and data science project proposals.
