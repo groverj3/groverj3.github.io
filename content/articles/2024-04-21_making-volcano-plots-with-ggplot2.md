@@ -152,10 +152,9 @@ This function works with DESeq2 output results as a data frame, but requires a b
 like this:
 
 ```R
-deseq_results <- results({your_deseq_dataset}, contrast = {your_deseq_contrast}) %>%
-    as.data.frame() %>%
+deseq_results <- as.data.frame(deseq2_results) %>%
     rownamnes_to_column(var = 'ensembl_id') %>%
-    left_join({df_ensembl_id_hgnc_symbol})
+    left_join({ensembl_id_hgnc_symbol})
 ```
 
 I typically work with ensembl gene IDs as a ground truth identifier for genes, and also include gene symbols as a more
@@ -163,9 +162,6 @@ human readable identifier. Since I'm primarily working with human cell lines at 
 your dataset called "hgnc_symbol," according to the design of the volcano plot function. We achieve this by `left_join()`
 with an additional dataframe that consists of only two columns, "ensembl_id" and "hgnc_symbol." If you do work in mice, plants,
 etc. you can change all references to that column to suit your needs both here and in the plotting function.
-
-A note: I prefer not to do any filtering of the data when calling `results()` on the DESeq2 outputs. This way I can
-save this data frame and do my own filtering on the fly with dplyr `filter()`.
 
 ### Brief Explanation
 
