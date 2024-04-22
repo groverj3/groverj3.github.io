@@ -138,10 +138,9 @@ there are lots of other ways to throw this together.&lt;/p&gt;
 &lt;h3&gt;How Is The Input Data Formatted?&lt;/h3&gt;
 &lt;p&gt;This function works with DESeq2 output results as a data frame, but requires a bit of reformatting. So, you can get there
 like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;deseq_results&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;results&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="n"&gt;your_deseq_dataset&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;contrast&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;your_deseq_contrast&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nf"&gt;as.data.frame&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;deseq_results&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;as.data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deseq2_results&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nf"&gt;rownamnes_to_column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#39;ensembl_id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nf"&gt;left_join&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="n"&gt;df_ensembl_id_hgnc_symbol&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nf"&gt;left_join&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="n"&gt;ensembl_id_hgnc_symbol&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I typically work with ensembl gene IDs as a ground truth identifier for genes, and also include gene symbols as a more
@@ -149,8 +148,6 @@ human readable identifier. Since I'm primarily working with human cell lines at 
 your dataset called "hgnc_symbol," according to the design of the volcano plot function. We achieve this by &lt;code&gt;left_join()&lt;/code&gt;
 with an additional dataframe that consists of only two columns, "ensembl_id" and "hgnc_symbol." If you do work in mice, plants,
 etc. you can change all references to that column to suit your needs both here and in the plotting function.&lt;/p&gt;
-&lt;p&gt;A note: I prefer not to do any filtering of the data when calling &lt;code&gt;results()&lt;/code&gt; on the DESeq2 outputs. This way I can
-save this data frame and do my own filtering on the fly with dplyr &lt;code&gt;filter()&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;Brief Explanation&lt;/h3&gt;
 &lt;p&gt;You can think of this function doing things in a few discrete steps:&lt;/p&gt;
 &lt;ol&gt;

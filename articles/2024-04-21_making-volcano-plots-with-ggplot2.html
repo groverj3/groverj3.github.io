@@ -252,10 +252,9 @@ there are lots of other ways to throw this together.</p>
 <h3>How Is The Input Data Formatted?</h3>
 <p>This function works with DESeq2 output results as a data frame, but requires a bit of reformatting. So, you can get there
 like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">deseq_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">results</span><span class="p">({</span><span class="n">your_deseq_dataset</span><span class="p">},</span><span class="w"> </span><span class="n">contrast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">your_deseq_contrast</span><span class="p">})</span><span class="w"> </span><span class="o">%&gt;%</span>
-<span class="w">    </span><span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+<div class="highlight"><pre><span></span><code><span class="n">deseq_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">deseq2_results</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
 <span class="w">    </span><span class="nf">rownamnes_to_column</span><span class="p">(</span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;ensembl_id&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
-<span class="w">    </span><span class="nf">left_join</span><span class="p">({</span><span class="n">df_ensembl_id_hgnc_symbol</span><span class="p">})</span>
+<span class="w">    </span><span class="nf">left_join</span><span class="p">({</span><span class="n">ensembl_id_hgnc_symbol</span><span class="p">})</span>
 </code></pre></div>
 
 <p>I typically work with ensembl gene IDs as a ground truth identifier for genes, and also include gene symbols as a more
@@ -263,8 +262,6 @@ human readable identifier. Since I'm primarily working with human cell lines at 
 your dataset called "hgnc_symbol," according to the design of the volcano plot function. We achieve this by <code>left_join()</code>
 with an additional dataframe that consists of only two columns, "ensembl_id" and "hgnc_symbol." If you do work in mice, plants,
 etc. you can change all references to that column to suit your needs both here and in the plotting function.</p>
-<p>A note: I prefer not to do any filtering of the data when calling <code>results()</code> on the DESeq2 outputs. This way I can
-save this data frame and do my own filtering on the fly with dplyr <code>filter()</code>.</p>
 <h3>Brief Explanation</h3>
 <p>You can think of this function doing things in a few discrete steps:</p>
 <ol>
