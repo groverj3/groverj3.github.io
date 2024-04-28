@@ -1,5 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2024-04-21T00:00:00-04:00</updated><subtitle>Senior Scientist - NGS &amp; Bioinformatics @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Making Volcano Plots With ggplot2</title><link href="https://groverj3.github.io/articles/2024-04-21_making-volcano-plots-with-ggplot2.html" rel="alternate"></link><published>2024-04-21T00:00:00-04:00</published><updated>2024-04-21T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2024-04-21:/articles/2024-04-21_making-volcano-plots-with-ggplot2.html</id><summary type="html">&lt;p&gt;One of the, if not &lt;em&gt;the&lt;/em&gt;, most common downstream analysis task I'm asked to perform on RNAseq data is to generate the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist.</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/all.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2024-04-26T00:00:00-04:00</updated><subtitle>Senior Scientist - NGS &amp; Bioinformatics @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>On Bioinformatics Workflow Design</title><link href="https://groverj3.github.io/articles/2024-04-26_on-bioinformatics-workflow-design.html" rel="alternate"></link><published>2024-04-26T00:00:00-04:00</published><updated>2024-04-26T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2024-04-26:/articles/2024-04-26_on-bioinformatics-workflow-design.html</id><summary type="html">&lt;p&gt;Since I was in grad school I've been writing bioinformatics &lt;a href="2019-08-19_the-snakemake-tutorial-i-wish-i-had.html"&gt;workflows&lt;/a&gt;.
+Usually to process NGS data. The concept of a workflow is simple, &lt;a href="https://github.com/spotify/luigi"&gt;and not limited to the domain of bioinformatics&lt;/a&gt;.
+However, a workflow (aka "pipeline") used to analyze data from next generation sequencing (again, will it ever be
+"current …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I was in grad school I've been writing bioinformatics &lt;a href="2019-08-19_the-snakemake-tutorial-i-wish-i-had.html"&gt;workflows&lt;/a&gt;.
+Usually to process NGS data. The concept of a workflow is simple, &lt;a href="https://github.com/spotify/luigi"&gt;and not limited to the domain of bioinformatics&lt;/a&gt;.
+However, a workflow (aka "pipeline") used to analyze data from next generation sequencing (again, will it ever be
+"current gen?") certainly falls under this banner.&lt;/p&gt;
+&lt;p&gt;Over the past few years I've become more opinionated on how bioinformatics workflows should be designed. First, we should
+have a basic understanding of what a bioinformatics workflow is and what they look like.&lt;/p&gt;
+&lt;h3&gt;What Is a Bioinformatics Workflow?&lt;/h3&gt;
+&lt;p&gt;If you work in bioinformatics and/or computational biology (really, most fields of science that utilize computational
+resources on a medium-large scale) you've probably written a workflow. I would define such a process as a series of
+programs, usually (but not always) operating sequentially on the output of the previous tool in the series. A typical
+workflow for the analysis of RNAseq data might look like this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;QC of raw .fastq data &lt;a href="https://github.com/s-andrews/FastQC"&gt;(fastqc)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Trimming of reads to remove adapters and low quality basecalls &lt;a href="https://github.com/FelixKrueger/TrimGalore"&gt;(trim_galore)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Alignment of cleaned reads against a reference genome &lt;a href="https://github.com/alexdobin/STAR"&gt;(STAR)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sorting and indexing the alignment .bam file &lt;a href="https://github.com/samtools/samtools"&gt;(samtools)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Post-alignment QC &lt;a href="https://github.com/broadinstitute/picard"&gt;(picard)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Read per gene counting &lt;a href="https://subread.sourceforge.net/"&gt;(featurecounts)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Log file aggregation &lt;a href="https://github.com/MultiQC/MultiQC"&gt;(multiqc)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Differential expression analysis &lt;a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"&gt;(DESeq2)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This example is pretty straightforward, and is not by any means the entireity of what one may do in the course of RNAseq
+analysis (for one, STAR can generate the counts tables directly with no need for featurecounts or other tools). It does
+demonstrate the concept though. In most cases, each tool runs on the output file of the previous step, with some
+exceptions (fastqc and trim_galore, for example, both operate on the raw data). More complex workflows may feature many
+steps which can run in parallel because their outputs are not required as inputs until reaching a later step.&lt;/p&gt;
+&lt;h3&gt;Common Workflow Frameworks In Bioinformatics&lt;/h3&gt;
+&lt;p&gt;If you've ever written a series of scripts in shell, python, R, or any other language, that uses sequential processes on
+one or more input files then you already have a workflow. Most people in bioinformatics that process NGS data begin
+writing BASH scripts as both a way to enable hands-off running of workflow steps, and a way to record what work was
+performed.&lt;/p&gt;
+&lt;p&gt;There are many workflow management frameworks in common usage within bioinformatics today. These include (this list is
+not exhaustive):&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://nextflow.io/" target="_blank"&gt;&lt;img src="../images/nextflow-logo-bg-light.png" alt="Nextflow" style="width:214px;height:35px;"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://snakemake.github.io/" target="_blank"&gt;&lt;img src="../images/snakemake_logo_dark.png" alt="Snakemake" style="width:208px;height:51px;"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.commonwl.org/" target="_blank"&gt;&lt;img src="../images/CWL-Logo-VGA.png" alt="CWL" style="width:111px;height:70px"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openwdl.org/" target="_blank"&gt;&lt;img src="../images/wdl-logo.png" alt="WDL" style="width:128px;height:51px"&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; I am fully aware that not all of these aspire to also encompass execution, choosing to leave that to separate
+tools (CWL, WDL). However, for the purpose of this discussion lumping them together with Nextflow and Snakemake makes
+sense logically as workflow languages. I will probably catch flak for this.&lt;/p&gt;
+&lt;p&gt;This article is not a deep dive on each framework's pros and cons or my opinions on them.&lt;/p&gt;
+&lt;h3&gt;The "Why" and "When" Of Workflow Automation&lt;/h3&gt;
+&lt;p&gt;Workflow management frameworks do a lot of things for you, but all have a learning curve. They each have unique syntax,
+and their own common workflow design idioms. However, if you use a framework like these you'll be able to write once,
+run anywhere (in theory). Run locally, fine. Run on an HPC, great. Run on a public cloud (AWS, GCP, Azure), cool. Run on
+a kubernetes cluster, probably fine. You get the idea.&lt;/p&gt;
+&lt;p&gt;These workflow languages and the executors that run them allow efficient resource usage, if you define the resources
+required for each step the executor will determine how many of each job can run in parallel. They also excel at
+scattering jobs across compute nodes, this is especially important in an HPC or cloud compute context. Importantly, they
+(can) enable greater reproducibility. They integrate with container runtimes, allowing you to use Docker, Podman,
+Apptainer, et al. for each piece of software in a workflow and guarantee a specific version of each tool is used. This
+also eases deployment to HPCs or cloud compute.&lt;/p&gt;
+&lt;p&gt;In my opinion, you should look to workflow management frameworks when you want:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reproducibility&lt;ul&gt;
+&lt;li&gt;You can rerun an analysis and get reliable, and comparable, results.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Automation&lt;ul&gt;
+&lt;li&gt;No need to write scripts for each step, no need for complex scripting to handle resource management.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Portability&lt;ul&gt;
+&lt;li&gt;Run the same process agnostic of underlying hardware (local, HPC, cloud, etc.).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Harmonization&lt;ul&gt;
+&lt;li&gt;You should have no question about whether data from similar experiments, analyzed with the same workflow, are comparable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Efficiency&lt;ul&gt;
+&lt;li&gt;You are going to run a process many times and you want to reduce execution time and/or costs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I wouldn't bother uising workflow management frameworks for:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Prototyping&lt;ul&gt;
+&lt;li&gt;Write the workflow when you &lt;em&gt;done&lt;/em&gt; prototyping. Scripts are well-suited for this and it's easier to write
+workflows when you have well-written scripts to start with.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;One-off analyses&lt;ul&gt;
+&lt;li&gt;Is it really worth it to spend your time on this instead of directly answering your research question? BASH
+scripts are still a thing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Bespoke visualization and statistical analysis&lt;ul&gt;
+&lt;li&gt;This is difficult to standardize and requires careful consideration of data distributions. Consider computational
+notebooks instead.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Some Bioinformatics Workflow Anti-Patterns&lt;/h3&gt;
+&lt;p&gt;Now I'm going to get controversial.&lt;/p&gt;
+&lt;p&gt;I have seen these in some high-profile implementations.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;God Workflows&lt;ul&gt;
+&lt;li&gt;A workflow that actually is for the processing of multiple kinds of -omics data.&lt;/li&gt;
+&lt;li&gt;A workflow that includes specialized processing of the same kind of data in multiple unrelated ways.&lt;/li&gt;
+&lt;li&gt;I have seen these as the buzzword "multi-omics" has become more prevalent.&lt;/li&gt;
+&lt;li&gt;Similar in concept to god functions or &lt;a href="https://en.wikipedia.org/wiki/God_object"&gt;god objects&lt;/a&gt;. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Filename Implicit Metadata&lt;ul&gt;
+&lt;li&gt;Who isn't guilty of using filenames to store metadata? I am. &lt;code&gt;sampleID_treatment_replicate.fastq.gz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;It's not a problem to store metadata in filenames, per se. It's a problem to &lt;strong&gt;depend&lt;/strong&gt; on filenames as the
+ground truth source of file information.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Not Actually Automated&lt;ul&gt;
+&lt;li&gt;Workflows which expose far too many options to actually be that useful as automation.&lt;/li&gt;
+&lt;li&gt;Do you really need to allow the changing of &lt;strong&gt;every&lt;/strong&gt; option in your steps?&lt;/li&gt;
+&lt;li&gt;This is especially problematic when there are options that are not suitable for a given workflow and should never
+be enabled/disabled.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Forgetting To Make Design &lt;strong&gt;Decisions&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;In the name of providing options to users, you may be tempted to allow multiple programs in different steps.&lt;/li&gt;
+&lt;li&gt;"You can use STAR &lt;em&gt;or&lt;/em&gt; HISAT2 by running with &lt;code&gt;--aligner STAR&lt;/code&gt; or &lt;code&gt;--aligner HISAT2&lt;/code&gt;."&lt;/li&gt;
+&lt;li&gt;Now, saying "I ran &lt;code&gt;{workflow_name_here}&lt;/code&gt; from the &lt;code&gt;{fancy_project_name}&lt;/code&gt; github" is not descriptive enough to
+actually inform people what was run.&lt;/li&gt;
+&lt;li&gt;Yes, I am aware log files still exist, but you shouldn't need to look at a log file to at least know the basic
+steps that were executed on some data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Unnecessary Complexity&lt;ul&gt;
+&lt;li&gt;"Real programmers separate all their functions and classes into modules, so each step of my 10 step workflow is in
+a separate file."&lt;/li&gt;
+&lt;li&gt;Breaking up workflows can be done for good reasons, but this isn't one of them.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Good Practices To Use Instead&lt;/h3&gt;
+&lt;p&gt;To avoid these problems, in order:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Embrace Modular Workflows&lt;ul&gt;
+&lt;li&gt;A workflow processes &lt;strong&gt;one&lt;/strong&gt; kind of data.&lt;/li&gt;
+&lt;li&gt;A workflow outputs data for &lt;strong&gt;one&lt;/strong&gt; purpose (not necessary only one kind of experiment when the same outputs may
+be useful for more than one type of experiment).&lt;/li&gt;
+&lt;li&gt;If you need to integrate multiple -omics types consider higher order workflows, like higher-order functions or
+classes (depending on your preference for functional or object oriented programming).&lt;/li&gt;
+&lt;li&gt;Higher order, or nested workflows, allow the execution of multiple sub workflows which still may be executed just
+as well on their own.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;First Class Metadata&lt;ul&gt;
+&lt;li&gt;The ground truth for sample information, the metadata, lives elsewhere from the filenames.&lt;/li&gt;
+&lt;li&gt;Link the metadata to the files. Using the filenames and md5 hashes in a separate database is a good option.&lt;/li&gt;
+&lt;li&gt;At a minimum, a low-effort way to solve this just involves a .csv file that has columns for filenames in addition
+to other sample metadata.&lt;/li&gt;
+&lt;li&gt;Use metadata sheets when executing workflows to read sample names and important information related to options
+that need changing for specific samples (paired end read status, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Automate, Automate, Automate!&lt;ul&gt;
+&lt;li&gt;If there are options that should not be changed do not allow users to change them.&lt;/li&gt;
+&lt;li&gt;Every "option" should have a default that you have chosen for &lt;strong&gt;good reason&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;You should very rarely &lt;em&gt;need&lt;/em&gt; to specify an option at execution to successfully and correctly run your workflow.&lt;/li&gt;
+&lt;li&gt;Remember that one of your reasons behind writing a workflow is to automate the thing beyond writing individual
+scripts.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Own Your Design Decisions&lt;ul&gt;
+&lt;li&gt;Every tool for each step of your analysis was chosen for a reason, let your users know that.&lt;/li&gt;
+&lt;li&gt;There are exceptions to every rule, but the rule should be &lt;strong&gt;one step, one tool&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;If someone thinks their favorite tool is better than the one you picked they can write their own workflow or use
+a different one.&lt;/li&gt;
+&lt;li&gt;It should be clear what happened to the data when you explain "I ran &lt;code&gt;{workflow_name_here}&lt;/code&gt; from the
+&lt;code&gt;{fancy_project_name}&lt;/code&gt; github." Yes, log files are still important.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Keep It Simple&lt;ul&gt;
+&lt;li&gt;If you have a somewhat small workflow you don't need separate modules for every step, it's actually &lt;strong&gt;less&lt;/strong&gt;
+readable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;In Conclusion&lt;/h3&gt;
+&lt;p&gt;No code today, just thoughts. Maybe you've thought these things but didn't put them into writing. Maybe you're just
+coming around to the idea of workflow automation. Maybe you think I'm wrong (in this case, please don't email me I
+already get too much email and I'll just delete it anyway). However, I think by keeping a few things in mind you can
+really improve both the readability of your workflows and their usefulness.&lt;/p&gt;
+&lt;p&gt;Thanks for coming to my TED Talk/giant wall o' text. If you like these thoughts I accept payment in the form of cookies,
+peanut m&amp;amp;ms, millions of dollars in cash by the briefcase, and mysterious wire transfers in amounts large enough to pay
+off my wife and I's student debt.&lt;/p&gt;</content><category term="commentary"></category><category term="workflows"></category></entry><entry><title>Making Volcano Plots With ggplot2</title><link href="https://groverj3.github.io/articles/2024-04-21_making-volcano-plots-with-ggplot2.html" rel="alternate"></link><published>2024-04-21T00:00:00-04:00</published><updated>2024-04-21T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2024-04-21:/articles/2024-04-21_making-volcano-plots-with-ggplot2.html</id><summary type="html">&lt;p&gt;One of the, if not &lt;em&gt;the&lt;/em&gt;, most common downstream analysis task I'm asked to perform on RNAseq data is to generate the
 venerable "Volcano Plot." These are kind of the bioinformatics equivalent of saying "Hey! Look how much data I have!"
 Regardless, they are a pretty good way to quickly …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of the, if not &lt;em&gt;the&lt;/em&gt;, most common downstream analysis task I'm asked to perform on RNAseq data is to generate the
 venerable "Volcano Plot." These are kind of the bioinformatics equivalent of saying "Hey! Look how much data I have!"
@@ -587,7 +776,7 @@ don't even need to import anything unless you want a minor speed boost from
 from not calling an &lt;code&gt;str.strip()&lt;/code&gt; method on each line.&lt;/p&gt;
 &lt;p&gt;If you're ok with living dangerously, and are sure your files are formatted
 correctly you can easily write something that will outperform standard
-implementations with little effort when it comes to .fastq parsing.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="python"></category></entry><entry><title>The Snakemake Tutorial I Wish I Had</title><link href="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html" rel="alternate"></link><published>2019-08-19T00:00:00-04:00</published><updated>2019-08-19T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-19:/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html</id><summary type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
+implementations with little effort when it comes to .fastq parsing.&lt;/p&gt;</content><category term="commentary"></category><category term="bioinformatics"></category><category term="python"></category><category term="workflows"></category></entry><entry><title>The Snakemake Tutorial I Wish I Had</title><link href="https://groverj3.github.io/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html" rel="alternate"></link><published>2019-08-19T00:00:00-04:00</published><updated>2019-08-19T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2019-08-19:/articles/2019-08-19_the-snakemake-tutorial-i-wish-i-had.html</id><summary type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
 bioinformatics has grown greatly. This is a great thing for the field and adds to
 our ability to perform reproducible analyses, especially for pipelines with many
 steps. These are common in bioinformatics, but prior to the use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Over the past few years the use of workflow managers in genomics and
