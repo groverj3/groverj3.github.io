@@ -1,7 +1,7 @@
 Title: Just Write Your Own Python Parsers for .fastq Files
 Date: 2019-08-22
 Category: commentary
-tags: bioinformatics, python
+tags: bioinformatics, python, workflows
 
 In contrast to the [zen of python](https://en.wikipedia.org/wiki/Zen_of_Python)
 there are actually many ways to handle sequence data in Python. There are several
