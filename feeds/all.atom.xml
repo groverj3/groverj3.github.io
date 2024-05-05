@@ -107,7 +107,7 @@ touch&lt;span class="w"&gt; &lt;/span&gt;shiny/app.R
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;For the ease of following along, I'm putting this shiny app up on my github:
-&lt;a href="https://github.com/groverj3/"&gt;volcano_rnaseq_shiny_example&lt;/a&gt;&lt;/p&gt;
+&lt;a href="https://github.com/groverj3/volcano_rnaseq_shiny_example"&gt;volcano_rnaseq_shiny_example&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Prepare the Differential Expression Data&lt;/h2&gt;
 &lt;p&gt;The test data for this app is supplied in the aforementioned github repo, but
 for the sake of completeness, this is how it's generated.&lt;/p&gt;
