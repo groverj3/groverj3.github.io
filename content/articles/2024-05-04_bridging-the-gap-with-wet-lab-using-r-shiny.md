@@ -125,9 +125,6 @@ mkdir shiny
 touch shiny/app.R
 ```
 
-For the ease of following along, I'm putting this shiny app up on my github:
-[volcano_rnaseq_shiny_example](https://github.com/groverj3/volcano_rnaseq_shiny_example)
-
 ## Prepare the Differential Expression Data
 
 The test data for this app is supplied in the aforementioned github repo, but
@@ -239,8 +236,12 @@ results %>% filter(padj < 0.1) %>% nrow()
 
 ## Let's Build the Shiny App
 
-Open the `app.R` we created earlier in your favorite text/code editor and add
-the following:
+For the ease of following along, I'm putting this shiny app up on my github:
+[volcano_rnaseq_shiny_example](https://github.com/groverj3/volcano_rnaseq_shiny_example).
+You can find a working example there.
+
+To create it yourself, open the `app.R` we created earlier in your favorite
+text/code editor and add the following:
 
 ```R
 library(shiny)
