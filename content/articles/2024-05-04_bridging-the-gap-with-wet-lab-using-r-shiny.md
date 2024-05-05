@@ -126,7 +126,7 @@ touch shiny/app.R
 ```
 
 For the ease of following along, I'm putting this shiny app up on my github:
-[volcano_rnaseq_shiny_example](https://github.com/groverj3/)
+[volcano_rnaseq_shiny_example](https://github.com/groverj3/volcano_rnaseq_shiny_example)
 
 ## Prepare the Differential Expression Data
 
