@@ -222,8 +222,6 @@ mkdir<span class="w"> </span>shiny
 touch<span class="w"> </span>shiny/app.R
 </code></pre></div>
 
-<p>For the ease of following along, I'm putting this shiny app up on my github:
-<a href="https://github.com/groverj3/volcano_rnaseq_shiny_example">volcano_rnaseq_shiny_example</a></p>
 <h2>Prepare the Differential Expression Data</h2>
 <p>The test data for this app is supplied in the aforementioned github repo, but
 for the sake of completeness, this is how it's generated.</p>
@@ -323,8 +321,11 @@ methods I've learned. Data are messy.</p>
 </code></pre></div>
 
 <h2>Let's Build the Shiny App</h2>
-<p>Open the <code>app.R</code> we created earlier in your favorite text/code editor and add
-the following:</p>
+<p>For the ease of following along, I'm putting this shiny app up on my github:
+<a href="https://github.com/groverj3/volcano_rnaseq_shiny_example">volcano_rnaseq_shiny_example</a>.
+You can find a working example there.</p>
+<p>To create it yourself, open the <code>app.R</code> we created earlier in your favorite
+text/code editor and add the following:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">bslib</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">DT</span><span class="p">)</span>

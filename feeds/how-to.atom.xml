@@ -106,8 +106,6 @@ mkdir&lt;span class="w"&gt; &lt;/span&gt;shiny
 touch&lt;span class="w"&gt; &lt;/span&gt;shiny/app.R
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;For the ease of following along, I'm putting this shiny app up on my github:
-&lt;a href="https://github.com/groverj3/volcano_rnaseq_shiny_example"&gt;volcano_rnaseq_shiny_example&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Prepare the Differential Expression Data&lt;/h2&gt;
 &lt;p&gt;The test data for this app is supplied in the aforementioned github repo, but
 for the sake of completeness, this is how it's generated.&lt;/p&gt;
@@ -207,8 +205,11 @@ methods I've learned. Data are messy.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;Let's Build the Shiny App&lt;/h2&gt;
-&lt;p&gt;Open the &lt;code&gt;app.R&lt;/code&gt; we created earlier in your favorite text/code editor and add
-the following:&lt;/p&gt;
+&lt;p&gt;For the ease of following along, I'm putting this shiny app up on my github:
+&lt;a href="https://github.com/groverj3/volcano_rnaseq_shiny_example"&gt;volcano_rnaseq_shiny_example&lt;/a&gt;.
+You can find a working example there.&lt;/p&gt;
+&lt;p&gt;To create it yourself, open the &lt;code&gt;app.R&lt;/code&gt; we created earlier in your favorite
+text/code editor and add the following:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shiny&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bslib&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="nf"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
