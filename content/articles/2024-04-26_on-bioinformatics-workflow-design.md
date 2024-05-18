@@ -1,7 +1,7 @@
 Title: On Bioinformatics Workflow Design
 Date: 2024-04-26
 Category: commentary
-tags: workflows
+tags: workflows, bioinformatics
 
 Since I was in grad school I've been writing bioinformatics [workflows](2019-08-19_the-snakemake-tutorial-i-wish-i-had.html).
 Usually to process NGS data. The concept of a workflow is simple, [and not limited to the domain of bioinformatics](https://github.com/spotify/luigi).
