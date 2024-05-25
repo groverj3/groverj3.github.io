@@ -1,5 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist. - how-to</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/how-to.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2024-05-04T00:00:00-04:00</updated><subtitle>Senior Scientist - NGS &amp; Bioinformatics @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Bridging the Gap With Wet Lab Using R Shiny</title><link href="https://groverj3.github.io/articles/2024-05-04_bridging-the-gap-with-wet-lab-using-r-shiny.html" rel="alternate"></link><published>2024-05-04T00:00:00-04:00</published><updated>2024-05-04T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2024-05-04:/articles/2024-05-04_bridging-the-gap-with-wet-lab-using-r-shiny.html</id><summary type="html">&lt;p&gt;How do you communicate results of an analysis? What tools do you use?
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jeff Grover. Bioinformatics Scientist. - how-to</title><link href="https://groverj3.github.io/" rel="alternate"></link><link href="https://groverj3.github.io/feeds/how-to.atom.xml" rel="self"></link><id>https://groverj3.github.io/</id><updated>2024-05-24T00:00:00-04:00</updated><subtitle>Senior Scientist - NGS &amp; Bioinformatics @ &lt;a href="https://www.entradatx.com/" target="_blank"&gt;Entrada Therapeutics&lt;/a&gt;</subtitle><entry><title>Nextflow With First Class Metadata: A Minimal Example</title><link href="https://groverj3.github.io/articles/2024-05-24_nextflow-with-first-class-metadata-a-minimal-example.html" rel="alternate"></link><published>2024-05-24T00:00:00-04:00</published><updated>2024-05-24T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2024-05-24:/articles/2024-05-24_nextflow-with-first-class-metadata-a-minimal-example.html</id><summary type="html">&lt;p&gt;TLDR - Check out this github repo for the full example:
+&lt;a href="https://github.com/groverj3/minimal_nextflow_samplesheet_example"&gt;https://github.com/groverj3/minimal_nextflow_samplesheet_example&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I recently wrote &lt;a href="2024-04-26_on-bioinformatics-workflow-design.html"&gt;an article&lt;/a&gt;
+regarding some of my opinions on bioinformatics workflow design. I've written
+workflows in several languages over the years, but at this point it seems that
+&lt;a href="https://www.nextflow.io/"&gt;Nextflow&lt;/a&gt; has become something of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;TLDR - Check out this github repo for the full example:
+&lt;a href="https://github.com/groverj3/minimal_nextflow_samplesheet_example"&gt;https://github.com/groverj3/minimal_nextflow_samplesheet_example&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I recently wrote &lt;a href="2024-04-26_on-bioinformatics-workflow-design.html"&gt;an article&lt;/a&gt;
+regarding some of my opinions on bioinformatics workflow design. I've written
+workflows in several languages over the years, but at this point it seems that
+&lt;a href="https://www.nextflow.io/"&gt;Nextflow&lt;/a&gt; has become something of the de facto
+industry standard. I thought it might make a nice example to show one of my
+recommendations in action for this commonly-used workflow language.&lt;/p&gt;
+&lt;p&gt;This is a deliberately simple example of an RNAseq workflow, and not really
+intended as an example of production-ready code. However, it will demonstrate
+one of the points that I wrote about in that article, First Class Metadata.&lt;/p&gt;
+&lt;h2&gt;First Class Metadata&lt;/h2&gt;
+&lt;p&gt;What I'm referring to as first class metadata is the concept that the important
+information about your data lives elsewhere in a simple format that can be
+easily parsed. The filenames themselves are not the ground truth for
+information about your data. Filenames are simply an identifier and a method of
+linking data to metadata. Take these hypothetical files as an example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;RNASEQ_cell_line_A_treated_20um_replicate_1_R1.fastq.gz
+RNASEQ_cell_line_A_treated_20um_replicate_1_R2.fastq.gz
+RNASEQ_cell_line_A_treated_20um_replicate_2_R1.fastq.gz
+RNASEQ_cell_line_A_treated_20um_replicate_2_R2.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_1_R1.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_1_R2.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_2_R1.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_2_R2.fastq.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;These are clearly from an RNAseq experiment. It even says so! What else do we
+know? There's other information, apparently. They're from a cell line, the
+highly specific "cell_line_A," some have been treated with &lt;em&gt;something&lt;/em&gt; and we
+have a concentration (20 micromolar). We also have a replicate number (I hope
+in your real experiments you're doing more than one replicate...) and since
+these are paired end samples there is information on whether they are read 1
+or 2 of the pair.&lt;/p&gt;
+&lt;p&gt;What would first class metadata mean? Here's an example, a simple .csv (or
+.tsv):&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;sample_id&lt;/th&gt;
+&lt;th&gt;experiment&lt;/th&gt;
+&lt;th&gt;cell_line&lt;/th&gt;
+&lt;th&gt;treatment&lt;/th&gt;
+&lt;th&gt;replicate&lt;/th&gt;
+&lt;th&gt;paired_status&lt;/th&gt;
+&lt;th&gt;read1&lt;/th&gt;
+&lt;th&gt;read2&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;treated_20_1&lt;/td&gt;
+&lt;td&gt;rnaseq&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;20_micromolar&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;paired_end&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_treated_20um_replicate_1_R1.fastq.gz&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_treated_20um_replicate_1_R2.fastq.gz&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;treated_20_2&lt;/td&gt;
+&lt;td&gt;rnaseq&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;20_micromolar&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;paired_end&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_treated_20um_replicate_2_R1.fastq.gz&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_treated_20um_replicate_2_R1.fastq.gz&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;untreated_1&lt;/td&gt;
+&lt;td&gt;rnaseq&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;NA&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;paired_end&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_untreated_replicate_1_R1.fastq.gz&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_untreated_replicate_1_R2.fastq.gz&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;untreated_2&lt;/td&gt;
+&lt;td&gt;rnaseq&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;NA&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;paired_end&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_untreated_replicate_2_R1.fastq.gz&lt;/td&gt;
+&lt;td&gt;RNASEQ_cell_line_A_untreated_replicate_2_R2.fastq.gz&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;What makes it "first class" is that this separate document, whether that's a
+tabular file or something more complex like a database, is the ultimate source
+of truth. The &lt;strong&gt;sample&lt;/strong&gt; is also the fundamental unit of observations in the
+table, rather than the &lt;strong&gt;file&lt;/strong&gt;. This is apparent because both reads are listed
+for a single sample, rather than each as a separate line. This means that
+single-end and paired-end samples are coexist without the need to duplicate a
+lot of metadata on more lines. Some sequencing protocols also create a separate
+fastq for UMIs or barcodes, they could also be included as an addtitional
+metadata field.&lt;/p&gt;
+&lt;p&gt;These metadata can then be parsed when executing a workflow as long as the
+files are referenced in the same sample sheet. Using this paradigm it's easier 
+to use sample metadata in the course of your workflow execution. Perhaps you'll
+assign output file names based on the sample_id field above, or split samples
+into groups based on treatment. The possibilities are myriad!&lt;/p&gt;
+&lt;h2&gt;How Does First Class Metadata Help My Nextflow Workflows?&lt;/h2&gt;
+&lt;p&gt;If you've recorded your sample metadata in this fashion you can directly read
+it during workflow execution. This means you're no longer forced to create
+brittle code that makes assumptions about your samples based on file names.
+Some of the &lt;a href="https://nf-co.re/"&gt;nf-core&lt;/a&gt; workflows make use of these ideas.&lt;/p&gt;
+&lt;p&gt;This isn't a full-blown Nextflow tutorial, but I will demonstrate this with a
+minimal example. Imagine you have a simple RNAseq workflow, just Fastqc and a
+pseudoaligner like Salmon. All your sample information is contained within a
+single .csv file. When you define your workflow in the &lt;code&gt;.nf&lt;/code&gt; file you can
+create a channel that takes your metadata sheet as an input like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;workflow&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;// Read samplesheet and convert to queueable channel of: sample id, paired_status, read1, read2 as a tuple&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;reads_channel&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;fromPath&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;samplesheet&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;splitCsv&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nl"&gt;header:&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="c1"&gt;// map{} applies a closure (function) to each element of a channel&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="c1"&gt;// In this case, the rows from splitCsv() are converted to a tuple based on the header &lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tuple&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;sample_id&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;paired_status&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;input_dir&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;read1&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;input_dir&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;read2&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;FASTQC&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reads_channel&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;SALMON_QUANT&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reads_channel&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;map{}&lt;/code&gt; is an operator that applies a function to each element of a channel. In
+this case, the iterator returned by splitCsv (named &lt;code&gt;row&lt;/code&gt; here for clarity) is
+converted to a tuple that contains sample information. This tuple is then used
+as input to FASTQC and SALMON_QUANT, the only two steps (processes in
+Nextflowese, which would be defined elsewhere in the .nf file) in the workflow.&lt;/p&gt;
+&lt;p&gt;The idea is you would use your main metadata database as the sample sheet, just
+filtered for the samples you want to analyze.&lt;/p&gt;
+&lt;p&gt;The full example can be found here: &lt;a href="https://github.com/groverj3/minimal_nextflow_samplesheet_example"&gt;https://github.com/groverj3/minimal_nextflow_samplesheet_example&lt;/a&gt;.
+I have included lots of comments to help you get started writing Nextflow, as
+well as ways to procure a small test dataset. The test dataset and workflow run
+in just over a minute on my laptop, excluding pulling containers, so lack of a
+cluster or cloud compute environment shouldn't stand in your way for testing.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Podman Example" src="https://raw.githubusercontent.com/groverj3/minimal_nextflow_samplesheet_example/main/example_execution/podman_run.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This very simple example highlights a strategy I use when writing workflows,
+and currently that means Nextflow. These ideas are transferrable to other
+workflow languages as well. Personally, I am a fan of Snakemake, as it was the
+first workflow language I learned, and it's implemented in Python. However,
+Nextflow has become something of an industry standard, and Snakemake is more
+common in academia, plus Seqera labs supports Nextflow with paid products like
+the Seqera Platform (formerly known as Nextflow Tower), and there are other
+bioinformatics cloud platforms that are increasingly supporting Nextflow
+workflows. At the end of the day, it is a tool to help enable reproducible
+analysis of your data, and we should be careful to do it in a way that
+maximizes that reproducibility.&lt;/p&gt;</content><category term="how-to"></category><category term="workflows"></category><category term="bioinformatics"></category><category term="RNAseq"></category></entry><entry><title>Bridging the Gap With Wet Lab Using R Shiny</title><link href="https://groverj3.github.io/articles/2024-05-04_bridging-the-gap-with-wet-lab-using-r-shiny.html" rel="alternate"></link><published>2024-05-04T00:00:00-04:00</published><updated>2024-05-04T00:00:00-04:00</updated><author><name>Jeffrey Grover</name></author><id>tag:groverj3.github.io,2024-05-04:/articles/2024-05-04_bridging-the-gap-with-wet-lab-using-r-shiny.html</id><summary type="html">&lt;p&gt;How do you communicate results of an analysis? What tools do you use?
 Scientists that work in the wet lab are accustomed to firing up excel or some
 instrument-specific software and working with their own data. For genomics
 or other types of experiments in biology that result in large datasets …&lt;/p&gt;</summary><content type="html">&lt;p&gt;How do you communicate results of an analysis? What tools do you use?

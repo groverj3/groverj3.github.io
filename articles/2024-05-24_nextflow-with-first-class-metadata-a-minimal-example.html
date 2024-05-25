@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="TLDR - Check out this github repo for the full example: https://github.com/groverj3/minimal_nextflow_samplesheet_example I recently wrote an article regarding some of my opinions on bioinformatics workflow design. I&#39;ve written workflows in several languages over the years, but at this point it seems that Nextflow has become something of …" />
+<meta name="keywords" content="workflows, bioinformatics, RNAseq">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
+<meta property="og:title" content="Nextflow With First Class Metadata: A Minimal Example"/>
+<meta property="og:description" content="TLDR - Check out this github repo for the full example: https://github.com/groverj3/minimal_nextflow_samplesheet_example I recently wrote an article regarding some of my opinions on bioinformatics workflow design. I&#39;ve written workflows in several languages over the years, but at this point it seems that Nextflow has become something of …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2024-05-24_nextflow-with-first-class-metadata-a-minimal-example.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2024-05-24 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="how-to"/>
+<meta property="article:tag" content="workflows"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="RNAseq"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Nextflow With First Class Metadata: A Minimal Example</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Senior Scientist - NGS & Bioinformatics @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@protonmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="nextflow-with-first-class-metadata-a-minimal-example">Nextflow With First Class Metadata: A Minimal Example</h1>
+    <p>
+          Posted on Fri 24 May 2024 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>TLDR - Check out this github repo for the full example:
+<a href="https://github.com/groverj3/minimal_nextflow_samplesheet_example">https://github.com/groverj3/minimal_nextflow_samplesheet_example</a></p>
+<p>I recently wrote <a href="2024-04-26_on-bioinformatics-workflow-design.html">an article</a>
+regarding some of my opinions on bioinformatics workflow design. I've written
+workflows in several languages over the years, but at this point it seems that
+<a href="https://www.nextflow.io/">Nextflow</a> has become something of the de facto
+industry standard. I thought it might make a nice example to show one of my
+recommendations in action for this commonly-used workflow language.</p>
+<p>This is a deliberately simple example of an RNAseq workflow, and not really
+intended as an example of production-ready code. However, it will demonstrate
+one of the points that I wrote about in that article, First Class Metadata.</p>
+<h2>First Class Metadata</h2>
+<p>What I'm referring to as first class metadata is the concept that the important
+information about your data lives elsewhere in a simple format that can be
+easily parsed. The filenames themselves are not the ground truth for
+information about your data. Filenames are simply an identifier and a method of
+linking data to metadata. Take these hypothetical files as an example:</p>
+<div class="highlight"><pre><span></span><code>RNASEQ_cell_line_A_treated_20um_replicate_1_R1.fastq.gz
+RNASEQ_cell_line_A_treated_20um_replicate_1_R2.fastq.gz
+RNASEQ_cell_line_A_treated_20um_replicate_2_R1.fastq.gz
+RNASEQ_cell_line_A_treated_20um_replicate_2_R2.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_1_R1.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_1_R2.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_2_R1.fastq.gz
+RNASEQ_cell_line_A_untreated_replicate_2_R2.fastq.gz
+</code></pre></div>
+
+<p>These are clearly from an RNAseq experiment. It even says so! What else do we
+know? There's other information, apparently. They're from a cell line, the
+highly specific "cell_line_A," some have been treated with <em>something</em> and we
+have a concentration (20 micromolar). We also have a replicate number (I hope
+in your real experiments you're doing more than one replicate...) and since
+these are paired end samples there is information on whether they are read 1
+or 2 of the pair.</p>
+<p>What would first class metadata mean? Here's an example, a simple .csv (or
+.tsv):</p>
+<table>
+<thead>
+<tr>
+<th>sample_id</th>
+<th>experiment</th>
+<th>cell_line</th>
+<th>treatment</th>
+<th>replicate</th>
+<th>paired_status</th>
+<th>read1</th>
+<th>read2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>treated_20_1</td>
+<td>rnaseq</td>
+<td>A</td>
+<td>20_micromolar</td>
+<td>1</td>
+<td>paired_end</td>
+<td>RNASEQ_cell_line_A_treated_20um_replicate_1_R1.fastq.gz</td>
+<td>RNASEQ_cell_line_A_treated_20um_replicate_1_R2.fastq.gz</td>
+</tr>
+<tr>
+<td>treated_20_2</td>
+<td>rnaseq</td>
+<td>A</td>
+<td>20_micromolar</td>
+<td>2</td>
+<td>paired_end</td>
+<td>RNASEQ_cell_line_A_treated_20um_replicate_2_R1.fastq.gz</td>
+<td>RNASEQ_cell_line_A_treated_20um_replicate_2_R1.fastq.gz</td>
+</tr>
+<tr>
+<td>untreated_1</td>
+<td>rnaseq</td>
+<td>A</td>
+<td>NA</td>
+<td>1</td>
+<td>paired_end</td>
+<td>RNASEQ_cell_line_A_untreated_replicate_1_R1.fastq.gz</td>
+<td>RNASEQ_cell_line_A_untreated_replicate_1_R2.fastq.gz</td>
+</tr>
+<tr>
+<td>untreated_2</td>
+<td>rnaseq</td>
+<td>A</td>
+<td>NA</td>
+<td>2</td>
+<td>paired_end</td>
+<td>RNASEQ_cell_line_A_untreated_replicate_2_R1.fastq.gz</td>
+<td>RNASEQ_cell_line_A_untreated_replicate_2_R2.fastq.gz</td>
+</tr>
+</tbody>
+</table>
+<p>What makes it "first class" is that this separate document, whether that's a
+tabular file or something more complex like a database, is the ultimate source
+of truth. The <strong>sample</strong> is also the fundamental unit of observations in the
+table, rather than the <strong>file</strong>. This is apparent because both reads are listed
+for a single sample, rather than each as a separate line. This means that
+single-end and paired-end samples are coexist without the need to duplicate a
+lot of metadata on more lines. Some sequencing protocols also create a separate
+fastq for UMIs or barcodes, they could also be included as an addtitional
+metadata field.</p>
+<p>These metadata can then be parsed when executing a workflow as long as the
+files are referenced in the same sample sheet. Using this paradigm it's easier 
+to use sample metadata in the course of your workflow execution. Perhaps you'll
+assign output file names based on the sample_id field above, or split samples
+into groups based on treatment. The possibilities are myriad!</p>
+<h2>How Does First Class Metadata Help My Nextflow Workflows?</h2>
+<p>If you've recorded your sample metadata in this fashion you can directly read
+it during workflow execution. This means you're no longer forced to create
+brittle code that makes assumptions about your samples based on file names.
+Some of the <a href="https://nf-co.re/">nf-core</a> workflows make use of these ideas.</p>
+<p>This isn't a full-blown Nextflow tutorial, but I will demonstrate this with a
+minimal example. Imagine you have a simple RNAseq workflow, just Fastqc and a
+pseudoaligner like Salmon. All your sample information is contained within a
+single .csv file. When you define your workflow in the <code>.nf</code> file you can
+create a channel that takes your metadata sheet as an input like so:</p>
+<div class="highlight"><pre><span></span><code><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="c1">// Read samplesheet and convert to queueable channel of: sample id, paired_status, read1, read2 as a tuple</span>
+<span class="w">    </span><span class="n">reads_channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">samplesheet</span><span class="o">)</span>
+<span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="kc">true</span><span class="o">)</span>
+<span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="o">{</span>
+<span class="w">            </span><span class="c1">// map{} applies a closure (function) to each element of a channel</span>
+<span class="w">            </span><span class="c1">// In this case, the rows from splitCsv() are converted to a tuple based on the header </span>
+<span class="w">            </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">sample_id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">paired_status</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_dir</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">read1</span><span class="o">),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_dir</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">read2</span><span class="o">))</span>
+<span class="w">        </span><span class="o">}</span>
+
+<span class="w">    </span><span class="n">FASTQC</span><span class="o">(</span><span class="n">reads_channel</span><span class="o">)</span>
+<span class="w">    </span><span class="n">SALMON_QUANT</span><span class="o">(</span><span class="n">reads_channel</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p><code>map{}</code> is an operator that applies a function to each element of a channel. In
+this case, the iterator returned by splitCsv (named <code>row</code> here for clarity) is
+converted to a tuple that contains sample information. This tuple is then used
+as input to FASTQC and SALMON_QUANT, the only two steps (processes in
+Nextflowese, which would be defined elsewhere in the .nf file) in the workflow.</p>
+<p>The idea is you would use your main metadata database as the sample sheet, just
+filtered for the samples you want to analyze.</p>
+<p>The full example can be found here: <a href="https://github.com/groverj3/minimal_nextflow_samplesheet_example">https://github.com/groverj3/minimal_nextflow_samplesheet_example</a>.
+I have included lots of comments to help you get started writing Nextflow, as
+well as ways to procure a small test dataset. The test dataset and workflow run
+in just over a minute on my laptop, excluding pulling containers, so lack of a
+cluster or cloud compute environment shouldn't stand in your way for testing.</p>
+<p><img alt="Podman Example" src="https://raw.githubusercontent.com/groverj3/minimal_nextflow_samplesheet_example/main/example_execution/podman_run.png"></p>
+<h2>Conclusion</h2>
+<p>This very simple example highlights a strategy I use when writing workflows,
+and currently that means Nextflow. These ideas are transferrable to other
+workflow languages as well. Personally, I am a fan of Snakemake, as it was the
+first workflow language I learned, and it's implemented in Python. However,
+Nextflow has become something of an industry standard, and Snakemake is more
+common in academia, plus Seqera labs supports Nextflow with paid products like
+the Seqera Platform (formerly known as Nextflow Tower), and there are other
+bioinformatics cloud platforms that are increasingly supporting Nextflow
+workflows. At the end of the day, it is a tool to help enable reproducible
+analysis of your data, and we should be careful to do it in a way that
+maximizes that reproducibility.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/workflows.html">workflows</a>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/rnaseq.html">RNAseq</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
