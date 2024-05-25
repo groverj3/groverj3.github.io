@@ -129,3 +129,8 @@ bioinformatics cloud platforms that are increasingly supporting Nextflow
 workflows. At the end of the day, it is a tool to help enable reproducible
 analysis of your data, and we should be careful to do it in a way that
 maximizes that reproducibility.
+
+If you're interested in more advanced and/or more comprehensive Nextflow
+material I can recommend the docs at [https://www.nextflow.io/docs/latest/index.html](https://www.nextflow.io/docs/latest/index.html)
+and the Nextflow training material at [https://training.nextflow.io/](https://training.nextflow.io/).
+There is also a lot of content you can find trawling around GitHub.
