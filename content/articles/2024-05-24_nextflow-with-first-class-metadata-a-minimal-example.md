@@ -59,7 +59,7 @@ tabular file or something more complex like a database, is the ultimate source
 of truth. The **sample** is also the fundamental unit of observations in the
 table, rather than the **file**. This is apparent because both reads are listed
 for a single sample, rather than each as a separate line. This means that
-single-end and paired-end samples are coexist without the need to duplicate a
+single-end and paired-end samples can coexist without the need to duplicate a
 lot of metadata on more lines. Some sequencing protocols also create a separate
 fastq for UMIs or barcodes, they could also be included as an addtitional
 metadata field.
