@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/pygments/paraiso-dark.min.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://groverj3.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://groverj3.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jeff Grover. Bioinformatics Scientist. Atom">
+
+
+
+
+
+<meta name="author" content="Jeffrey Grover" />
+<meta name="description" content="TLDR - Check out this github repo for a (still really wordy) example: polyglot_jupyter_example If you&#39;re anything like me, and there are probably tens of you out there, you enjoy working in multiple programming languages for your bioinformatics/data science work. Perhaps you love the tidyverse R ecosystem for data manipulation …" />
+<meta name="keywords" content="bioinformatics, data-science, jupyter, notebooks, tutorial, r, python, sysadmin">
+
+<meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
+<meta property="og:title" content="Polyglot R and Python Notebooks for Bioinformatics and Data Science Projects"/>
+<meta property="og:description" content="TLDR - Check out this github repo for a (still really wordy) example: polyglot_jupyter_example If you&#39;re anything like me, and there are probably tens of you out there, you enjoy working in multiple programming languages for your bioinformatics/data science work. Perhaps you love the tidyverse R ecosystem for data manipulation …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2024-06-02_polyglot-r-and-python-notebooks-for-bioinformatics-and-data-science-projects.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2024-06-02 00:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://groverj3.github.io/author/jeffrey-grover.html">
+<meta property="article:section" content="how-to"/>
+<meta property="article:tag" content="bioinformatics"/>
+<meta property="article:tag" content="data-science"/>
+<meta property="article:tag" content="jupyter"/>
+<meta property="article:tag" content="notebooks"/>
+<meta property="article:tag" content="tutorial"/>
+<meta property="article:tag" content="r"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="sysadmin"/>
+<meta property="og:image" content="/images/jeff.jpg">
+
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Polyglot R and Python Notebooks for Bioinformatics and Data Science Projects</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://groverj3.github.io">
+        <img src="/images/jeff.jpg" alt="Jeffrey Grover" title="Jeffrey Grover">
+      </a>
+      <h1><a href="https://groverj3.github.io">Jeffrey Grover</a></h1>
+
+<p>Senior Scientist - NGS & Bioinformatics @ <a href="https://www.entradatx.com/" target="_blank">Entrada Therapeutics</a></p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pages/cv.html">CV</a></li>
+          <li><a href="/pages/projects.html">Projects</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:jeffrey.w.grover@protonmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/jeffreygrover/" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/groverj3" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://groverj3.github.io">    Home
+</a>
+
+      <a href="/pages/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://groverj3.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="polyglot-r-and-python-notebooks-for-bioinformatics-and-data-science-projects">Polyglot R and Python Notebooks for Bioinformatics and Data Science Projects</h1>
+    <p>
+          Posted on Sun 02 June 2024 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>TLDR - Check out this github repo for a (still really wordy) example:
+<a href="https://github.com/groverj3/polyglot_jupyter_example">polyglot_jupyter_example</a></p>
+<p>If you're anything like me, and there are probably tens of you out there, you
+enjoy working in multiple programming languages for your bioinformatics/data
+science work. Perhaps you love the <a href="https://www.tidyverse.org/">tidyverse</a> R
+ecosystem for data manipulation but prefer packages from a Python library like
+<a href="https://scikit-learn.org/stable/index.html">Scikit-learn</a>. Or, as is becoming
+increasingly common, you're working on single-cell RNAseq analysis and you like
+normalization provided by <a href="https://satijalab.org/seurat/">Seurat</a>, need to
+load data types only supported in the Python <a href="https://github.com/scverse">scverse</a>,
+and want to use the Bioconductor <a href="https://bioconductor.org/packages/devel/bioc/html/SingleCellExperiment.html">SingleCellExperiment</a>
+class to store your data.</p>
+<p>If you're tried to use both Python and R in the same project maybe you've
+already realized that <a href="https://jupyter.org/">Jupyter notebooks and lab</a> support
+many kernel types, including R. By installing the <a href="https://irkernel.github.io/">R Kernel</a>
+in addition to the default <a href="https://github.com/ipython/ipykernel">ipython kernel</a>
+you can use Jupyter for both R and Python notebooks, harmonizing your workflow
+across both languages. However, there is another consideration, having a
+reproducible <em>environment</em>.</p>
+<h2>Enter virtualenv and renv</h2>
+<p><a href="https://github.com/pyenv/pyenv"><img src="https://avatars.githubusercontent.com/u/16530698?s=200&v=4" alt="Pyenv" style="width:120px;height:120px;"></a>
+<a href="https://github.com/rstudio/renv"><img src="https://rstudio.github.io/renv/logo.svg" alt="Renv" style="width:120px;height:120px;"></a></p>
+<p>Python virtual environments have been around for a very long time. They're a
+great way to make sure that your package versions for a given project are
+recorded, frozen, and don't conflict with those packages you're installed for
+other projects. The standard library module <a href="https://docs.python.org/3/library/venv.html">venv</a>
+and the installable package <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a>
+allow you to manage them. I typically use <a href="https://github.com/pyenv/pyenv">pyenv</a>
+to install and manage python versions, and it has an extension for managing
+virtual environments as well: <a href="https://github.com/pyenv/pyenv-virtualenv">pyenv-virtualenv</a>.
+Confusingly, pyenv-virtualenv actually uses <code>venv</code> (mostly).</p>
+<p>On the R side of things, it seems virtual environments or project environments,
+haven't had as much focus. Generally, packages are very backwards compatible in
+R land. However, the package <a href="https://rstudio.github.io/renv/index.html">renv</a>
+is getting more attention. I think it's great for the R community. It's long
+been commonplace to run <code>sessionInfo()</code> at the end of a notebook or script to
+make sure you know which packages are in-use and their versions. Instead,
+<code>renv</code> allows creating a project-specific library and tracks versions of all
+packages used (though, you should still run <code>sessionInfo()</code> for in your
+notebooks for completeness, I think).</p>
+<p>There are lots of guides for Python virtual environments, but fewer at this
+time for <code>renv</code>. It's pretty easy to start using though, just install it with
+<code>install.packages("renv")</code>, restart R, initialize it in a directory for your project
+<code>renv::init()</code>, install the packages you want, then update the lockfile with
+<code>renv::snapshot()</code>. There are some quirks to it, so I recommend perusing the
+docs.</p>
+<h2>The Goal: Use Both virtualenvs and renvs in Jupyter</h2>
+<p>I'm a big fan of Jupyter Lab, and I use it for most of my downstream analysis
+tasks in both R and Python. I use R more frequently despite liking Jupyter,
+which I guess makes me kind of weird. I'm not using R Studio (which is a great IDE
+for R too) because I want to use the same editor for notebooks in both
+languages. There are ways to use reproducible environments for both languages
+in Jupyter notebooks, so I thought "Why not find a configuration that allows the
+use of reproducible R and Python environments in the <strong>same project</strong>."</p>
+<p>This required a bit of tweaking, but I'm fairly happy with the result. To do
+this you need to be a bit adventurous, but I promise it's not that hard.</p>
+<h2>Global Configuration</h2>
+<p>This has worked well for me in Ubuntu 22.04 (bare metal as well as WSL2) and
+Manjaro Linux.</p>
+<ol>
+<li>Install <a href="https://github.com/pyenv/pyenv">pyenv</a>.<ul>
+<li>Don't use your system python, especially on Linux, lots of the system can depend on it.</li>
+<li>Using the system python makes managing packages a nightmare.</li>
+</ul>
+</li>
+<li>Install <a href="https://github.com/pyenv/pyenv-virtualenv">pyenv-virtualenv</a>.</li>
+<li>Install the version of python you wish to use and set it as your global version.<ul>
+<li>Make sure to use <code>--PYTHON_CONFIGURE_OPTS="--enable-shared</code> at a minimum.</li>
+<li>The full command with pyenv that I use at the time of writing this is (you can use another
+version if you wish):
+<code>env PYTHON_CONFIGURE_OPTS="--enable-shared --enable-optimizations --with-lto" PYTHON_CFLAGS='-march=native -mtune=native' pyenv install 3.12.3</code></li>
+<li><code>pyenv global 3.12.3</code></li>
+</ul>
+</li>
+<li>Install jupyterlab and any other Python packages you want.<ul>
+<li><code>pip install jupyterlab</code></li>
+</ul>
+</li>
+<li>Install R using <a href="https://github.com/r-lib/rig">rig</a><ul>
+<li>rig is optional but I really like it.</li>
+<li>Installing R from the <a href="https://cran.r-project.org/">CRAN</a> repository is also perfectly reasonable.</li>
+</ul>
+</li>
+<li>Install the R kernel for Jupyter.<ul>
+<li>Follow the instructions in the <a href="https://irkernel.github.io/">R Kernel</a> docs.</li>
+</ul>
+</li>
+</ol>
+<p>That gets you all the basics.</p>
+<p>We are installing jupyter for the Global Python version. However, this global
+Python is not the system Python and is not used directly for any data science
+work, it's only for running jupyterlab.</p>
+<h2>Create Your Project Folder</h2>
+<p>I like to encapsulate each of my projects into a separate directory. This way,
+a series of computational notebooks that share a common theme can be tracked
+together with version control. Plus, a single environment can be used across notebooks
+used for a single project. This makes it easy to know which project notebooks
+belong to.</p>
+<p>In this example I'm using <code>polyglot_jupyter_example</code> as the project name:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>polyglot_jupyter_example
+<span class="nb">cd</span><span class="w"> </span>polyglot_jupyter_example
+</code></pre></div>
+
+<p>I then start jupyterlab in the project folder, or if you have a larger
+structure that encompasses many projects, in that higher-level directory:</p>
+<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>lab
+</code></pre></div>
+
+<h2>Set-up the Python virtualenv</h2>
+<ol>
+<li>Make sure you're in the project/github repo directory.</li>
+<li>Set a version of python in the current project folder.<ul>
+<li><code>pyenv local 3.12.3</code></li>
+</ul>
+</li>
+<li>Create a virtualenv, I just name them the same as the project.<ul>
+<li><code>pyenv virtualenv polyglot_jupyter_example</code></li>
+</ul>
+</li>
+<li>Activate the virtualenv. You don't have to stay in the directory you made, but it keeps things simple.<ul>
+<li><code>pyenv activate polyglot_jupyter_example</code></li>
+</ul>
+</li>
+<li>Install a minimal subset of packages needed for this example.<ul>
+<li><code>pip install ipykernel pandas seaborn</code></li>
+</ul>
+</li>
+<li>Add the ipykernel you installed in the virtualenv to your jupyter that's <strong>outside</strong> the virtualenv.<ul>
+<li><code>python -m ipykernel install --user --name=polyglot_jupyter_example</code></li>
+</ul>
+</li>
+<li>Exit the virtualenv<ul>
+<li><code>pyenv deactivate</code></li>
+<li>Don't worry, jupyter will still know about it.</li>
+</ul>
+</li>
+<li>Start jupyter and you'll see that you can now create notebooks inside the virtualenv.</li>
+</ol>
+<p><strong>Important Note:</strong> If you're used to installing pip packages, etc. within a
+notebook by <code>! pip install {package}</code> you'll need to adjust your workflow. The
+shell that jupyter spawns does not know about your virtualenv. Just keep a terminal
+open outside the notebook.</p>
+<p><img alt="Great Success!" src="https://raw.githubusercontent.com/groverj3/polyglot_jupyter_example/main/images/python_env_jupyter.png"></p>
+<h2>Set-up the Renv</h2>
+<p>This is somewhat easier, because R isn't controlling jupyter.</p>
+<ol>
+<li>Inside the project directory, start R.<ul>
+<li><code>R</code></li>
+</ul>
+</li>
+<li>Initialize an renv.<ul>
+<li><code>renv::init(bare = TRUE)</code></li>
+<li><code>bare = TRUE</code> keeps renv from parsing all text files in the project, if you're starting a
+   project and it's not a blank slate (you have large notebooks and other files in it) this can cause renv to hang.</li>
+<li>This creates a project-specific library, a <code>.Rprofile</code>, and <code>renv.lock</code> amongst other things.</li>
+</ul>
+</li>
+<li>Exit R, and add configure bioconductor if you use it<ul>
+<li>Setup information for the posit package manager mirror of bioconductor: <a href="https://packagemanager.posit.co/client/#/repos/bioconductor/setup">here</a></li>
+</ul>
+</li>
+<li>Enter R again and install the ir kernel and data science stack.<ul>
+<li><code>install.packages(c("tidyverse", "IRkernel"))</code></li>
+</ul>
+</li>
+<li>Make sure the R kernel is installed in jupyter outside the renv as well (as per the directions earlier).</li>
+</ol>
+<p>As long as you start your jupyter notebooks in the top level of the project folder then R kernels
+will respect your Renv.</p>
+<h2>Project Structure</h2>
+<div class="highlight"><pre><span></span><code>project_repo_dir
+├── .python-version
+├── .gitignore
+├── .renvignore
+├── .Rprofile
+├── renv.lock
+├── requirements.txt
+├── {python_notebook_names}_py.ipynb
+├── {python_notebook_outdirs}_py
+    ├── {python_notebook_names}_py.py
+    ├── {python_notebook_names}_py.html
+    └── {analysis_outputs}
+├── {r_notebook_names}_r.ipynb
+├── {r_notebook_outdirs}_r
+    ├── {python_notebook_names}_r.r
+    ├── {python_notebook_names}_r.html
+    └── {analysis_outputs}
+├── README.md
+</code></pre></div>
+
+<p>There is quite a bit going on here so I will elaborate:</p>
+<ul>
+<li><code>.python-version</code>: Records the local version of python in the project.</li>
+<li><code>.gitignore</code>: Records any files that should be ignored by git.</li>
+<li><code>.renvignore</code>: Records any files that should not be parsed by <code>renv</code>.</li>
+<li><code>.Rprofile</code>: Project-specific configuration for R.</li>
+<li><code>renv.lock</code>: Where <code>renv</code> records the packages in the environment (including
+  versions). Similar in concept to a Python requirements.txt.</li>
+<li><code>requirements.txt</code>: List of Python packages installed in the environment.</li>
+<li><code>{python_notebook_names}_py.ipynb</code>: Jupyter notebooks that use Python get named
+  with "_py.ipynb" to make it clear they use Python.</li>
+<li><code>{python_notebook_outdirs}_py</code>: Output folders for Python notebooks, each
+  Python notebook gets an output folder named the same as the parent notebook.<ul>
+<li>Outputs from analysis go in here.</li>
+<li>I also like to include the notebook is plain text .py format so they can
+  be run without Jupyter, and in .html format so they can be viewed by
+  non-coders.</li>
+</ul>
+</li>
+<li><code>{r_notebook_names}_r.ipynb</code>: Jupyter notebooks that use R get named with "_r.ipynb".<ul>
+<li><code>{r_notebook_outdirs}_r</code>: The same schme as <code>{python_notebook_outdirs}</code>.</li>
+</ul>
+</li>
+<li>README.md: Summary of the project.</li>
+</ul>
+<p>The companion github repository is <a href="https://github.com/groverj3/polyglot_jupyter_example">here</a>
+and has examples of all these files, as well as two example notebooks. I
+recommend checking them out.</p>
+<h2>Notes on .gitignore and .renvignore</h2>
+<p>By default renv will parse all files in your project to determine which
+packages need to be tracked in the <code>renv.lock</code>. This can be problematic if you
+have large files, including notebooks in the project folder.</p>
+<p>One way around them is to add these to <code>.gitignore</code>. Renv respects that as a list
+of files and subdirectories not to parse. You'll notice this already will exist
+in the <code>./renv/</code> subdirectory it creates your project-specific library in to
+avoid having git track all that. This probably isn't sufficient to avoid having
+issues with it parsing notebooks, which you likely <em>do</em> want to track with git.</p>
+<p>If you create an <code>.renvignore</code> in your project folder then Renv will use that
+<em>instead</em> of <code>.gitignore</code>. So, you can have renv ignore anything you want, I
+have been naming notebooks I write python in with <code>_py</code> on the end so I can
+match them and output folders in <code>.renvignore</code> easily. This is kind of clunky
+though.</p>
+<p>In light of this I set up my <code>.gitignore</code> with typical settings from jupyter
+notebooks like this: <a href="https://github.com/groverj3/polyglot_jupyter_example/blob/main/.gitignore">.gitignore</a>.
+Basically, only ignoring the <code>.ipynb_checkpoints</code> and <code>.virtual_documents</code> folders.</p>
+<p>For <code>.renvignore</code> I create one that ignores all python-based notebooks. You may
+want to tweak this to your liking: <a href="https://github.com/groverj3/polyglot_jupyter_example/blob/main/.renvignore">.renvignore</a>.
+You can get around the behavior of renv trying to parse large files by forcing
+it to record <strong>all</strong> packages <em>installed</em> in an environment rather than just
+ones <em>used</em> and their dependencies. This is demonstrated in the
+<a href="https://github.com/groverj3/polyglot_jupyter_example/blob/main/polyglot_jupyter_example_r.ipynb">R notebook example</a>
+with <code>renv::snapshot(type = "all")</code>.</p>
+<h2>Restoring an Environment</h2>
+<p>If you need to restore the environment at a later date, or on a new machine,
+you will need to enter the project folder; then set up a new virtualenv for
+Pythonm install the packages from the <code>requirements.txt</code>, and install the
+ipython kernel to your jupyter as you did during the initial set-up:</p>
+<div class="highlight"><pre><span></span><code>pyenv<span class="w"> </span>virtualenv<span class="w"> </span><span class="o">{</span>polyglot_project_name<span class="o">}</span><span class="w">  </span><span class="c1"># This should already use the local python version from .python-version</span>
+pyenv<span class="w"> </span>activate<span class="w"> </span><span class="o">{</span>polyglot_project_name<span class="o">}</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">={</span>polyglot_project_name<span class="o">}</span>
+</code></pre></div>
+
+<p>You'll then need to make sure you have R and renv installed before opening an
+R terminal and running:</p>
+<div class="highlight"><pre><span></span><code><span class="n">renv</span><span class="o">::</span><span class="nf">restore</span><span class="p">()</span>
+</code></pre></div>
+
+<h2>Notes on Alternative Setups</h2>
+<p>There is more than one way to do this. <a href="https://python-poetry.org/">Poetry</a> is
+one attractive option, but I decided against this as it's another dependency and
+this was already plenty complicated. I intended this as a minimal example of
+such a setup depending only on Python, R, virtualenvs (python, through pyenv),
+and renv(R). Some will prefer to opt for <a href="https://conda.io">conda</a> environments
+instead, since there is some support for R. Anaconda is pretty heavy and I'm
+not a fan, but miniconda is certainly an option. <a href="https://github.com/mamba-org/mamba">Mamba</a>
+is a great option to manage conda environments which is much faster.</p>
+<p>Then, there's the nuclear option of every environment being a standalone
+<a href="https://www.docker.com/">Docker</a> or <a href="https://podman.io/">Podman</a> container.
+This is attractive when you don't need to interact much a host system, and
+therefore is a good fit for working in "the cloud." Of course, there are ways
+around that by mounting local storage inside your containers. You still need to document
+your environments to be able to recreate them.</p>
+<p>Perhaps you vastly prefer R over Python, and would rather call Python from R
+using <a href="https://rstudio.github.io/reticulate/">reticulate</a>. Reticulate actually
+works with this set-up as well, you do need to force it to use the virtual
+environment you created for your project with <a href="https://rstudio.github.io/reticulate/reference/use_python.html"><code>use_python()</code></a>.</p>
+<p>If you have a strong preference for Python, then you might already use
+<a href="https://rpy2.github.io/">rpy2</a>. This is similar in concept to reticulate, but
+I can't speak to how well it works with a setup like this, or if it would even
+be necessary. This does require you to call R from Python, rather than writing
+standalone R notebooks though.</p>
+<p>There are probably improvements I'll add over time if I get around to it.
+However, this may give you some ideas of your own when it comes to living the
+polyglot data science/bioinformatics life.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://groverj3.github.io/tag/bioinformatics.html">bioinformatics</a>
+      <a href="https://groverj3.github.io/tag/data-science.html">data-science</a>
+      <a href="https://groverj3.github.io/tag/jupyter.html">jupyter</a>
+      <a href="https://groverj3.github.io/tag/notebooks.html">notebooks</a>
+      <a href="https://groverj3.github.io/tag/tutorial.html">tutorial</a>
+      <a href="https://groverj3.github.io/tag/r.html">r</a>
+      <a href="https://groverj3.github.io/tag/python.html">python</a>
+      <a href="https://groverj3.github.io/tag/sysadmin.html">sysadmin</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2019 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Jeff Grover. Bioinformatics Scientist. ",
+  "url" : "https://groverj3.github.io",
+  "image": "/images/jeff.jpg",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
