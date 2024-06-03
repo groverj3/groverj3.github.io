@@ -191,7 +191,7 @@ will respect your Renv.&lt;/p&gt;
     ├── {python_notebook_names}_r.r
     ├── {python_notebook_names}_r.html
     └── {analysis_outputs}
-├── README.md
+└── README.md
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;There is quite a bit going on here so I will elaborate:&lt;/p&gt;
