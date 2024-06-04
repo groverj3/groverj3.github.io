@@ -29,10 +29,10 @@
 <meta name="keywords" content="bioinformatics, data-science, jupyter, notebooks, tutorial, r, python, sysadmin">
 
 <meta property="og:site_name" content="Jeff Grover. Bioinformatics Scientist."/>
-<meta property="og:title" content="Polyglot R and Python Notebooks for Bioinformatics and Data Science Projects"/>
+<meta property="og:title" content="Polyglot R and Python Bioinformatics and Data Science Projects Using Jupyter Notebooks"/>
 <meta property="og:description" content="TLDR - Check out this github repo for a (still really wordy) example: polyglot_jupyter_example If you&#39;re anything like me, and there are probably tens of you out there, you enjoy working in multiple programming languages for your bioinformatics/data science work. Perhaps you love the tidyverse R ecosystem for data manipulation …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://groverj3.github.io/articles/2024-06-02_polyglot-r-and-python-notebooks-for-bioinformatics-and-data-science-projects.html"/>
+<meta property="og:url" content="https://groverj3.github.io/articles/2024-06-02_polyglot-r-and-python-bioinformatics-and-data-science-projects-using-jupyter-notebooks.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2024-06-02 00:00:00-04:00"/>
 <meta property="article:modified_time" content=""/>
@@ -48,7 +48,7 @@
 <meta property="article:tag" content="sysadmin"/>
 <meta property="og:image" content="/images/jeff.jpg">
 
-  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Polyglot R and Python Notebooks for Bioinformatics and Data Science Projects</title>
+  <title>Jeff Grover. Bioinformatics Scientist. &ndash; Polyglot R and Python Bioinformatics and Data Science Projects Using Jupyter Notebooks</title>
 
 </head>
 <body>
@@ -110,7 +110,7 @@
 <article class="single">
   <header>
       
-    <h1 id="polyglot-r-and-python-notebooks-for-bioinformatics-and-data-science-projects">Polyglot R and Python Notebooks for Bioinformatics and Data Science Projects</h1>
+    <h1 id="polyglot-r-and-python-bioinformatics-and-data-science-projects-using-jupyter-notebooks">Polyglot R and Python Bioinformatics and Data Science Projects Using Jupyter Notebooks</h1>
     <p>
           Posted on Sun 02 June 2024 in <a href="https://groverj3.github.io/category/how-to.html">how-to</a>
 
@@ -169,8 +169,8 @@ docs.</p>
 <h2>The Goal: Use Both virtualenvs and renvs in Jupyter</h2>
 <p>I'm a big fan of Jupyter Lab, and I use it for most of my downstream analysis
 tasks in both R and Python. I use R more frequently despite liking Jupyter,
-which I guess makes me kind of weird. I'm not using R Studio (which is a great IDE
-for R too) because I want to use the same editor for notebooks in both
+which I guess makes me kind of weird. I'm not using R Studio (which is a great
+IDE for R too) because I want to use the same editor for notebooks in both
 languages. There are ways to use reproducible environments for both languages
 in Jupyter notebooks, so I thought "Why not find a configuration that allows the
 use of reproducible R and Python environments in the <strong>same project</strong>."</p>
@@ -270,6 +270,11 @@ open outside the notebook.</p>
 <li><code>R</code></li>
 </ul>
 </li>
+<li>Install <code>renv</code>.<ul>
+<li><code>install.packages("renv")</code></li>
+</ul>
+</li>
+<li>Restart the R session.</li>
 <li>Initialize an renv.<ul>
 <li><code>renv::init(bare = TRUE)</code></li>
 <li><code>bare = TRUE</code> keeps renv from parsing all text files in the project, if you're starting a
@@ -342,20 +347,19 @@ recommend checking them out.</p>
 <p>By default renv will parse all files in your project to determine which
 packages need to be tracked in the <code>renv.lock</code>. This can be problematic if you
 have large files, including notebooks in the project folder.</p>
-<p>One way around them is to add these to <code>.gitignore</code>. Renv respects that as a list
+<p>One way around this is to add large files to <code>.gitignore</code>. Renv respects that as a list
 of files and subdirectories not to parse. You'll notice this already will exist
-in the <code>./renv/</code> subdirectory it creates your project-specific library in to
+in the <code>./renv/</code> subdirectory it creates your project-specific library in, to
 avoid having git track all that. This probably isn't sufficient to avoid having
 issues with it parsing notebooks, which you likely <em>do</em> want to track with git.</p>
 <p>If you create an <code>.renvignore</code> in your project folder then Renv will use that
-<em>instead</em> of <code>.gitignore</code>. So, you can have renv ignore anything you want, I
-have been naming notebooks I write python in with <code>_py</code> on the end so I can
-match them and output folders in <code>.renvignore</code> easily. This is kind of clunky
-though.</p>
-<p>In light of this I set up my <code>.gitignore</code> with typical settings from jupyter
+<em>instead</em> of <code>.gitignore</code>. I have been naming notebooks I write python in with
+<code>_py</code> on the end so I can match them and output folders in <code>.renvignore</code>
+easily. This is kind of clunky though.</p>
+<p>In light of this, I set up my <code>.gitignore</code> with typical settings from jupyter
 notebooks like this: <a href="https://github.com/groverj3/polyglot_jupyter_example/blob/main/.gitignore">.gitignore</a>.
-Basically, only ignoring the <code>.ipynb_checkpoints</code> and <code>.virtual_documents</code> folders.</p>
-<p>For <code>.renvignore</code> I create one that ignores all python-based notebooks. You may
+Ignoring the <code>.ipynb_checkpoints</code> and <code>.virtual_documents</code> folders.</p>
+<p>For <code>.renvignore</code>, I create one that ignores all python-based notebooks. You may
 want to tweak this to your liking: <a href="https://github.com/groverj3/polyglot_jupyter_example/blob/main/.renvignore">.renvignore</a>.
 You can get around the behavior of renv trying to parse large files by forcing
 it to record <strong>all</strong> packages <em>installed</em> in an environment rather than just
@@ -389,7 +393,7 @@ not a fan, but miniconda is certainly an option. <a href="https://github.com/mam
 is a great option to manage conda environments which is much faster.</p>
 <p>Then, there's the nuclear option of every environment being a standalone
 <a href="https://www.docker.com/">Docker</a> or <a href="https://podman.io/">Podman</a> container.
-This is attractive when you don't need to interact much a host system, and
+This is attractive when you don't need to interact much with a host system, and
 therefore is a good fit for working in "the cloud." Of course, there are ways
 around that by mounting local storage inside your containers. You still need to document
 your environments to be able to recreate them.</p>
