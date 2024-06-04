@@ -1,4 +1,4 @@
-Title: Polyglot R and Python Notebooks for Bioinformatics and Data Science Projects
+Title: Polyglot R and Python Bioinformatics and Data Science Projects Using Jupyter Notebooks
 Date: 2024-06-02
 Category: how-to
 tags: bioinformatics, data-science, jupyter, notebooks, tutorial, r, python, sysadmin
@@ -62,8 +62,8 @@ docs.
 
 I'm a big fan of Jupyter Lab, and I use it for most of my downstream analysis
 tasks in both R and Python. I use R more frequently despite liking Jupyter,
-which I guess makes me kind of weird. I'm not using R Studio (which is a great IDE
-for R too) because I want to use the same editor for notebooks in both
+which I guess makes me kind of weird. I'm not using R Studio (which is a great
+IDE for R too) because I want to use the same editor for notebooks in both
 languages. There are ways to use reproducible environments for both languages
 in Jupyter notebooks, so I thought "Why not find a configuration that allows the
 use of reproducible R and Python environments in the **same project**."
@@ -153,16 +153,19 @@ This is somewhat easier, because R isn't controlling jupyter.
 
 1. Inside the project directory, start R.
      - `R`
-2. Initialize an renv.
+2. Install `renv`.
+     - `install.packages("renv")`
+3. Restart the R session.
+4. Initialize an renv.
      - `renv::init(bare = TRUE)`
      - `bare = TRUE` keeps renv from parsing all text files in the project, if you're starting a
        project and it's not a blank slate (you have large notebooks and other files in it) this can cause renv to hang.
      - This creates a project-specific library, a `.Rprofile`, and `renv.lock` amongst other things.
-3. Exit R, and add configure bioconductor if you use it
+5. Exit R, and add configure bioconductor if you use it
      - Setup information for the posit package manager mirror of bioconductor: [here](https://packagemanager.posit.co/client/#/repos/bioconductor/setup)
-4. Enter R again and install the ir kernel and data science stack.
+6. Enter R again and install the ir kernel and data science stack.
      - `install.packages(c("tidyverse", "IRkernel"))`
-5. Make sure the R kernel is installed in jupyter outside the renv as well (as per the directions earlier).
+7. Make sure the R kernel is installed in jupyter outside the renv as well (as per the directions earlier).
 
 As long as you start your jupyter notebooks in the top level of the project folder then R kernels
 will respect your Renv.
@@ -221,23 +224,22 @@ By default renv will parse all files in your project to determine which
 packages need to be tracked in the `renv.lock`. This can be problematic if you
 have large files, including notebooks in the project folder.
 
-One way around them is to add these to `.gitignore`. Renv respects that as a list
+One way around this is to add large files to `.gitignore`. Renv respects that as a list
 of files and subdirectories not to parse. You'll notice this already will exist
-in the `./renv/` subdirectory it creates your project-specific library in to
+in the `./renv/` subdirectory it creates your project-specific library in, to
 avoid having git track all that. This probably isn't sufficient to avoid having
 issues with it parsing notebooks, which you likely *do* want to track with git.
 
 If you create an `.renvignore` in your project folder then Renv will use that
-*instead* of `.gitignore`. So, you can have renv ignore anything you want, I
-have been naming notebooks I write python in with `_py` on the end so I can
-match them and output folders in `.renvignore` easily. This is kind of clunky
-though.
+*instead* of `.gitignore`. I have been naming notebooks I write python in with
+`_py` on the end so I can match them and output folders in `.renvignore`
+easily. This is kind of clunky though.
 
-In light of this I set up my `.gitignore` with typical settings from jupyter
+In light of this, I set up my `.gitignore` with typical settings from jupyter
 notebooks like this: [.gitignore](https://github.com/groverj3/polyglot_jupyter_example/blob/main/.gitignore).
-Basically, only ignoring the `.ipynb_checkpoints` and `.virtual_documents` folders.
+Ignoring the `.ipynb_checkpoints` and `.virtual_documents` folders.
 
-For `.renvignore` I create one that ignores all python-based notebooks. You may
+For `.renvignore`, I create one that ignores all python-based notebooks. You may
 want to tweak this to your liking: [.renvignore](https://github.com/groverj3/polyglot_jupyter_example/blob/main/.renvignore).
 You can get around the behavior of renv trying to parse large files by forcing
 it to record **all** packages *installed* in an environment rather than just
@@ -279,7 +281,7 @@ is a great option to manage conda environments which is much faster.
 
 Then, there's the nuclear option of every environment being a standalone
 [Docker](https://www.docker.com/) or [Podman](https://podman.io/) container.
-This is attractive when you don't need to interact much a host system, and
+This is attractive when you don't need to interact much with a host system, and
 therefore is a good fit for working in "the cloud." Of course, there are ways
 around that by mounting local storage inside your containers. You still need to document
 your environments to be able to recreate them.
